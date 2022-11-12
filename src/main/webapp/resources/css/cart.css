@@ -1,0 +1,110 @@
+
+/* main */
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500&display=swap');
+
+*{
+    font-family: 'IBM Plex Sans KR', sans-serif;
+}
+
+main * {
+    margin:auto;
+    text-align: center;
+    list-style: none;
+}
+
+.cart_container {
+    margin-top: 250px;
+    margin-bottom: 50px;
+    width: 900px;
+}
+
+figure {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+table {
+    width: 600px;
+    border-top: 1px solid lightgray;
+    border-collapse: collapse;
+}
+ td {
+    border-bottom: 1px solid lightgray;
+    border-left: 1px solid lightgray;
+    padding: 10px;
+}
+
+ th {
+     background-color: #eeecec;
+    border-bottom: 1px solid lightgray;
+    border-left: none;
+     padding: 10px;
+}
+
+th:first-child, td:first-child {
+    border-left: none;
+}
+
+thead th,
+tfoot *,
+tbody * {
+    margin: 20px;
+}
+
+thead .itemPrice {
+    margin: auto;
+}
+
+tr {
+    padding: 20px 0px;
+}
+
+button {
+    height: 30px;
+    background-color: white;
+    padding: 3px;
+    border: 1px solid darkgray;
+}
+
+.input_cartAmount {
+    width: 25px;
+    height: 25px;
+    border: 1px solid darkgray;
+}
+
+.itemPrice {
+    margin-right: 30px;
+}
+
+tfoot * {
+    font-weight: bold;
+}
+
+.modBtn {
+    margin-bottom: 10px;
+}
+
+.itemPrice {
+    font-size: 12px;
+    color: darkgray;
+}
+
+.delAllBtn ,
+.payBtn ,
+.shopBtn ,
+.payAllBtn {
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 20px;
+    padding: 5px;
+}
+
+.payAllBtn {
+    margin-left: 10px;
+    width: 130px;
+    background-color: rgb(84, 108, 92);
+    height: 40px;
+    padding: 5px;
+    font-size: 16px;
+    color: whitesmoke;
+}

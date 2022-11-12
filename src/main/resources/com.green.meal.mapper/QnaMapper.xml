@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.green.meal.mapper.QnaMapper">
+
+    <sql id="search">
+        <if test="keyword!=null">
+            <bind name="keyVal" value="'%'+keyword+'%'"/>
+        </if>
+        <choose>
+            <when test="searchType=='i'.toString()">
+                and user_id like #{keyVal})
+            </when>
+            <when test="searchType=='t'.toString()">
+                and qna_title like #{keyVal})
+            </when>
+            <when test="searchType=='c'.toString()">
+                and qna_content like #{keyVal} )
+            </when>
+            <otherwise>)</otherwise>
+        </choose>
+    </sql>
+
+    <!-- 관리자용 qnaList -->
+    <select id="qnalistAll" resultType="com.green.meal.domain.QnaVO">
+        select * from qna
+        where ( qna_no > 0 <include refid="search"></include>
+        order by qna_root desc, qna_step asc
+        limit #{sno}, #{rowsPerPage}
+    </select>
+
+    <!-- 유저용 qnaList -->
+    <!--<select id="qnalistOne" resultType="com.green.meal.domain.QnaVO">
+            select * from qna
+            where user_id = #{userId} or user_id = 'admin'
+            order by qna_root desc, qna_step asc
+            limit #{sno}, #{rowsPerPage}
+        </select>-->
+    <!-- Mybatis는 param을 두개 담을 수 없어서, @RequestParam으로 sessionId 지정, 연결해줘야 #{user_id} 사용 가능? -->
+
+    <select id="searchCount" resultType="int">
+        select count(*) from qna where ( qna_no > 0 <include refid="search"></include>
+    </select>
+
+    <!-- QnA detail 출력 -->
+    <select id="qnadetail" resultType="com.green.meal.domain.QnaVO">
+        select * from qna
+        where qna_no = #{qnaNo}
+    </select>
+
+    <!-- QnA 작성 -->
+    <insert id="qnainsert">
+        <selectKey keyProperty="qnaNo" resultType="int" order="BEFORE">
+            select IFNULL(max(qna_no),0)+1 from qna
+        </selectKey>
+        insert into qna(qna_no, user_id, qna_title, qna_content, qna_root)
+        values(#{qnaNo}, #{userId}, #{qnaTitle}, #{qnaContent}, #{qnaNo})
+    </insert>
+
+    <!-- QnA 수정 -->
+    <update id="qnaupdate">
+        update qna set qna_title=#{qnaTitle}, qna_content=#{qnaContent} where qna_no=#{qnaNo}
+    </update>
+
+    <!-- QnA 삭제(원글 삭제 시 원글만, 답글 삭제 시 답글만) -->
+    <delete id="qnadelete">
+        delete from qna where qna_no = #{qnaNo}
+    </delete>
+
+    <!-- QnA 답변 작성 -->
+    <insert id="qnarinsert">
+        insert into qna(user_id, qna_title, qna_content, qna_root, qna_step, qna_child)
+        values(#{userId}, #{qnaTitle}, #{qnaContent}, #{qnaRoot}, #{qnaStep}, #{qnaChild})
+    </insert>
+
+    <!-- QnA 답변 출력 -->
+    <select id="qnarDetail" resultType="com.green.meal.domain.QnaVO">
+        select * from qna
+        where qna_root = #{qnaRoot} and qna_child > 0
+    </select>
+</mapper>

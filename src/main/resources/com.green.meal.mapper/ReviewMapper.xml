@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.green.meal.mapper.ReviewMapper">
+
+    <!-- 상세페이지 Review list 출력 -->
+    <select id="reviewlistD" parameterType="map" resultType="com.green.meal.domain.ReviewVO">
+        select * from review where item_no = #{itemNo} order by review_root desc, review_step asc
+        limit #{sno}, #{rowsPerPage}
+    </select>
+
+    <!-- Reviewlist(MyPage) 출력 -->
+    <select id="reviewlistM" parameterType="map" resultType="com.green.meal.domain.ReviewVO">
+        select * from review where user_id=#{userId} order by review_root desc, review_step asc
+        limit #{sno}, #{rowsPerPage}
+    </select>
+
+    <sql id="search">
+        <if test="keyword!=null">
+            <bind name="keyVal" value="'%'+keyword+'%'"/>
+        </if>
+        <choose>
+            <when test="searchType=='in'.toString()">
+            <!-- keyword like 기준은 item_name(item에서 join) -->
+                item_name like #{keyVal}
+            </when>
+            <otherwise>review_no > 0</otherwise>
+        </choose>
+    </sql>
+
+    <!-- Review List 출력 -->
+    <select id="reviewlist" resultType="com.green.meal.domain.ReviewVO">
+        select review_no, user_id, order_no, review.item_no, item_name, item_price, review_title,
+               review_content, review_root, review_step, review_child, review_star, img_name
+        from item, review
+        where item.item_no=review.item_no and <include refid="search"></include>
+        order by review_root desc, review_step asc
+        limit #{sno}, #{rowsPerPage}
+    </select>
+
+    <!-- SearchCount(paging) -->
+    <select id="searchCount" resultType="int">
+        select count(*)
+        from item, review
+        where item.item_no=review.item_no and <include refid="search"></include>
+    </select>
+
+    <!-- Review Detail(+상품명, 가격 조인) 출력 -->
+    <select id="reviewdetail" resultType="com.green.meal.domain.ReviewVO">
+        select review_no, user_id, order_no, item_no, (select item_name from item where item_no=#{itemNo}) as item_name,
+               (select item_price from item where item_no=#{itemNo}) as item_price, review_title, review_content,
+               reg_date, review_root, review_step, review_child, review_star, img_name
+        from review
+        where review_no = #{reviewNo}
+    </select>
+
+    <!-- Review Insert -->
+    <insert id="reviewinsert">
+        <selectKey keyProperty="reviewNo" resultType="int" order="BEFORE">
+            select IFNULL(max(review_no),0)+1 from review
+        </selectKey>
+        insert into review(review_no, user_id, order_no, item_no, review_title, review_content, review_root, review_star, img_name)
+        values(#{reviewNo},#{userId},#{orderNo},#{itemNo}, #{reviewTitle}, #{reviewContent}, #{reviewNo}, #{reviewStar}, #{imgName})
+        <!-- root자리에 selectKey reviewNo 넣어서 root==no 맞춰주기, img도 넣기 -->
+        <!-- order_no, item_no 는 뭘로 받아올건지?
+             imgFile은 #{imgName} 하면 됨. -->
+    </insert>
+
+    <!-- Review Update -->
+    <update id="reviewupdate">
+        update review set review_title=#{reviewTitle}, review_content=#{reviewContent}, img_name=#{imgName}
+        where review_no=#{reviewNo}
+    </update>
+
+    <!-- Review Delete (원글 삭제 시 답글도 삭제, 답글 삭제 시 답글만 삭제) -->
+    <delete id="reviewdelete">
+        delete from review
+        <if test="reviewNo==reviewRoot">
+            where review_root=#{reviewNo}
+        </if>
+        <if test="reviewNo != reviewRoot">
+            where review_no=#{reviewNo}
+        </if>
+    </delete>
+
+    <!-- Review Reply Insert -->
+    <insert id="reviewrinsert">
+        insert into review(user_id, order_no, item_no, review_title, review_content, review_root, review_step, review_child)
+        values(#{userId}, #{orderNo}, #{itemNo}, #{reviewTitle}, #{reviewContent}, #{reviewRoot}, #{reviewStep}, #{reviewChild})
+    </insert>
+
+    <!-- Review Reply Detail -->
+    <select id="reviewrDetail" resultType="com.green.meal.domain.ReviewVO">
+        select * from review
+        where review_root = #{reviewRoot} and review_child > 0
+    </select>
+
+</mapper>

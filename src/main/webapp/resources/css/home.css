@@ -1,0 +1,151 @@
+/* main */
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500&display=swap');
+
+main * {
+    margin:auto;
+    text-align: center;
+    font-family: 'IBM Plex Sans KR', sans-serif;
+}
+
+
+/* event */
+
+.event_container {
+    margin-top: 205px;
+    margin-bottom: 50px;
+}
+
+.event_list {
+    position: relative;
+    width: 1200px;
+    height: 480px;
+    overflow:hidden;
+}
+
+.event_list li {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transition: all .7s;
+    opacity: 0;
+    left: 100%;
+}
+
+.event_list li:nth-of-type(1) {
+    opacity: 1;
+    left:0;
+}
+
+.play,
+.pause {
+    position: absolute;
+    opacity: .3;
+    z-index: 1;
+    width:35px;
+    height:35px;
+    border:none;
+    cursor: pointer;
+    top : 10px;
+    right : 10px;
+}
+
+.play {
+    background: url(../icon/play.png) 0/100% ;
+}
+
+.pause {
+    background: url(../icon/pause.png) 0/100% ;
+}
+
+.event_list>button:hover {
+    opacity: .7;
+}
+
+.nonVisible {
+    visibility: hidden;
+}
+
+
+
+/* best */
+
+.best_container {
+    text-align: center;
+}
+
+.best_container h2 {
+    width: 1200px;
+}
+
+.best_section {
+    position: relative;
+    width:1200px;
+    height: 624px;
+}
+
+.best_box{
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+}
+
+.best_list {
+    display:flex;
+    width:100%;
+    left: 0;
+    position:absolute;
+    transition: all 1s;
+}
+
+.best_list img {
+    cursor: pointer;
+}
+
+.best_list *{
+    margin-top: 10px;
+}
+
+.best_list sup {
+    font-size: 10px;
+}
+
+
+.best_container button {
+    position: absolute;
+    width: 51px;
+    height: 85px;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: .5;
+    border: none;
+}
+
+
+.btn_back {
+    background: url(../icon/before.png);
+    right:100%;
+}
+
+.btn_after {
+    background: url(../icon/after.png);
+    left:100%;
+}
+
+
+.btn_back:hover,
+.btn_after:hover {
+    opacity: 1;
+    cursor: pointer;
+}
+
+.gram_mission {
+    width: 1200px;
+    height: 480px;
+    background: url(../icon/misson.png) 0/100% no-repeat;
+}
+
+.gram_motto {
+    width: 1200px;
+    height: 470px;
+    background: url(../image/motto.png) 0/100% no-repeat;
+}

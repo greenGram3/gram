@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <settings>
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
+
+    <typeAliases>
+        <typeAlias alias="CartVO" type="com.green.meal.domain.CartVO"/>
+        <typeAlias alias="OrderListDto" type="com.green.meal.domain.OrderListDto"/>
+        <typeAlias alias="OrderDetailDto" type="com.green.meal.domain.OrderDetailDto"/>
+        <typeAlias alias="OrderSearch" type="com.green.meal.domain.OrderSearch"/>
+
+        <typeAlias alias="ItemVO" type="com.green.meal.domain.ItemVO"/>
+        <typeAlias alias="UserVO" type="com.green.meal.domain.UserVO"/>
+        <typeAlias alias="OrderListVO" type="com.green.meal.domain.OrderListVO"/>
+        <typeAlias alias="OrderDetailVO" type="com.green.meal.domain.OrderDetailVO"/>
+        <typeAlias alias="OrderItemDTO" type="com.green.meal.domain.OrderItemDTO"/>
+        <typeAlias alias="SearchCondition" type="com.green.meal.domain.SearchCondition"/>
+
+    </typeAliases>
+
+</configuration>

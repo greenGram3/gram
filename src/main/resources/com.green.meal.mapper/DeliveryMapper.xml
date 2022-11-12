@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.green.meal.mapper.DeliveryMapper">
+
+    <select id="selectDelivery" resultType="com.green.meal.domain.DeliveryVO">
+        select * from delivery where user_id = #{userId};
+    </select>
+
+    <update id="delyProc" statementType="CALLABLE" parameterType="com.green.meal.domain.DeliveryVO">
+        call delyProc(#{userId}, #{delyNo}, #{delyPlace}, #{delyAddr}, #{receiver}, #{delyPhone})
+    </update>
+
+    <update id="updateDelivery" parameterType="map">
+        update delivery set receiver= #{dely0.receiver}, dely_place= #{dely0.delyPlace}, dely_phone= #{dely0.delyPhone}, dely_addr= #{dely0.delyAddr} where receiver= #{dely1.receiver} and dely_place = #{dely1.delyPlace} and dely_phone= #{dely1.delyPhone} and dely_addr=#{dely1.delyAddr} and user_id = #{dely0.userId};
+    </update>
+
+    <delete id="deleteDelivery" parameterType="com.green.meal.domain.DeliveryVO">
+        delete from delivery where receiver = #{receiver} and dely_place = #{delyPlace} and dely_no = #{delyNo} and dely_addr = #{delyAddr} and dely_phone = #{delyPhone} and user_id = #{userId}
+    </delete>
+</mapper>

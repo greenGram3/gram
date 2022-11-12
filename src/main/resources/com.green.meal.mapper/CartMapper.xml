@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.green.meal.mapper.CartMapper">
+
+<select id="getList" resultType="CartVO" parameterType="String">
+    select c.user_id, c.item_no, i.item_name, c.cart_amount, i.item_price , e.path
+    from cart c
+    join item i
+        on c.item_no = i.item_no
+    join image e
+        on c.item_no = e.item_no
+    where c.user_id = #{userId}
+</select>
+
+    <insert id="insert" parameterType="CartVO">
+        insert into Cart
+            (user_id, item_no, cart_amount)
+        values
+            (#{userId},#{itemNo},#{cartAmount})
+    </insert>
+
+    <update id="update" parameterType="CartVO">
+        update Cart
+        set cart_amount = #{cartAmount}
+        where user_id=  #{userId} and item_no = #{itemNo}
+    </update>
+
+    <delete id="delete" parameterType="map">
+        delete from Cart
+        where user_id=  #{userId} and item_no = #{itemNo}
+    </delete>
+
+    <select id="findByItem" resultType="CartVO" parameterType="map">
+        select c.user_id, c.item_no, i.item_name, c.cart_amount, i.item_price , e.path
+        from cart c
+                 join item i
+                      on c.item_no = i.item_no
+                 join image e
+                      on c.item_no = e.item_no
+        where c.user_id = #{userId} and c.item_no = #{itemNo}
+    </select>
+
+    <delete id="deleteAll" parameterType="String">
+        delete from Cart
+        where user_id= #{userId}
+    </delete>
+
+
+</mapper>

@@ -1,0 +1,224 @@
+
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+    color: rgb(18, 14, 2);
+    font-family: 'IBM Plex Sans KR', sans-serif;
+}
+
+
+
+.summit_line ,
+.bottom_line {
+    height:40px;
+    background-color: rgb(84, 108, 92);
+}
+
+/* ================================================== */
+
+/* header */
+
+.gram_container {
+    width: 1200px;
+    margin: 30px auto;
+    position: relative;
+}
+
+.gram_container h1,
+.gram_container h1 a,
+.user_input {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.gram_container h1 {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.logo_image {
+    background: url(../icon/logo.png) center no-repeat;
+    width: 291px;
+    height: 68px;
+    text-indent: -9999em;
+}
+
+
+.user_input {
+    line-height: 30px;
+    position: absolute;
+    right: 0;
+}
+
+
+.memberShip a {
+    margin: 0 5px;
+    font-size: 12px;
+}
+
+form {
+    margin-top: 10px;
+}
+
+legend {
+    margin-left: 60px;
+    display: flex;
+    border: 1px solid;
+    border-radius: 3px;
+    margin-top: 10px;
+}
+
+
+fieldset,
+input {
+    border: none;
+}
+
+input {
+    height: 30px;
+}
+
+
+.user_input button {
+    margin-top: 5px;
+    width: 20px;
+    height: 20px;
+    background: url(../icon/search.png) 100%/100% no-repeat;
+    border:none;
+    cursor: pointer;
+}
+
+.user_input a:hover {
+    opacity: .3;
+}
+
+
+
+/* menu */
+
+header {
+    width: 100%;
+    position: fixed;
+    z-index: 2;
+    background-color:white;
+    top: 0;
+}
+
+
+.menu {
+    display:flex;
+    justify-content: space-between;
+    width:1200px;
+    margin: 120px auto 10px;
+
+}
+
+.menu li a {
+    font-weight: 500;
+}
+
+
+
+.menu a:hover {
+    color: rgb(84, 108, 92);
+    font-weight: 1000;
+}
+
+
+
+.menus {
+    width: 1200px;
+    margin: auto;
+
+}
+
+.category1,
+.thema {
+    border:1px solid;
+    border-top:none;
+    border-color: gainsboro;
+    width: 150px;
+    position: absolute;
+    background-color:white;
+    margin:auto;
+    display: none;
+}
+
+.category1{
+    margin-left: 410px;
+}
+
+.thema {
+    margin-left: 590px;
+}
+
+
+.menus li {
+    height:30px;
+    line-height: 30px;
+    font-size:12px;
+}
+
+
+.menus li:hover {
+    background-color:rgb(84, 108, 92);
+}
+.menus li:hover a{
+    color:aliceblue;
+}
+
+/* ============================================== */
+
+/* footer */
+
+footer {
+    /*background-color:rgb(58, 95, 68);*/
+    background: rgb(230, 230, 230);
+}
+
+
+.service_container {
+    display:flex;
+    width: 1200px;
+    justify-content: space-around;
+    margin:auto;
+}
+
+.info,
+.center,
+.connected {
+    margin-top: 50px;
+    height: 300px;
+    line-height:30px;
+    text-align: left;
+}
+
+.service_container a:hover {
+    opacity: .3;
+    text-decoration: underline;
+}
+
+.connected ul {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.connected img {
+    margin-top: 5px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+
+.service_container h3{
+    cursor: default;
+}
+
+.connected img:hover {
+    opacity:.3;
+}

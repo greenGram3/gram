@@ -1,0 +1,120 @@
+package com.green.meal.mapper;
+
+import com.green.meal.domain.SearchCondition;
+import com.green.meal.domain.UserVO;
+
+import java.util.List;
+import java.util.Map;
+
+//@Mapper
+public interface UserMapper {
+
+    int insertUser(UserVO user);
+    UserVO selectUserOne(String userId);
+
+    int updateUserPwd(Map map);
+
+    int updateUserName(Map map);
+
+    int updateUserEmail(Map map);
+
+    int updateUserPhone(Map map);
+
+    int deleteUser(String userId);
+
+    UserVO selectOne(String userId);
+
+    int delete(String userId);
+
+    int searchResultCnt(SearchCondition sc);
+
+    List<UserVO> searchSelectPage(SearchCondition sc);
+
+
+//	// 모든 user들의 정보 가져오는 메서드
+//	public List<UserVO> getListOfUsers();
+//
+//	// user 등록하는 메서드
+//	public void insertUser(UserVO user);
+//
+//	public void insertSelectKey(UserVO user);
+//
+//	//소셜 회원가입 시키기
+//	public void insertUserByGoogle(@Param("userEmail")String email, @Param("userFstName")String userFstName, @Param("userLastName")String userLastName , @Param("userRegisterMethod")String registerMethod);
+//
+//	// userNum으로 user 정보 가져오는 메서드
+//	public UserVO readUser(String userNum);
+//
+//	// userNum을 가진 user 없애는 메서드
+//	public int deleteUser(String userNum);
+//
+//	// user정보 업데이트하는 메서드
+//	public int updateUser(UserVO user);
+//
+//	// email로 중복되는 값이 있는 지 확인하는 메서드
+//	public int canRegister(@Param("userEmail")String email);
+//
+//	//이메일로 회원의 가입경로를 확인하는 메서드
+//	public String checkRegisterMethod(@Param("userEmail")String email);
+//
+//	//이메일과 가입경로로 user를 가져오는 메서드
+//	public UserVO getUserByEmailAndRegMethod(@Param("userEmail")String email, @Param("userRegisterMethod") String registerMethod);
+//
+//	// 해당 회원이 있는지 확인하는 메서드
+//	public UserVO isValidUser(@Param("userEmail") String userEmail, @Param("userPwd") String userPwd);
+//
+//	//해당 회원의 userNum을 반환
+//	public UserVO getUserById(String UserEmail);
+//
+//	// 로그인 정보 일치하는 지 확인하는 메서드
+//	public boolean checkLogin(UserVO user);
+//
+//	//입력된 인증코드와 보내진 db의 인증코드가 일치하는 사람이 1명이 맞는지 확인하는 메서드
+//	public int matchAuthCode(@Param("userEmail") String email, @Param("userAuthCode") String authCode);
+//
+//	//user의 상태코드를 'ACTIVE'로 수정하는 메서드
+//	public int grantActive(@Param("userEmail") String email, @Param("userAuthCode") String authCode);
+//
+//	//user의 인증코드를 업데이트 하는 메서드
+//	public int updateAuthCode(@Param("userEmail") String email, @Param("userAuthCode") String authCode);
+//
+//	//userNum으로 프로필을 가져오는 메서드
+//	public UserProfileVO getUserProfile(@Param("userNum") String userNum);
+//
+//	//프로필을 업데이트하는 메서드
+//	public int updateProfile(UserProfileVO profile);
+//
+//	//비밀번호를 업데이트하는 메서드
+//	public int updatePassword(@Param("userNum")String userNum, @Param("currentPassword")String currentPassword, @Param("newPassword") String newPasssword);
+//
+//
+//
+//
+//
+//	/////////////////////////////////림쨩의 영역/////////////////////////////////
+//
+//	//숙소등록을 처음 시작할때 사업자번호등록
+//	public int becomeHost(UserVO u);
+//
+//	public UserVO isHost(String userNum);
+//
+//	//세션새거
+//	public UserVO letsNewSession(String userNum);
+//
+//	//////////////////////////////어드민단 //////////////////////////////////////
+//
+//
+//	public List<UserVO> getadminListUsers(String userStatusCode);
+//
+//	public UserVO getUser(String userNum);
+//
+//	public int moditoHost(UserVO vo);
+//
+//	public int moditoGuest(UserVO vo);
+//
+//
+//	//사업자번호로 유져불러오기
+//	public UserVO  getAcmOwner(String bizRegnum);
+
+
+}

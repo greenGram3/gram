@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.green.meal.mapper.UserMapper">
+
+    <insert id="insertUser">
+        insert into user(user_id, user_name, user_email, user_pwd, user_phone, user_addr, user_birth, user_gender)
+        values (#{userId}, #{userName}, #{userEmail}, #{userPwd}, #{userPhone}, #{userAddr}, #{userBirth},
+                #{userGender})
+    </insert>
+
+    <select id="selectUserOne" resultType="UserVO">
+        select * from user where user_id = #{userId}
+    </select>
+
+    <update id="updateUserPwd" parameterType="map">
+        update user set user_pwd = #{newPwd} where user_id = #{userId}
+    </update>
+
+    <update id="updateUserName" parameterType="map">
+        update user set user_name = #{newName} where user_id = #{userId}
+    </update>
+
+    <update id="updateUserEmail" parameterType="map">
+        update user set user_email = #{newEmail} where user_id = #{userId}
+    </update>
+
+    <update id="updateUserPhone" parameterType="map">
+        update user set user_phone = #{newPhone} where user_id = #{userId}
+    </update>
+
+    <delete id="deleteUser">
+        delete from user where user_id = #{userId}
+    </delete>
+
+    <sql id="searchCondition">
+        <choose>
+            <when test='option=="Id"'>
+                and user_id like concat('%', #{keyword}, '%')
+            </when>
+            <when test='option=="Na"'>
+                and user_name like concat('%', #{keyword}, '%')
+            </when>
+            <when test='option=="Em"'>
+                and user_email like concat('%', #{keyword}, '%')
+            </when>
+            <when test='option=="Ph"'>
+                and user_phone like concat('%', #{keyword}, '%')
+            </when>
+            <otherwise>
+                and user_id like concat('%', #{keyword}, '%')
+                or user_name like concat('%', #{keyword}, '%')
+                or user_email like concat('%', #{keyword}, '%')
+                or user_phone like concat('%', #{keyword}, '%')
+            </otherwise>
+        </choose>
+    </sql>
+
+    <select id="selectOne" parameterType="String" resultType="UserVO">
+        select * from user
+        WHERE user_id = #{userId}
+    </select>
+
+    <delete id="delete" parameterType="String">
+        delete from user where user_id = #{userId}
+    </delete>
+
+    <select id="searchResultCnt" parameterType="SearchCondition" resultType="int">
+        select count(*)
+        from user
+        where true
+        <include refid="searchCondition"/>
+    </select>
+
+    <select id="searchSelectPage" parameterType="SearchCondition" resultType="UserVO">
+        select *
+        from user
+        where true
+        <include refid="searchCondition"/>
+        order by user_id asc
+        limit #{offset}, #{pageSize}
+    </select>
+
+
+</mapper>
