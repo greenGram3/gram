@@ -15,11 +15,26 @@
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/**" location="/resources/" />
 
+	<!-- ViewNameResolver설정(Resolver분기) 1) BeanNameViewResolver 2) jsonView 설정 -->
+	<beans:bean id="viewResolver" class="org.springframework.web.servlet.view.BeanNameViewResolver">
+		<beans:property name="order" value="1" />
+	</beans:bean>
+	<beans:bean id="jsonView" class="net.sf.json.spring.web.servlet.view.JsonView" />
+
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
+
+	<!-- Image Upload(MultiPart Resolver 설정) -->
+	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<beans:property name="maxUploadSize" value="-1" />
+	</beans:bean>
+
+	<!-- ImageDownLoad Resolver -->
+	<!-- => 다운로드를 처리할 ViewResolver 클래스 등록(DownloadView 직접만들기) => id="downloadView" 와  컨트롤러의 매핑메서드에서 리턴된 view name 과 같아야 한다. -->
+	<beans:bean id="downloadView" class="com.green.meal.download.DownloadView" />
 
 	<context:component-scan base-package="com.green.meal"/>
 
