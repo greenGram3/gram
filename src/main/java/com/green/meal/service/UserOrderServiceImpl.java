@@ -62,5 +62,10 @@ public class UserOrderServiceImpl implements UserOrderService {
         return userOrderMapper.orderConfirm(orderListVO);
     }
 
+    @Override
+    public List<OrderListDto> cancelList(String userId) {
+        return userOrderMapper.cancelList(userId);
+    }
+
 
 }

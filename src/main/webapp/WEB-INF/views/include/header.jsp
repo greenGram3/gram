@@ -15,7 +15,7 @@
       <div class="memberShip">
         <a href="<c:url value='/login/login'/>">로그인</a>|
         <a href="<c:url value='/register/register'/>" >회원가입</a>|
-        <a href="<c:url value='/user/order'/>" >마이페이지</a>|
+        <a href="<c:url value='/mypage/order'/>" >마이페이지</a>|
         <a href="#">고객센터</a>
       </div>
 

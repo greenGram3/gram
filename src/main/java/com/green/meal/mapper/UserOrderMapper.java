@@ -13,6 +13,7 @@ public interface UserOrderMapper {
 
     List<OrderDetailDto> orderDetail(Integer orderNo);
     List<OrderListDto> orderList(String userId);
+    List<OrderListDto> cancelList(String userId);
 
     List<OrderListDto> searchOrder(OrderSearch orderSearch);
 
@@ -23,6 +24,8 @@ public interface UserOrderMapper {
     OrderListDto order(Map map);
 
     int orderConfirm(OrderListDto orderListVO);
+
+
 
 
 }

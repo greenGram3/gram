@@ -21,4 +21,6 @@ public interface UserOrderService {
     OrderListDto order(Map map);
 
     int orderConfirm(OrderListDto orderListVO);
+
+    List<OrderListDto> cancelList(String userId);
 }

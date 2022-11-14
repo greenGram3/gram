@@ -20,7 +20,7 @@ import java.util.Map;
 @Slf4j
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/user/order")
+@RequestMapping("/mypage")
 public class UserOrderController {
 
     private final UserOrderService userOrderService;
@@ -34,13 +34,28 @@ public class UserOrderController {
 
     }
 
-    @GetMapping()
+    @GetMapping("/order")
     public String getList( Model model, HttpSession httpSession){
 
         //회원의 주문정보 가져오기
         String userId = (String) httpSession.getAttribute("userId") ;
         List<OrderListDto> orderList = userOrderService.orderUserInfo(userId);
 
+
+        setOrder(orderList);
+
+        model.addAttribute("orderList",orderList);
+
+        return "userOrderList";
+    }
+
+    @GetMapping("/cancel")
+    public String cancelList( Model model, HttpSession httpSession){
+
+        //회원의 주문정보 가져오기
+        String userId = (String) httpSession.getAttribute("userId");
+
+        List<OrderListDto> orderList = userOrderService.cancelList(userId);
 
         setOrder(orderList);
 

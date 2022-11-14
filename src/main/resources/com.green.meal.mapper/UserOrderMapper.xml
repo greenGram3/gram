@@ -12,6 +12,13 @@
             where user_id=#{userId} order by order_no desc
         </select>
 
+    <select id="cancelList" resultType="OrderListDto" parameterType="String">
+        select order_no, user_id,receiver, dely_addr, user_phone, payment, order_req , order_date , order_state
+
+        from order_list
+        where user_id=#{userId} and order_state='반품요청' order by order_no desc
+    </select>
+
         <select id="order" resultType="OrderListDto" parameterType="map">
             select order_no, user_id, receiver, dely_addr, user_phone, order_date, payment, order_req , order_date , order_state
 

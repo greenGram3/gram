@@ -9,8 +9,8 @@
   <h3>마이페이지</h3>
   <div>쇼핑정보
     <ul>
-      <li><a href="<c:url value='/user/order'/>">　- 주문목록/배송조회</a></li>
-      <li><a href="">　- 취소/반품 내역</a></li>
+      <li><a href="<c:url value='/mypage/order'/>">　- 주문목록/배송조회</a></li>
+      <li><a href="<c:url value='/mypage/cancel'/>">　- 취소/반품 내역</a></li>
     </ul>
   </div>
 
