@@ -16,8 +16,8 @@
     </select>
 
     <sql id="search">
-        <if test="keyword!=null">
-            <bind name="keyVal" value="'%'+keyword+'%'"/>
+        <if test="scKeyword!=null">
+            <bind name="keyVal" value="'%'+scKeyword+'%'"/>
         </if>
         <choose>
             <when test="searchType=='in'.toString()">

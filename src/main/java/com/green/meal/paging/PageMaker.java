@@ -66,7 +66,7 @@ public class PageMaker {
                         queryParam("currPage", currPage).
                         queryParam("rowsPerPage",cri.getRowsPerPage()).
                         queryParam("searchType", cri.getSearchType()).
-                        queryParam("keyword", cri.getKeyword()).
+                        queryParam("scKeyword", cri.getScKeyword()).
                         build();
         return uriComponents.toString();
     } //searchQuery

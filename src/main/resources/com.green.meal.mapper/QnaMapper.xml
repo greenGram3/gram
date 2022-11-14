@@ -4,8 +4,8 @@
 <mapper namespace="com.green.meal.mapper.QnaMapper">
 
     <sql id="search">
-        <if test="keyword!=null">
-            <bind name="keyVal" value="'%'+keyword+'%'"/>
+        <if test="scKeyword!=null">
+            <bind name="keyVal" value="'%'+scKeyword+'%'"/>
         </if>
         <choose>
             <when test="searchType=='i'.toString()">
@@ -28,15 +28,6 @@
         order by qna_root desc, qna_step asc
         limit #{sno}, #{rowsPerPage}
     </select>
-
-    <!-- 유저용 qnaList -->
-    <!--<select id="qnalistOne" resultType="com.green.meal.domain.QnaVO">
-            select * from qna
-            where user_id = #{userId} or user_id = 'admin'
-            order by qna_root desc, qna_step asc
-            limit #{sno}, #{rowsPerPage}
-        </select>-->
-    <!-- Mybatis는 param을 두개 담을 수 없어서, @RequestParam으로 sessionId 지정, 연결해줘야 #{user_id} 사용 가능? -->
 
     <select id="searchCount" resultType="int">
         select count(*) from qna where ( qna_no > 0 <include refid="search"></include>

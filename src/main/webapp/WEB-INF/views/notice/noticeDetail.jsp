@@ -4,6 +4,7 @@
 <head>
     <title>NoticeDetail</title>
     <link rel="stylesheet" href="resources/css/boardDetail.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 </head>
 <body>
 <c:if test="${not empty message}">

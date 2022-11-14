@@ -3,7 +3,8 @@
 <html>
 <head>
     <title>reviewList</title>
-    <link rel="stylesheet" href="resources/css/boardList.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="js/reviewAjax.js"></script>
 </head>
 <body>
 <c:if test="${not empty message}">

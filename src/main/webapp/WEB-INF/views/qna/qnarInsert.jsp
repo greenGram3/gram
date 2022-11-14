@@ -3,9 +3,8 @@
 <html>
 <head>
     <title>qnaReplyInsert</title>
-    <link rel="stylesheet" href="resources/css/boardDetail.css">
-    <script src="resources/ajaxLib/jquery-3.2.1.min.js"></script>
-    <script src="resources/ajaxLib/qnaRinsert.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="js/qnaAjax.js"></script>
 </head>
 <body>
 <c:if test="${not empty message}">

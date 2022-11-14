@@ -3,9 +3,8 @@
 <html>
 <head>
     <title>reviewReplyInsert</title>
-    <link rel="stylesheet" href="resources/css/boardDetail.css">
-    <script src="resources/ajaxLib/jquery-3.2.1.min.js"></script>
-    <script src="resources/ajaxLib/reviewRinsert.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="js/reviewAjax.js"></script>
 </head>
 <body>
 <c:if test="${not empty message}">

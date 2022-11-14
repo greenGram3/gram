@@ -3,21 +3,21 @@
 <html>
 <head>
     <title>noticeList</title>
-    <link rel="stylesheet" href="resources/css/boardList.css">
-    <script src="resources/ajaxLib/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" href="css/boardList.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script>
         // ** notice Search js
         $(function () {
             $('#searchType').change(function () {
-                if ($(this).val() == 'a') $('#keyword').val('');
+                if ($(this).val() == 'a') $('#scKeyword').val('');
             }); //change
             $('#noticeSearchBtn').click(function () {
                 self.location = "noticelist"
                     + "${pageMaker.makeQuery(1)}"
                     + "&searchType="
                     + $('#searchType').val()
-                    + "&keyword="
-                    + $('#keyword').val()
+                    + "&scKeyword="
+                    + $('#scKeyword').val()
             }); //click
         }); //ready
     </script>
@@ -39,7 +39,7 @@
                 <option value="c" ${pageMaker.cri.searchType=='c' ? 'selected':''}>내용</option>
                 <option value="tc" ${pageMaker.cri.searchType=='tc' ? 'selected':''}>제목+내용</option>
             </select>
-            <input type="text" name="keyword" id="keyword" value="${pageMaker.cri.keyword}">
+            <input type="text" name="scKeyword" id="scKeyword" value="${pageMaker.cri.scKeyword}">
             <button id="noticeSearchBtn">검색</button>
         </div>
         <br>

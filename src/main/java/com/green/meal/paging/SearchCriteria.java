@@ -16,7 +16,7 @@ public class SearchCriteria {
     private String searchType;
 
     @Setter
-    private String keyword;
+    private String scKeyword;
 
     // 1) 필요한 "★기본값(처음)" 초기화는 생성자 이용
     public SearchCriteria () {
