@@ -1,0 +1,60 @@
+.registerForm {
+    margin-top: 250px;
+    margin-bottom: 50px;
+    width: 900px;
+}
+main * {
+    margin: auto;
+}
+.registerForm input {
+    border:1px solid darkgrey;
+    height: 30px;
+}
+
+.registerForm * {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.registerForm hr {
+    color: #cccccc;
+}
+
+.registerForm hr {
+    border: 1px solid gainsboro;
+}
+
+.registerForm h1 {
+    padding-bottom: 30px;
+}
+
+.registerForm button{
+    height: 30px;
+    width: 70px;
+    border: 1px solid lightgray;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+.registerFormBtn {
+    text-align: center;
+}
+
+
+.registerFormBtn button {
+    width: 150px;
+    height: 40px;
+    margin-left:10px;
+    background-color: whitesmoke;
+    font-weight: 500;
+}
+
+.registerFormBtn input {
+    width: 150px;
+    height: 40px;
+    margin-left:10px;
+    background-color: rgb(84, 108, 92);
+    color: #eeecec;
+    font-weight: 500;
+    cursor: pointer;
+}

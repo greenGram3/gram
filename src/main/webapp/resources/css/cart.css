@@ -1,15 +1,19 @@
 
 /* main */
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500&display=swap');
 
-*{
-    font-family: 'IBM Plex Sans KR', sans-serif;
+hr {
+    color: gainsboro;
+}
+
+h2 {
+    padding-bottom: 20px;
+    display: flex;
+    font-size: 1.8em;
 }
 
 main * {
     margin:auto;
     text-align: center;
-    list-style: none;
 }
 
 .cart_container {
@@ -24,10 +28,11 @@ figure {
 }
 
 table {
-    width: 600px;
+    width: 100%;
     border-top: 1px solid lightgray;
     border-collapse: collapse;
 }
+
  td {
     border-bottom: 1px solid lightgray;
     border-left: 1px solid lightgray;
@@ -37,7 +42,6 @@ table {
  th {
      background-color: #eeecec;
     border-bottom: 1px solid lightgray;
-    border-left: none;
      padding: 10px;
 }
 
@@ -45,11 +49,6 @@ th:first-child, td:first-child {
     border-left: none;
 }
 
-thead th,
-tfoot *,
-tbody * {
-    margin: 20px;
-}
 
 thead .itemPrice {
     margin: auto;
@@ -66,22 +65,24 @@ button {
     border: 1px solid darkgray;
 }
 
-.input_cartAmount {
+.cartAmount>input {
     width: 25px;
     height: 25px;
     border: 1px solid darkgray;
 }
 
 .itemPrice {
-    margin-right: 30px;
+    margin:auto;
 }
 
 tfoot * {
     font-weight: bold;
 }
 
-.modBtn {
+.delBtn button,
+.modBtn button {
     margin-bottom: 10px;
+    width: 80px;
 }
 
 .itemPrice {

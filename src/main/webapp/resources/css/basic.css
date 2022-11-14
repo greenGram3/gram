@@ -177,7 +177,6 @@ header {
 /* footer */
 
 footer {
-    /*background-color:rgb(58, 95, 68);*/
     background: rgb(230, 230, 230);
 }
 
@@ -187,6 +186,7 @@ footer {
     width: 1200px;
     justify-content: space-around;
     margin:auto;
+    margin-top: 100px;
 }
 
 .info,
@@ -222,3 +222,4 @@ footer {
 .connected img:hover {
     opacity:.3;
 }
+

@@ -1,0 +1,84 @@
+.loginForm {
+    margin-top: 250px;
+    margin-bottom: 50px;
+    width: 900px;
+    padding-bottom: 50px;
+}
+main * {
+    margin: auto;
+}
+
+.loginForm p {
+    padding-top: 20px;
+    padding-bottom: 15px;
+    font-size: 20px;
+}
+
+.loginForm h1 {
+    margin-left: 160px;
+}
+
+.login {
+    border: 1px solid gainsboro;
+    padding: 20px 20px 60px 20px;
+    width: 540px;
+}
+.memberLogin {
+    display: flex;
+}
+
+.login input {
+    border:1px solid darkgrey;
+    height: 30px;
+    vertical-align: bottom;
+}
+
+.loginForm button {
+    width: 160px;
+    height: 80px;
+    background-color: rgb(84, 108, 92);
+    border: none;
+    color: #f8f8f8;
+    font-weight: bold;
+    cursor: pointer;
+    margin-left: -10px;
+    margin-top: 13px;
+}
+
+.memberLoginDetail {
+    margin-left: 0;
+}
+
+.memberLoginDetail li{
+    margin-bottom: 10px;
+}
+
+.memberLoginDetail li:nth-of-type(1) {
+    margin: 14px;
+}
+
+.rememberId {
+    display: flex;
+    margin-bottom: 20px;
+    margin-left: -400px;
+}
+
+.memberCheck {
+    margin-top: 40px;
+}
+
+.memberCheck a {
+    width: 150px;
+    height: 50px;
+    border: 1px solid darkgray;
+    text-align: center;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 50px;
+    padding: 10px 25px;
+}
+
+.memberCheck a:last-of-type {
+    padding: 10px 50px;
+    background-color: #eeecec;
+}

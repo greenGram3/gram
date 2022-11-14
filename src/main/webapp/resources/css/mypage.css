@@ -1,0 +1,54 @@
+/* aside */
+
+.main {
+    width:1200px;
+    display: flex;
+    width: 1200px;
+    margin: auto;
+}
+
+.mypage {
+    width: 180px;
+    margin-top: 250px;
+    margin-bottom: 50px;
+}
+
+aside {
+    width:180px;
+    position: relative;
+}
+
+
+.mypage * {
+    text-align: left;
+    padding-left: 0;
+    margin-top: 10px;
+}
+
+h3{
+    font-size:1.2em;
+}
+
+.mypage div {
+    margin-top: 40px;
+    font-weight: 500;
+}
+
+.mypage li {
+    height:30px;
+}
+
+.mypage li a {
+    font-size: 13px;
+    font-weight:100;
+    line-height:30px;
+}
+
+.mypage li:hover a {
+    color:rgb(84, 108, 92);
+    font-weight:500;
+}
+
+.mypage li:hover {
+    background-color: #eeecec;
+}

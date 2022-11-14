@@ -1,0 +1,84 @@
+
+.orderList {
+    margin-top: 250px;
+    margin-bottom: 50px;
+    width: 900px;
+}
+
+.orderList h3 {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+
+.orderList div{
+    padding-bottom: 10px;
+}
+
+.search-container input{
+    margin: 5px 10px;
+    border: 1px solid darkgrey;
+}
+
+.search-container {
+    border: 2px solid #eeecec ;
+    width: 900px;
+    margin-bottom: 50px;
+    line-height: 60px;
+}
+
+.search-container form {
+    color: gray;
+    font-weight: 400;
+}
+
+.searchBtn {
+    width: 90px;
+    background-color: rgb(84, 108, 92);
+    color: #eeecec;
+    cursor: pointer;
+}
+
+
+
+/* table*/
+
+
+.orderList .fixBtn {
+    margin-bottom: 5px;
+}
+
+
+li> button {
+    width: 60px;
+    background-color: #eeecec;
+    border: 1px solid darkgrey;
+    height: 25px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+table {
+    width: 100%;
+    border-top: 1px solid lightgray;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+.orderList td {
+    border-bottom: 1px solid lightgray;
+    border-top: 1px solid lightgray;
+    padding: 10px;
+}
+
+.orderList th {
+    background-color: #eeecec;
+    border-bottom: 1px solid lightgray;
+    padding: 10px;
+}
+
+.orderDate {
+    text-decoration: underline;
+}
+
+

@@ -9,13 +9,13 @@
   <div class="summit_line"></div>
   <section class="gram_container">
     <h1>
-      <a class="logo_image" href="#">편한밥상</a>
+      <a class="logo_image" href="<c:url value='/'/>">편한밥상</a>
     </h1>
     <div class="user_input">
       <div class="memberShip">
-        <a href="#">로그인</a>|
-        <a href="#" >회원가입</a>|
-        <a href="#" >마이페이지</a>|
+        <a href="<c:url value='/login/login'/>">로그인</a>|
+        <a href="<c:url value='/register/register'/>" >회원가입</a>|
+        <a href="<c:url value='/user/order'/>" >마이페이지</a>|
         <a href="#">고객센터</a>
       </div>
 
