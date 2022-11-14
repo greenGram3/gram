@@ -9,14 +9,11 @@
     <link rel="stylesheet" href="<c:url value='/css/userOrderList.css'/>">
     <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
 </head>
-
 <body>
 <%@include file="include/header.jsp"%>
-
 <script>
     let msg = "${msg}";
     if(msg=="null")alert("날짜를 다시 입력해주세요");
-
 </script>
 <main>
     <div class="main">

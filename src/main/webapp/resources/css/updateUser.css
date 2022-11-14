@@ -1,0 +1,218 @@
+
+.updateUser {
+    margin-top: 250px;
+    margin-bottom: 50px;
+    width: 900px;
+}
+
+.updateUser h3 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.updateUser hr {
+    color: #cccccc;
+    margin-bottom: 20px;
+}
+
+
+.hidden {
+    display: none;
+}
+
+.updateUser input{
+    margin: 5px 10px;
+    border: 1px solid darkgrey;
+}
+
+.userId,
+.userPwd,
+.userName,
+.userEmail,
+.userPhone,
+.userGender {
+    display: flex;
+    border-top: 1px solid lightgrey;
+}
+
+.userGender {
+    border-bottom: 1px solid lightgrey;
+}
+.updateUser p {
+    line-height: 40px;
+    padding-left: 20px;
+}
+
+.updateUser p:nth-of-type(1){
+    width: 200px;
+    height: 40px;
+    font-weight: 500;
+    background-color: #eeecec;
+}
+
+.updateUser p:nth-of-type(2){
+    width: 300px;
+    height: 40px;
+}
+
+.userEmail p:nth-of-type(2) {
+    margin-left: 15px;
+}
+
+
+
+.updateUser .pwd,
+.updateUser .name,
+.updateUser .email,
+.updateUser .phone {
+    width: 100px;
+    background-color: #eeecec;
+    cursor: pointer;
+}
+#pwd{
+    width: 100%;
+    background-color:white;
+}
+#pwd>div {
+    display: flex;
+    height: 41px;
+}
+
+#pwd>div:nth-of-type(1),
+#pwd>div:nth-of-type(3){
+    border-bottom: 1px solid lightgrey;
+    border-top: 1px solid lightgrey;
+}
+
+#pwd span {
+    width: 200px;
+    line-height: 41px;
+    padding-left: 20px;
+    background-color: #eeecec;
+}
+
+#pwd input {
+    margin-left: 20px;
+    margin-right: 0px;
+}
+
+.pwdCheck {
+    margin-left: 220px;
+}
+
+.pwdCheck input {
+    width: 80px;
+    cursor: pointer;
+}
+
+#name>div {
+    display: flex;
+}
+
+#name>div:nth-of-type(1){
+    border-bottom: 1px solid lightgrey;
+    border-top: 1px solid lightgrey;
+}
+
+.updateUser form {
+    margin-top: 0px;
+}
+.userName p:nth-of-type(2) {
+    margin-left: 15px;
+}
+#name {
+    width: 100%;
+    background-color: white;
+}
+
+#name span {
+    width: 200px;
+    padding-left: 20px;
+    background-color: #eeecec;
+    line-height: 42px;
+}
+
+#name>div:nth-of-type(2) {
+    margin-left: 230px;
+}
+
+#newName {
+    margin-left: 20px;
+}
+
+#nameCancel,
+#nameComplete {
+    width: 80px;
+    cursor: pointer;
+}
+
+.email>div {
+    display: flex;
+}
+
+#email>div:nth-of-type(1){
+    border-bottom: 1px solid lightgrey;
+    border-top: 1px solid lightgrey;
+}
+
+#email {
+    width: 100%;
+    background-color: white;
+}
+
+.email span {
+    width: 200px;
+    padding-left: 20px;
+    background-color: #eeecec;
+    line-height: 42px;
+}
+
+#email>div:nth-of-type(2) {
+    margin-left: 230px;
+}
+
+#newEmail {
+    margin-left: 20px;
+}
+
+#emailCancel,
+#emailComplete {
+    width: 80px;
+    cursor: pointer;
+}
+
+
+.phone>div {
+    display: flex;
+}
+
+#phone>div:nth-of-type(1){
+    border-bottom: 1px solid lightgrey;
+    border-top: 1px solid lightgrey;
+}
+
+#phone {
+    width: 100%;
+    background-color: white;
+}
+
+.phone span {
+    width: 200px;
+    padding-left: 20px;
+    background-color: #eeecec;
+    line-height: 42px;
+}
+
+#phone>div:nth-of-type(2) {
+    margin-left: 230px;
+}
+
+#newPhone {
+    margin-left: 20px;
+}
+
+#phoneCancel,
+#phoneComplete {
+    width: 80px;
+    cursor: pointer;
+}

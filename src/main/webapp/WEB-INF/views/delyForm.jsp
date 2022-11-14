@@ -1,15 +1,29 @@
-<%@ page pageEncoding="UTF-8" %>
-
+<%@ page contentType="text/html;charset=UTF-8"  language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt" %>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>delyList</title>
+    <link rel="stylesheet" href="<c:url value='/css/delyForm.css'/>">
+    <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+</head>
+<body>
+<%@include file="include/header.jsp"%>
 <main>
+    <div class="main">
 
- <section>
-     <table border="1">
+    <%@include file="include/mypage.jsp"%>
+
+     <div class="delyForm">
+         <h3>배송지 관리</h3>
+     <table>
          <th>수령인</th>
          <th>배송지</th>
          <th>기본배송지</th>
          <th>주소</th>
          <th>연락처</th>
-         <th>buttons</th>
+         <th>관리</th>
 
          <c:forEach var="item" items="${list}" varStatus="status">
                  <tr>
@@ -20,10 +34,10 @@
                              <span style="color: dodgerblue;">기본 배송지</span>
                          </c:if>
                      </td>
-                     <th>${item.delyAddr}</th>
-                     <th>${item.delyPhone}</th>
-                     <th><input type="button" value="수정" id="updateBtn${status.index}">
-                          <input type="button" value="삭제" id="deleteBtn${status.index}"></th>
+                     <td>${item.delyAddr}</td>
+                     <td>${item.delyPhone}</td>
+                     <td><input type="button" value="수정" id="updateBtn${status.index}">
+                         <input type="button" value="삭제" id="deleteBtn${status.index}"></td>
                  </tr>
              <script>
                  document.querySelector("#updateBtn${status.index}").addEventListener('click', function(){
@@ -52,22 +66,18 @@
                  })
              </script>
          </c:forEach>
-
-
      </table>
-
-     <button type="button" id="regBtn">배송지등록</a>></button>
- </section>
-</main>
-</body>
-</html>
-
+     <button type="button" id="regBtn">배송지 등록</button>
 <script>
     document.querySelector("#regBtn").addEventListener('click',function (){
         window.open("<c:url value="/delivery/register"/>","Child","left=400,top=200,width=500,height=500")
     })
 </script>
-
-
+    </div>
+    </div>
+</main>
+<%@include file="include/footer.jsp"%>
+</body>
+</html>
 
 

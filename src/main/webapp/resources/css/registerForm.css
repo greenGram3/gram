@@ -6,6 +6,7 @@
 main * {
     margin: auto;
 }
+
 .registerForm input {
     border:1px solid darkgrey;
     height: 30px;

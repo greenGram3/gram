@@ -6,24 +6,34 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="<c:url value='/css/delyRegister.css'/>">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Delivery</title>
 </head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
 <body>
 <main>
         <h2>신규배송지</h2>
+    <hr class="hr1">
+    <div class="delyRegister">
         <div>수령인 <input type="text" name="receiver" id="receiver"></div>
     <div id="msgReceiver" style="color: red"></div>
+        <hr class="hr2">
         <div>배송지명 <input type="text" name="delyPlace" id="delyPlace"></div>
     <div id="msgDelyPlace" style="color: red"></div>
+        <hr class="hr3">
         <div>휴대전화 <input type="text" name="delyPhone" id="delyPhone"></div>
     <div id="msgDelyPhone" style="color: red"></div>
+        <hr class="hr4">
         <div>배송지 주소 <input type="text" name="delyAddr" id="delyAddr"></div>
     <div id="msgDelyAddr" style="color: red"></div>
-        <input type="checkbox" name="delyNo" value="1" id="delyNo">기본 배송지 설정
-        <input type="button" value="등록" id="submitBtn">
+        <hr class="hr5">
+        <div class="delyCheck">
+            <input type="checkbox" name="delyNo" value="1" id="delyNo">　기본 배송지 설정　
+            <input type="button" value="등록" id="submitBtn">
+        </div>
+    </div>
 </main>
 </body>
 </html>

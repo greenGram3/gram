@@ -1,0 +1,65 @@
+
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+    color: rgb(18, 14, 2);
+    font-family: 'IBM Plex Sans KR', sans-serif;
+}
+
+
+h2 {
+    margin-left: 20px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.delyRegister input {
+    border:1px solid darkgrey;
+    height: 30px;
+}
+
+hr {
+    color: #cccccc;
+    width: 500px;
+    margin-left: 2px;
+}
+
+.delyRegister>div {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+}
+
+.delyRegister input {
+    margin-left: 40px;
+}
+
+input#receiver {
+    margin-left: 54px;
+}
+
+input#delyAddr {
+    margin-left: 23px;
+}
+
+input#submitBtn {
+    margin-left: 30px;
+    width: 90px;
+    cursor: pointer;
+}
+
+.delyCheck {
+    display: flex;
+    align-items: center;
+}
+
+#delyNo {
+    margin-bottom: 10px;
+    margin-left: 18px;
+}
+
+

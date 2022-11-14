@@ -1,49 +1,52 @@
-
-<%@ page pageEncoding="UTF-8" %>
-
+<%@ page contentType="text/html;charset=UTF-8"  language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt" %>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>orderList</title>
+  <link rel="stylesheet" href="<c:url value='/css/updateUser.css'/>">
+  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+</head>
+<body>
+<%@include file="include/header.jsp"%>
 <main>
+  <div class="main">
+  <%@include file="include/mypage.jsp"%>
 
-  <section>
-    <h1>회원정보변경</h1>
-
-    <ul>
-      <li>아이디</li>
-      <li>${user.userId}</li>
-    </ul>
-
-    <ul>
-      <li>비밀번호</li>
-      <li>********</li>
-      <li><input type="button" class="pwd" value="비밀번호 변경"></li>
-    </ul>
-
-    <div class="pwd hidden">
+  <div class="updateUser">
+    <h3>회원정보변경</h3>
+    <hr>
+  <div class="userId">
+    <p>아이디</p>　<p>${user.userId}</p>
+  </div>
+    <div class="userPwd">
+      <p>비밀번호</p>　<p>********</p>　<input type="button" class="pwd" value="비밀번호 변경">
+    </div>
+    <div class="pwd hidden" id="pwd">
       <div><span>현재비밀번호</span><input type="text" id="currentPwd"></div>
       <div><span>신규비밀번호</span><input type="text" id="newPwd1"></div>
-      <div><span>신규비밀번호 재입력</span><input type="text" id="newPwd2"></div>
-      <div id="msgPwd" style="color: red"></div>
-      <div>
+      <div><span>신규비밀번호 재입력</span><input type="text" id="newPwd2"> <div id="msgPwd" style="color: red"></div></div>
+      <div class="pwdCheck">
         <input type="button" id="pwdCancel" value="취소">
         <input type="button" id="pwdComplete" value="완료">
       </div>
     </div>
 
-    <ul>
-      <li>이름(실명)</li>
-      <li>${user.userName}</li>
-      <li><input type="button" class="name" value="이름 변경"></li>
-    </ul>
-
+    <div>
+      <div class="userName"> <p>이름(실명)</p><p>${user.userName}</p>　<input type="button" class="name" value="이름 변경"></div>
+    <div class="userNameForm">
     <form action="<c:url value='/update/userName'/>" method="post" id="nameForm">
-      <div class="name hidden">
-        <div><span>이름 입력</span><input type="text" id="newName" name="newName"></div>
-        <div id="msgName" style="color: red"></div>
+      <div class="name hidden" id="name">
+        <div><span>새로운 이름</span><input type="text" id="newName" name="newName"><div id="msgName" style="color: red"></div></div>
         <div>
           <input type="button" id="nameCancel" value="취소">
           <input type="button" id="nameComplete" value="완료">
         </div>
       </div>
     </form>
+    </div>
+  </div>
 
     <script>
       $('#nameComplete')[0].addEventListener('click', function (){
@@ -64,23 +67,21 @@
         $('#nameForm').submit();
       })
     </script>
-
-    <ul>
-      <li>이메일</li>
-      <li>${user.userEmail}</li>
-      <li><input type="button" class="email" value="이메일 변경"></li>
-    </ul>
-
+    <div>
+    <div class="userEmail">
+    <p> 이메일</p><p>${user.userEmail}</p>　<input type="button" class="email" value="이메일 변경"></div>
+      <div class="userEmailForm">
     <form action="<c:url value='/update/userEmail'/>" method="post" id="emailForm">
-      <div class="email hidden">
-        <div><span>이메일 입력</span><input type="text" id="newEmail" name="newEmail"></div>
-        <div id="msgEmail" style="color: red"></div>
+      <div class="email hidden" id="email">
+        <div><span>이메일 입력</span><input type="text" id="newEmail" name="newEmail">  <div id="msgEmail" style="color: red"></div></div>
         <div>
           <input type="button" id="emailCancel" value="취소">
           <input type="button" id="emailComplete" value="완료">
         </div>
       </div>
     </form>
+      </div>
+    </div>
 
     <script>
       $('#emailComplete')[0].addEventListener('click', function (){
@@ -94,23 +95,22 @@
         }
       })
     </script>
+    <div>
+    <div class="userPhone">
+      <p>휴대전화</p>　<p>${user.userPhone}</p>　<input type="button" class="phone" value="휴대전화 변경"> </div>
 
-    <ul>
-      <li>휴대전화</li>
-      <li>${user.userPhone}</li>
-      <li><input type="button" class="phone" value="휴대전화 변경"></li>
-    </ul>
-
+    <div class="userPhoneForm">
     <form action="<c:url value='/update/userPhone'/>" method="post" id="phoneForm">
-      <div class="phone hidden">
-        <div><span>휴대폰번호 입력</span><input type="text" id="newPhone" name="newPhone"></div>
-        <div id="msgPhone" style="color: red"></div>
+      <div class="phone hidden" id="phone">
+        <div><span>휴대폰번호 입력</span><input type="text" id="newPhone" name="newPhone"><div id="msgPhone" style="color: red"></div></div>
         <div>
           <input type="button" id="phoneCancel" value="취소">
           <input type="button" id="phoneComplete" value="완료">
         </div>
       </div>
     </form>
+    </div>
+    </div>
 
     <script>
       $('#phoneComplete')[0].addEventListener('click', function (){
@@ -125,24 +125,9 @@
       })
     </script>
 
-    <ul>
-      <li>성별</li>
-      <li>${user.userGender}</li>
-    </ul>
-  </section>
-
-</main>
-</body>
-</html>
-
-<style>
-  .hidden {
-    display: none;
-  }
-</style>
-
-
-
+    <div class="userGender">
+      <p>성별</p>　<p>${user.userGender}</p>
+    </div>
 
 <script>
   const currentPwd = document.querySelector("#currentPwd");
@@ -218,5 +203,11 @@
     $('.phone')[1].classList.add('hidden');
     $('.'+name)[1].classList.remove('hidden');
   }
-
 </script>
+
+  </div>
+  </div>
+</main>
+<%@include file="include/footer.jsp"%>
+</body>
+</html>

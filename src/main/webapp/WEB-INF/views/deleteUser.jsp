@@ -1,16 +1,28 @@
-<%@ page pageEncoding="UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8"  language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt" %>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>orderList</title>
+    <link rel="stylesheet" href="<c:url value='/css/deleteUser.css'/>">
+    <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+</head>
+<body>
+<%@include file="include/header.jsp"%>
 <script>
     if("${msg}"=="deleteUser_fail") alert("비밀번호가 맞지 않습니다.");
 </script>
-
-
 <main>
+    <div class="main">
+        <%@include file="include/mypage.jsp"%>
 
- <section>
+        <div class="deleteUser">
      <h3>01.회원탈퇴 안내</h3>
+            <hr>
      <div>
     <pre>
-                             담짜몰 탈퇴안내
+                             편한밥상 탈퇴안내
 
 회원님께서 회원 탈퇴를 원하신다니 저희 쇼핑몰의 서비스가 많이 부족하고 미흡했나 봅니다.
 불편하셨던 점이나 불만사항을 알려주시면 적극 반영해서 고객님의 불편함을 해결해 드리도록 노력하겠습니다.
@@ -23,15 +35,12 @@
      </div>
 
      <h3>02.회원탈퇴 하기</h3>
+            <hr>
      <form action="<c:url value='/update/userDelete' />" method="post" id="form">
-         <span>비밀번호</span><input type="text" name="userPwd"/>
-         <span>탈퇴사유</span><input type="text"/>
+         <span>비밀번호</span><input type="text" name="userPwd" autofocus/>
+         <span>탈퇴사유</span><input type="text" autofocus/>
          <input type="button" value="탈퇴하기" id="delBtn">
      </form>
- </section>
-</main>
-</body>
-</html>
 
 <script>
 const delBtn = document.querySelector("#delBtn");
@@ -43,6 +52,12 @@ delBtn.addEventListener('click',function (){
 
 });
 </script>
+    </div>
+    </div>
+</main>
+<%@include file="include/footer.jsp"%>
+</body>
+</html>
 
 
 

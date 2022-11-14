@@ -6,6 +6,7 @@ import com.green.meal.domain.OrderSearch;
 import com.green.meal.service.UserOrderService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -25,6 +26,9 @@ public class UserOrderController {
 
     private final UserOrderService userOrderService;
 
+    @Autowired
+    UserController userController;
+
     //결제페이지 에서 주문내역으로 저장
     @PostMapping("/save")
     public void save(List<OrderDetailDto> orderItemVO, OrderListDto orderListVO){
@@ -39,6 +43,8 @@ public class UserOrderController {
 
         //회원의 주문정보 가져오기
         String userId = (String) httpSession.getAttribute("userId") ;
+
+
         List<OrderListDto> orderList = userOrderService.orderUserInfo(userId);
 
 

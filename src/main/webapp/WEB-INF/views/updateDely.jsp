@@ -6,6 +6,7 @@
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="<c:url value='/css/updateDely.css'/>">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
 </head>
@@ -14,25 +15,33 @@
 <body>
 <main>
     <h2>배송지 수정</h2>
+    <hr class="hr1">
+    <div class="updateDely">
+
     <div>수령인 <input type="text" name="receiver" id="receiver" value="${dely.receiver}"></div>
     <input type="hidden" name="receiver1" value="${dely.receiver}">
     <div id="msgReceiver" style="color: red"></div>
-
+    <hr class="hr2">
 
     <div>배송지명 <input type="text" name="delyPlace" id="delyPlace" value="${dely.delyPlace}"></div>
     <input type="hidden" name="delyPlace1" value="${dely.delyPlace}">
     <div id="msgDelyPlace" style="color: red"></div>
+        <hr class="hr3">
 
     <div>휴대전화 <input type="text" name="delyPhone" id="delyPhone" value="${dely.delyPhone}"></div>
     <input type="hidden" name="delyPhone1" value="${dely.delyPhone}">
     <div id="msgDelyPhone" style="color: red"></div>
+        <hr class="hr4">
 
     <div>배송지 주소 <input type="text" name="delyAddr" id="delyAddr" value="${dely.delyAddr}"></div>
     <input type="hidden" name="delyAddr1" value="${dely.delyAddr}">
     <div id="msgDelyAddr" style="color: red"></div>
-
+        <hr class="hr5">
+        <div class="delyCheck">
     <input type="button" value="취소" id="delBtn">
     <input type="button" value="수정" id="updBtn">
+        </div>
+    </div>
 </main>
 </body>
 </html>
