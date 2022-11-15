@@ -9,7 +9,7 @@
     <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
 </head>
 <body>
-<%@include file="include/header.jsp"%>
+<jsp:include page="include/header.jsp" flush="false" />
 <main>
     <div class="main">
 
@@ -96,7 +96,7 @@
         </div>
     </div>
 </main>
-<%@include file="include/footer.jsp"%>
+<jsp:include page="include/footer.jsp" flush="false" />
 </body>
 </html>
 

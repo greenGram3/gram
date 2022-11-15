@@ -25,7 +25,7 @@
     </script>
 </head>
 <body>
-<%@include file="../include/header.jsp"%>
+<jsp:include page="../include/header.jsp" flush="false" />
 
 <c:if test="${not empty message}">
     <script type="text/javascript">
@@ -154,6 +154,6 @@
     </div>
     </div>
 </main>
-<%@include file="../include/footer.jsp"%>
+<jsp:include page="../include/footer.jsp" flush="false" />
 </body>
 </html>

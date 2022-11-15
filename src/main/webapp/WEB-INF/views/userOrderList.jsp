@@ -10,7 +10,7 @@
     <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
 </head>
 <body>
-<%@include file="include/header.jsp"%>
+<jsp:include page="include/header.jsp" flush="false" />
 <script>
     let msg = "${msg}";
     if(msg=="null")alert("날짜를 다시 입력해주세요");
@@ -18,7 +18,7 @@
 <main>
     <div class="main">
 
-        <%@include file="include/mypage.jsp"%>
+        <jsp:include page="include/mypage.jsp" flush="false" />
 
         <div class="orderList">
             <h3>주문목록 / 조회</h3>

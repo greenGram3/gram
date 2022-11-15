@@ -9,10 +9,10 @@
   <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
 </head>
 <body>
-<%@include file="include/header.jsp"%>
+<jsp:include page="include/header.jsp" flush="false" />
 <main>
   <div class="main">
-    <%@include file="include/mypage.jsp"%>
+    <jsp:include page="include/mypage.jsp" flush="false" />
 
     <div class="updateUser">
       <h3>회원정보변경</h3>
@@ -202,6 +202,6 @@
     </div>
   </div>
 </main>
-<%@include file="include/footer.jsp"%>
+<jsp:include page="include/footer.jsp" flush="false" />
 </body>
 </html>

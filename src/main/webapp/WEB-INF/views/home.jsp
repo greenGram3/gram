@@ -10,7 +10,7 @@
 </head>
 <body>
 
-<%@include file="include/header.jsp"%>
+<jsp:include page="include/header.jsp" flush="false" />
 
 <main>
 	<section class="event_container">
@@ -37,7 +37,7 @@
 
 </main>
 
-<%@include file="include/footer.jsp"%>
+<jsp:include page="include/footer.jsp" flush="false" />
 
 </body>
 </html>

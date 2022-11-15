@@ -134,9 +134,9 @@
                 <span class="lastBtn none">&nbsp;&gt;&nbsp;&nbsp;▶▶</span>
             </c:otherwise>
         </c:choose>
+        </div>
     </div>
-
 </main>
-<%@include file="../include/footer.jsp"%>
+<jsp:include page="../include/footer.jsp" flush="false" />
 </body>
 </html>

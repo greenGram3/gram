@@ -36,7 +36,7 @@
 
 <main class="main_container">
     <div class="main">
-        <%@include file="../include/mypage.jsp"%>
+        <jsp:include page="../include/mypage.jsp" flush="false" />
         <div class="reviewList">
 
     <h1>상품후기</h1>
@@ -136,6 +136,6 @@
         </div>
     </div>
 </main>
-<%@include file="../include/footer.jsp"%>
+<jsp:include page="../include/footer.jsp" flush="false" />
 </body>
 </html>

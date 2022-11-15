@@ -9,7 +9,7 @@
     <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
 </head>
 <body>
-<%@include file="include/header.jsp"%>
+<jsp:include page="include/header.jsp" flush="false" />
 <script>
     if("${msg}"=="deleteUser_fail") alert("비밀번호가 맞지 않습니다.");
 </script>
@@ -55,7 +55,7 @@ delBtn.addEventListener('click',function (){
     </div>
     </div>
 </main>
-<%@include file="include/footer.jsp"%>
+<jsp:include page="include/footer.jsp" flush="false" />
 </body>
 </html>
 

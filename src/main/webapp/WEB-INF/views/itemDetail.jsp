@@ -78,7 +78,7 @@
     </script>
 </head>
 <body>
-<%@include file="include/header.jsp" %>
+<jsp:include page="include/header.jsp" flush="false" />
 
 <c:if test="${not empty msg}">
     <script type="text/javascript">
