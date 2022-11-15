@@ -11,7 +11,7 @@ import java.util.Map;
 
 public interface DelyService {
 
-     List<DeliveryVO> selectDelivery(String userId);
+    List<DeliveryVO> selectDelivery(String userId);
 
     int delyProc(DeliveryVO dely);
 
