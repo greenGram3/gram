@@ -1,8 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html>
 <html>
 <head>
     <title>ReviewReplyUpdate</title>
+    <link rel="stylesheet" href="<c:url value='/css/review.css'/>">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script src="js/reviewAjax.js"></script>
     <script>
@@ -43,7 +45,12 @@
     </script>
 </head>
 <body>
+<main>
+
+    <div class="reviewRupdate">
 <form action="reviewrupdate" method="post">
+    <h3>답글 수정</h3>
+
     <table>
         <tr>
             <td>아이디</td>
@@ -51,11 +58,11 @@
         </tr>
         <tr>
             <td>제목</td>
-            <td><input type="text" name="reviewTitle" id="reviewTitle" minlength="2" required></td>
+            <td><input type="text" name="reviewTitle" id="reviewTitle" minlength="2" value="${reviewResult.reviewTitle}" required></td>
         </tr>
         <tr>
             <td>내용</td>
-            <td><textarea name="reviewContent" id="reviewContent" minlength="10" required></textarea></td>
+            <td><textarea name="reviewContent" id="reviewContent" minlength="10" value="${reviewResult.reviewContent}" required></textarea></td>
         </tr>
 
         <tr class="modBtn">
@@ -70,5 +77,7 @@
         </tr>
     </table>
 </form>
+    </div>
+</main>
 </body>
 </html>

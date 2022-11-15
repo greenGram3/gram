@@ -15,7 +15,7 @@
 </c:if>
 <main class="main_container">
     <div class="reviewReplyInsert">
-    <h2>상품후기 답변 작성</h2>
+    <h3>상품후기 답변 작성</h3>
     <section class="section_container">
         <form action="reviewrinsert" method="post">
             <table>

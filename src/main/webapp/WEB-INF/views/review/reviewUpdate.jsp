@@ -1,8 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html>
 <html>
 <head>
     <title>reviewUpdate</title>
+    <link rel="stylesheet" href="<c:url value='/css/review.css'/>">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script src="js/reviewAjax.js"></script>
 </head>
@@ -13,9 +15,15 @@
         alert(message);
     </script>
 </c:if>
+
+<jsp:include page="../include/header.jsp" flush="false" />
+
 <main class="main_container">
+    <div class="main">
+    <jsp:include page="../include/mypage.jsp" flush="false" />
     <div class="reviewUpdate">
-    <h3>상품후기</h3>
+
+    <h3>상품 후기 수정</h3>
     <section class="section_container">
         <form action="reviewupdate" method="post" enctype="multipart/form-data">
             <table>
@@ -36,10 +44,10 @@
                 <c:if test="${not empty reviewResult.imgName}">
                     <tr>
                         <td>첨부파일</td>
-                        <td>
-                            <img src="${reviewResult.imgName}" class="select_img">
-                            <input type="hidden" name="imgName" id="imgName" value="${reviewResult.imgName}"><br>
-                            <input type="file" name="imgNamef" id="imgNamef">
+                        <td class="imgCheck">
+                            <li><img src="${reviewResult.imgName}" class="select_img"></li>
+                            <input type="hidden" name="imgName" id="imgName" value="${reviewResult.imgName}">
+                            <li><input type="file" name="imgNamef" id="imgNamef"></li>
                         </td>
                     </tr>
                     <script>
@@ -75,6 +83,9 @@
 <%--        </div>--%>
 <%--    </div>--%>
     </div>
+    </div>
+
 </main>
+<jsp:include page="../include/footer.jsp" flush="false" />
 </body>
 </html>
