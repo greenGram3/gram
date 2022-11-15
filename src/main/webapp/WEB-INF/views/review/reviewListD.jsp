@@ -1,8 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html>
 <html>
 <head>
     <title>reviewList</title>
+    <link rel="stylesheet" href="<c:url value='/css/review.css'/>">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script>
         // ** 상세페이지 Detail 바로 밑 출력 Json
@@ -33,6 +35,8 @@
     </script>
 </head>
 <body>
+<%@include file="../include/header.jsp"%>
+
 <c:if test="${not empty message}">
     <script type="text/javascript">
         let message = "${message}";
@@ -40,10 +44,13 @@
     </script>
 </c:if>
 <main class="main_container">
+    <div class="main">
+
+
     <section class="section_container">
         <table>
             <tr>
-                <th>이미지 미리보기</th>
+                <th>상품 정보</th>
                 <th colspan="2">제목</th>
                 <th>아이디</th>
             </tr>
@@ -81,7 +88,6 @@
             </c:if>
         </table>
     </section>
-    <hr>
     <!-- Paging 1)forward button 2)back button 3)pageNo -->
     <div>
         <!-- 1. First, Prev button: ver01.pageMaker.makeQuery / ver02.SearchQuery -->
@@ -129,6 +135,8 @@
             </c:otherwise>
         </c:choose>
     </div>
+
 </main>
+<%@include file="../include/footer.jsp"%>
 </body>
 </html>

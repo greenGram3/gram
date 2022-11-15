@@ -30,9 +30,6 @@ main * {
     height: 30px;
 }
 
-#qnaSearchBar {
-
-}
 
 #qnaSearchBtn {
     width: 90px;
@@ -72,10 +69,6 @@ main * {
     padding: 10px;
 }
 
-.qnaList th:first-child,
-.qnaList td:first-child {
-    border-left: none;
-}
 
 .qnaList .paging {
     margin-top: 10px;

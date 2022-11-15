@@ -1,0 +1,127 @@
+/* reviewList */
+
+.reviewList {
+    margin-top: 250px;
+    margin-bottom: 50px;
+    width: 900px;
+}
+
+main * {
+    margin:auto;
+    text-align: center;
+}
+
+
+.reviewList h1 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.reviewList hr {
+    color: #cccccc;
+    margin-bottom: 20px;
+}
+
+.reviewList input{
+    margin: 5px 10px;
+    border: 1px solid darkgrey;
+}
+
+.reviewList select#searchType {
+    width: 80px;
+    height: 30px;
+}
+
+#reviewSearchBtn {
+    width: 90px;
+    height: 30px;
+    background-color: rgb(84, 108, 92);
+    color: #eeecec;
+    cursor: pointer;
+    border: none;
+}
+
+.reviewList table {
+    width: 100%;
+    border-top: 1px solid lightgray;
+    border-collapse: collapse;
+}
+.reviewList th {
+    background-color: #eeecec;
+    border-bottom: 1px solid lightgray;
+    padding: 10px;
+}
+
+.reviewList td {
+    border-bottom: 1px solid lightgray;
+    padding: 10px;
+}
+.reviewList th:nth-of-type(1) {
+    width: 20%;
+}
+.reviewList th:nth-of-type(2) {
+    width: 60%;
+}
+
+
+/*reviewDetail*/
+
+.reviewDetail {
+    margin-top: 250px;
+    margin-bottom: 50px;
+    width: 900px;
+}
+
+
+.reviewDetail h1 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.reviewDetail hr {
+    color: #cccccc;
+    margin-bottom: 20px;
+}
+
+
+.reviewDetail table {
+    width: 100%;
+    border-top: 1px solid lightgray;
+    border-collapse: collapse;
+}
+.reviewDetail th {
+    background-color: #eeecec;
+    border-bottom: 1px solid lightgray;
+    padding: 10px;
+}
+
+.reviewDetail td {
+    border-bottom: 1px solid lightgray;
+    padding: 10px;
+}
+
+.reviewDetail th:nth-of-type(1) {
+    width: 20%;
+}
+.reviewDetail th:nth-of-type(2) {
+    width: 60%;
+}
+
+
+
+.linkBtn_container{
+    margin-top: 20px;
+}
+
+.linkBtn_container span,
+.linkBtn_container a {
+    margin-top: 10px;
+    padding: 4px 10px;
+    background-color: whitesmoke;
+    border: 1px solid darkgray;
+    cursor: pointer;
+}
+
+.linkBtn * {
+    margin-right: 5px;
+}

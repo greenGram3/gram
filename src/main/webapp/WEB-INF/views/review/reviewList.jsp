@@ -1,8 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html>
 <html>
 <head>
     <title>reviewList</title>
+    <link rel="stylesheet" href="<c:url value='/css/review.css'/>">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script src="js/reviewAjax.js"></script>
     <script>
@@ -23,6 +25,8 @@
     </script>
 </head>
 <body>
+<%@include file="../include/header.jsp"%>
+
 <c:if test="${not empty message}">
     <script type="text/javascript">
         let message = "${message}";
@@ -31,7 +35,12 @@
 </c:if>
 
 <main class="main_container">
+    <div class="main">
+        <%@include file="../include/mypage.jsp"%>
+        <div class="reviewList">
+
     <h1>상품후기</h1>
+            <hr>
     <section class="section_container">
         <div id="reviewSearchBar">
             <select name="searchType" id="searchType" class="searchBar">
@@ -44,7 +53,7 @@
         </div>
         <table>
             <tr>
-                <th>이미지 미리보기</th>
+                <th>상품 정보</th>
                 <th colspan="2">제목</th>
                 <th>아이디</th>
             </tr>
@@ -77,7 +86,6 @@
             </c:if>
         </table>
     </section>
-    <hr>
     <!-- Paging 1)forward button 2)back button 3)pageNo -->
     <div>
         <!-- 1. First, Prev button: ver01.pageMaker.makeQuery / ver02.SearchQuery -->
@@ -125,6 +133,9 @@
             </c:otherwise>
         </c:choose>
     </div>
+        </div>
+    </div>
 </main>
+<%@include file="../include/footer.jsp"%>
 </body>
 </html>

@@ -1,12 +1,16 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html>
 <html>
 <head>
     <title>reviewDetail</title>
+    <link rel="stylesheet" href="<c:url value='/css/review.css'/>">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script src="js/reviewAjax.js"></script>
 </head>
 <body>
+<%@include file="../include/header.jsp"%>
+
 <c:if test="${not empty message}">
     <script type="text/javascript">
         let message = "${message}";
@@ -14,26 +18,32 @@
     </script>
 </c:if>
 <main class="main_container">
-    <h1>상품후기</h1>
+    <div class="main">
+        <%@include file="../include/mypage.jsp"%>
+        <div class="reviewDetail">
+
+        <h1>상품후기</h1>
+            <hr>
     <section class="section_container">
         <table>
             <tr>
-                <td>제목</td>
                 <td>${reviewResult.reviewTitle}</td>
-                <td background-color="#f8f8f8">아이디</td>
+                <td>아이디</td>
                 <td>${reviewResult.userId}</td>
             </tr>
 
+
             <tr>
-                <td>리뷰 이미지</td>
                 <td>
                     <c:if test="${not empty reviewResult.imgName}">
                         <img src="${reviewResult.imgName}" width=250 height=250>
                     </c:if>
                 </td>
                 <c:if test="${not empty reviewResult.itemName}">
-                    <td>상품명:<br>${reviewResult.itemName}</td>
-                    <td>가격:<br>${reviewResult.itemPrice}</td>
+                    <td><li>${reviewResult.itemName}</li>
+                        <li>${reviewResult.itemPrice}</li>
+                    </td>
+
                 </c:if>
             </tr>
 
@@ -80,6 +90,9 @@
         <div id="resultArea2"></div>
         <div id="resultArea3"></div>
     </section>
+        </div>
+    </div>
 </main>
+<%@include file="../include/footer.jsp"%>
 </body>
 </html>
