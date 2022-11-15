@@ -108,11 +108,11 @@ public class CartController {
 
     @ResponseBody
     @PostMapping()
-    public  ResponseEntity<String> save(Integer itemNo, Integer itemAmount, HttpSession session){
-        System.out.println("itemAmount = " + itemAmount);
+    public  ResponseEntity<String> save(Integer itemNo, Integer cartAmount, HttpSession session){
+        System.out.println("itemAmount = " + cartAmount);
         CartVO cartVO = new CartVO();
         cartVO.setItemNo(itemNo);
-        cartVO.setCartAmount(itemAmount);
+        cartVO.setCartAmount(cartAmount);
 
         //비회원 장바구니 저장
         if(!loginCheck(session)){
@@ -158,7 +158,7 @@ public class CartController {
              rowCnt = cartService.save(cartVO);
         }else {
             //같은 상품이 있을경우 수량 합쳐서 수정
-            cartVO.setCartAmount(itemAmount+ byItem.getCartAmount());
+            cartVO.setCartAmount(cartAmount+ byItem.getCartAmount());
             rowCnt = cartService.update(cartVO);
         }
         try {
