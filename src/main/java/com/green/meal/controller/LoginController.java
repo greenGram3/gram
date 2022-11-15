@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -32,16 +33,18 @@ public class LoginController {
     }
 
     @GetMapping("/logout")
-    public String logout(HttpSession session) {
+    public String logout(HttpSession session, RedirectAttributes rettr) {
         // 1. 세션을 종료
         session.invalidate();
+
+        rettr.addFlashAttribute("msg","logout_ok");
         // 2. 홈으로 이동
         return "redirect:/";
     }
 
     @PostMapping("/login")
     public String login(String userId, String userPwd, boolean rememberId,
-                        HttpServletRequest request, HttpServletResponse response) throws Exception {
+                        HttpServletRequest request, HttpServletResponse response, RedirectAttributes rettr) throws Exception {
 
         // 1. id와 pwd를 확인
         if(!loginCheck(userId, userPwd)) {
@@ -67,6 +70,8 @@ public class LoginController {
 //		       2. 응답에 저장
             response.addCookie(cookie);
         }
+
+        rettr.addFlashAttribute("msg","login_ok");
 //		       3. 홈으로 이동
         return "redirect:/";
     }

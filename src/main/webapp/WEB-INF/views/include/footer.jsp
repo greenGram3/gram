@@ -30,10 +30,11 @@
 
     <div class="connected">
       <h3>STAY CONNECTED</h3>
+
       <ul>
-        <img src="./icon/facebook.png" alt="facebook">
-        <img src="./icon/instagram.png" alt="instagram">
-        <img src="./icon/youtube.png" alt="youtube">
+        <img src="<c:url value='/icon/facebook.png'/>" alt="facebook">
+        <img src="<c:url value='/icon/instagram.png'/>" alt="instagram">
+        <img src="<c:url value='/icon/youtube.png'/>" alt="youtube">
       </ul>
     </div>
   </section>

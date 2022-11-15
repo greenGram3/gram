@@ -1,6 +1,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page session="true" %>
+<script>
+	if('${msg}'=='register_ok') alert("회원가입 되셨습니다.");
+	if('${msg}'=='login_ok') alert("로그인 되셨습니다.");
+	if('${msg}'=='logout_ok') alert("로그아웃 되셨습니다.");
+</script>
 <html>
 <head>
 	<title>Home</title>
