@@ -6,7 +6,6 @@ import lombok.extern.slf4j.Slf4j;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @Slf4j
@@ -15,7 +14,7 @@ public class SpecialChValidator implements ConstraintValidator<SpecialChCheck, S
 
     @Override
     public boolean isValid(String s, ConstraintValidatorContext constraintValidatorContext) {
-        if(Pattern.matches("^[a-zA-Z0-9]*$", s)){
+        if(Pattern.matches("^[0-9|a-z|A-Z|ㄱ-ㅎ|ㅏ-ㅣ|가-힣]*$", s)){
             log.info("SpecialChCheck success");
         }else{
             log.info("SpecialChCheck fail");

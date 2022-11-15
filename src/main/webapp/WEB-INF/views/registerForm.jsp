@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8"  language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt" %>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page session="true"%>
 <!DOCTYPE html>
 <html>
@@ -20,20 +21,20 @@
         <hr>
 
         <form:form modelAttribute="userVO" method="post">
-            <label for="">아이디　</label>
-            <input type="text" id="userId" name="userId" placeholder="　아이디(6~12자 이내, 특수문자 사용 불가)" style="width: 300px">　
+            <label for="userId">아이디　</label>
+            <input type="text" id="userId" name="userId" placeholder="　아이디(6~12자 이내, 특수문자 사용 불가)" style="width: 300px" value="${user.userId}">　
             <button type="button" id="dupliCheck">중복검사</button>
-            <form:errors path="userId" cssClass="class" cssStyle="color: red" />
             <br>
+            <form:errors path="userId" cssClass="class" cssStyle="color: red" id="userIdError"/>
             <hr>
 
-            <label for="">이름　</label>
-            <input type="text" id="" name="userName" placeholder="　이름(1~10자 이내, 특수문자 사용불가)" style="width: 300px">
-            <form:errors path="userName" cssClass="class" cssStyle="color: red"></form:errors>
+            <label for="userName">이름　</label>
+            <input type="text" id="userName" name="userName" placeholder="　이름(1~10자 이내, 특수문자 사용불가)" style="width: 300px" value="${user.userName}">
             <br>
+            <form:errors path="userName" cssClass="class" cssStyle="color: red" ></form:errors>
             <hr>
-            <label for="">이메일　</label>
-            <input type="text" id="" name="userEmailArr"> @ <input type="text" id="selectedEmail" name="userEmailArr" value="">
+            <label for="userEmailArr">이메일　</label>
+            <input type="text" id="userEmailArr" name="userEmailArr" value="${userEmailArr[0]}"> @ <input type="text" id="selectedEmail" name="userEmailArr" value="${userEmailArr[1]}">
             <select id="selectEmail">
                 <option value="직접입력" selected>　직접입력</option>
                 <option value="naver.com">naver.com</option>
@@ -41,28 +42,28 @@
                 <option value="gmail.com">gmail.com</option>
                 <option value="nate.com">nate.com</option>
             </select>
+            <br>
             <form:errors path="userEmail" cssClass="class" cssStyle="color: red"></form:errors>
-            <br>
             <hr>
-            <label for="">비밀번호　</label>
-            <input type="text" id="" name="userPwd" placeholder="　비밀번호(8~20자 이내, 하나이상의 영문,숫자,특수문자)" style="width: 450px">
+            <label for="userPwd">비밀번호　</label>
+            <input type="text" id="userPwd" name="userPwd" placeholder="　비밀번호(8~20자 이내, 하나이상의 영문,숫자,특수문자)" style="width: 450px" value="${user.userPwd}">
+            <br>
             <form:errors path="userPwd" cssClass="class" cssStyle="color: red"></form:errors>
-            <br>
             <hr>
-            <label for="">비밀번호 확인　</label>
-            <input type="text" id="" name="">
-            <br>
+            <label for="pwdCheck">비밀번호 확인　</label>
+            <input type="text" id="pwdCheck" name="pwdCheck" value="${pwdCheck}">
+            <div id="msgPwd" style="color: red; display: none"></div>
             <hr>
-            <label for="">휴대폰번호　</label>
-            <input type="text" id="" name="userPhone" placeholder="　010-0000-0000">
+            <label for="userPhone">휴대폰번호　</label>
+            <input type="text" id="userPhone" name="userPhone" placeholder="　010-0000-0000" value="${user.userPhone}">
+            <br>
             <form:errors path="userPhone" cssClass="class" cssStyle="color: red"></form:errors>
+            <hr>
+            <label for="userAddr">주소　</label>
+            <input type="text" id="userAddr" name="userAddr" value="${user.userAddr}">
             <br>
             <hr>
-            <label for="">주소　</label>
-            <input type="text" id="" name="userAddr">
-            <br>
-            <hr>
-            <label for="">생일　</label>
+            <label for="userBirth">생일　</label>
             <input type="date" name="userBirth" id="userBirth">
 
             <label for="">　　|　　성별　</label>
@@ -73,11 +74,10 @@
             <hr>
             <div class="registerFormBtn">
                 <button type="button" id="delBtn">취소</button>
-                <input type="submit" value="회원가입">
+                <input type="button" value="회원가입" id="regBtn">
             </div>
         </form:form>
     </div>
-    <%--    </form>--%>
 </main>
 <%@include file="include/footer.jsp"%>
 </body>
@@ -95,16 +95,40 @@
         selectedEmail.setAttribute('value', e.target.value);
     });
 
+    //비밀번호 재입력 체크
+    $('#regBtn')[0].addEventListener('click', function (){
+        if($('#pwdCheck')[0].value != $('#userPwd')[0].value){
+            $('#msgPwd')[0].style.display = 'block';
+            $('#msgPwd')[0].innerHTML = '비밀번호와 맞지 않습니다';
+            console.log( $('#msgPwd')[0].getAttribute('display'));
+        }
+        else{
+            $('#userVO').submit();
+        }
+    });
+
     //아이디 중복검사 버튼 누를시 중복체크
     dupliCheck.addEventListener('click', function (){
-        console.log("userId.value : "+userId.value);
+        //6~12체크
+        if($('#userId')[0].value.length<6 || $('#userId')[0].value.length>12){
+            alert('6~12이내로 입력하셔야 합니다.');
+            return;
+        }
+        //특수문자 체크
+        if($('#userId')[0].value.search(/\W|\s/g) > -1){
+            alert('특수문자가 있어선 안됩니다.');
+            return;
+        }
+
         $.ajax({
             type:'POST',
             url: '/meal/register/dupliCheck',
             headers: {"content-type":"apllication/json"},
             dataType: 'text',
             data:JSON.stringify(userId.value),
-            success: function (result){alert(result)},
+            success: function (result){
+                alert(result)
+            },
             error: function(){alert("error : ")}
         })
     })
@@ -117,5 +141,4 @@
     })
 
 </script>
-
 

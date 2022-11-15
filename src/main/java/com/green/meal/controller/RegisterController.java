@@ -2,7 +2,6 @@ package com.green.meal.controller;
 
 import com.green.meal.domain.UserVO;
 import com.green.meal.service.UserService;
-import com.green.meal.service.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -10,12 +9,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -34,9 +31,12 @@ public class RegisterController {
 
     //회원가입 -> 메인
     @PostMapping("/register")
-    public String register2(@Valid UserVO user, BindingResult result, RedirectAttributes attr, String[] userEmailArr) {
+    public String register2(@Valid UserVO user, BindingResult result, RedirectAttributes attr, String[] userEmailArr, Model model, String pwdCheck) {
 
         if(result.hasErrors()){
+            model.addAttribute("pwdCheck", pwdCheck);
+            model.addAttribute("userEmailArr", userEmailArr);
+            model.addAttribute("user", user);
             return "registerForm";
         }
 

@@ -47,6 +47,16 @@ public class DeliveryController {
         return "jsonView";
     }
 
+    @PostMapping("/register2")
+    public String delyRegisterPost2(HttpSession session, HttpServletResponse response, Model model){
+        String userId = (String) session.getAttribute("userId");
+        response.setContentType("text/html; charset=UTF-8");
+
+        int result = delyService.selectBase(userId);
+        model.addAttribute("code", result);
+        return "jsonView";
+    }
+
     @GetMapping("/update")
     public String delyUpdateGet(DeliveryVO dely, Model model){
         model.addAttribute("dely", dely);
@@ -62,7 +72,16 @@ public class DeliveryController {
         int result = delyService.updateDelivery(dely0, dely1);
         model.addAttribute("code",result);
 
-       return "jsonView";
+        return "jsonView";
+    }
+
+    @PostMapping("/update2")
+    public String delyUpdatePost2(HttpServletResponse response, Model model, HttpSession session){
+        response.setContentType("text/html; charset=UTF-8");
+        int result = delyService.updateDelivery2((String) session.getAttribute("userId"));
+        model.addAttribute("code",result);
+
+        return "jsonView";
     }
 
     @PostMapping("/delete")

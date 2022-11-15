@@ -13,10 +13,18 @@
     </update>
 
     <update id="updateDelivery" parameterType="map">
-        update delivery set receiver= #{dely0.receiver}, dely_place= #{dely0.delyPlace}, dely_phone= #{dely0.delyPhone}, dely_addr= #{dely0.delyAddr} where receiver= #{dely1.receiver} and dely_place = #{dely1.delyPlace} and dely_phone= #{dely1.delyPhone} and dely_addr=#{dely1.delyAddr} and user_id = #{dely0.userId};
+        update delivery set receiver= #{dely0.receiver}, dely_place= #{dely0.delyPlace}, dely_phone= #{dely0.delyPhone}, dely_addr= #{dely0.delyAddr}, dely_no= #{dely0.delyNo} where receiver= #{dely1.receiver} and dely_place = #{dely1.delyPlace} and dely_phone= #{dely1.delyPhone} and dely_addr=#{dely1.delyAddr} and user_id = #{dely0.userId};
+    </update>
+
+    <update id="updateDelivery2">
+        update delivery set dely_no = 0 where user_id = #{userId}
     </update>
 
     <delete id="deleteDelivery" parameterType="com.green.meal.domain.DeliveryVO">
         delete from delivery where receiver = #{receiver} and dely_place = #{delyPlace} and dely_no = #{delyNo} and dely_addr = #{delyAddr} and dely_phone = #{delyPhone} and user_id = #{userId}
     </delete>
+
+    <select id="selectBase" resultType="int">
+        select count(*) from delivery where dely_no = 1 and user_id = #{userId};
+    </select>
 </mapper>

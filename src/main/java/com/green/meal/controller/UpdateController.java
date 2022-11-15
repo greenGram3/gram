@@ -1,11 +1,8 @@
 package com.green.meal.controller;
 
-import com.green.meal.domain.UserVO;
 import com.green.meal.service.UserService;
-import com.green.meal.service.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.hibernate.validator.constraints.Length;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -33,7 +30,7 @@ public class UpdateController {
     // 비밀번호변경
     @PostMapping("/userPwd")
     @ResponseBody
-    public int updateUserPwd(@RequestBody String data,HttpSession session ){// @RequestParam("cp") String cp, @RequestParam("np1") String np1
+    public int updateUserPwd(@RequestBody String data,HttpSession session ){
 
         data = data.replaceAll("\"", "");
         String[] datas = data.split("/");
@@ -53,14 +50,15 @@ public class UpdateController {
     // 이름 변경
     @PostMapping("/userName")
     public String updateUserName(String newName, HttpSession session){
-       updateUser(newName, session);
-       return "redirect:/update/user";
+        updateUser(newName, session);
+        return "redirect:/update/user";
     }
 
     // 이메일 변경
     @PostMapping("/userEmail")
-    public String updateUserEmail(String newEmail, HttpSession session){
-        int result = updateUser(newEmail, session);
+    public String updateUserEmail(String[] userEmailArr, HttpSession session){
+        String newEmail = userEmailArr[0] + "@" + userEmailArr[1];
+        updateUser(newEmail, session);
         return "redirect:/update/user";
     }
 
@@ -70,7 +68,7 @@ public class UpdateController {
         updateUser(newPhone, session);
         return "redirect:/update/user";
     }
-//============================================================================================================
+    //============================================================================================================
     //회원탈퇴
     @GetMapping("/userDelete")
     public String delUserGet(){

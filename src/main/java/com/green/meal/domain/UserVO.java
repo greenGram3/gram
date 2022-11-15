@@ -12,7 +12,7 @@ import javax.validation.constraints.NotBlank;
 
 @Getter @Setter @ToString @EqualsAndHashCode @Slf4j @NoArgsConstructor
 public class UserVO {
-    @Length(min = 4, max = 12) @SpecialChCheck
+    @Length(min = 6, max = 12) @SpecialChCheck
     private String userId;
     @Length(min = 1, max = 10) @SpecialChCheck
     private String userName;
@@ -26,7 +26,4 @@ public class UserVO {
     private String userBirth;
     private String userGender;
     private String regDate;
-    private String etc1;
-    private String etc2;
-    private String etc3;
 }
