@@ -20,4 +20,9 @@ public interface ItemService {
     int getSearchResultCnt(SearchCondition sc) throws Exception;
 
     List<ItemVO> getSearchResultPage(SearchCondition sc) throws Exception;
+
+
+    // heeJeong item 상세페이지------------------------------------------------------------- //
+    ItemVO itemdetail(ItemVO vo) throws Exception;
+
 }

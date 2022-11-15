@@ -39,12 +39,14 @@ public class ReviewController {
 
         if (list!=null) {
             model.addAttribute("reviewResult", list);
+
+            pageMaker.setCri(cri);
+            pageMaker.setTotalRowsCount(reviewService.searchCount(cri));
+            model.addAttribute("pageMaker",pageMaker);
+
         } else {
             model.addAttribute("message", "아직 후기가 없습니다.");
         }
-        pageMaker.setCri(cri);
-        pageMaker.setTotalRowsCount(reviewService.searchCount(cri));
-        model.addAttribute("pageMaker",pageMaker);
 
         return "/review/reviewListD";
     }
@@ -129,7 +131,7 @@ public class ReviewController {
         realPath = "C:\\Users\\Eom hee jeong\\IdeaProjects\\gram\\src\\main\\webapp\\resources\\reviewImage\\";
 
         // ** 기본 이미지 지정하기
-        String file1, file2="resources/reviewImage/noImage.JPG";
+        String file1, file2="reviewImage/noImage.JPG";
 
         // ** MultipartFile
         MultipartFile imgNamef = vo.getImgNamef();//이미지정보들 모두 들어있음.
@@ -139,7 +141,7 @@ public class ReviewController {
             file1 = realPath + imgNamef.getOriginalFilename(); // 경로완성(ctrlc)
             imgNamef.transferTo(new File(file1)); // Image저장(ctrlv[경로]->File타입으로 변환★)
             // 2) Table 저장 준비
-            file2="resources/reviewImage/"+imgNamef.getOriginalFilename();
+            file2="reviewImage/"+imgNamef.getOriginalFilename();
         }
         // ** Table에 완성 String경로 set
         vo.setImgName(file2);
@@ -197,7 +199,7 @@ public class ReviewController {
         // 2) 위 값을 이용해서 실제저장위치 확인
         realPath = "C:\\Users\\Eom hee jeong\\IdeaProjects\\gram\\src\\main\\webapp\\resources\\reviewImage\\";
         // ** 기본 이미지 지정하기
-        String file1, file2="resources/reviewImage/noImage.JPG";
+        String file1, file2="reviewImage/noImage.JPG";
         // ** MultipartFile
         MultipartFile imgNamef = vo.getImgNamef();//이미지정보들 모두 들어있음.
         if ( imgNamef !=null && !imgNamef.isEmpty() ) {//이미지 첨부하고 이미지정보도 있는 경우
@@ -206,7 +208,7 @@ public class ReviewController {
             file1 = realPath + imgNamef.getOriginalFilename(); // 경로완성(ctrlc)
             imgNamef.transferTo(new File(file1)); // Image저장(ctrlv[경로]->File타입으로 변환★)
             // 2) Table 저장 준비
-            file2="resources/reviewImage/"+imgNamef.getOriginalFilename();
+            file2="reviewImage/"+imgNamef.getOriginalFilename();
             // ** Table에 완성 String경로 set
             vo.setImgName(file2);
         }

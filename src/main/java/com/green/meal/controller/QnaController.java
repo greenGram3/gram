@@ -37,7 +37,7 @@ public class QnaController {
         // 1) userId가 null은 로그인X -> 로그인창으로
         if (userId == null) {
             model.addAttribute("message","로그인 하세요.");
-            uri = "/loginForm";
+            uri = "loginForm";
         } else { // 2) userId != null은 로그인O
                 list = qnaService.qnalistAll(cri); // 3) qna list 담기
                 if( list!=null ) {
@@ -45,13 +45,13 @@ public class QnaController {
                 } else {
                     model.addAttribute("message","QnA가 없습니다.");
                 }
-            }
-        model.addAttribute("userId", userId);
-        model.addAttribute("qnaRoot", vo.getQnaRoot());
+            model.addAttribute("userId", userId);
+            model.addAttribute("qnaRoot", vo.getQnaRoot());
 
-        pageMaker.setCri(cri);
-        pageMaker.setTotalRowsCount(qnaService.searchCount(cri));
-        model.addAttribute("pageMaker",pageMaker);
+            pageMaker.setCri(cri);
+            pageMaker.setTotalRowsCount(qnaService.searchCount(cri));
+            model.addAttribute("pageMaker",pageMaker);
+            }
 
         return uri;
     } // qnalist

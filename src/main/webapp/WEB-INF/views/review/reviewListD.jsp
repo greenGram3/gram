@@ -4,7 +4,33 @@
 <head>
     <title>reviewList</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-    <script src="js/reviewAjax.js"></script>
+    <script>
+        // ** 상세페이지 Detail 바로 밑 출력 Json
+        function reviewDetailD(e, reviewNo, itemNo, count) {
+
+            console.log('*** e.type =>'+e.type);
+            console.log('*** e.target =>'+e.target);
+
+            $('#resultArea2').html(''); //클릭 시 resultArea2 클리어
+
+            if( $('#'+count).html()=='' ) {
+                $.ajax({
+                    type: 'Get',
+                    url: 'reviewDetailD?reviewNo='+reviewNo+"&itemNo="+itemNo,
+                    success: function(resultData){
+
+                        $('.reviewD').html('');
+                        $('#'+count).html(resultData.reviewContent);
+                    },
+                    error: function(){
+                        $('#resultArea2').html('서버 오류. 다시 시도하시기 바랍니다.');
+                    }
+                });
+            } else {
+                $('#'+count).html('');
+            }
+        } //reviewDetailD
+    </script>
 </head>
 <body>
 <c:if test="${not empty message}">

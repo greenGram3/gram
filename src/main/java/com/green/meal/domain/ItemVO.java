@@ -1,5 +1,9 @@
 package com.green.meal.domain;
 
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
+
 import java.util.Objects;
 
 public class ItemVO {
@@ -10,6 +14,13 @@ public class ItemVO {
     private String itemName;
     private int itemAmount;
     private int itemPrice;
+
+    // 이미지
+    @Getter @Setter
+    private String imgName; //DB에 저장된 이미지 String경로 꺼내오는 용
+
+    @Getter @Setter
+    private MultipartFile imgNamef; //img 진짜 정보 저장 객체 타입
 
     public ItemVO () { }
 

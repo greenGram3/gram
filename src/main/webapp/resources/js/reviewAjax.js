@@ -99,8 +99,8 @@ function reviewReplyUpF(userId, reviewNo) {
     }); //ajax
 } //reviewReplyUpF
 //-----------------------------------------------------------------------//
-// ** 상세페이지 reviewList
-function reviewListD(itemNo) {
+// ** 상세페이지 reviewList => jsp에 js 직접구현
+/*function reviewListD(itemNo) {
     $.ajax({
         type: 'Get',
         url: 'reviewlistD',
@@ -114,10 +114,10 @@ function reviewListD(itemNo) {
             $('#resultArea1').html('ReplyForm 요청 error');
         }
     }); //ajax
-} //qnaReplyD
+} //qnaReplyD*/
 //-----------------------------------------------------------------------//
-// ** 상세페이지 Detail 바로 밑 출력 Json
-function reviewDetailD(e, reviewNo, itemNo, count) {
+// ** 상세페이지 Detail 바로 밑 출력 Json => reviewListD JSP에 직접구현
+/*function reviewDetailD(e, reviewNo, itemNo, count) {
 
     console.log('*** e.type =>'+e.type);
     console.log('*** e.target =>'+e.target);
@@ -140,5 +140,5 @@ function reviewDetailD(e, reviewNo, itemNo, count) {
     } else {
         $('#'+count).html('');
     }
-} //reviewDetailD
+} //reviewDetailD*/
 
