@@ -34,11 +34,20 @@
         WHERE item_no = #{itemNo}
     </select>
 
+    <!-- Image Table 포린키 연결 등록 위한 selectKey만 밑에 추가 -->
     <insert id="insert" parameterType="ItemVO">
         insert into item
             (item_category1, item_category2, item_name, item_amount, item_price)
         values
             (#{itemCategory1}, #{itemCategory2}, #{itemName}, #{itemAmount}, #{itemPrice})
+        <selectKey keyProperty="itemNo" resultType="int" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+    </insert>
+
+    <!-- Image Insert 추가 -->
+    <insert id="itemImgUpload">
+        insert into image(item_no, img_name, img_type) values(#{itemNo},#{imgName},"d")
     </insert>
 
     <delete id="delete" parameterType="int">
@@ -52,6 +61,13 @@
             item_name = #{itemName},
             item_amount = #{itemAmount},
             item_price = #{itemPrice}
+        where item_no = #{itemNo}
+    </update>
+
+    <!-- Image Update 추가 -->
+   <update id="imageModify">
+        update image
+        set img_name = #{imgName}
         where item_no = #{itemNo}
     </update>
 

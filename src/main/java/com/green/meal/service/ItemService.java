@@ -25,4 +25,10 @@ public interface ItemService {
     // heeJeong item 상세페이지------------------------------------------------------------- //
     ItemVO itemdetail(ItemVO vo) throws Exception;
 
+    // item등록 이미지 등록
+    int itemImgUpload(ItemVO vo) throws Exception;
+
+    // item 업데이트 이미지 업데이트
+    int imageModify(ItemVO vo) throws Exception;
+
 }
