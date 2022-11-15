@@ -8,6 +8,7 @@
 </head>
 <body>
 <main class="main_container">
+    <div class="reviewReplyDetail">
     <section class="section_container">
         <table>
             <tr>
@@ -16,7 +17,7 @@
             </tr>
             <tr>
                 <td>내용</td>
-                <td><textarea rows="5" cols="50" readonly>${reviewResult.reviewContent}</textarea></td>
+                <td><textarea readonly>${reviewResult.reviewContent}</textarea></td>
             </tr>
             <tr hidden>
                 <td>${reviewResult.reviewNo}</td>
@@ -29,8 +30,8 @@
 
     <!-- 수정하기(업데이트) -> Ajax -->
     <c:if test="${not empty userId && userId == 'admin'}">
-        <div background-color="Black" text-align="left">
-            <span color="Gray" onclick="reviewReplyUpF('admin',${reviewResult.reviewNo})">댓글수정하기</span>
+        <div class="reviewReply">
+            <span onclick="reviewReplyUpF('admin',${reviewResult.reviewNo})">댓글수정하기</span>
             <a href="reviewdelete?reviewNo=${reviewResult.reviewNo}" onclick="return confirm('삭제하시겠습니까? 확인/취소');">삭제하기</a><br>
         </div>
     </c:if>
@@ -39,6 +40,7 @@
         <!-- Ajax 답글 달기, 답글 출력 창 -->
         <div id="resultArea2"></div>
     </section>
+    </div>
 </main>
 </body>
 </html>

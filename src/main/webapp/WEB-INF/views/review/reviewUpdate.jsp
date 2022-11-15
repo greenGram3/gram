@@ -14,7 +14,8 @@
     </script>
 </c:if>
 <main class="main_container">
-    <h1>상품후기</h1>
+    <div class="reviewUpdate">
+    <h3>상품후기</h3>
     <section class="section_container">
         <form action="reviewupdate" method="post" enctype="multipart/form-data">
             <table>
@@ -29,7 +30,7 @@
                 </tr>
                 <tr>
                     <td>내용</td>
-                    <td><textarea rows="10" cols="50" name="reviewContent" id="reviewContent" minlength="10"
+                    <td><textarea name="reviewContent" id="reviewContent" minlength="10"
                                   required>${reviewResult.reviewContent}</textarea></td>
                 </tr>
                 <c:if test="${not empty reviewResult.imgName}">
@@ -54,7 +55,7 @@
                         }); //change
                     </script>
                 </c:if>
-                <tr>
+                <tr class="modBtn">
                     <td colspan="2">
                         <input type="submit" value="수정" onclick="return confirm('수정하시겠습니까? 수정/취소');">
                     </td>
@@ -66,12 +67,13 @@
             </table>
         </form>
     </section>
-    <div class="linkBtn_container">
-        <div class="linkBtn">
-            <c:if test="${userId == reviewResult.userId || userId == 'admin'}">
-                &nbsp;&nbsp;<a href="reviewdelete?reviewNo=${reviewResult.reviewNo}" onclick="return confirm('삭제하시겠습니까? 확인/취소');">삭제하기</a>
-            </c:if>
-        </div>
+<%--    <div class="linkBtn_container">--%>
+<%--        <div class="linkBtn">--%>
+<%--            <c:if test="${userId == reviewResult.userId || userId == 'admin'}">--%>
+<%--                &nbsp;&nbsp;<a href="reviewdelete?reviewNo=${reviewResult.reviewNo}" onclick="return confirm('삭제하시겠습니까? 확인/취소');">삭제하기</a>--%>
+<%--            </c:if>--%>
+<%--        </div>--%>
+<%--    </div>--%>
     </div>
 </main>
 </body>

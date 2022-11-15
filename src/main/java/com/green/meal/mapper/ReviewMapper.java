@@ -2,10 +2,12 @@ package com.green.meal.mapper;
 
 import com.green.meal.domain.ReviewVO;
 import com.green.meal.paging.SearchCriteria;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 import java.util.Map;
 
+@Mapper
 public interface ReviewMapper {
 
     // 상세페이지 ReviewList 출력

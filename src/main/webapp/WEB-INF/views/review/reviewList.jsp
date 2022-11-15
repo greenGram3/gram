@@ -53,31 +53,31 @@
         </div>
         <table>
             <tr>
-                <th>상품 정보</th>
-                <th colspan="2">제목</th>
-                <th>아이디</th>
+                <th>상품</th>
+                <th>제목</th>
+                <th>작성자</th>
+                <th>작성일</th>
             </tr>
             <c:if test="${not empty reviewResult}">
                 <c:forEach var="review" items="${reviewResult}">
                         <tr>
                             <c:if test="${not empty review.imgName}">
-                                <td><img src="${review.imgName}" width=150 height=150></td>
+                                <td><img src="${review.imgName}"></td>
                             </c:if>
                             <c:if test="${review.reviewStep < 1}">
-                                <td colspan="2">
-                                    <a href="reviewdetail?reviewNo=${review.reviewNo}&itemNo=${review.itemNo}">${review.reviewTitle}</a>
-                                </td>
+                                <td><a href="reviewdetail?reviewNo=${review.reviewNo}&itemNo=${review.itemNo}">${review.reviewTitle}</a></td>
                             </c:if>
-
                             <!-- Step > 0 이면 관리자가 단글 -> 여기만 &nbsp; 적용 & colspan 3  -->
                             <c:if test="${review.reviewStep > 0}">
-                                <td colspan="3" text-align="right">
+                                <td></td>
+                                <td text-align="right">
                                     <a href="reviewdetail?reviewNo=${review.reviewNo}&itemNo=${review.itemNo}">&nbsp;&nbsp;ㄴ답변&nbsp;${review.reviewTitle}</a>
                                 </td>
                             </c:if>
-
                             <td>${review.userId}</td>
+                            <td class="regDate">${review.regDate}</td>
                         </tr>
+
                         <tr hidden>
                             <td>${review.itemNo}</td>
                         </tr>
@@ -87,7 +87,7 @@
         </table>
     </section>
     <!-- Paging 1)forward button 2)back button 3)pageNo -->
-    <div>
+    <div class="paging">
         <!-- 1. First, Prev button: ver01.pageMaker.makeQuery / ver02.SearchQuery -->
         <c:choose>
             <c:when test="${pageMaker.prev && pageMaker.spageNo>1}">

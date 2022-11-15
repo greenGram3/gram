@@ -14,6 +14,7 @@
     </script>
 </c:if>
 <main class="main_container">
+    <div class="reviewReplyInsert">
     <h2>상품후기 답변 작성</h2>
     <section class="section_container">
         <form action="reviewrinsert" method="post">
@@ -52,6 +53,7 @@
         <div class="linkBtn">
             <a href="reviewlist">목록으로</a>
         </div>
+    </div>
     </div>
 </main>
 </body>

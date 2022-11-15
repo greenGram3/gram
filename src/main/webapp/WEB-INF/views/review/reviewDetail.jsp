@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,34 +23,33 @@
         <%@include file="../include/mypage.jsp"%>
         <div class="reviewDetail">
 
-        <h1>상품후기</h1>
-            <hr>
+        <h3>상품 후기</h3>
+
     <section class="section_container">
         <table>
             <tr>
-                <td>${reviewResult.reviewTitle}</td>
-                <td>아이디</td>
-                <td>${reviewResult.userId}</td>
+                <th colspan="2">${reviewResult.reviewTitle}</th>
             </tr>
-
+            <tr class="reviewDetailBold">
+                <td>${reviewResult.userId}</td>
+                <td>${reviewResult.regDate}</td>
+            </tr>
 
             <tr>
                 <td>
                     <c:if test="${not empty reviewResult.imgName}">
-                        <img src="${reviewResult.imgName}" width=250 height=250>
+                        <img src="${reviewResult.imgName}">
                     </c:if>
                 </td>
                 <c:if test="${not empty reviewResult.itemName}">
                     <td><li>${reviewResult.itemName}</li>
-                        <li>${reviewResult.itemPrice}</li>
+                        <li><fmt:formatNumber pattern="###,###,###" value="${reviewResult.itemPrice}"/> 원</li>
                     </td>
-
                 </c:if>
             </tr>
 
             <tr>
-                <td>내용</td>
-                <td colspan="3"><textarea rows="10" cols="50" readonly>${reviewResult.reviewContent}</textarea></td>
+                <td colspan="2"><textarea readonly>${reviewResult.reviewContent}</textarea></td>
             </tr>
 
             <tr hidden>
@@ -68,17 +68,17 @@
 
     <div class="linkBtn_container">
         <div class="linkBtn">
-            <a href="reviewlist">목록으로</a>&nbsp;&nbsp;
+            <a href="reviewlist">목록으로</a>
             <c:if test="${userId == 'admin' && reviewResult.reviewChild < 1}">
     <span class="textLink"
-          onclick="reviewReplyF(${reviewResult.orderNo},${reviewResult.itemNo},${reviewResult.reviewRoot},${reviewResult.reviewStep},${reviewResult.reviewChild})">답글달기</span><br>
+          onclick="reviewReplyF(${reviewResult.orderNo},${reviewResult.itemNo},${reviewResult.reviewRoot},${reviewResult.reviewStep},${reviewResult.reviewChild})">답글달기</span>
             </c:if>
             <c:if test="${reviewResult.reviewStep < 1}">
             <span class="textLink"
                   onclick="reviewReplyD(${reviewResult.reviewRoot},${reviewResult.reviewStep},${reviewResult.reviewChild})">댓글보기</span>
             </c:if>
             <c:if test="${userId == reviewResult.userId || userId == 'admin'}">
-                <a href="reviewdetail?jCode=U&reviewNo=${reviewResult.reviewNo}">수정하기</a>&nbsp;&nbsp;
+                <a href="reviewdetail?jCode=U&reviewNo=${reviewResult.reviewNo}">수정하기</a>
                 <a href="reviewdelete?reviewNo=${reviewResult.reviewNo}&reviewRoot=${reviewResult.reviewRoot}"
                    onclick="return confirm('삭제하시겠습니까? 확인/취소');">삭제하기</a>
             </c:if>

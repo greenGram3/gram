@@ -188,6 +188,7 @@ header {
 /* footer */
 
 footer {
+    margin-top: 100px;
     background: rgb(230, 230, 230);
 }
 
@@ -197,13 +198,12 @@ footer {
     width: 1200px;
     justify-content: space-around;
     margin:auto;
-    margin-top: 100px;
 }
 
 .info,
 .center,
 .connected {
-    margin-top: 50px;
+    margin-top: 70px;
     height: 300px;
     line-height:30px;
     text-align: left;

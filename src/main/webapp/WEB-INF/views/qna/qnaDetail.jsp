@@ -23,7 +23,7 @@
     <div class="main">
         <%@include file="../include/mypage.jsp"%>
         <div class="qnaDetail">
-    <h1>1:1문의</h1>
+    <h3>1:1문의</h3>
     <section class="section_container">
         <table>
             <tr>
