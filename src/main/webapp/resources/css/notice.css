@@ -1,0 +1,279 @@
+/* noticeList */
+
+.noticeList {
+    margin-top: 250px;
+    margin-bottom: 50px;
+    width: 900px;
+}
+
+main * {
+    margin:auto;
+    text-align: center;
+}
+
+.noticeList h1 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.noticeList hr {
+    color: #cccccc;
+    margin-bottom: 20px;
+}
+.noticeList input{
+    margin: 5px 10px;
+    border: 1px solid darkgrey;
+}
+
+
+.noticeList select#searchType {
+    width: 80px;
+    height: 30px;
+}
+
+#noticeSearchBtn {
+    width: 90px;
+    height: 30px;
+    background-color: rgb(84, 108, 92);
+    color: #eeecec;
+    cursor: pointer;
+    border: none;
+}
+
+.noticeList table {
+    width: 100%;
+    border-top: 1px solid lightgray;
+    border-collapse: collapse;
+}
+
+.noticeList table * {
+  text-align: left;
+}
+.noticeList th {
+    background-color: #eeecec;
+    border-bottom: 1px solid lightgray;
+    padding: 10px;
+}
+
+.noticeList td {
+    border-bottom: 1px solid lightgray;
+    padding: 10px;
+}
+
+.noticeList th:nth-of-type(1) {
+    width: 20%;
+}
+.noticeList th:nth-of-type(2) {
+    width: 60%;
+}
+
+.noticeList .regDate {
+    font-size: 14px;
+}
+
+.noticeList .paging {
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.linkBtn_container a {
+    margin-top: 10px;
+    padding: 4px 15px;
+    background-color: whitesmoke;
+    border: 1px solid darkgray;
+    cursor: pointer;
+}
+/*noticeDetail*/
+
+.noticeDetail {
+    margin-top: 250px;
+    margin-bottom: 50px;
+    width: 900px;
+}
+
+.noticeDetail * {
+    text-align: left;
+}
+
+
+.noticeDetail h3 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+}
+
+
+.noticeDetail table {
+    width: 100%;
+    border-top: 1px solid lightgray;
+    border-collapse: collapse;
+}
+
+
+.noticeDetail td {
+    border-bottom: 1px solid lightgray;
+    padding: 10px;
+    margin-left: 10px;
+}
+
+.noticeDetail td:first-of-type {
+    background-color: #eeecec;
+    border-bottom: 1px solid lightgray;
+    padding: 10px;
+    margin-left: 10px;
+    width: 100px;
+}
+
+.linkBtn_container{
+    margin-top: 20px;
+}
+
+.noticeDetail textarea {
+    border: none;
+}
+
+
+/* noticeInsert */
+
+.noticeInsert {
+    margin-top: 250px;
+    margin-bottom: 50px;
+    width: 900px;
+}
+
+.noticeInsert * {
+    text-align: left;
+    margin: 0px;
+}
+.noticeInsert h3 {
+    margin-bottom: 20px;
+}
+
+.noticeInsert table {
+    border-top: 1px solid lightgray;
+    border-collapse: collapse;
+}
+
+
+.noticeInsert td {
+    border-bottom: 1px solid lightgray;
+    padding: 5px;
+    margin-left: 10px;
+}
+
+.noticeInsert td:first-of-type {
+    background-color: #eeecec;
+    width: 100px;
+}
+
+.noticeInsert tr:last-of-type td {
+    background-color: white;
+}
+.noticeInsert select {
+    margin: 5px 10px;
+    padding: 5px;
+}
+
+.noticeInsert input {
+    margin: 5px 10px;
+    border: 1px solid darkgrey;
+    padding-left: 5px;
+}
+
+.noticeInsert textarea {
+    margin: 5px 10px;
+    border: 1px solid darkgray;
+    width: 700px;
+    height: 300px;
+    padding: 5px;
+}
+
+.noticeInsert input[type="reset"] {
+    margin-left: 648px;
+}
+
+.noticeInsert tr:last-of-type input {
+    text-align: center;
+    padding: 4px 10px;
+    background-color: whitesmoke;
+    border: 1px solid darkgray;
+    cursor: pointer;
+    width: 80px;
+}
+
+.noticeInsert .linkBtn {
+    margin-top: 20px;
+}
+
+/*noticeUpdate*/
+
+.noticeUpdate {
+    margin-top: 250px;
+    margin-bottom: 50px;
+    width: 900px;
+}
+
+
+.noticeUpdate * {
+    text-align: left;
+    margin: 0px;
+}
+.noticeUpdate h3 {
+    margin-bottom: 20px;
+}
+
+
+.noticeUpdate table {
+    border-top: 1px solid lightgray;
+    border-collapse: collapse;
+}
+
+
+.noticeUpdate td {
+    border-bottom: 1px solid lightgray;
+    padding: 5px;
+    margin-left: 10px;
+}
+
+.noticeUpdate td:first-of-type {
+    background-color: #eeecec;
+    width: 100px;
+}
+
+
+.noticeUpdate select {
+    margin: 5px 10px;
+    padding: 5px;
+}
+
+.noticeUpdate input {
+    margin: 5px 10px;
+    border: 1px solid darkgrey;
+    padding-left: 5px;
+}
+
+.noticeUpdate textarea {
+    margin: 5px 10px;
+    border: 1px solid darkgray;
+    width: 700px;
+    height: 300px;
+    padding: 5px;
+}
+
+.noticeUpdate tr:nth-of-type(4) td {
+    background-color: white;
+}
+
+.noticeUpdate tr:nth-of-type(4) input {
+    text-align: center;
+    padding: 4px 10px;
+    background-color: whitesmoke;
+    border: 1px solid darkgray;
+    cursor: pointer;
+    width: 80px;
+    margin-left:750px;
+}
+
+.noticeUpdate .linkBtn {
+    margin-top: 20px;
+}

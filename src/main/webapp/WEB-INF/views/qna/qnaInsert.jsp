@@ -12,6 +12,7 @@
 
 <jsp:include page="../include/header.jsp" flush="false" />
 
+
 <c:if test="${not empty message}">
     <script type="text/javascript">
         let message = "${message}";
@@ -20,9 +21,9 @@
 </c:if>
 <main class="main_container">
     <div class="main">
-        <%@include file="../include/mypage.jsp"%>
+        <jsp:include page="../include/mypage.jsp" flush="false" />
         <div class="qnaInsert">
-    <h1>1:1문의</h1>
+    <h3>1:1문의 작성</h3>
     <section class="section_container">
         <form action="qnainsert" method="post">
             <table>

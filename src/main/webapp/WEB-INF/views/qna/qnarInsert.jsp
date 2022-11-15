@@ -15,7 +15,7 @@
 </c:if>
 <main class="main_container">
     <div class="qnaRInsert">
-    <h2>1:1문의 답변 작성</h2>
+    <h3>1:1문의 답변 작성</h3>
     <section class="section_container">
         <form action="qnaRInsert" method="post">
             <table>

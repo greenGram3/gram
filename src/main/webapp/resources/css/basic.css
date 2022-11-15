@@ -62,8 +62,7 @@
 }
 
 .memberShip a:nth-of-type(5) {
-    width: 30px;
-    height: 30px;
+    padding: 2px 6px;
     background: url(../icon/cart.png) center no-repeat;
     text-indent: -9999em;
 }

@@ -35,7 +35,7 @@
 </c:if>
 <main class="main_container">
     <div class="main">
-        <%@include file="../include/mypage.jsp"%>
+        <jsp:include page="../include/mypage.jsp" flush="false" />
         <div class="qnaList">
     <h1>1:1문의</h1>
             <hr>
@@ -118,7 +118,7 @@
             i가 현재페이지라면(현재page 가 현재page라면) -->
             <c:if test="${i==pageMaker.cri.currPage}">
                 <!-- 현재페이지 표식 -->
-                <span class="currPage">${i}</span>&nbsp;
+                <span class="currPage">${i}</span>
             </c:if>
 
             <c:if test="${i!=pageMaker.cri.currPage}">

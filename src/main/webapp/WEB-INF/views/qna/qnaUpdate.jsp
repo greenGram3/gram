@@ -18,9 +18,9 @@
 </c:if>
 <main class="main_container">
     <div class="main">
-        <%@include file="../include/mypage.jsp"%>
+        <jsp:include page="../include/mypage.jsp" flush="false" />
         <div class="qnaUpdate">
-    <h1>1:1문의</h1>
+    <h3>1:1문의 수정</h3>
     <section class="section_container">
         <form action="qnaupdate" method="post">
             <table>

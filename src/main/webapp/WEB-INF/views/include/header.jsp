@@ -21,7 +21,7 @@
         <a href="<c:url value='/register/register'/>" >회원가입</a>|
 
         <a href="<c:url value='${MyPageLink}'/>" >마이페이지</a>|
-        <a href="#">고객센터</a>
+        <a href="<c:url value='/noticelist'/>">고객센터</a>
         <a href="<c:url value='/cart'/>">　</a>
       </div>
 

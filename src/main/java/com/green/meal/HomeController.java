@@ -35,7 +35,7 @@ public class HomeController {
 		String formattedDate = dateFormat.format(date);
 		HttpSession session = request.getSession();
 
-//		session.setAttribute("userId","asdf");
+		session.setAttribute("userId","admin");
 
 		model.addAttribute("serverTime", formattedDate );
 		

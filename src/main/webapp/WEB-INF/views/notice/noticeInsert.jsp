@@ -1,12 +1,14 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html>
 <html>
 <head>
     <title>noticeInsert</title>
-    <link rel="stylesheet" href="resources/css/boardDetail.css">
+    <link rel="stylesheet" href="<c:url value='/css/notice.css'/>">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 </head>
 <body>
+<jsp:include page="../include/header.jsp" flush="false" />
 <c:if test="${not empty message}">
     <script type="text/javascript">
         let message = "${message}";
@@ -15,7 +17,11 @@
 </c:if>
 
 <main class="main_container">
-    <h1>공지사항</h1>
+    <div class="main">
+        <jsp:include page="../include/center.jsp" flush="false" />
+
+        <div class="noticeInsert">
+    <h3>공지사항 작성</h3>
     <section class="section_container">
         <form action="noticeinsert" method="post">
             <table>
@@ -37,12 +43,12 @@
 
                 <tr>
                     <td>내용</td>
-                    <td><textarea rows="10" cols="50" name="noticeContent" minlength="10" placeholder="내용을 입력하세요" required></textarea></td>
+                    <td><textarea  name="noticeContent" minlength="10" placeholder="내용을 입력하세요" required></textarea></td>
                 </tr>
 
                 <tr>
                     <td colspan="2">
-                        <input type="reset" value="취소">&nbsp;&nbsp;&nbsp;
+                        <input type="reset" value="취소">
                         <input type="submit" value="등록" onclick="return confirm('등록하시겠습니까? 등록/취소');">
                     </td>
                 </tr>
@@ -51,9 +57,12 @@
     </section>
     <div class="linkBtn_container">
         <div class="linkBtn">
-            &nbsp;<a href="noticelist">목록으로</a>
+            <a href="noticelist">목록으로</a>
+        </div>
+    </div>
         </div>
     </div>
 </main>
+<jsp:include page="../include/footer.jsp" flush="false" />
 </body>
 </html>

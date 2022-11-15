@@ -21,7 +21,8 @@
 
 <main class="main_container">
     <div class="main">
-        <%@include file="../include/mypage.jsp"%>
+        <jsp:include page="../include/mypage.jsp" flush="false" />
+
         <div class="qnaDetail">
     <h3>1:1문의</h3>
     <section class="section_container">

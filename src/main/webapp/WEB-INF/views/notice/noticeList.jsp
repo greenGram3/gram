@@ -1,9 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html>
 <html>
 <head>
     <title>noticeList</title>
-    <link rel="stylesheet" href="css/boardList.css">
+    <link rel="stylesheet" href="<c:url value='/css/notice.css'/>">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script>
         // ** notice Search js
@@ -23,6 +24,7 @@
     </script>
 </head>
 <body>
+<jsp:include page="../include/header.jsp" flush="false" />
 <c:if test="${not empty message}">
     <script type="text/javascript">
         let message = "${message}";
@@ -30,7 +32,14 @@
     </script>
 </c:if>
 <main class="main_container">
+
+    <div class="main">
+
+        <jsp:include page="../include/center.jsp" flush="false" />
+
+        <div class="noticeList">
     <h1>공지사항</h1>
+            <hr>
     <section class="section_container">
         <div id="noticeSearchBar">
             <select name="searchType" id="searchType" class="searchBar">
@@ -57,7 +66,7 @@
                         <td>
                             <a href="noticedetail?noticeNo=${notice.noticeNo}">${notice.noticeTitle}</a>
                         </td>
-                        <td>${notice.regDate}</td>
+                        <td class="regDate">${notice.regDate}</td>
                     </tr>
                 </c:forEach>
             </c:if>
@@ -65,7 +74,7 @@
     </section>
     <hr>
         <!-- Paging 1)forward button 2)back button 3)pageNo -->
-        <div>
+        <div class="paging">
             <!-- 1. First, Prev button: ver01.pageMaker.makeQuery / ver02.SearchQuery -->
             <c:choose>
                 <c:when test="${pageMaker.prev && pageMaker.spageNo>1}">
@@ -87,7 +96,7 @@
                 i가 현재페이지라면(현재page 가 현재page라면) -->
                 <c:if test="${i==pageMaker.cri.currPage}">
                     <!-- 현재페이지 표식 -->
-                    <span class="currPage">${i}</span>&nbsp;
+                    <span class="currPage">${i}</span>
                 </c:if>
 
                 <c:if test="${i!=pageMaker.cri.currPage}">
@@ -120,6 +129,9 @@
                 </div>
             </div>
         </div>
+        </div>
+    </div>
 </main>
+<jsp:include page="../include/footer.jsp" flush="false" />
 </body>
 </html>
