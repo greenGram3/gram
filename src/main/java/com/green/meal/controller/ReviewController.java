@@ -299,6 +299,8 @@ public class ReviewController {
     public String reviewrupdatef(HttpServletRequest request, HttpServletResponse response, ReviewVO vo, Model model) {
         vo.setUserId(vo.getUserId());
         vo.setReviewNo(vo.getReviewNo());
+        vo.setReviewTitle(vo.getReviewTitle());
+        vo.setReviewContent(vo.getReviewContent());
 
         model.addAttribute("reviewResult",vo);
 

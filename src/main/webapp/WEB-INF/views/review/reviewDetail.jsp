@@ -20,7 +20,7 @@
 </c:if>
 <main class="main_container">
     <div class="main">
-        <%@include file="../include/mypage.jsp"%>
+        <jsp:include page="../include/mypage.jsp" flush="false" />
         <div class="reviewDetail">
 
         <h3>상품 후기</h3>
