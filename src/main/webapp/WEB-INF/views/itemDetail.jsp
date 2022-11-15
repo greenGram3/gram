@@ -58,6 +58,14 @@
 </head>
 <body>
 <%@include file="include/header.jsp" %>
+
+<c:if test="${not empty msg}">
+    <script type="text/javascript">
+        let message = "${msg}";
+        alert(message);
+    </script>
+</c:if>
+
 <main>
     <div class="itemDetail-container">
         <form action="cart" method="post" name="itemDetailForm" >
@@ -112,7 +120,7 @@
                     <tfoot>
                     <tr>
                         <th>
-                            <button type="submit" onclick="return confirm('장바구니에 추가하시겠습니까?');">장바구니 담기</button>
+                            <button type="submit" onclick="return confirm('장바구니에 추가 하시겠습니까?');">장바구니 담기</button>
                         </th>
                     </tr>
                     </tfoot>
@@ -156,7 +164,23 @@
                 document.itemDetailForm.itemPrice.value * document.itemDetailForm.cartAmount.value;
         }
 
-        //==========================================================================//
+        //====================================================================//
+        // 장바구니 confirm 함수
+ /*       function cartConfirm() {
+            let result1 = confirm('상품을 장바구니에 추가하시겠습니까?');
+            let result2 = confirm('장바구니로 이동 하시겠습니까?');
+
+            if (result1==true) {
+                alert('상품이 장바구니에 추가 되었습니다.');
+                if(result2==true) {
+                    alert('장바구니로 이동합니다.');
+                } else {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        }*/
     </script>
 </main>
 </body>
