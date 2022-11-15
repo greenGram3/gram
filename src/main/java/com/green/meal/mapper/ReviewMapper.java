@@ -38,4 +38,7 @@ public interface ReviewMapper {
     // Review 삭제
     int reviewdelete(ReviewVO vo);
 
+    // Review 답변 업데이트
+    int reviewRupdate(ReviewVO vo);
+
 }

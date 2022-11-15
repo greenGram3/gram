@@ -302,7 +302,26 @@ public class ReviewController {
 
         model.addAttribute("reviewResult",vo);
 
-        return "/review/reviewUpdate";
+        return "/review/reviewRupdate";
+    }
+
+    // ** review 답변 업데이트 하기
+    @RequestMapping(value="/reviewrupdate", method= RequestMethod.POST)
+    public String reviewrupdatef(HttpServletResponse response, Model model, ReviewVO vo) {
+        // 한글처리
+        response.setContentType("text/html; charset=UTF-8");
+
+        // 1. 요청분석
+        model.addAttribute("reviewResult",vo); //업뎃 실패시에도 값 저장
+
+        // 2. service 처리
+        if(reviewService.reviewRupdate(vo)>0) {
+            model.addAttribute("code","200");
+        } else {
+            model.addAttribute("message","수정 실패. 다시 시도하시기 바랍니다.");
+            model.addAttribute("code","500");
+        }
+        return "jsonView";
     }
 
 } //Controller

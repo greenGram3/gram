@@ -5,6 +5,14 @@
     <title>reviewReplyDetail</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script src="js/reviewAjax.js"></script>
+    <script>
+        $(function (){
+            // ** Review 답변 업데이트 팝업 띄우기
+            $('#reviewReplyUpF').click(function () {
+                window.open("<c:url value='/reviewrupdatef'/>?userId=${userId}&reviewNo=${reviewResult.reviewNo}", "Child","width=900, height=600,left=300, top=300");
+            }); //reviewReplyUpF
+        }) //ready
+    </script>
 </head>
 <body>
 <main class="main_container">
@@ -31,7 +39,7 @@
     <!-- 수정하기(업데이트) -> Ajax -->
     <c:if test="${not empty userId && userId == 'admin'}">
         <div class="reviewReply">
-            <span onclick="reviewReplyUpF('admin',${reviewResult.reviewNo})">댓글수정하기</span>
+            <span color="White" id="reviewReplyUpF">댓글수정하기</span>
             <a href="reviewdelete?reviewNo=${reviewResult.reviewNo}" onclick="return confirm('삭제하시겠습니까? 확인/취소');">삭제하기</a><br>
         </div>
     </c:if>

@@ -72,6 +72,12 @@
         where review_no=#{reviewNo}
     </update>
 
+    <!-- Review Reply Update -->
+    <update id="reviewRupdate">
+        update review set review_title=#{reviewTitle}, review_content=#{reviewContent}
+        where review_no=#{reviewNo}
+    </update>
+
     <!-- Review Delete (원글 삭제 시 답글도 삭제, 답글 삭제 시 답글만 삭제) -->
     <delete id="reviewdelete">
         delete from review

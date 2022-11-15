@@ -36,7 +36,39 @@ $(function(){
         }); //ajax
     });
 //-------------------------------------------------------------------------------------------------//
+    // ** Review Reply Update Json
+/*    $('#ReUpdateBtn').click(function () {
 
+        var result = confirm('수정하시겠습니까? (수정/취소)');
+
+        if(result==true) {
+            alert('답변이 수정 되었습니다');
+        } else {
+            return false;
+        }
+
+        $.ajax({
+            type: 'Post',
+            url: 'reviewrupdate',
+            data: {
+                userId: $('#userId').val(),
+                reviewTitle: $('#reviewTitle').val(),
+                reviewContent: $('#reviewContent').val(),
+                reviewNo: $('#reviewNo').val()
+            },
+            success: function (resultData) {
+                if(resultData.code == 200) { //json update 성공 시
+                        opener.parent.location.reload();
+                        window.close();
+                } else { //json insert 실패 시
+                    alert('error:'+resultData);
+                }
+            },
+            error: function () {
+                $('#resultArea2').html('Reply수정 error');
+            }
+        }) //ajax
+    }); // ReUpdateBtn*/
 }); //ready
 
 //-------------------------------------------------------------------------------------------------//
@@ -82,7 +114,7 @@ function reviewReplyD(reviewRoot,reviewStep,reviewChild) {
 } //qnaReplyD
 //-----------------------------------------------------------------------//
 // ** Review 답변 업데이트 폼 띄우기(Ajax)
-function reviewReplyUpF(userId, reviewNo) {
+/*function reviewReplyUpF(userId, reviewNo) {
     $.ajax({
         type: 'Get',
         url: 'reviewrupdatef',
@@ -97,7 +129,7 @@ function reviewReplyUpF(userId, reviewNo) {
             $('#resultArea2').html('ReplyForm 요청 error');
         }
     }); //ajax
-} //reviewReplyUpF
+} //reviewReplyUpF*/
 //-----------------------------------------------------------------------//
 // ** 상세페이지 reviewList => jsp에 js 직접구현
 /*function reviewListD(itemNo) {
