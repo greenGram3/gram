@@ -106,9 +106,9 @@ public class CartController {
 
 
 
-    @ResponseBody
+/*    @ResponseBody*/
     @PostMapping()
-    public  ResponseEntity<String> save(Integer itemNo, Integer cartAmount, HttpSession session){
+    public  String save(Integer itemNo, Integer cartAmount, HttpSession session, Model m){
         System.out.println("itemAmount = " + cartAmount);
         CartVO cartVO = new CartVO();
         cartVO.setItemNo(itemNo);
@@ -120,7 +120,7 @@ public class CartController {
             if(session.getAttribute("list")==null){
                 list.add(cartVO);
                 session.setAttribute("list",list);
-                return new ResponseEntity<>("SAVE_OK",HttpStatus.OK);
+                return "addCart";
             }
 
             //장바구니가 있으면 리스트에서 같은 상품이 있는지 검사 후 다시 저장
@@ -139,7 +139,7 @@ public class CartController {
             session.setAttribute("list",list);
 
 
-            return new ResponseEntity<>("SAVE_OK",HttpStatus.OK);
+            return "addCart";
         }
         //회원 장바구니 저장
         String userId =(String) session.getAttribute("userId");
@@ -167,9 +167,10 @@ public class CartController {
             }
         }catch (Exception e){
             e.printStackTrace();
-            return new ResponseEntity<>("SAVE_ERR",HttpStatus.BAD_REQUEST);
+            m.addAttribute("msg","장바구니 추가 오류");
+            return "itemDetail?itemNo="+itemNo;
         }
-        return new ResponseEntity<>("SAVE_OK",HttpStatus.OK);
+        return "addCart";
 
     }
 
