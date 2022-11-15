@@ -113,7 +113,7 @@
                     <tbody>
                     <tr>
                         <th>판매가</th>
-                        <input type="text" name="itemPrice" id="itemPrice" value="${itemResult.itemPrice}">
+                        <td><input type="text" name="itemPrice" id="itemPrice" value="${itemResult.itemPrice}"></td>
                     </tr>
                     <tr>
                         <th>배송정보</th>
