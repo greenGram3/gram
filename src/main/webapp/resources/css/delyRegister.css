@@ -47,7 +47,7 @@ input#delyAddr {
 }
 
 input#submitBtn {
-    margin-left: 30px;
+    margin-left: 15px;
     width: 90px;
     cursor: pointer;
 }

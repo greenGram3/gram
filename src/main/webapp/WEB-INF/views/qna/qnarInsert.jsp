@@ -14,9 +14,10 @@
     </script>
 </c:if>
 <main class="main_container">
+    <div class="qnaRInsert">
     <h2>1:1문의 답변 작성</h2>
     <section class="section_container">
-        <form action="qnarinsert" method="post">
+        <form action="qnaRInsert" method="post">
             <table>
                 <tr hidden>
                     <td>관리자</td>
@@ -33,7 +34,6 @@
 
                 <!-- 답글등록시 필요한 부모글의 root, step, child 전달 -->
                 <tr>
-                    <td></td>
                     <td hidden>
                         <input type="text" name="qnaRoot" id="qnaRoot" value="${param.qnaRoot}" readonly>
                         <input type="text" name="qnaStep" id="qnaStep" value="${param.qnaStep}" readonly>
@@ -46,11 +46,11 @@
             </table>
         </form>
     </section>
-    <hr>
     <div class="linkBtn_container">
         <div class="linkBtn">
             <a href="qnalist">목록으로</a>
         </div>
+    </div>
     </div>
 </main>
 </body>

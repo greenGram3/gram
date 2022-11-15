@@ -1,8 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html>
 <html>
 <head>
     <title>qnaList</title>
+    <link rel="stylesheet" href="<c:url value='/css/qna.css'/>">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script src="js/qnaAjax.js"></script>
     <script>
@@ -23,6 +25,8 @@
     </script>
 </head>
 <body>
+<%@include file="../include/header.jsp"%>
+
 <c:if test="${not empty message}">
     <script type="text/javascript">
         let message = "${message}";
@@ -30,7 +34,11 @@
     </script>
 </c:if>
 <main class="main_container">
+    <div class="main">
+        <%@include file="../include/mypage.jsp"%>
+        <div class="qnaList">
     <h1>1:1문의</h1>
+            <hr>
     <section class="section_container">
         <div id="qnaSearchBar">
             <select name="searchType" id="searchType" class="searchBar">
@@ -87,9 +95,8 @@
             </c:if>
         </table>
     </section>
-    <hr>
     <!-- Paging 1)forward button 2)back button 3)pageNo -->
-    <div>
+    <div class="paging">
         <!-- 1. First, Prev button: ver01.pageMaker.makeQuery / ver02.SearchQuery -->
         <c:choose>
             <c:when test="${pageMaker.prev && pageMaker.spageNo>1}">
@@ -139,11 +146,14 @@
         <div class="linkBtn">
             <div class="Insert">
                 <c:if test="${not empty userId && userId != 'admin'}">
-                    <a href="qnainsertf">1:1문의하기</a>
+                    <a href="qnainsertf">1:1 문의하기</a>
                 </c:if>
             </div>
         </div>
     </div>
+    </div>
+    </div>
 </main>
+<%@include file="../include/footer.jsp"%>
 </body>
 </html>

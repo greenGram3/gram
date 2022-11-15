@@ -1,12 +1,15 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html>
 <html>
 <head>
     <title>qnaUpdate</title>
+    <link rel="stylesheet" href="<c:url value='/css/qna.css'/>">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script src="js/qnaAjax.js"></script>
 </head>
 <body>
+<%@include file="../include/header.jsp"%>
 <c:if test="${not empty message}">
     <script type="text/javascript">
         let message = "${message}";
@@ -14,6 +17,9 @@
     </script>
 </c:if>
 <main class="main_container">
+    <div class="main">
+        <%@include file="../include/mypage.jsp"%>
+        <div class="qnaUpdate">
     <h1>1:1문의</h1>
     <section class="section_container">
         <form action="qnaupdate" method="post">
@@ -46,12 +52,15 @@
     </section>
     <div class="linkBtn_container">
         <div class="linkBtn">
-            &nbsp;<%--<a href="qnalist">목록으로</a>--%>
+            &nbsp;<a href="qnalist">목록으로</a>
             <c:if test="${userId != 'admin'}">
                 &nbsp;&nbsp;<a href="qnadelete?qnaNo=${qnaResult.qnaNo}" onclick="return confirm('삭제하시겠습니까? 확인/취소');">삭제하기</a>
             </c:if>
         </div>
     </div>
+        </div>
+    </div>
 </main>
+<%@include file="../include/footer.jsp"%>
 </body>
 </html>

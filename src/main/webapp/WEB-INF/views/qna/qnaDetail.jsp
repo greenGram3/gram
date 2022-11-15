@@ -1,12 +1,17 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html>
 <html>
 <head>
     <title>qnaDetail</title>
+    <link rel="stylesheet" href="<c:url value='/css/qna.css'/>">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script src="js/qnaAjax.js"></script>
 </head>
 <body>
+
+<%@include file="../include/header.jsp"%>
+
 <c:if test="${not empty message}">
     <script type="text/javascript">
         let message = "${message}";
@@ -15,6 +20,9 @@
 </c:if>
 
 <main class="main_container">
+    <div class="main">
+        <%@include file="../include/mypage.jsp"%>
+        <div class="qnaDetail">
     <h1>1:1문의</h1>
     <section class="section_container">
         <table>
@@ -45,18 +53,18 @@
 
     <div class="linkBtn_container">
         <div class="linkBtn">
-            <a href="qnalist">목록으로</a>&nbsp;&nbsp;
+            <a href="qnalist">목록으로</a>
             <c:if test="${userId == 'admin' && qnaResult.qnaChild < 1}">
         <span class="textLink"
-              onclick="qnaReplyF(${qnaResult.qnaRoot},${qnaResult.qnaStep},${qnaResult.qnaChild})">답글달기</span><br>
+              onclick="qnaReplyF(${qnaResult.qnaRoot},${qnaResult.qnaStep},${qnaResult.qnaChild})">답글달기</span>
             </c:if>
             <c:if test="${qnaResult.qnaStep < 1}">
                 <span class="textLink"
-                      onclick="qnaReplyD(${qnaResult.qnaRoot},${qnaResult.qnaStep},${qnaResult.qnaChild})">답변보기</span><br>
+                      onclick="qnaReplyD(${qnaResult.qnaRoot},${qnaResult.qnaStep},${qnaResult.qnaChild})">답변보기</span>
             </c:if>
             <c:if test="${userId == qnaResult.userId || userId == 'admin'}">
-                <a href="qnadetail?jCode=U&qnaNo=${qnaResult.qnaNo}">수정하기</a>&nbsp;&nbsp;
-                <a href="qnadelete?qnaNo=${qnaResult.qnaNo}" onclick="return confirm('삭제하시겠습니까? 확인/취소');">삭제하기</a><br>
+                <a href="qnadetail?jCode=U&qnaNo=${qnaResult.qnaNo}">수정하기</a>
+                <a href="qnadelete?qnaNo=${qnaResult.qnaNo}" onclick="return confirm('삭제하시겠습니까? 확인/취소');">삭제하기</a>
             </c:if>
         </div>
     </div>
@@ -65,6 +73,9 @@
         <div id="resultArea2"></div>
         <div id="resultArea3"></div>
     </section>
+        </div>
+    </div>
 </main>
+<%@include file="../include/footer.jsp"%>
 </body>
 </html>

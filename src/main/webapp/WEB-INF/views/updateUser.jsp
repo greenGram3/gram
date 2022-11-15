@@ -24,9 +24,9 @@
       <p>비밀번호</p>　<p>********</p>　<input type="button" class="pwd" value="비밀번호 변경">
     </div>
     <div class="pwd hidden" id="pwd">
-      <div><span>현재비밀번호</span><input type="text" id="currentPwd"></div>
-      <div><span>신규비밀번호</span><input type="text" id="newPwd1"></div>
-      <div><span>신규비밀번호 재입력</span><input type="text" id="newPwd2"> <div id="msgPwd" style="color: red"></div></div>
+      <div><span>현재 비밀번호</span><input type="text" id="currentPwd"></div>
+      <div><span>신규 비밀번호</span><input type="text" id="newPwd1"></div>
+      <div><span>신규 비밀번호 재입력</span><input type="text" id="newPwd2"> <div id="msgPwd" style="color: red"></div></div>
       <div class="pwdCheck">
         <input type="button" id="pwdCancel" value="취소">
         <input type="button" id="pwdComplete" value="완료">
@@ -38,7 +38,7 @@
     <div class="userNameForm">
     <form action="<c:url value='/update/userName'/>" method="post" id="nameForm">
       <div class="name hidden" id="name">
-        <div><span>새로운 이름</span><input type="text" id="newName" name="newName"><div id="msgName" style="color: red"></div></div>
+        <div><span>이름  입력</span><input type="text" id="newName" name="newName"><div id="msgName" style="color: red"></div></div>
         <div>
           <input type="button" id="nameCancel" value="취소">
           <input type="button" id="nameComplete" value="완료">

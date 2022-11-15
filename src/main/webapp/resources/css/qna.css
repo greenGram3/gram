@@ -1,0 +1,321 @@
+/* qnaList */
+.qnaList {
+    margin-top: 250px;
+    margin-bottom: 50px;
+    width: 900px;
+}
+
+main * {
+    margin:auto;
+    text-align: center;
+}
+
+.qnaList h1 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.qnaList hr {
+    color: #cccccc;
+    margin-bottom: 20px;
+}
+
+.qnaList input{
+    margin: 5px 10px;
+    border: 1px solid darkgrey;
+}
+
+.qnaList select#searchType {
+    width: 80px;
+    height: 30px;
+}
+
+#qnaSearchBar {
+
+}
+
+#qnaSearchBtn {
+    width: 90px;
+    height: 30px;
+    background-color: rgb(84, 108, 92);
+    color: #eeecec;
+    cursor: pointer;
+    border: none;
+}
+
+.qnaList table {
+    width: 100%;
+    border-top: 1px solid lightgray;
+    border-collapse: collapse;
+}
+
+.qnaList th {
+    background-color: #eeecec;
+    border-bottom: 1px solid lightgray;
+    padding: 10px;
+}
+
+.qnaList th:nth-of-type(3) {
+    width: 20%;
+}
+.qnaList th:nth-of-type(2) {
+    width: 60%;
+}
+
+.qnaList td:last-of-type {
+    font-size: 14px;
+}
+
+
+.qnaList td {
+    border-bottom: 1px solid lightgray;
+    padding: 10px;
+}
+
+.qnaList th:first-child,
+.qnaList td:first-child {
+    border-left: none;
+}
+
+.qnaList .paging {
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.qnaList .Insert a {
+    margin-top: 10px;
+    padding: 4px 10px;
+    background-color: whitesmoke;
+    border: 1px solid darkgray;
+    cursor: pointer;
+}
+
+/* qnaDetail */
+
+
+.qnaDetail {
+    margin-top: 250px;
+    margin-bottom: 50px;
+    width: 900px;
+}
+.qnaDetail * {
+    text-align: left;
+}
+
+.qnaDetail h1 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+}
+
+.qnaDetail table {
+    width: 100%;
+    border-top: 1px solid lightgray;
+    border-collapse: collapse;
+}
+
+.qnaDetail td {
+    border-bottom: 1px solid lightgray;
+    padding: 10px 30px
+}
+
+.qnaDetail td:first-of-type {
+    background-color: #eeecec;
+}
+
+.qnaDetail textarea {
+    width: 700px;
+    height: 150px;
+    padding: 5px;
+}
+
+.linkBtn_container{
+    margin-top: 20px;
+}
+
+.linkBtn_container span,
+.linkBtn_container a {
+    margin-top: 10px;
+    padding: 4px 10px;
+    background-color: whitesmoke;
+    border: 1px solid darkgray;
+    cursor: pointer;
+}
+
+.linkBtn * {
+    margin-right: 5px;
+}
+
+/* qnaInsert */
+
+
+.qnaInsert {
+    margin-top: 250px;
+    margin-bottom: 50px;
+    width: 900px;
+}
+.qnaInsert * {
+    text-align: left;
+}
+
+.qnaInsert h1 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+}
+
+.qnaInsert table {
+    width: 100%;
+    border-top: 1px solid lightgray;
+    border-collapse: collapse;
+}
+
+.qnaInsert td {
+    border-bottom: 1px solid lightgray;
+    padding: 10px 30px
+}
+
+.qnaInsert td:first-of-type {
+    background-color: #eeecec;
+}
+
+.qnaInsert .qnaTitle {
+    border: 1px solid darkgray;
+    padding: 4px 10px;
+}
+
+.qnaInsert textarea {
+    width: 700px;
+    height: 150px;
+    padding: 5px;
+}
+.qnaInsert tr:last-of-type td {
+    background-color: white;
+}
+
+.qnaInsert tr:last-of-type input {
+    text-align: center;
+    margin-top: 10px;
+    padding: 4px 10px;
+    background-color: whitesmoke;
+    border: 1px solid darkgray;
+    cursor: pointer;
+    margin-right: 10px;
+    width: 80px;
+}
+
+.qnaInsert .qnaCheck {
+    margin-left: 530px;
+}
+
+
+/* qnaUpdate */
+
+
+.qnaUpdate {
+    margin-top: 250px;
+    margin-bottom: 50px;
+    width: 900px;
+}
+.qnaUpdate * {
+    text-align: left;
+}
+
+.qnaUpdate h1 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+}
+
+.qnaUpdate table {
+    width: 100%;
+    border-top: 1px solid lightgray;
+    border-collapse: collapse;
+}
+
+.qnaUpdate td {
+    border-bottom: 1px solid lightgray;
+    padding: 10px 30px
+}
+
+.qnaUpdate td:first-of-type {
+    background-color: #eeecec;
+}
+
+.qnaUpdate #qnaTitle {
+    border: 1px solid darkgray;
+    padding: 4px 10px;
+}
+
+.qnaUpdate textarea {
+    width: 700px;
+    height: 150px;
+    padding: 5px;
+}
+.qnaUpdate tr:nth-of-type(4) td {
+    background-color: white;
+}
+
+.qnaUpdate tr:nth-of-type(4) input {
+    text-align: center;
+    margin-top: 10px;
+    padding: 4px 10px;
+    background-color: whitesmoke;
+    border: 1px solid darkgray;
+    cursor: pointer;
+    margin-right: 10px;
+    width: 80px;
+    margin-left: 730px;
+}
+
+
+/* qnarinsert */
+
+.qnaRInsert {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    width: 900px;
+}
+
+.qnaRInsert tr:last-of-type td {
+    background-color: white;
+}
+
+.qnaRInsert tr:last-of-type span {
+    text-align: center;
+    margin-top: 10px;
+    padding: 4px 10px;
+    background-color: whitesmoke;
+    border: 1px solid darkgray;
+    cursor: pointer;
+    margin-right: 10px;
+    width: 80px;
+    margin-left: 750px;
+}
+
+/* qnaRdetail */
+
+
+.qnaRdetail {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    width: 900px;
+}
+
+.qnaRdetailCheck span,
+.qnaRdetailCheck a {
+    text-align: center;
+    margin-top: 10px;
+    padding: 4px 10px;
+    background-color: whitesmoke;
+    border: 1px solid darkgray;
+    cursor: pointer;
+    margin-right: 10px;
+    width: 80px;
+}
+
+.qnaRdetailCheck {
+    margin-top: 20px;
+}
+
+

@@ -1,12 +1,18 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html>
 <html>
 <head>
     <title>qnaInsert</title>
+    <link rel="stylesheet" href="<c:url value='/css/qna.css'/>">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script src="js/qnaAjax.js"></script>
 </head>
 <body>
+
+<%@include file="../include/header.jsp"%>
+
+
 <c:if test="${not empty message}">
     <script type="text/javascript">
         let message = "${message}";
@@ -14,6 +20,9 @@
     </script>
 </c:if>
 <main class="main_container">
+    <div class="main">
+        <%@include file="../include/mypage.jsp"%>
+        <div class="qnaInsert">
     <h1>1:1문의</h1>
     <section class="section_container">
         <form action="qnainsert" method="post">
@@ -26,7 +35,7 @@
                 </tr>
                 <tr>
                     <td>제목</td>
-                    <td><input type="text" name="qnaTitle" minlength="2" placeholder="제목을 입력하세요" required></td>
+                    <td><input class="qnaTitle" type="text" name="qnaTitle" minlength="2" placeholder="제목을 입력하세요" required></td>
                 </tr>
                 <tr>
                     <td>내용</td>
@@ -35,8 +44,10 @@
                 <tr>
                     <td></td>
                     <td>
-                        <input type="reset" value="취소">&nbsp;&nbsp;&nbsp;
+                        <div class="qnaCheck">
+                        <input type="reset" value="취소">
                         <input type="submit" value="등록" onclick="return confirm('등록하시겠습니까? 등록/취소');">
+                    </div>
                     </td>
                 </tr>
             </table>
@@ -46,8 +57,10 @@
         <div class="linkBtn">
             <a href="qnalist">목록으로</a>
         </div>
+        </div>
+        </div>
     </div>
-    &nbsp;&nbsp;
 </main>
+<%@include file="../include/footer.jsp"%>
 </body>
 </html>

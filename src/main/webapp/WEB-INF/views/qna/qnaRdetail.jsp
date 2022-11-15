@@ -1,8 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html>
 <html>
 <head>
     <title>qnaReplyDetail</title>
+    <link rel="stylesheet" href="<c:url value='/css/qna.css'/>">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script src="js/qnaAjax.js"></script>
     <script>
@@ -16,6 +18,7 @@
 </head>
 <body>
 <main class="main_container">
+        <div class="qnaRdetail">
     <section class="section_container">
         <table>
             <tr>
@@ -38,7 +41,7 @@
 
     <!-- 수정하기(업데이트) -> Ajax -->
     <c:if test="${not empty userId && userId == 'admin'}">
-        <div background-color="Black" text-align="left">
+        <div class="qnaRdetailCheck" >
             <span color="White" id="qnaReplyUpF">답변수정하기</span>
             <a href="qnadelete?qnaNo=${qnaResult.qnaNo}" onclick="return confirm('삭제하시겠습니까? 확인/취소');">삭제하기</a><br>
         </div>
@@ -49,6 +52,7 @@
         <div id="resultArea1"></div>
         <div id="resultArea2"></div>
     </section>
+        </div>
 </main>
 </body>
 </html>
