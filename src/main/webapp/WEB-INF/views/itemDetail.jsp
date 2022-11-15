@@ -9,6 +9,7 @@
         $(function () {
 
             let buyButton = $('#buyButton');
+            let orderAmount = $('#cartAmount');
 
             buyButton.click(function() {
 
@@ -17,6 +18,8 @@
                 } else {
                     return false;
                 }
+                orderAmount.attr("name","itemAmount");
+                orderAmount.attr("id","itemAmount");
 
                 const itemDetailForm = $('#itemDetailForm');
                 itemDetailForm.attr("action","buy");
@@ -110,7 +113,7 @@
                     <tbody>
                     <tr>
                         <th>판매가</th>
-                        <input type="text" name="itemPrice" id="itemPrice" value="${itemResult.itemPrice}" disabled>
+                        <input type="text" name="itemPrice" id="itemPrice" value="${itemResult.itemPrice}">
                     </tr>
                     <tr>
                         <th>배송정보</th>
@@ -191,5 +194,3 @@
 </main>
 </body>
 </html>
-
-<%--onclick="return confirm('장바구니에 추가 하시겠습니까?');"--%>
