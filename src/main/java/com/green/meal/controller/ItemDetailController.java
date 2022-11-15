@@ -1,6 +1,8 @@
 package com.green.meal.controller;
 
 import com.green.meal.domain.ItemVO;
+import com.green.meal.domain.OrderDetailDto;
+import com.green.meal.domain.OrderDetailVO;
 import com.green.meal.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -57,8 +59,8 @@ public class ItemDetailController {
     //    ========= 상세페이지->결제페이지 작업 중 코드(정무혁) =============
 
     @RequestMapping("/buy")
-    public String buy() {
-
+    public String buy(OrderDetailDto dto, Model m) {
+        m.addAttribute("dto", dto);
         return "payment";
     }
 
