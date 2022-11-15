@@ -95,7 +95,7 @@
                     <thead>
                     <tr>
                         <input type="text" name="itemNo" value="${itemResult.itemNo}" readonly>
-                        <input type="text" name="userId" value="${userId}" disabled>
+                        <%--<input type="text" name="userId" value="${userId}" disabled>--%>
                     </tr>
                     <tr>
                         <th></th>
