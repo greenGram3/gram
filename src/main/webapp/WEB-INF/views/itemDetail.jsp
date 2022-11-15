@@ -5,6 +5,27 @@
     <title>itemDetail</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script>
+        // ** 구매하기 버튼 클릭 시 구매하기 폼으로(action buy)
+        $(function () {
+
+            let buyButton = $('#buyButton');
+
+            buyButton.click(function() {
+
+                if(confirm('구매하시겠습니까?')==true) {
+                    alert('구매 페이지로 이동합니다.');
+                } else {
+                    return false;
+                }
+
+                const itemDetailForm = $('#itemDetailForm');
+                itemDetailForm.attr("action","buy");
+                itemDetailForm.attr("method","post");
+                itemDetailForm.submit();
+            })
+        });
+    </script>
+    <script>
             // ** 상세페이지 reviewList
             function reviewListD(itemNo) {
                 $.ajax({
@@ -68,7 +89,7 @@
 
 <main>
     <div class="itemDetail-container">
-        <form action="cart" method="post" name="itemDetailForm" >
+        <form action="cart" method="post" name="itemDetailForm" id="itemDetailForm">
             <figure>
                 <table>
                     <thead>
@@ -120,7 +141,10 @@
                     <tfoot>
                     <tr>
                         <th>
-                            <button type="submit" onclick="return confirm('장바구니에 추가 하시겠습니까?');">장바구니 담기</button>
+                            <button type="submit" onclick="return confirm('장바구니에 추가하시겠습니까?')" id="cartButton">장바구니 담기</button>
+                        </th>
+                        <th>
+                            <button type="button" id="buyButton">주문하기</button>
                         </th>
                     </tr>
                     </tfoot>
@@ -163,25 +187,9 @@
             document.itemDetailForm.totalItemPrice.value =
                 document.itemDetailForm.itemPrice.value * document.itemDetailForm.cartAmount.value;
         }
-
-        //====================================================================//
-        // 장바구니 confirm 함수
- /*       function cartConfirm() {
-            let result1 = confirm('상품을 장바구니에 추가하시겠습니까?');
-            let result2 = confirm('장바구니로 이동 하시겠습니까?');
-
-            if (result1==true) {
-                alert('상품이 장바구니에 추가 되었습니다.');
-                if(result2==true) {
-                    alert('장바구니로 이동합니다.');
-                } else {
-                    return false;
-                }
-            } else {
-                return false;
-            }
-        }*/
     </script>
 </main>
 </body>
 </html>
+
+<%--onclick="return confirm('장바구니에 추가 하시겠습니까?');"--%>
