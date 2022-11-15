@@ -4,7 +4,7 @@
 
 const menu = document.querySelector('.menu');
 const thema = document.querySelector('.thema');
-const category = document.querySelector('.category1');
+const category01 = document.querySelector('#category01');
 
 menu.addEventListener('mouseover' ,(e) => {
     let eventOj = e.target;
@@ -18,8 +18,8 @@ menu.addEventListener('mouseover' ,(e) => {
     }
 })
 
-category.addEventListener('mouseleave',()=> {
-    category.style.display='none';
+category01.addEventListener('mouseleave',()=> {
+    category01.style.display='none';
 })
 
 thema.addEventListener('mouseleave',()=> {

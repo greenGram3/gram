@@ -11,75 +11,15 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
+  <link rel="stylesheet" href="<c:url value='/css/item.css'/>">
   <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
-  <style>
-    * { box-sizing:border-box; }
-    form {
-      width:400px;
-      height:600px;
-      display : flex;
-      flex-direction: column;
-      align-items:center;
-      position : absolute;
-      top:50%;
-      left:50%;
-      transform: translate(-50%, -50%) ;
-      border: 1px solid rgb(89,117,196);
-      border-radius: 10px;
-    }
-    .input-field {
-      width: 300px;
-      height: 40px;
-      border : 1px solid rgb(89,117,196);
-      border-radius:5px;
-      padding: 0 10px;
-      margin-bottom: 10px;
-    }
-    button {
-      background-color: rgb(89,117,196);
-      border-radius: 5px;
-      border : none;
-      cursor: pointer;
-      color : white;
-      width:80px;
-      height:40px;
-      font-size: 17px;
-      margin : 10px 0 30px 0;
-    }
 
-    .category_option {
-      width: 300px;
-      height: 40px;
-      border : 1px solid rgb(89,117,196);
-      border-radius:5px;
-      padding: 0 10px;
-      margin-bottom: 10px;
-    }
-    label {
-      width:300px;
-      height:30px;
-      margin-top :4px;
-    }
-    .button_container {
-      width: 300px;
-      display: flex;
-      justify-content: space-evenly;
-    }
-    .title {
-      font-size : 20px;
-      font-weight: bold;
-      margin: 40px 0 30px 0;
-    }
-    .category_option .current_option {
-      font-weight: bold;
-    }
-  </style>
   <title>상품 정보 수정</title>
 
 </head>
 
 <body>
+<jsp:include page="include/header.jsp" flush="false" />
 
 <script>
   let msg = "${msg}";
@@ -88,39 +28,63 @@
   if(msg=="DEL_ERR") alert("게시물 등록에 실패했습니다. 다시 시도해주세요.");
   if(msg=="UniqueKey_ERR") alert("게시물 등록에 실패했습니다.(중복 오류)");
 </script>
+<main>
+
+  <div class="main">
+    <jsp:include page="include/admin.jsp" flush="false" />
+
+    <div class="itemAdmin">
+
 <%--등록버튼 누르면 테이블에 insert 되도록 컨트롤러 돌려야될거같음--%>
 <%--<form:form modelAttribute="user">--%>
 <form id="form" action="" method="">
-  <div class="title">상품 정보 관리</div>
-  <label for="itemNo">상품번호</label>
-  <input class="input-field" type="text" id="itemNo" name="itemNo", value="${vo.itemNo}", readonly>
-  <label for="itemCategory1">카테고리1</label>
-  <select class="category_option" id="itemCategory1" name="itemCategory1">
-    <option class="current_option" value="${vo.itemCategory1}" selected>${vo.itemCategory1}</option>
-    <option value="한식">한식</option>
-    <option value="중식">중식</option>
-    <option value="일식">일식</option>
-    <option value="분식">분식</option>
-    <option value="야식">야식</option>
-  </select>
-  <label for="itemCategory2">카테고리2</label>
-  <select class="category_option" id="itemCategory2" name="itemCategory2">
-    <option class="current_option" value="${vo.itemCategory2}" selected>${vo.itemCategory2}</option>
-    <option value="한식">한식</option>
-    <option value="중식">중식</option>
-    <option value="일식">일식</option>
-    <option value="분식">분식</option>
-    <option value="야식">야식</option>
-    <option value="선택안함">선택안함</option>
-  </select>
-  <label for="itemName">상품명</label>
-  <input class="input-field" type="text" id="itemName" name="itemName" value="${vo.itemName}">
-  <label for="itemAmount">재고수량</label>
-  <input class="input-field" type="number" id="itemAmount" name="itemAmount" value="${vo.itemAmount}">
-  <label for="itemPrice">가격</label>
-  <input class="input-field" type="number" id="itemPrice" name="itemPrice" value="${vo.itemPrice}">
+  <h3>상품 정보 수정</h3>
+  <hr>
+  <table>
+    <tr>
+      <th><label for="itemNo">상품번호</label></th>
+      <td><input class="input-field" type="text" id="itemNo" name="itemNo", value="${vo.itemNo}", readonly></td>
+    </tr>
+    <tr>
+      <th><label for="itemCategory1">카테고리1</label></th>
+      <td> <select class="category_option" id="itemCategory1" name="itemCategory1">
+        <option class="current_option" value="${vo.itemCategory1}" selected>${vo.itemCategory1}</option>
+        <option value="한식">한식</option>
+        <option value="중식">중식</option>
+        <option value="일식">일식</option>
+        <option value="분식">분식</option>
+        <option value="야식">야식</option>
+      </select></td>
+    </tr>
+    <tr>
+      <th><label for="itemCategory2">카테고리2</label></th>
+      <td><select class="category_option" id="itemCategory2" name="itemCategory2">
+        <option class="current_option" value="${vo.itemCategory2}" selected>${vo.itemCategory2}</option>
+        <option value="한식">한식</option>
+        <option value="중식">중식</option>
+        <option value="일식">일식</option>
+        <option value="분식">분식</option>
+        <option value="야식">야식</option>
+        <option value="선택안함">선택안함</option>
+      </select></td>
+    </tr>
+    <tr>
+      <th><label for="itemName">상품명</label></th>
+      <td><input class="input-field" type="text" id="itemName" name="itemName" value="${vo.itemName}"></td>
+    </tr>
+    <tr>
+      <th><label for="itemAmount">재고수량</label></th>
+      <td><input class="input-field" type="number" id="itemAmount" name="itemAmount" value="${vo.itemAmount}"></td>
+    </tr>
+
+    <tr>
+      <th><label for="itemPrice">가격</label></th>
+      <td><input class="input-field" type="number" id="itemPrice" name="itemPrice" value="${vo.itemPrice}"></td>
+    </tr>
+
+  </table>
   <div class="button_container">
-    <button type="button" id="modifyBtn" class="btn-modify">등록</button>
+    <button type="button" id="modifyBtn" class="btn-modify">변경</button>
     <button type="button" id="removeBtn" class="btn-remove">삭제</button>
     <button type="button" id="listBtn" class="btn-cancel">취소</button>
   </div>
@@ -174,7 +138,10 @@
   });
 
 </script>
-
+    </div>
+  </div>
+</main>
+<jsp:include page="include/footer.jsp" flush="false" />
 </body>
 
 </html>

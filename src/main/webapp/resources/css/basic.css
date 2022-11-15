@@ -145,7 +145,7 @@ header {
 
 }
 
-.category1,
+#category01,
 .thema {
     border:1px solid;
     border-top:none;
@@ -157,7 +157,7 @@ header {
     display: none;
 }
 
-.category1{
+#category01{
     margin-left: 410px;
 }
 

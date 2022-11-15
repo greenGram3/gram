@@ -2,7 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <c:set var="loginId" value="${sessionScope.userId==null ? '' : sessionScope.userId}"/>
 <c:set var="loginOutLink" value="${loginId=='' ? '/login/login' : '/login/logout'}"/>
-<c:set var="MyPageLink" value="${loginId=='' ? '/login/login' : '/mypage/order'}"/>
+<c:set var="MyPageLink" value="${loginId=='' ?  '/login/login'  :  ( loginId=='admin' ? '/item/list' : '/mypage/order' )}"/>
 <c:set var="loginOut" value="${loginId=='' ? '로그인' : '로그아웃'}"/>
 <!DOCTYPE html>
 <html>
@@ -47,7 +47,7 @@
       <li><a href="#">커뮤니티</a></li>
     </ul>
     <div class="menus">
-      <div class="category1">
+      <div id="category01">
         <ul>
           <li><a href="">한식</a></li>
           <li><a href="">양식</a></li>
