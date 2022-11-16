@@ -84,7 +84,7 @@ public class ItemController {
             // 실제 저장 위치(배포 전 - 컴마다 다름)
             realPath = "C:\\Users\\Eom hee jeong\\IdeaProjects\\gram\\src\\main\\webapp\\resources\\itemImage\\";
             // 기본 이미지 지정
-            String file1, file2="itemImage/noImage.JPG";
+            String file1, file2="../itemImage/noImage.JPG";
             // ** MultipartFile
             MultipartFile imgNamef = vo.getImgNamef();
             if ( imgNamef !=null && !imgNamef.isEmpty() ) {
@@ -93,7 +93,7 @@ public class ItemController {
                 file1 = realPath + imgNamef.getOriginalFilename();
                 imgNamef.transferTo(new File(file1));
                 // 2) Table 저장 준비
-                file2="itemImage/"+imgNamef.getOriginalFilename();
+                file2="../itemImage/"+imgNamef.getOriginalFilename();
                 // ** Table에 완성 String경로 set
                 vo.setImgName(file2);
             }
@@ -161,7 +161,7 @@ public class ItemController {
             realPath = "C:\\Users\\Eom hee jeong\\IdeaProjects\\gram\\src\\main\\webapp\\resources\\itemImage\\";
 
             // 기본 이미지 지정
-            String file1, file2="itemImage/noImage.JPG";
+            String file1, file2="../itemImage/noImage.JPG";
 
             // MultipartFile
             MultipartFile imgNamef = vo.getImgNamef();
@@ -171,7 +171,7 @@ public class ItemController {
                 file1 = realPath + imgNamef.getOriginalFilename();
                 imgNamef.transferTo(new File(file1));
                 // 2) Table 저장 준비
-                file2="itemImage/"+imgNamef.getOriginalFilename();
+                file2="../itemImage/"+imgNamef.getOriginalFilename();
             }
             // Table에 완성 String경로 set
             vo.setImgName(file2);
