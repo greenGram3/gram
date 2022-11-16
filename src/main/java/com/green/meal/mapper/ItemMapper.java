@@ -1,5 +1,6 @@
 package com.green.meal.mapper;
 
+import com.green.meal.domain.ImageVO;
 import com.green.meal.domain.ItemVO;
 import com.green.meal.domain.SearchCondition;
 import org.apache.ibatis.annotations.Mapper;
@@ -26,6 +27,9 @@ public interface ItemMapper {
 
     // heeJeong item 상세페이지------------------------------------------------------------- //
     ItemVO itemdetail(ItemVO vo);
+
+    // ** image테이블 이미지 여러장 출력
+    List<ImageVO> imageDetail(ImageVO vo1);
 
     // item등록 이미지 등록
     int itemImgUpload(ItemVO vo);
