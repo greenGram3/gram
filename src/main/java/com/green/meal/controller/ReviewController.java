@@ -299,8 +299,6 @@ public class ReviewController {
     public String reviewrupdatef(HttpServletRequest request, HttpServletResponse response, ReviewVO vo, Model model) {
         vo.setUserId(vo.getUserId());
         vo.setReviewNo(vo.getReviewNo());
-        vo.setReviewTitle(vo.getReviewTitle());
-        vo.setReviewContent(vo.getReviewContent());
 
         model.addAttribute("reviewResult",vo);
 
@@ -309,7 +307,7 @@ public class ReviewController {
 
     // ** review 답변 업데이트 하기
     @RequestMapping(value="/reviewrupdate", method= RequestMethod.POST)
-    public String reviewrupdatef(HttpServletResponse response, Model model, ReviewVO vo) {
+    public String reviewrupdate(HttpServletResponse response, Model model, ReviewVO vo) {
         // 한글처리
         response.setContentType("text/html; charset=UTF-8");
 
