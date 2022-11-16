@@ -1,5 +1,6 @@
 package com.green.meal.service;
 
+import com.green.meal.domain.ImageVO;
 import com.green.meal.domain.ItemVO;
 import com.green.meal.domain.SearchCondition;
 import com.green.meal.mapper.ItemMapper;
@@ -57,6 +58,12 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public ItemVO itemdetail(ItemVO vo) throws Exception {
         return mapper.itemdetail(vo);
+    }
+
+    // ** image테이블 이미지 여러장 출력
+    @Override
+    public List<ImageVO> imageDetail(ImageVO vo1) throws Exception {
+        return mapper.imageDetail(vo1);
     }
 
     // item등록 이미지 등록

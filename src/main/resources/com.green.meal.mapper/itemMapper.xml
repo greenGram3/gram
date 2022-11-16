@@ -107,6 +107,11 @@
         where item_no=#{itemNo}
     </select>
 
+    <select id="imageDetail" resultType="com.green.meal.domain.ImageVO">
+        select * from image
+        where item_no=#{itemNo}
+    </select>
+
 </mapper>
 
 

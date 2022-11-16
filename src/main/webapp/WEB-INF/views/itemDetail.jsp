@@ -11,77 +11,77 @@
             let buyButton = $('#buyButton');
             let orderAmount = $('#cartAmount');
 
-            buyButton.click(function() {
+            buyButton.click(function () {
 
-                if(confirm('구매하시겠습니까?')==true) {
+                if (confirm('구매하시겠습니까?') == true) {
                     alert('구매 페이지로 이동합니다.');
                 } else {
                     return false;
                 }
-                orderAmount.attr("name","itemAmount");
-                orderAmount.attr("id","itemAmount");
+                orderAmount.attr("name", "itemAmount");
+                orderAmount.attr("id", "itemAmount");
 
                 const itemDetailForm = $('#itemDetailForm');
-                itemDetailForm.attr("action","buy");
-                itemDetailForm.attr("method","post");
+                itemDetailForm.attr("action", "buy");
+                itemDetailForm.attr("method", "post");
                 itemDetailForm.submit();
             })
         });
     </script>
     <script>
-            // ** 상세페이지 reviewList
-            function reviewListD(itemNo) {
-                $.ajax({
-                    type: 'Get',
-                    url: 'reviewlistD',
-                    data: {
-                        itemNo: itemNo
-                    },
-                    success: function (resultPage) {
-                        $('#resultArea1').html(resultPage);
-                    },
-                    error: function () {
-                        $('#resultArea1').html('상세페이지 review 요청 error');
-                    }
-                }); //ajax
-            } //reviewListD
-            //==========================================================================//
-            // ** 상품 상세페이지 Detail
-            function itemDetailPage(itemNo) {
-                $.ajax({
-                    type: 'Get',
-                    url: 'itemDetailPage',
-                    data: {
-                        itemNo: itemNo
-                    },
-                    success: function (resultPage) {
-                        $('#resultArea1').html('');
-                        $('#resultArea1').html(resultPage);
-                    },
-                    error: function () {
-                        $('#resultArea1').html('상품 설명페이지 error');
-                    }
-                }); //ajax
-            } //itemDetail
-            //==========================================================================//
-            // ** 배송정보
-            function deli_info() {
-                $.ajax({
-                    type: 'Get',
-                    url: 'deliInfo',
-                    success: function (resultPage) {
-                        $('#resultArea1').html('');
-                        $('#resultArea1').html(resultPage);
-                    },
-                    error: function () {
-                        $('#resultArea1').html('상세페이지 배송안내 요청 error');
-                    }
-                }); //ajax
-            } //deli_info
+        // ** 상세페이지 reviewList
+        function reviewListD(itemNo) {
+            $.ajax({
+                type: 'Get',
+                url: 'reviewlistD',
+                data: {
+                    itemNo: itemNo
+                },
+                success: function (resultPage) {
+                    $('#resultArea1').html(resultPage);
+                },
+                error: function () {
+                    $('#resultArea1').html('상세페이지 review 요청 error');
+                }
+            }); //ajax
+        } //reviewListD
+        //==========================================================================//
+        // ** 상품 상세페이지 Detail
+        function itemDetailPage(itemNo) {
+            $.ajax({
+                type: 'Get',
+                url: 'itemDetailPage',
+                data: {
+                    itemNo: itemNo
+                },
+                success: function (resultPage) {
+                    $('#resultArea1').html('');
+                    $('#resultArea1').html(resultPage);
+                },
+                error: function () {
+                    $('#resultArea1').html('상품 설명페이지 error');
+                }
+            }); //ajax
+        } //itemDetail
+        //==========================================================================//
+        // ** 배송정보
+        function deli_info() {
+            $.ajax({
+                type: 'Get',
+                url: 'deliInfo',
+                success: function (resultPage) {
+                    $('#resultArea1').html('');
+                    $('#resultArea1').html(resultPage);
+                },
+                error: function () {
+                    $('#resultArea1').html('상세페이지 배송안내 요청 error');
+                }
+            }); //ajax
+        } //deli_info
     </script>
 </head>
 <body>
-<jsp:include page="include/header.jsp" flush="false" />
+<jsp:include page="include/header.jsp" flush="false"/>
 
 <c:if test="${not empty msg}">
     <script type="text/javascript">
@@ -104,6 +104,13 @@
                         <th></th>
                         <td><img src="${itemResult.imgName}" width=300 height=300></td>
                     </tr>
+                    <c:if test="${not empty imageResult}">
+                        <c:forEach var="image" items="${imageResult}">
+                            <tr>
+                                <td><img src="${image.imgName}" width=100 height=100></td>
+                            </tr>
+                        </c:forEach>
+                    </c:if>
                     <tr>
                         <th></th>
                         <td><input type="text" name="itemName" value="${itemResult.itemName}"></td>
@@ -144,7 +151,8 @@
                     <tfoot>
                     <tr>
                         <th>
-                            <button type="submit" onclick="return confirm('장바구니에 추가하시겠습니까?')" id="cartButton">장바구니 담기</button>
+                            <button type="submit" onclick="return confirm('장바구니에 추가하시겠습니까?')" id="cartButton">장바구니 담기
+                            </button>
                         </th>
                         <th>
                             <button type="button" id="buyButton">주문하기</button>
