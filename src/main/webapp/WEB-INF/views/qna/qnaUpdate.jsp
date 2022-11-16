@@ -18,7 +18,14 @@
 </c:if>
 <main class="main_container">
     <div class="main">
-        <jsp:include page="../include/mypage.jsp" flush="false" />
+
+        <c:if test="${link eq 'M'}">
+            <jsp:include page="../include/center.jsp" flush="false" />
+        </c:if>
+
+        <c:if test="${link ne 'M'}">
+            <jsp:include page="../include/mypage.jsp" flush="false" />
+        </c:if>
         <div class="qnaUpdate">
     <h3>1:1문의 수정</h3>
     <section class="section_container">
@@ -52,9 +59,9 @@
     </section>
     <div class="linkBtn_container">
         <div class="linkBtn">
-            &nbsp;<a href="qnalist">목록으로</a>
+            &nbsp;<a href="qnalist${link}">목록으로</a>
             <c:if test="${userId != 'admin'}">
-                &nbsp;&nbsp;<a href="qnadelete?qnaNo=${qnaResult.qnaNo}" onclick="return confirm('삭제하시겠습니까? 확인/취소');">삭제하기</a>
+                &nbsp;&nbsp;<a href="qnadelete?qnaNo=${qnaResult.qnaNo}&link=${link}" onclick="return confirm('삭제하시겠습니까? 확인/취소');">삭제하기</a>
             </c:if>
         </div>
     </div>

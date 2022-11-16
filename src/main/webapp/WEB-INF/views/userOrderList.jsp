@@ -18,6 +18,7 @@
 <main>
     <div class="main">
 
+
         <jsp:include page="include/mypage.jsp" flush="false" />
 
         <div class="orderList">

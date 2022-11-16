@@ -21,7 +21,14 @@
 </c:if>
 <main class="main_container">
     <div class="main">
-        <jsp:include page="../include/mypage.jsp" flush="false" />
+
+        <c:if test="${link eq 'M'}">
+            <jsp:include page="../include/center.jsp" flush="false" />
+        </c:if>
+
+        <c:if test="${link ne 'M'}">
+            <jsp:include page="../include/mypage.jsp" flush="false" />
+        </c:if>
         <div class="qnaInsert">
     <h3>1:1문의 작성</h3>
     <section class="section_container">
@@ -55,7 +62,7 @@
     </section>
     <div class="linkBtn_container">
         <div class="linkBtn">
-            <a href="qnalist">목록으로</a>
+            <a href="qnalist${link}">목록으로</a>
         </div>
         </div>
         </div>

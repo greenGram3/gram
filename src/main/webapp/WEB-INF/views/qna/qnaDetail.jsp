@@ -21,7 +21,15 @@
 
 <main class="main_container">
     <div class="main">
-        <jsp:include page="../include/mypage.jsp" flush="false" />
+
+        <c:if test="${link eq 'M'}">
+            <jsp:include page="../include/center.jsp" flush="false" />
+        </c:if>
+
+        <c:if test="${link ne 'M'}">
+            <jsp:include page="../include/mypage.jsp" flush="false" />
+        </c:if>
+
 
         <div class="qnaDetail">
     <h3>1:1문의</h3>
@@ -54,7 +62,7 @@
 
     <div class="linkBtn_container">
         <div class="linkBtn">
-            <a href="qnalist">목록으로</a>
+            <a href="qnalist${link}">목록으로</a>
             <c:if test="${userId == 'admin' && qnaResult.qnaChild < 1}">
         <span class="textLink"
               onclick="qnaReplyF(${qnaResult.qnaRoot},${qnaResult.qnaStep},${qnaResult.qnaChild})">답글달기</span>
@@ -64,8 +72,8 @@
                       onclick="qnaReplyD(${qnaResult.qnaRoot},${qnaResult.qnaStep},${qnaResult.qnaChild})">답변보기</span>
             </c:if>
             <c:if test="${userId == qnaResult.userId || userId == 'admin'}">
-                <a href="qnadetail?jCode=U&qnaNo=${qnaResult.qnaNo}">수정하기</a>
-                <a href="qnadelete?qnaNo=${qnaResult.qnaNo}" onclick="return confirm('삭제하시겠습니까? 확인/취소');">삭제하기</a>
+                <a href="qnadetail?jCode=U&qnaNo=${qnaResult.qnaNo}&link=${link}">수정하기</a>
+                <a href="qnadelete?qnaNo=${qnaResult.qnaNo}&link=${link}" onclick="return confirm('삭제하시겠습니까? 확인/취소');">삭제하기</a>
             </c:if>
         </div>
     </div>

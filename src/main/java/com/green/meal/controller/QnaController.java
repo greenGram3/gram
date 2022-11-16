@@ -55,18 +55,61 @@ public class QnaController {
 
         return uri;
     } // qnalist
+
+    @RequestMapping(value="/qnalistM")
+    public String qnalistM(HttpServletRequest request, HttpServletResponse response, Model model,
+                          QnaVO vo, SearchCriteria cri, PageMaker pageMaker) {
+        cri.setSnoEno(); //Sno, Eno 계산
+
+
+        // 1. 요청분석
+        List<QnaVO> list = new ArrayList<QnaVO>(); // 결과 담을 list
+        String uri = "/qna/qnaListM"; //성공 시 list로
+        HttpSession session = request.getSession(false); //session 가져오기
+        String userId = (String)session.getAttribute("userId"); //session의 userID 가져오기
+
+        // 1) userId가 null은 로그인X -> 로그인창으로
+        if (userId == null) {
+            model.addAttribute("message","로그인 하세요.");
+            uri = "loginForm";
+        } else { // 2) userId != null은 로그인O
+            list = qnaService.qnalistAll(cri); // 3) qna list 담기
+            if( list!=null ) {
+                model.addAttribute("qnaResult",list);
+            } else {
+                model.addAttribute("message","QnA가 없습니다.");
+            }
+            model.addAttribute("userId", userId);
+            model.addAttribute("qnaRoot", vo.getQnaRoot());
+            String link="M";
+            model.addAttribute("link",link);
+            pageMaker.setCri(cri);
+            pageMaker.setTotalRowsCount(qnaService.searchCount(cri));
+            model.addAttribute("pageMaker",pageMaker);
+        }
+
+        return uri;
+    } // qnalist
     // -----------------------------------------------------------------------------------------//
     // ** QnA 작성
     @RequestMapping(value="/qnainsertf")
-    public String qnainsertf(HttpServletRequest request, HttpServletResponse response) {
+    public String qnainsertf(HttpServletRequest request, HttpServletResponse response,String link, Model model) {
+        if(link != null){
+            model.addAttribute("link",link);
+        }
+
         return "/qna/qnaInsert";
     }
 
     @RequestMapping(value="/qnainsert", method = RequestMethod.POST)
     public String qnainsert(HttpServletRequest request, HttpServletResponse response, QnaVO vo,
-                            Model model, RedirectAttributes rttr) {
+                            Model model, String link, RedirectAttributes rttr) {
         // 1. 요청분석
-        String uri = "redirect:qnalist";
+        String uri = "redirect:qnalist"+link;
+
+        if(link != null){
+            model.addAttribute("link",link);
+        }
 
         // 2. service 처리
         if (qnaService.qnainsert(vo)>0) { //인서트 성공
@@ -80,7 +123,11 @@ public class QnaController {
     // -----------------------------------------------------------------------------------------//
     // ** QnA Detail
     @RequestMapping(value="/qnadetail")
-    public String qnadetail (HttpServletRequest request, HttpServletResponse response, Model model, QnaVO vo) {
+    public String qnadetail (HttpServletRequest request, HttpServletResponse response, Model model, QnaVO vo,String link) {
+
+        if(link != null){
+            model.addAttribute("link",link);
+        }
         QnaVO voRe;
         // 1. 성공 시 detail폼
         String uri = "/qna/qnaDetail";
@@ -96,7 +143,8 @@ public class QnaController {
             model.addAttribute("qnaResult",voRe);
         } else { //저장 실패 error면
             model.addAttribute("message","자료를 불러오는 데 실패했습니다.");
-            uri = "redirect:qnalist";
+
+            uri = "redirect:qnalist"+link;
         }
         return uri;
     }
@@ -104,10 +152,14 @@ public class QnaController {
     // -----------------------------------------------------------------------------------------//
     // ** QnA Update
     @RequestMapping(value = "/qnaupdate", method=RequestMethod.POST)
-    public String qnaupdate(HttpServletRequest request, HttpServletResponse response, QnaVO vo, Model model) {
+    public String qnaupdate(HttpServletRequest request, HttpServletResponse response, QnaVO vo, Model model,String link) {
         // 한글처리
         response.setContentType("text/html; charset=UTF-8");
 
+
+        if(link != null){
+            model.addAttribute("link",link);
+        }
         // 1. 요청분석
         model.addAttribute("qnaResult",vo); //업뎃 실패시에도 값 저장
 
@@ -118,22 +170,23 @@ public class QnaController {
             model.addAttribute("message","수정 실패. 다시 시도하시기 바랍니다.");
             model.addAttribute("code","500");
         }
+
         return "jsonView";
     }
     // -----------------------------------------------------------------------------------------//
     // ** QnA Delete
     @RequestMapping(value="qnadelete")
     public String qnadelete(HttpServletRequest request, HttpServletResponse response,
-                               QnaVO vo, Model model, RedirectAttributes rttr) {
+                               QnaVO vo, String link, Model model, RedirectAttributes rttr) {
         // 1. 요청분석
-        String uri ="redirect:qnalist";
+        String uri ="redirect:qnalist"+link;
 
         // 2. service처리
         if (qnaService.qnadelete(vo)>0) {
             rttr.addFlashAttribute("message","문의 삭제 성공");
         } else {
             rttr.addFlashAttribute("message","삭제 실패. 다시 시도하시기 바랍니다.");
-            uri ="redirect:qnadetail?qnaNo="+vo.getQnaNo();
+            uri ="redirect:qnadetail?qnaNo="+vo.getQnaNo()+"&link="+link;
         }
         return uri;
     }
@@ -141,7 +194,11 @@ public class QnaController {
     // ** QnA reply insert
     @RequestMapping(value="/qnarinsertf")
     public String qnarinsertf(HttpServletRequest request, HttpServletResponse response,
-                                 Model model, QnaVO vo) { //vo에 detail의 root 담김
+                                 Model model,String link, QnaVO vo) { //vo에 detail의 root 담김
+        if(link != null){
+            model.addAttribute("link",link);
+        }
+
         return "/qna/qnarInsert";
     }
 
