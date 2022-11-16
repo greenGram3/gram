@@ -69,6 +69,7 @@
         <table>
             <tr>
                 <th class="no">번호</th>
+                <th class="item-image">이미지</th>
                 <th class="category1">카테고리1</th>
                 <th class="category2">카테고리2</th>
                 <th class="name">상품명</th>
@@ -79,6 +80,7 @@
             <c:forEach var="itemVO" items="${list}">
                 <tr>
                     <td class="no">${itemVO.itemNo}</td>
+                    <td class="item-image"><img src="${itemVO.imgName}" width="100px" height="100px"></td>
                     <td class="category1">${itemVO.itemCategory1}</td>
                     <td class="category1">${itemVO.itemCategory2}</td>
                     <td class="name">${itemVO.itemName}</td>
