@@ -10,9 +10,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.File;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.sql.SQLIntegrityConstraintViolationException;
@@ -68,7 +71,7 @@ public class ItemController {
     }
 
     @PostMapping("/modify")
-    public String modify(Model m, SearchCondition sc, ItemVO vo, RedirectAttributes rattr) {
+    public String modify(Model m, SearchCondition sc, ItemVO vo, RedirectAttributes rattr, HttpServletRequest request) {
 
         try {
 
@@ -79,9 +82,31 @@ public class ItemController {
             //원래 있던 페이지로 돌아가기 위해 필요함 -> 파라미터로 전달
             //이렇게 안하고 리다이렉트에 sc.겟쿼리스트링 적는 방법도 있음 => 적용 잘 안돼서 일단 포기
 
-            int rowCnt = itemService.itemModify(vo);
+            // --------------------------------------------------------------------------//
+            // * 이미지 업데이트
+            String realPath = request.getRealPath("/");
+            System.out.println("** realPath => "+realPath);
+            // 실제 저장 위치(배포 전 - 컴마다 다름)
+            realPath = "C:\\Users\\Eom hee jeong\\IdeaProjects\\gram\\src\\main\\webapp\\resources\\itemImage\\";
+            // 기본 이미지 지정
+            String file1, file2="itemImage/noImage.JPG";
+            // ** MultipartFile
+            MultipartFile imgNamef = vo.getImgNamef();
+            if ( imgNamef !=null && !imgNamef.isEmpty() ) {
+                // ** Image를 선택 -> Image저장
+                // 1) 물리적 저장경로에 Image저장
+                file1 = realPath + imgNamef.getOriginalFilename();
+                imgNamef.transferTo(new File(file1));
+                // 2) Table 저장 준비
+                file2="itemImage/"+imgNamef.getOriginalFilename();
+                // ** Table에 완성 String경로 set
+                vo.setImgName(file2);
+            }
 
-            if(rowCnt!=1)
+            int rowCnt = itemService.itemModify(vo);
+            int rowCnt1 = itemService.imageModify(vo);
+
+            if(rowCnt!=1 && rowCnt1!=1)
                 throw new Exception("item modify failed");
 
             rattr.addFlashAttribute("msg", "MOD_OK");
@@ -129,13 +154,38 @@ public class ItemController {
     }
 
     @PostMapping("/upload")
-    public String upload(ItemVO vo, Model m, RedirectAttributes rattr) {
+    public String upload(ItemVO vo, Model m, RedirectAttributes rattr, HttpServletRequest request) {
 
         try {
+            //----------------------------------------------------------------------//
+            // ** 이미지 업로드
+            String realPath = request.getRealPath("/");
+            System.out.println("** realPath => "+realPath);
 
+            // 이미지 실제 저장 위치 - 배포 전: 컴마다 다름
+            realPath = "C:\\Users\\Eom hee jeong\\IdeaProjects\\gram\\src\\main\\webapp\\resources\\itemImage\\";
+
+            // 기본 이미지 지정
+            String file1, file2="itemImage/noImage.JPG";
+
+            // MultipartFile
+            MultipartFile imgNamef = vo.getImgNamef();
+            if ( imgNamef !=null && !imgNamef.isEmpty() ) {
+                // ** Image를 선택 -> Image저장
+                // 1) 물리적 저장경로에 Image저장
+                file1 = realPath + imgNamef.getOriginalFilename();
+                imgNamef.transferTo(new File(file1));
+                // 2) Table 저장 준비
+                file2="itemImage/"+imgNamef.getOriginalFilename();
+            }
+            // Table에 완성 String경로 set
+            vo.setImgName(file2);
+
+//-------------------------------------------------------------//
             int rowCnt = itemService.itemUpload(vo);
+            int rowCntI = itemService.itemImgUpload(vo);
 
-            if(rowCnt!=1)
+            if(rowCnt!=1 && rowCntI!=1)
                 throw new Exception("item upload failed");
 
             rattr.addFlashAttribute("msg", "UPL_OK");

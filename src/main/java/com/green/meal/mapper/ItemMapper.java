@@ -25,6 +25,12 @@ public interface ItemMapper {
     List<ItemVO> searchSelectPage(SearchCondition sc);
 
     // heeJeong item 상세페이지------------------------------------------------------------- //
-    ItemVO itemdetail(ItemVO vo) throws Exception;
+    ItemVO itemdetail(ItemVO vo);
+
+    // item등록 이미지 등록
+    int itemImgUpload(ItemVO vo);
+
+    // item 업데이트 이미지 업데이트
+    int imageModify(ItemVO vo);
 
 }

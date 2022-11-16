@@ -37,7 +37,7 @@
 
 <%--등록버튼 누르면 테이블에 insert 되도록 컨트롤러 돌려야될거같음--%>
 <%--<form:form modelAttribute="user">--%>
-<form id="form" action="" method="">
+<form id="form" action="" method="" enctype="">
   <h3>상품 정보 수정</h3>
   <hr>
   <table>
@@ -82,6 +82,27 @@
       <td><input class="input-field" type="number" id="itemPrice" name="itemPrice" value="${vo.itemPrice}"></td>
     </tr>
 
+     <!-- Image Update -->
+     <tr>
+      <td>상품이미지</td>
+      <td>
+        <img src="${vo.imgName}" class="select_img">
+        <input type="hidden" name="imgName" id="imgName" value="${vo.imgName}"><br>
+        <input type="file" name="imgNamef" id="imgNamef">
+      </td>
+    </tr>
+    <script>
+      $('#imgNamef').change(function () {
+        if (this.files && this.files[0]) {
+          let reader = new FileReader;
+          reader.readAsDataURL(this.files[0]);
+          reader.onload = function (e) {
+            $(".select_img").attr("src", e.target.result)
+                    .width(150).height(150);
+          }
+        }
+      });
+    </script>
   </table>
   <div class="button_container">
     <button type="button" id="modifyBtn" class="btn-modify">변경</button>
@@ -117,6 +138,7 @@
 
     $("#modifyBtn").on("click", function(){
       let form = $("#form");
+      form.attr("enctype","multipart/form-data")
       form.attr("action", "<c:url value='/item/modify${searchCondition.queryString}'/>");
       form.attr("method", "post");
       if(formCheck())

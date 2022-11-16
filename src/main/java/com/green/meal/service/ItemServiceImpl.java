@@ -58,4 +58,17 @@ public class ItemServiceImpl implements ItemService {
     public ItemVO itemdetail(ItemVO vo) throws Exception {
         return mapper.itemdetail(vo);
     }
+
+    // item등록 이미지 등록
+    @Override
+    public int itemImgUpload(ItemVO vo) throws Exception {
+        return mapper.itemImgUpload(vo);
+    }
+
+    // item 업데이트 이미지 업데이트
+
+    @Override
+    public int imageModify(ItemVO vo) throws Exception {
+        return mapper.imageModify(vo);
+    }
 }
