@@ -1,6 +1,7 @@
 package com.green.meal.controller;
 
 import com.green.meal.domain.QnaVO;
+import com.green.meal.domain.ReviewVO;
 import com.green.meal.paging.PageMaker;
 import com.green.meal.paging.SearchCriteria;
 import com.green.meal.service.QnaService;
@@ -224,4 +225,35 @@ public class QnaController {
         }
         return uri;
     }
+
+    // -----------------------------------------------------------------------------------------//
+    // ** QnA 답변 업데이트 폼(팝업) 띄우기
+    @RequestMapping(value="/qnarupdatef")
+    public String qnarupdatef(QnaVO vo, Model model) {
+        vo.setUserId(vo.getUserId());
+        vo.setQnaNo(vo.getQnaNo());
+
+        model.addAttribute("qnaResult",vo);
+
+        return "/qna/qnaRupdate";
+    }
+
+    // ** QnA 답변 업데이트하기(JSON)
+    @RequestMapping(value="/qnarupdate", method= RequestMethod.POST)
+    public String qnarupdate(HttpServletResponse response, Model model, QnaVO vo, HttpServletRequest request) {
+        // 한글처리
+        response.setContentType("text/html; charset=UTF-8");
+
+        // 1. 요청분석
+        model.addAttribute("qnaResult",vo);
+
+        // 2. service 처리
+        if(qnaService.qnaupdate(vo) > 0) {
+            model.addAttribute("code","200");
+        } else {
+            model.addAttribute("code","500");
+        }
+        return "jsonView";
+    }
+
 } //qnaController

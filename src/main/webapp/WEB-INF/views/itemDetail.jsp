@@ -104,13 +104,13 @@
                         <th></th>
                         <td><img src="${itemResult.imgName}" width=300 height=300></td>
                     </tr>
-                    <c:if test="${not empty imageResult}">
-                        <c:forEach var="image" items="${imageResult}">
+<%--                    <c:if test="${not empty imageResult}">
+                        <c:forEach var="image" items="${imageResult}" varStatus="imgVar">
                             <tr>
-                                <td><img src="${image.imgName}" width=100 height=100></td>
+                                <td><img src="${image.imgName}" id="${imgVar.index}" width=100 height=100></td>
                             </tr>
                         </c:forEach>
-                    </c:if>
+                    </c:if>--%>
                     <tr>
                         <th></th>
                         <td><input type="text" name="itemName" value="${itemResult.itemName}"></td>

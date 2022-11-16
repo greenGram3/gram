@@ -11,7 +11,7 @@
         $(function (){
             // ** QnA 답변 업데이트 폼 띄우기(Ajax)
             $('#qnaReplyUpF').click(function () {
-                window.open("<c:url value='/qnadetail'/>?jCode=U&userId=${qnaResult.userId}&qnaNo=${qnaResult.qnaNo}", "Child","width=900, height=600,left=300, top=300");
+                window.open("<c:url value='/qnarupdatef'/>?userId=${userId}&qnaNo=${qnaResult.qnaNo}", "Child","width=900, height=600,left=300, top=300");
             }); //qnaReplyUpF
         }) //ready
     </script>
