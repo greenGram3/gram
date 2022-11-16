@@ -31,7 +31,7 @@
     <!-- Review List 출력 -->
     <select id="reviewlist" resultType="com.green.meal.domain.ReviewVO">
         select review_no, user_id, order_no, review.item_no, item_name, item_price, review_title,
-               review_content, review_root, review_step, review_child, review_star, img_name, reg_date
+               review_content, review_root, review_step, review_child, review_star, review.img_name, reg_date
         from item, review
         where item.item_no=review.item_no and <include refid="search"></include>
         order by review_root desc, review_step asc

@@ -95,10 +95,16 @@
     </select>
 
     <!-- heeJeang item 상세페이지 itemDetail -->
-    <select id="itemdetail" resultType="ItemVO">
+<!--    <select id="itemdetail" resultType="ItemVO">
         select item.item_no, item_name, item_price, img_name, img_type
         from item, image
         where item.item_no=#{itemNo} and item.item_no=image.item_no;
+    </select>-->
+
+    <select id="itemdetail" resultType="ItemVO">
+        select *
+        from item
+        where item_no=#{itemNo}
     </select>
 
 </mapper>
