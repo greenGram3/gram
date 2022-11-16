@@ -21,6 +21,11 @@ public class ItemServiceImpl implements ItemService {
         return mapper.selectOne(itemNo);
     }
 
+    // Heejeong - 이미지 관리폼에서 등록된 이미지 두장 다 보이게
+
+    @Override
+    public ImageVO imageAdmin(Integer itemNo) throws Exception { return mapper.imageAdmin(itemNo); }
+
     @Override
     public int itemUpload(ItemVO vo) {
         return mapper.insert(vo);
@@ -68,14 +73,14 @@ public class ItemServiceImpl implements ItemService {
 
     // item등록 이미지 등록
     @Override
-    public int itemImgUpload(ItemVO vo) throws Exception {
-        return mapper.itemImgUpload(vo);
+    public int itemImgUpload(ImageVO vo1) throws Exception {
+        return mapper.itemImgUpload(vo1);
     }
 
     // item 업데이트 이미지 업데이트
 
     @Override
-    public int imageModify(ItemVO vo) throws Exception {
-        return mapper.imageModify(vo);
+    public int imageModify(ImageVO vo1) throws Exception {
+        return mapper.imageModify(vo1);
     }
 }

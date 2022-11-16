@@ -85,11 +85,18 @@
      <!-- Image Update -->
      <tr>
       <th>상품이미지</th>
-      <td>
-        <li><img src="${vo.imgName}" class="select_img"> </li>
-        <input type="hidden" name="imgName" id="imgName" value="${vo.imgName}">
-        <li><input type="file" name="imgNamef" id="imgNamef"> </li>
-      </td>
+       <td>대표이미지</td>
+       <td>
+         <img src="${vo.imgName}" class="select_img" width="150px" height="150px">
+         <input type="hidden" name="imgName" id="imgName" value="${vo.imgName}">
+         <input type="file" name="imgNamef" id="imgNamef">
+       </td>
+
+       <td>
+         <img src="${vo1.imgName}" class="select_img1" width="150px" height="150px">
+         <input type="hidden" name="imgName" id="imgName1" value="${vo1.imgName}">
+         <input type="file" name="imgNamef1" id="imgNamef1">
+       </td>
     </tr>
 
     <script>
@@ -99,6 +106,17 @@
           reader.readAsDataURL(this.files[0]);
           reader.onload = function (e) {
             $(".select_img").attr("src", e.target.result)
+                    .width(150).height(150);
+          }
+        }
+      });
+
+      $('#imgNamef1').change(function () {
+        if (this.files && this.files[0]) {
+          let reader = new FileReader;
+          reader.readAsDataURL(this.files[0]);
+          reader.onload = function (e) {
+            $(".select_img1").attr("src", e.target.result)
                     .width(150).height(150);
           }
         }

@@ -13,6 +13,9 @@ public interface ItemMapper {
 
     ItemVO selectOne(Integer itemNo);
 
+    // Heejeong - 이미지 관리폼에서 등록된 이미지 두장 다 보이게
+    ImageVO imageAdmin(Integer itemNo);
+
     int insert(ItemVO vo);
 
     int delete(Integer itemNo);
@@ -32,9 +35,9 @@ public interface ItemMapper {
     List<ImageVO> imageDetail(ImageVO vo1);
 
     // item등록 이미지 등록
-    int itemImgUpload(ItemVO vo);
+    int itemImgUpload(ImageVO vo1);
 
     // item 업데이트 이미지 업데이트
-    int imageModify(ItemVO vo);
+    int imageModify(ImageVO vo1);
 
 }

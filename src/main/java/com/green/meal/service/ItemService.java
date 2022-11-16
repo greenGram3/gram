@@ -10,6 +10,9 @@ import java.util.List;
 public interface ItemService {
     ItemVO itemAdmin(Integer itemNo) throws Exception;
 
+    // Heejeong - 이미지 관리폼에서 등록된 이미지 두장 다 보이게
+    ImageVO imageAdmin(Integer itemNo) throws Exception;
+
     int itemUpload(ItemVO vo) throws Exception;
 
     int itemRemove(Integer itemNo) throws Exception;
@@ -30,9 +33,9 @@ public interface ItemService {
     List<ImageVO> imageDetail(ImageVO vo1) throws Exception;
 
     // item등록 이미지 등록
-    int itemImgUpload(ItemVO vo) throws Exception;
+    int itemImgUpload(ImageVO vo1) throws Exception;
 
     // item 업데이트 이미지 업데이트
-    int imageModify(ItemVO vo) throws Exception;
+    int imageModify(ImageVO vo1) throws Exception;
 
 }

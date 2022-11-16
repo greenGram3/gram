@@ -1,6 +1,7 @@
 package com.green.meal.controller;
 
 
+import com.green.meal.domain.ImageVO;
 import com.green.meal.domain.ItemVO;
 import com.green.meal.domain.PageHandler;
 import com.green.meal.domain.SearchCondition;
@@ -13,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import java.awt.*;
 import java.io.File;
 import java.util.List;
 
@@ -47,11 +49,12 @@ public class ItemController {
     }
 
     @GetMapping("/read")
-    public String read(ItemVO vo, SearchCondition sc, Model m) {
+    public String read(ItemVO vo, SearchCondition sc, Model m, ImageVO vo1) {
         try {
-
+            vo1 = itemService.imageAdmin(vo1.getItemNo());
             vo = itemService.itemAdmin(vo.getItemNo());
             m.addAttribute("vo", vo);
+            m.addAttribute("vo1",vo1);
             m.addAttribute("sc", sc);
 
             return "admin/itemAdmin";
@@ -66,7 +69,7 @@ public class ItemController {
     }
 
     @PostMapping("/modify")
-    public String modify(Model m, SearchCondition sc, ItemVO vo, RedirectAttributes rattr, HttpServletRequest request) {
+    public String modify(Model m, SearchCondition sc, ItemVO vo, ImageVO vo1, RedirectAttributes rattr, HttpServletRequest request) {
 
         try {
 
@@ -78,13 +81,15 @@ public class ItemController {
             //이렇게 안하고 리다이렉트에 sc.겟쿼리스트링 적는 방법도 있음 => 적용 잘 안돼서 일단 포기
 
             // --------------------------------------------------------------------------//
-            // * 이미지 업데이트
+            // * 이미지 업데이트 - itemImage
             String realPath = request.getRealPath("/");
             System.out.println("** realPath => "+realPath);
             // 실제 저장 위치(배포 전 - 컴마다 다름)
             realPath = "C:\\Users\\Eom hee jeong\\IdeaProjects\\gram\\src\\main\\webapp\\resources\\itemImage\\";
             // 기본 이미지 지정
             String file1, file2="../itemImage/noImage.JPG";
+            String file3, file4="../itemImage/noImage.JPG";
+
             // ** MultipartFile
             MultipartFile imgNamef = vo.getImgNamef();
             if ( imgNamef !=null && !imgNamef.isEmpty() ) {
@@ -97,9 +102,23 @@ public class ItemController {
                 // ** Table에 완성 String경로 set
                 vo.setImgName(file2);
             }
+            // --------------------------------------------------------------------------//
+            // ImageImage 업데이트
+            MultipartFile imgNamef1 = vo1.getImgNamef1();
+            if ( imgNamef1 !=null && !imgNamef1.isEmpty() ) {
+                // ** Image를 선택 -> Image저장
+                // 1) 물리적 저장경로에 Image저장
+                file3 = realPath + imgNamef1.getOriginalFilename();
+                imgNamef1.transferTo(new File(file3));
+                // 2) Table 저장 준비
+                file4 = "../itemImage/"+imgNamef1.getOriginalFilename();
+            }
+            // Table에 완성 String경로 set
+            vo1.setImgName(file4);
+            // --------------------------------------------------------------------------//
 
             int rowCnt = itemService.itemModify(vo);
-            int rowCnt1 = itemService.imageModify(vo);
+            int rowCnt1 = itemService.imageModify(vo1);
 
             if(rowCnt!=1 && rowCnt1!=1)
                 throw new Exception("item modify failed");
@@ -149,7 +168,7 @@ public class ItemController {
     }
 
     @PostMapping("/upload")
-    public String upload(ItemVO vo, Model m, RedirectAttributes rattr, HttpServletRequest request) {
+    public String upload(ItemVO vo, ImageVO vo1, Model m, RedirectAttributes rattr, HttpServletRequest request) {
 
         try {
             //----------------------------------------------------------------------//
@@ -162,7 +181,9 @@ public class ItemController {
 
             // 기본 이미지 지정
             String file1, file2="../itemImage/noImage.JPG";
+            String file3, file4="../itemImage/noImage.JPG";
 
+            // item에 저장하는 Image
             // MultipartFile
             MultipartFile imgNamef = vo.getImgNamef();
             if ( imgNamef !=null && !imgNamef.isEmpty() ) {
@@ -175,10 +196,23 @@ public class ItemController {
             }
             // Table에 완성 String경로 set
             vo.setImgName(file2);
-
 //-------------------------------------------------------------//
+            // Image에 저장하는 Image
+            // MultipartFile
+            MultipartFile imgNamef1 = vo1.getImgNamef1();
+            if ( imgNamef1 !=null && !imgNamef1.isEmpty() ) {
+                // ** Image를 선택 -> Image저장
+                // 1) 물리적 저장경로에 Image저장
+                file3 = realPath + imgNamef1.getOriginalFilename();
+                imgNamef1.transferTo(new File(file3));
+                // 2) Table 저장 준비
+                file4="../itemImage/"+imgNamef1.getOriginalFilename();
+            }
+            // Table에 완성 String경로 set
+            vo1.setImgName(file4);
+ //--------------------------------------------------------------//
             int rowCnt = itemService.itemUpload(vo);
-            int rowCntI = itemService.itemImgUpload(vo);
+            int rowCntI = itemService.itemImgUpload(vo1);
 
             if(rowCnt!=1 && rowCntI!=1)
                 throw new Exception("item upload failed");

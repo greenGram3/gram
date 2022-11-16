@@ -77,9 +77,12 @@
     <tr>
       <th>상품이미지</th>
       <td>
-        <li><img src="" class="select_img"> </li>
-        <input type="hidden" name="imgName" id="imgName" value="">
-        <li><input type="file" name="imgNamef" id="imgNamef"> </li>
+        <img src="" class="select_img"><br> <!-- 대표이미지 -->
+        <input type="file" name="imgNamef" id="imgNamef"></td>
+      </td>
+      <td>
+        <img src="" class="select_img1"><br> <!-- 파일 미리보기(js이용) -->
+        <input type="file" name="imgNamef1" id="imgNamef1"></td>
       </td>
     </tr>
     <script>
@@ -89,6 +92,17 @@
           reader.readAsDataURL(this.files[0]);
           reader.onload = function (e) {
             $(".select_img").attr("src", e.target.result)
+                    .width(150).height(150);
+          }
+        }
+      }); //change
+
+      $('#imgNamef1').change(function () {
+        if (this.files && this.files[0]) {
+          let reader = new FileReader;
+          reader.readAsDataURL(this.files[0]);
+          reader.onload = function (e) {
+            $(".select_img1").attr("src", e.target.result)
                     .width(150).height(150);
           }
         }

@@ -33,21 +33,30 @@
         select * from item
         WHERE item_no = #{itemNo}
     </select>
+    <select id="imageAdmin" resultType="com.green.meal.domain.ImageVO">
+        select * from image
+        WHERE item_no = #{itemNo}
+    </select>
 
-    <!-- Image Table 포린키 연결 등록 위한 selectKey만 밑에 추가 -->
+    <!-- Image Table -->
     <insert id="insert" parameterType="ItemVO">
         insert into item
             (item_category1, item_category2, item_name, item_amount, item_price, img_name)
         values
             (#{itemCategory1}, #{itemCategory2}, #{itemName}, #{itemAmount}, #{itemPrice}, #{imgName})
-        <selectKey keyProperty="itemNo" resultType="int" order="AFTER">
-            SELECT LAST_INSERT_ID()
-        </selectKey>
     </insert>
 
+    <!-- 이미지 한개 등록용 이전 구버전 -->
+    <!--    <selectKey keyProperty="itemNo" resultType="int" order="AFTER">
+                SELECT LAST_INSERT_ID()
+            </selectKey> -->
+
     <!-- Image Insert 추가 -->
-    <insert id="itemImgUpload">
-        insert into image(item_no, img_name, img_type) values(#{itemNo},#{imgName},"d")
+    <insert id="itemImgUpload" parameterType="com.green.meal.domain.ImageVO">
+        <selectKey keyProperty="itemNo" resultType="int" order="BEFORE">
+            select IFNULL(max(item_no),0)+1 from image
+        </selectKey>
+        insert into image(item_no, img_name, img_type) values(#{itemNo},#{imgName},"e")
     </insert>
 
     <delete id="delete" parameterType="int">
@@ -66,7 +75,7 @@
     </update>
 
     <!-- Image Update 추가 -->
-   <update id="imageModify">
+   <update id="imageModify" parameterType="com.green.meal.domain.ImageVO">
         update image
         set img_name = #{imgName}
         where item_no = #{itemNo}
