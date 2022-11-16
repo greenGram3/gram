@@ -10,7 +10,7 @@ menu.addEventListener('mouseover' ,(e) => {
     let eventOj = e.target;
 
     if(eventOj.classList.contains('meal')){
-        category.style.display='block';
+        category01.style.display='block';
     }
 
     if(eventOj.classList.contains('them')) {
