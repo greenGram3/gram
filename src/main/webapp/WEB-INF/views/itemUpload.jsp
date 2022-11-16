@@ -75,10 +75,12 @@
     </tr>
 
     <tr>
-      <td>상품이미지</td>
+      <th>상품이미지</th>
       <td>
-        <img src="" class="select_img"><br> <!-- 선택한 파일 미리보기 -->
-        <input type="file" name="imgNamef" id="imgNamef"></td>
+        <li><img src="" class="select_img"> </li>
+        <input type="hidden" name="imgName" id="imgName" value="">
+        <li><input type="file" name="imgNamef" id="imgNamef"> </li>
+      </td>
     </tr>
     <script>
       $('#imgNamef').change(function () {

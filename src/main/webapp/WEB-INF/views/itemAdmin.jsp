@@ -84,13 +84,14 @@
 
      <!-- Image Update -->
      <tr>
-      <td>상품이미지</td>
+      <th>상품이미지</th>
       <td>
-        <img src="${vo.imgName}" class="select_img">
-        <input type="hidden" name="imgName" id="imgName" value="${vo.imgName}"><br>
-        <input type="file" name="imgNamef" id="imgNamef">
+        <li><img src="${vo.imgName}" class="select_img"> </li>
+        <input type="hidden" name="imgName" id="imgName" value="${vo.imgName}">
+        <li><input type="file" name="imgNamef" id="imgNamef"> </li>
       </td>
     </tr>
+
     <script>
       $('#imgNamef').change(function () {
         if (this.files && this.files[0]) {
