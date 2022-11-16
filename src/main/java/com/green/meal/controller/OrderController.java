@@ -3,12 +3,9 @@ package com.green.meal.controller;
 import com.green.meal.domain.*;
 import com.green.meal.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.*;
 
@@ -34,12 +31,14 @@ public class OrderController {
             m.addAttribute("list", list);
             m.addAttribute("ph", pageHandler);
 
+
+
         } catch (Exception e) {
             m.addAttribute("msg", "LIST_ERR");
             e.printStackTrace();
         }
 
-        return "orderList";
+        return "admin/orderList";
     }
 
     @GetMapping("/read")
@@ -50,13 +49,13 @@ public class OrderController {
             List<OrderDetailVO> list = orderService.orderDetail(orderNo);
             m.addAttribute("list", list);
 
-            return "orderDetail";
+            return "admin/orderDetail";
 
         } catch (Exception e) {
             e.printStackTrace();
             m.addAttribute("msg", "READ_ERR");
 
-            return "orderList";
+            return "admin/orderList";
         }
     }
 

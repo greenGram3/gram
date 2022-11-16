@@ -15,7 +15,7 @@
 
 <body>
 
-<jsp:include page="include/header.jsp" flush="false" />
+<jsp:include page="../include/header.jsp" flush="false" />
 <main>
 
 <script>
@@ -29,7 +29,7 @@
 </script>
 
     <div class="main">
-        <jsp:include page="include/admin.jsp" flush="false" />
+        <jsp:include page="../include/admin.jsp" flush="false" />
 
         <div class="itemList">
 <%--<div id="menu">--%>
@@ -123,6 +123,6 @@
         </div>
     </div>
 </main>
-<jsp:include page="include/footer.jsp" flush="false" />
+<jsp:include page="../include/footer.jsp" flush="false" />
 </body>
 </html>

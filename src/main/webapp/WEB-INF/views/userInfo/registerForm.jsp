@@ -13,7 +13,7 @@
 
 <body>
 
-<jsp:include page="include/header.jsp" flush="false" />
+<jsp:include page="../include/header.jsp" flush="false" />
 
 <main>
     <div class="registerForm">
@@ -79,7 +79,7 @@
         </form:form>
     </div>
 </main>
-<jsp:include page="include/footer.jsp" flush="false" />
+<jsp:include page="../include/footer.jsp" flush="false" />
 </body>
 </html>
 

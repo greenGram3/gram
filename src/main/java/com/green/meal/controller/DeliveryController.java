@@ -28,12 +28,12 @@ public class DeliveryController {
         BaseDelivery(list);
 
         model.addAttribute("list",list);
-        return "delyForm";
+        return "userInfo/delyForm";
     }
 
     @GetMapping("/register")
     public String delyRegisterGet(){
-        return "delyRegister";
+        return "userInfo/delyRegister";
     }
 
     @PostMapping("/register")
@@ -60,7 +60,7 @@ public class DeliveryController {
     @GetMapping("/update")
     public String delyUpdateGet(DeliveryVO dely, Model model){
         model.addAttribute("dely", dely);
-        return "updateDely";
+        return "userInfo/updateDely";
     }
 
     @PostMapping("/update")

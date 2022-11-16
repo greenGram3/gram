@@ -82,3 +82,37 @@ main * {
     padding: 10px 50px;
     background-color: #eeecec;
 }
+
+/*deleteUser*/
+
+
+.deleteUser {
+    margin-top: 250px;
+    margin-bottom: 50px;
+    width: 900px;
+}
+.deleteUser h3 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.deleteUser hr {
+    color: #cccccc;
+    margin-bottom: 20px;
+}
+
+.deleteUser input{
+    margin: 5px 10px;
+    border: 1px solid darkgrey;
+}
+
+.deleteUser pre {
+    border: 1px solid darkgray;
+    padding-left: 10px;
+    padding-top: 10px;
+}
+
+.deleteUser #delBtn {
+    width: 80px;
+    cursor: pointer;
+}

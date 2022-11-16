@@ -19,7 +19,7 @@
 </head>
 
 <body>
-<jsp:include page="include/header.jsp" flush="false" />
+<jsp:include page="../include/header.jsp" flush="false" />
 
 <script>
   let msg = "${msg}";
@@ -31,7 +31,7 @@
 <main>
 
   <div class="main">
-    <jsp:include page="include/admin.jsp" flush="false" />
+    <jsp:include page="../include/admin.jsp" flush="false" />
 
     <div class="itemAdmin">
 
@@ -164,7 +164,7 @@
     </div>
   </div>
 </main>
-<jsp:include page="include/footer.jsp" flush="false" />
+<jsp:include page="../include/footer.jsp" flush="false" />
 </body>
 
 </html>

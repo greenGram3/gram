@@ -10,7 +10,7 @@
     <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
 
 </head>
-<jsp:include page="include/header.jsp" flush="false" />
+<jsp:include page="../include/header.jsp" flush="false" />
 <body>
 <main>
     <div class="loginForm">
@@ -57,6 +57,6 @@
         </form>
     </div>
 </main>
-<jsp:include page="include/footer.jsp" flush="false" />
+<jsp:include page="../include/footer.jsp" flush="false" />
 </body>
 </html>

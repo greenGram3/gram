@@ -2,7 +2,6 @@ package com.green.meal.controller;
 
 import com.green.meal.domain.UserVO;
 import com.green.meal.service.UserService;
-import com.green.meal.service.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -29,7 +28,7 @@ public class LoginController {
 
     @GetMapping("/login")
     public String loginForm() {
-        return "loginForm";
+        return "user/loginForm";
     }
 
     @GetMapping("/logout")
