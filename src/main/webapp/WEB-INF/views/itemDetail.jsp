@@ -91,6 +91,7 @@
 </c:if>
 
 <main>
+    <div class="itemDetail">
     <div class="itemDetail-container">
         <form action="cart" method="post" name="itemDetailForm" id="itemDetailForm">
             <figure>
@@ -199,6 +200,7 @@
                 document.itemDetailForm.itemPrice.value * document.itemDetailForm.cartAmount.value;
         }
     </script>
+    </div>
 </main>
 </body>
 </html>

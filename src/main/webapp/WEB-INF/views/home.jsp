@@ -20,7 +20,6 @@
 <main>
 	<section class="event_container">
 		<ul class="event_list" >
-			<P> event Zone  ${serverTime}. </P>
 			<button class="play nonVisible"></button>
 			<button class="pause"></button>
 		</ul>
@@ -32,6 +31,7 @@
 			<div class="best_box">
 				<ul class="best_list">
 				</ul>
+				<P> event Zone  ${serverTime}. </P>
 			</div>
 			<button class="btn_back nonVisible"></button>
 			<button class="btn_after"></button>

@@ -3,12 +3,12 @@
 const event_container = document.querySelector('.event_container'),
     event_list= event_container.querySelector('.event_list'),
     e_imgList =
-        ['image/event_01.png',
-            'image/event_02.png',
-            'image/event_03.png',
-            'image/event_04.png',
-            'image/event_05.png',
-            'image/event_06.png'],
+        ['eventImage/event_01.png',
+            'eventImage/event_02.png',
+            'eventImage/event_03.png',
+            'eventImage/event_04.png',
+            'eventImage/event_05.png',
+            'eventImage/event_06.png'],
     icon = event_container.querySelectorAll('button');
 
 const e_li = event_list.getElementsByTagName('li');
@@ -17,6 +17,7 @@ const e_li = event_list.getElementsByTagName('li');
 for(let i = 0; i < e_imgList.length; i++){
     event_list.appendChild(document.createElement('li'))
         .style.background= `url(${e_imgList[i]})`;
+
 }
 
 // --------------------------------------------------------------
