@@ -106,7 +106,7 @@
                     </tr>
                     <tr>
                         <th></th>
-                        <td>${itemResult.itemName}</td>
+                        <td><input type="text" name="itemName" value="${itemResult.itemName}"></td>
                     </tr>
                     </thead>
 
@@ -137,7 +137,7 @@
                         <th>총 상품금액</th>
                         <td>
                             <input type="text" name="totalItemPrice" id="totalItemPrice" value="${itemResult.itemPrice}"
-                                   disabled>
+                                   readonly>
                         </td>
                     </tr>
                     </tbody>

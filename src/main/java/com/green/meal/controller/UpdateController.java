@@ -24,7 +24,7 @@ public class UpdateController {
     public String updateUser(HttpServletRequest request, Model model){
         String userId = (String) request.getSession().getAttribute("userId");
         model.addAttribute("user", userService.idDupliCheck(userId));
-        return "/updateUser";
+        return "userInfo/updateUser";
     }
 
     // 비밀번호변경
@@ -72,7 +72,7 @@ public class UpdateController {
     //회원탈퇴
     @GetMapping("/userDelete")
     public String delUserGet(){
-        return "deleteUser";
+        return "userInfo/deleteUser";
     }
 
     @PostMapping("/userDelete")

@@ -9,11 +9,11 @@
     <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
 </head>
 <body>
-<jsp:include page="include/header.jsp" flush="false" />
+<jsp:include page="../include/header.jsp" flush="false" />
 <main>
     <div class="main">
 
-        <%@include file="include/mypage.jsp"%>
+        <%@include file="../include/mypage.jsp"%>
 
         <div class="delyForm">
             <h3>배송지 관리</h3>
@@ -96,7 +96,7 @@
         </div>
     </div>
 </main>
-<jsp:include page="include/footer.jsp" flush="false" />
+<jsp:include page="../include/footer.jsp" flush="false" />
 </body>
 </html>
 

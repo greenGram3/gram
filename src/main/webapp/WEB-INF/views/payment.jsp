@@ -128,12 +128,14 @@
           <th class="item-name">상품명</th>
           <th class="item-amount">수량</th>
           <th class="item-price">가격</th>
+          <th class="total-price">총금액</th>
         </tr>
         <tr class="tr2">
           <td><input name="itemNo" type="text" value="${dto.itemNo}"></td>
           <td><input name="itemName" type="text" value="${dto.itemName}"></td>
           <td><input name="itemAmount" type="text" value="${dto.itemAmount}"></td>
           <td><input name="itemPrice" type="text" value="${dto.itemPrice}"></td>
+          <td><input name="totalItemPrice" type="text" value="${totalItemPrice}"></td>
         </tr>
 
         <tr class="block-div"></tr>
@@ -210,6 +212,10 @@
           }
         }).done(function (data) {
           alert("결제에 성공했습니다.");
+          let form = $("#form");
+          form.attr("action", "<c:url value='/paymentConfirm' />");
+          form.attr("method", "post");
+          form.submit();
         })
       } else {
         alert("결제에 실패했습니다. 에러 내용: " + rsp.error_msg);

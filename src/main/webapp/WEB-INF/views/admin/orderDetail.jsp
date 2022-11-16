@@ -16,7 +16,7 @@
 </head>
 
 <body>
-<jsp:include page="include/header.jsp" flush="false" />
+<jsp:include page="../include/header.jsp" flush="false" />
 <main>
 <script>
     let msg = "${msg}";
@@ -27,7 +27,7 @@
     if(reMsg=="SEND_ERR")  alert("발송 처리에 실패했습니다. 다시 시도해 주세요.");
 </script>
     <div class="main">
-        <jsp:include page="include/admin.jsp" flush="false" />
+        <jsp:include page="../include/admin.jsp" flush="false" />
 
         <div class="orderDetail">
 
@@ -147,7 +147,7 @@
         </div>
     </div>
 </main>
-<jsp:include page="include/footer.jsp" flush="false" />
+<jsp:include page="../include/footer.jsp" flush="false" />
 </body>
 
 </html>

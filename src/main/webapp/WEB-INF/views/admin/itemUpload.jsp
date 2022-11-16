@@ -18,7 +18,7 @@
 </head>
 
 <body>
-<jsp:include page="include/header.jsp" flush="false" />
+<jsp:include page="../include/header.jsp" flush="false" />
 
 <script>
   let msg = "${msg}";
@@ -27,7 +27,7 @@
 <main>
 
   <div class="main">
-    <jsp:include page="include/admin.jsp" flush="false" />
+    <jsp:include page="../include/admin.jsp" flush="false" />
 
     <div class="itemUpload">
 <%--등록버튼 누르면 테이블에 insert 되도록 컨트롤러 돌려야될거같음--%>
@@ -157,7 +157,7 @@
     </div>
   </div>
 </main>
-<jsp:include page="include/footer.jsp" flush="false" />
+<jsp:include page="../include/footer.jsp" flush="false" />
 </body>
 
 </html>

@@ -1,13 +1,11 @@
 package com.green.meal.controller;
 
 
-import com.green.meal.domain.ItemVO;
 import com.green.meal.domain.PageHandler;
 import com.green.meal.domain.SearchCondition;
 import com.green.meal.domain.UserVO;
 import com.green.meal.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -44,7 +42,7 @@ public class UserController {
             e.printStackTrace();
         }
 
-        return "userList";
+        return "admin/userList";
     }
 
     @GetMapping("/read")
@@ -56,13 +54,13 @@ public class UserController {
             m.addAttribute("vo", vo);
             m.addAttribute("sc", sc);
 
-            return "userDetail";
+            return "admin/userDetail";
 
         } catch (Exception e) {
             e.printStackTrace();
             m.addAttribute("msg", "READ_ERR");
 
-            return "userList";
+            return "admin/userList";
         }
     }
 
@@ -87,7 +85,7 @@ public class UserController {
             e.printStackTrace();
             m.addAttribute("vo", vo);
             m.addAttribute("msg", "WDR_ERR");
-            return "userDetail";
+            return "admin/userDetail";
         }
 
     }

@@ -59,7 +59,8 @@ public class ItemDetailController {
     //    ========= 상세페이지->결제페이지 작업 중 코드(정무혁) =============
 
     @RequestMapping("/buy")
-    public String buy(OrderDetailDto dto, Model m) {
+    public String buy(OrderDetailDto dto, Integer totalItemPrice, Model m) {
+        m.addAttribute("totalItemPrice", totalItemPrice);
         m.addAttribute("dto", dto);
         return "payment";
     }

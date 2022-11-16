@@ -26,7 +26,7 @@ public class RegisterController {
     //매인 -> 회원가입
     @GetMapping("/register")
     public String register(){
-        return "registerForm";
+        return "userInfo/registerForm";
     }
 
     //회원가입 -> 메인
@@ -37,7 +37,7 @@ public class RegisterController {
             model.addAttribute("pwdCheck", pwdCheck);
             model.addAttribute("userEmailArr", userEmailArr);
             model.addAttribute("user", user);
-            return "registerForm";
+            return "userInfo/registerForm";
         }
 
         //UserEmail 수동으로 넣기
