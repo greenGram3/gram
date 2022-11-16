@@ -19,11 +19,14 @@
 <main class="main_container">
     <div class="main">
 
-        <c:if test="${link eq 'M'}">
+        <c:if test="${link eq 'A'}">
+            <jsp:include page="../include/admin.jsp" flush="false" />
+        </c:if>
+        <c:if test="${link eq 'C'}">
             <jsp:include page="../include/center.jsp" flush="false" />
         </c:if>
 
-        <c:if test="${link ne 'M'}">
+        <c:if test="${link eq 'M'}">
             <jsp:include page="../include/mypage.jsp" flush="false" />
         </c:if>
         <div class="qnaUpdate">
@@ -54,12 +57,17 @@
                     <td>글번호</td>
                     <td><input type="text" name="qnaNo" id="qnaNo" value="${qnaResult.qnaNo}" readonly></td>
                 </tr>
+
+                <tr hidden>
+                    <td><input name="${link}" value="${link}"></td>
+                </tr>
+
             </table>
        </form>
     </section>
     <div class="linkBtn_container">
         <div class="linkBtn">
-            &nbsp;<a href="qnalist${link}">목록으로</a>
+            &nbsp;<a href="qnalist?link=${link}">목록으로</a>
             <c:if test="${userId != 'admin'}">
                 &nbsp;&nbsp;<a href="qnadelete?qnaNo=${qnaResult.qnaNo}&link=${link}" onclick="return confirm('삭제하시겠습니까? 확인/취소');">삭제하기</a>
             </c:if>

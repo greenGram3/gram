@@ -35,7 +35,16 @@
 </c:if>
 <main class="main_container">
     <div class="main">
-        <jsp:include page="../include/mypage.jsp" flush="false" />
+        <c:if test="${link eq 'A'}">
+            <jsp:include page="../include/admin.jsp" flush="false" />
+        </c:if>
+        <c:if test="${link eq 'C'}">
+            <jsp:include page="../include/center.jsp" flush="false" />
+        </c:if>
+
+        <c:if test="${link eq 'M'}">
+            <jsp:include page="../include/mypage.jsp" flush="false" />
+        </c:if>
         <div class="qnaList">
     <h1>1:1문의</h1>
             <hr>
@@ -73,7 +82,7 @@
                             <c:if test="${userId != 'admin'}">
                                 <c:choose>
                                     <c:when test="${userId == qna.userId}">
-                                        <a href="qnadetail?qnaNo=${qna.qnaNo}">${qna.qnaTitle}</a>
+                                        <a href="qnadetail?qnaNo=${qna.qnaNo}&link=${link}">${qna.qnaTitle}</a>
                                     </c:when>
                                     <c:when test="${userId != qna.userId && qna.userId != 'admin'}">
                                         [작성자 혹은 관리자만 확인 가능한 문의입니다.]
@@ -86,7 +95,7 @@
 
                             <!-- 관리자 -->
                             <c:if test="${userId == 'admin'}">
-                                <a href="qnadetail?qnaNo=${qna.qnaNo}">${qna.qnaTitle}</a>
+                                <a href="qnadetail?qnaNo=${qna.qnaNo}&link=${link}">${qna.qnaTitle}</a>
                             </c:if>
                         </td>
                         <td>${qna.regDate}</td>
@@ -101,8 +110,8 @@
         <c:choose>
             <c:when test="${pageMaker.prev && pageMaker.spageNo>1}">
 
-                <a href="qnalist${pageMaker.searchQuery(1)}" class="firstBtn">◀◀</a>&nbsp;
-                <a href="qnalist${pageMaker.searchQuery(pageMaker.spageNo-1)}" class="forwardBtn">&lt;</a>&nbsp;&nbsp;
+                <a href="qnalist${pageMaker.searchQuery(1)}&link=${link}" class="firstBtn">◀◀</a>&nbsp;
+                <a href="qnalist${pageMaker.searchQuery(pageMaker.spageNo-1)}&link=${link}" class="forwardBtn">&lt;</a>&nbsp;&nbsp;
                 <!-- 앞으로가기 : 현재페이지의 이전 그룹(spage-1)
                 => rowsPerPage는 그대로, currPage=spage-1 : EL로 기재 -->
             </c:when>
@@ -124,17 +133,17 @@
             <c:if test="${i!=pageMaker.cri.currPage}">
                 <!-- i가 현재페이지가 아닐 때 - 클릭하면 넘어가야 하니까 a href
                 현재페이지 param으로 controller에 넣어줘서 기준 주고, controll동작하게 하기-->
-                <a href="qnalist${pageMaker.searchQuery(i)}">${i}</a>
+                <a href="qnalist${pageMaker.searchQuery(i)}&link=${link}">${i}</a>
             </c:if>
         </c:forEach>
 
         <!-- 3. Next, Last button: ver01.pageMaker.makeQuery / ver02.SearchQuery -->
         <c:choose>
             <c:when test="${pageMaker.next && pageMaker.epageNo>0}">
-                <a href="qnalist${pageMaker.searchQuery(pageMaker.epageNo+1)}" class="backBtn">&nbsp;&nbsp;&gt;</a>
+                <a href="qnalist${pageMaker.searchQuery(pageMaker.epageNo+1)}&link=${link}" class="backBtn">&nbsp;&nbsp;&gt;</a>
                 <!-- 뒤로가기 : 현재 페이지의 다음그룹
                 => rowsPerPage는 그대로, currPage=epage+1 -->
-                <a href="qnalist${pageMaker.searchQuery(pageMaker.lastPageNo)}" class="lastBtn">▶▶</a>
+                <a href="qnalist${pageMaker.searchQuery(pageMaker.lastPageNo)}&link=${link}" class="lastBtn">▶▶</a>
                 <!-- lastPage는 pageMaker에서 계산해놨으니까 그대로 넣어주기 -->
             </c:when>
             <c:otherwise>
@@ -146,7 +155,7 @@
         <div class="linkBtn">
             <div class="Insert">
                 <c:if test="${not empty userId && userId != 'admin'}">
-                    <a href="qnainsertf">1:1 문의하기</a>
+                    <a href="qnainsertf?link=${link}">1:1 문의하기</a>
                 </c:if>
             </div>
         </div>

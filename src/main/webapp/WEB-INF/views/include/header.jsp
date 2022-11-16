@@ -2,7 +2,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <c:set var="loginId" value="${sessionScope.userId==null ? '' : sessionScope.userId}"/>
 <c:set var="loginOutLink" value="${loginId=='' ? '/login/login' : '/login/logout'}"/>
-<c:set var="MyPageLink" value="${loginId=='' ?  '/login/login'  :  ( loginId=='admin' ? '/item/list' : '/mypage/order' )}"/>
+<c:set var="pageName" value="${loginId=='admin' ? '관리자페이지' : '마이페이지'}"/>
+<c:set var="MyPageLink" value="${loginId=='' ?  '/login/login'  :  ( loginId=='admin' ? '/item/list' : '/mypage/order')}"/>
 <c:set var="loginOut" value="${loginId=='' ? '로그인' : '로그아웃'}"/>
 <!DOCTYPE html>
 <html>
@@ -20,8 +21,8 @@
         <a href="<c:url value='${loginOutLink}'/>">${loginOut}</a>|
         <a href="<c:url value='/register/register'/>" >회원가입</a>|
 
-        <a href="<c:url value='${MyPageLink}'/>" >마이페이지</a>|
-        <a href="<c:url value='/noticelist'/>">고객센터</a>
+        <a href="<c:url value='${MyPageLink}'/>" >${pageName}</a>|
+        <a href="<c:url value='/noticelist?link=C'/>">고객센터</a>
         <a href="<c:url value='/cart'/>">　</a>
       </div>
 

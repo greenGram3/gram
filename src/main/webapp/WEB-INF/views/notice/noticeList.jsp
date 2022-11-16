@@ -35,7 +35,13 @@
 
     <div class="main">
 
-        <jsp:include page="../include/center.jsp" flush="false" />
+        <c:if test="${link eq 'A'}">
+            <jsp:include page="../include/admin.jsp" flush="false" />
+        </c:if>
+        <c:if test="${link eq 'C'}">
+            <jsp:include page="../include/center.jsp" flush="false" />
+        </c:if>
+
 
         <div class="noticeList">
     <h1>공지사항</h1>
@@ -64,7 +70,7 @@
                     <tr>
                         <td>${notice.noticeType}</td>
                         <td>
-                            <a href="noticedetail?noticeNo=${notice.noticeNo}">${notice.noticeTitle}</a>
+                            <a href="noticedetail?noticeNo=${notice.noticeNo}&link=${link}">${notice.noticeTitle}</a>
                         </td>
                         <td class="regDate">${notice.regDate}</td>
                     </tr>
@@ -79,8 +85,8 @@
             <c:choose>
                 <c:when test="${pageMaker.prev && pageMaker.spageNo>1}">
 
-                    <a href="noticelist${pageMaker.searchQuery(1)}" class="firstBtn">◀◀</a>&nbsp;
-                    <a href="noticelist${pageMaker.searchQuery(pageMaker.spageNo-1)}" class="forwardBtn">&lt;</a>&nbsp;&nbsp;
+                    <a href="noticelist${pageMaker.searchQuery(1)}&link=${link}" class="firstBtn">◀◀</a>&nbsp;
+                    <a href="noticelist${pageMaker.searchQuery(pageMaker.spageNo-1)}&link=${link}" class="forwardBtn">&lt;</a>&nbsp;&nbsp;
                     <!-- 앞으로가기 : 현재페이지의 이전 그룹(spage-1)
                     => rowsPerPage는 그대로, currPage=spage-1 : EL로 기재 -->
                 </c:when>
@@ -102,17 +108,17 @@
                 <c:if test="${i!=pageMaker.cri.currPage}">
                     <!-- i가 현재페이지가 아닐 때 - 클릭하면 넘어가야 하니까 a href
                     현재페이지 param으로 controller에 넣어줘서 기준 주고, controll동작하게 하기-->
-                    <a href="noticelist${pageMaker.searchQuery(i)}">${i}</a>
+                    <a href="noticelist${pageMaker.searchQuery(i)}&link=${link}">${i}</a>
                 </c:if>
             </c:forEach>
 
             <!-- 3. Next, Last button: ver01.pageMaker.makeQuery / ver02.SearchQuery -->
             <c:choose>
                 <c:when test="${pageMaker.next && pageMaker.epageNo>0}">
-                    <a href="noticelist${pageMaker.searchQuery(pageMaker.epageNo+1)}" class="backBtn">&nbsp;&nbsp;&gt;</a>
+                    <a href="noticelist${pageMaker.searchQuery(pageMaker.epageNo+1)}&link=${link}" class="backBtn">&nbsp;&nbsp;&gt;</a>
                     <!-- 뒤로가기 : 현재 페이지의 다음그룹
                     => rowsPerPage는 그대로, currPage=epage+1 -->
-                    <a href="noticelist${pageMaker.searchQuery(pageMaker.lastPageNo)}" class="lastBtn">▶▶</a>
+                    <a href="noticelist${pageMaker.searchQuery(pageMaker.lastPageNo)}&link=${link}" class="lastBtn">▶▶</a>
                     <!-- lastPage는 pageMaker에서 계산해놨으니까 그대로 넣어주기 -->
                 </c:when>
                 <c:otherwise>
@@ -124,7 +130,7 @@
             <div class="linkBtn">
                 <div class="Insert">
                     <c:if test="${ userId == 'admin'}">
-                        <a href="noticeinsertf">공지등록</a>
+                        <a href="noticeinsertf?link=${link}">공지등록</a>
                     </c:if>
                 </div>
             </div>

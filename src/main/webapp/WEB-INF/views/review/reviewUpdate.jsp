@@ -20,7 +20,12 @@
 
 <main class="main_container">
     <div class="main">
-    <jsp:include page="../include/mypage.jsp" flush="false" />
+        <c:if test="${link eq 'A'}">
+            <jsp:include page="../include/admin.jsp" flush="false" />
+        </c:if>
+        <c:if test="${link eq 'M'}">
+            <jsp:include page="../include/mypage.jsp" flush="false" />
+        </c:if>
     <div class="reviewUpdate">
 
     <h3>상품 후기 수정</h3>
@@ -50,6 +55,7 @@
                             <li><input type="file" name="imgNamef" id="imgNamef"></li>
                         </td>
                     </tr>
+
                     <script>
                         $('#imgNamef').change(function () {
                             if (this.files && this.files[0]) {
@@ -71,6 +77,9 @@
                 <tr hidden>
                     <td>글번호</td>
                     <td><input type="text" name="reviewNo" id="reviewNo" value="${reviewResult.reviewNo}"></td>
+                </tr>
+                <tr hidden>
+                    <td><input  name="${link}" value="${link}"></td>
                 </tr>
             </table>
         </form>

@@ -7,6 +7,7 @@ import com.green.meal.service.QnaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -25,9 +26,11 @@ public class QnaController {
     // ** QnA List
     @RequestMapping(value="/qnalist")
     public String qnalist(HttpServletRequest request, HttpServletResponse response, Model model,
-                          QnaVO vo, SearchCriteria cri, PageMaker pageMaker) {
+                          QnaVO vo, SearchCriteria cri, String link, PageMaker pageMaker) {
         cri.setSnoEno(); //Sno, Eno 계산
-
+        if(link != null){
+            model.addAttribute("link",link);
+        }
         // 1. 요청분석
         List<QnaVO> list = new ArrayList<QnaVO>(); // 결과 담을 list
         String uri = "/qna/qnaList"; //성공 시 list로
@@ -56,40 +59,6 @@ public class QnaController {
         return uri;
     } // qnalist
 
-    @RequestMapping(value="/qnalistM")
-    public String qnalistM(HttpServletRequest request, HttpServletResponse response, Model model,
-                          QnaVO vo, SearchCriteria cri, PageMaker pageMaker) {
-        cri.setSnoEno(); //Sno, Eno 계산
-
-
-        // 1. 요청분석
-        List<QnaVO> list = new ArrayList<QnaVO>(); // 결과 담을 list
-        String uri = "/qna/qnaListM"; //성공 시 list로
-        HttpSession session = request.getSession(false); //session 가져오기
-        String userId = (String)session.getAttribute("userId"); //session의 userID 가져오기
-
-        // 1) userId가 null은 로그인X -> 로그인창으로
-        if (userId == null) {
-            model.addAttribute("message","로그인 하세요.");
-            uri = "loginForm";
-        } else { // 2) userId != null은 로그인O
-            list = qnaService.qnalistAll(cri); // 3) qna list 담기
-            if( list!=null ) {
-                model.addAttribute("qnaResult",list);
-            } else {
-                model.addAttribute("message","QnA가 없습니다.");
-            }
-            model.addAttribute("userId", userId);
-            model.addAttribute("qnaRoot", vo.getQnaRoot());
-            String link="M";
-            model.addAttribute("link",link);
-            pageMaker.setCri(cri);
-            pageMaker.setTotalRowsCount(qnaService.searchCount(cri));
-            model.addAttribute("pageMaker",pageMaker);
-        }
-
-        return uri;
-    } // qnalist
     // -----------------------------------------------------------------------------------------//
     // ** QnA 작성
     @RequestMapping(value="/qnainsertf")
@@ -103,12 +72,16 @@ public class QnaController {
 
     @RequestMapping(value="/qnainsert", method = RequestMethod.POST)
     public String qnainsert(HttpServletRequest request, HttpServletResponse response, QnaVO vo,
-                            Model model, String link, RedirectAttributes rttr) {
+                            Model model, @RequestBody String link, RedirectAttributes rttr) {
+
+       Integer index = link.length();
+        String link2 = link.substring(index - 1);
         // 1. 요청분석
-        String uri = "redirect:qnalist"+link;
+        String uri = "redirect:qnalist?link="+link2;
+
 
         if(link != null){
-            model.addAttribute("link",link);
+            model.addAttribute("link",link2);
         }
 
         // 2. service 처리
@@ -144,7 +117,7 @@ public class QnaController {
         } else { //저장 실패 error면
             model.addAttribute("message","자료를 불러오는 데 실패했습니다.");
 
-            uri = "redirect:qnalist"+link;
+            uri = "redirect:qnalist";
         }
         return uri;
     }
@@ -152,13 +125,17 @@ public class QnaController {
     // -----------------------------------------------------------------------------------------//
     // ** QnA Update
     @RequestMapping(value = "/qnaupdate", method=RequestMethod.POST)
-    public String qnaupdate(HttpServletRequest request, HttpServletResponse response, QnaVO vo, Model model,String link) {
+    public String qnaupdate(HttpServletRequest request, HttpServletResponse response, QnaVO vo, Model model,@RequestBody String link) {
         // 한글처리
         response.setContentType("text/html; charset=UTF-8");
 
+        Integer index = link.length();
+        String link2 = link.substring(index - 1);
+
+        System.out.println("link2 = " + link2);
 
         if(link != null){
-            model.addAttribute("link",link);
+            model.addAttribute("link",link2);
         }
         // 1. 요청분석
         model.addAttribute("qnaResult",vo); //업뎃 실패시에도 값 저장
@@ -179,8 +156,10 @@ public class QnaController {
     public String qnadelete(HttpServletRequest request, HttpServletResponse response,
                                QnaVO vo, String link, Model model, RedirectAttributes rttr) {
         // 1. 요청분석
-        String uri ="redirect:qnalist"+link;
-
+        String uri ="redirect:qnalist?link="+link;
+        if(link != null){
+            model.addAttribute("link",link);
+        }
         // 2. service처리
         if (qnaService.qnadelete(vo)>0) {
             rttr.addFlashAttribute("message","문의 삭제 성공");
@@ -198,7 +177,7 @@ public class QnaController {
         if(link != null){
             model.addAttribute("link",link);
         }
-
+        System.out.println("link = " + link);
         return "/qna/qnarInsert";
     }
 
@@ -224,10 +203,12 @@ public class QnaController {
     // -----------------------------------------------------------------------------------------//
     // ** QnA Reply Detail
     @RequestMapping(value="/qnarDetail")
-    public String qnarDetail(HttpServletRequest request, HttpServletResponse response, Model model, QnaVO vo) {
+    public String qnarDetail(HttpServletRequest request,String link, HttpServletResponse response, Model model, QnaVO vo) {
         // 1. 성공 시 detail폼
         String uri = "/qna/qnaRdetail";
-
+        if(link != null){
+            model.addAttribute("link",link);
+        }
         // session에서 userId받아 전달 => 관리자만 수정, 삭제 가능하게
         String userId = (String)request.getSession().getAttribute("userId"); //session의 userID 가져오기
         model.addAttribute("userId",userId);

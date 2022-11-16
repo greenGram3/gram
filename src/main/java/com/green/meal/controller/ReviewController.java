@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
@@ -55,9 +56,11 @@ public class ReviewController {
     // ** ReviewList 출력
     @RequestMapping(value="/reviewlist")
     public String reviewlist (HttpServletRequest request, HttpServletResponse response, Model model,
-                              SearchCriteria cri, PageMaker pageMaker) {
+                              SearchCriteria cri, String link, PageMaker pageMaker) {
         cri.setSnoEno(); //Sno, Eno 계산
-
+        if(link != null){
+            model.addAttribute("link",link);
+        }
         List<ReviewVO> list = new ArrayList<ReviewVO>();
         list = reviewService.reviewlist(cri);
 
@@ -87,8 +90,11 @@ public class ReviewController {
     //------------------------------------------------------------------------------------------------------//
     // ** ReviewDetail 출력
     @RequestMapping(value="/reviewdetail")
-    public String reviewdetail(HttpServletRequest request, HttpServletResponse response, Model model, ReviewVO vo) {
+    public String reviewdetail(HttpServletRequest request, HttpServletResponse response, String link,Model model, ReviewVO vo) {
         ReviewVO voRe;
+        if(link != null){
+            model.addAttribute("link",link);
+        }
         // 1. 성공 시 detail폼
         String uri = "/review/reviewDetail";
 
@@ -111,7 +117,8 @@ public class ReviewController {
     //------------------------------------------------------------------------------------------------------//
     // ** Review 작성
     @RequestMapping(value="/reviewinsertf")
-    public String reviewinsertf(HttpServletRequest request, HttpServletResponse response, ReviewVO vo, Model model) {
+    public String reviewinsertf(HttpServletRequest request, String link, HttpServletResponse response, ReviewVO vo, Model model) {
+        model.addAttribute("link",link);
         return "/review/reviewInsert";
     }
 
@@ -119,9 +126,14 @@ public class ReviewController {
     // ** 후기 insert(+이미지까지)
     @RequestMapping(value="/reviewinsert", method= RequestMethod.POST)
     public String reviewinsert(HttpServletRequest request, HttpServletResponse response,
-                             Model model, ReviewVO vo) throws IOException {
+                               Model model, @RequestBody String link, ReviewVO vo) throws IOException {
+
+        Integer index = link.length();
+        String link2 = link.substring(index - 1);
+        model.addAttribute("link",link2);
+
         // 1. 요청분석
-        String uri = "redirect:reviewlist";
+        String uri = "redirect:reviewlist?link="+link2;
 
 //------------------------------------------------------------------------//
         String realPath = request.getRealPath("/");
@@ -188,9 +200,13 @@ public class ReviewController {
     // ** Review Update
     @RequestMapping(value="/reviewupdate", method= RequestMethod.POST)
     public String reviewupdate(HttpServletRequest request, HttpServletResponse response,
-                               Model model, ReviewVO vo) throws IOException {
+                               @RequestBody String link, Model model, ReviewVO vo) throws IOException {
+        Integer index = link.length();
+        String link2 = link.substring(index - 1);
+        model.addAttribute("link",link2);
+
         // 1. 요청분석
-        String uri = "redirect:reviewdetail?reviewNo="+vo.getReviewNo();
+        String uri = "redirect:reviewdetail?reviewNo="+vo.getReviewNo()+"&link="+link2;
         model.addAttribute("reviewResult",vo); //업뎃 실패시에도 값 저장
         //------------------------------------------------------------------------//
         // * 이미지 저장
@@ -225,16 +241,16 @@ public class ReviewController {
     // ** Review Delete
     @RequestMapping(value="reviewdelete")
     public String reviewdelete(HttpServletRequest request, HttpServletResponse response,
-                            ReviewVO vo, Model model, RedirectAttributes rttr) {
+                            String link,ReviewVO vo, Model model, RedirectAttributes rttr) {
         // 1. 요청분석
-        String uri ="redirect:reviewlist";
+        String uri ="redirect:reviewlist?link="+link;
 
         // 2. service처리
         if (reviewService.reviewdelete(vo)>0) {
             rttr.addFlashAttribute("message","후기 삭제 성공");
         } else {
             rttr.addFlashAttribute("message","삭제 실패. 다시 시도하시기 바랍니다.");
-            uri ="redirect:reviewdetail?reviewNo="+vo.getReviewNo();
+            uri ="redirect:reviewdetail?reviewNo="+vo.getReviewNo()+"&link="+link;
         }
         return uri;
     }
@@ -264,10 +280,14 @@ public class ReviewController {
 
     @RequestMapping(value="/reviewlistM")
     public String reviewlistM(HttpServletRequest request, HttpServletResponse response,
-                              SearchCriteria cri, Model model, PageMaker pageMaker) {
+                              SearchCriteria cri,String link, Model model, PageMaker pageMaker) {
         // 1. 요청분석
         String uri = "/review/reviewListM"; // 성공 시 list
         String userId = null;
+
+        if(link != null){
+            model.addAttribute("link",link);
+        }
 
         // 2. session의 userId 받아서/ userId변수에 저장
         HttpSession session = request.getSession(false);

@@ -16,7 +16,7 @@
 
   <div>고객센터
     <ul>
-      <li><a href="<c:url value='/qnalist'/>">　- 1:1문의</a></li>
+      <li><a href="<c:url value='/qnalist?link=M'/>">　- 1:1문의</a></li>
     </ul>
   </div>
 

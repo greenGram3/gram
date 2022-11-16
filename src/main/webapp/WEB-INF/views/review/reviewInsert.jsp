@@ -14,7 +14,17 @@
     </script>
 </c:if>
 <main class="main_container">
-    <h1>상품후기</h1>
+
+    <div class="main">
+        <c:if test="${link eq 'A'}">
+            <jsp:include page="../include/admin.jsp" flush="false" />
+        </c:if>
+        <c:if test="${link eq 'M'}">
+            <jsp:include page="../include/mypage.jsp" flush="false" />
+        </c:if>
+        <div class="reviewInsert">
+
+    <h1>상품 후기 작성</h1>
     <section class="section_container">
         <form action="reviewinsert" method="post" enctype="multipart/form-data">
             <table>
@@ -76,6 +86,8 @@
     <div class="linkBtn_container">
         <div class="linkBtn">
             &nbsp;&nbsp;<a href="reviewlist">목록으로</a>
+        </div>
+    </div>
         </div>
     </div>
 </main>

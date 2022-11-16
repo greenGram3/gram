@@ -18,7 +18,13 @@
 <main class="main_container">
     <div class="main">
 
-        <%@include file="../include/center.jsp"%>
+        <c:if test="${link eq 'A'}">
+            <jsp:include page="../include/admin.jsp" flush="false" />
+        </c:if>
+        <c:if test="${link eq 'C'}">
+            <jsp:include page="../include/center.jsp" flush="false" />
+        </c:if>
+
 
         <div class="noticeDetail">
     <h3>공지사항</h3>
@@ -45,10 +51,10 @@
     </section>
     <div class="linkBtn_container">
         <div class="linkBtn">
-            <a href="noticelist">목록으로</a>
+            <a href="noticelist?link=${link}">목록으로</a>
             <c:if test="${userId == 'admin'}">
-                <a href="noticedetail?jCode=U&noticeNo=${noticeResult.noticeNo}">수정하기</a>
-                <a href="noticedelete?noticeNo=${noticeResult.noticeNo}" onclick="return confirm('삭제하시겠습니까? 확인/취소');">삭제하기</a>
+                <a href="noticedetail?jCode=U&noticeNo=${noticeResult.noticeNo}&link=${link}">수정하기</a>
+                <a href="noticedelete?noticeNo=${noticeResult.noticeNo}&link=${link}" onclick="return confirm('삭제하시겠습니까? 확인/취소');">삭제하기</a>
             </c:if>
         </div>
     </div>

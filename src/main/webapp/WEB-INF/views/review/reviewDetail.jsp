@@ -20,7 +20,12 @@
 </c:if>
 <main class="main_container">
     <div class="main">
-        <jsp:include page="../include/mypage.jsp" flush="false" />
+        <c:if test="${link eq 'A'}">
+            <jsp:include page="../include/admin.jsp" flush="false" />
+        </c:if>
+        <c:if test="${link eq 'M'}">
+            <jsp:include page="../include/mypage.jsp" flush="false" />
+        </c:if>
         <div class="reviewDetail">
 
         <h3>상품 후기</h3>
@@ -68,7 +73,7 @@
 
     <div class="linkBtn_container">
         <div class="linkBtn">
-            <a href="reviewlist">목록으로</a>
+            <a href="reviewlist?link=${link}">목록으로</a>
             <c:if test="${userId == 'admin' && reviewResult.reviewChild < 1}">
     <span class="textLink"
           onclick="reviewReplyF(${reviewResult.orderNo},${reviewResult.itemNo},${reviewResult.reviewRoot},${reviewResult.reviewStep},${reviewResult.reviewChild})">답글달기</span>
@@ -78,8 +83,8 @@
                   onclick="reviewReplyD(${reviewResult.reviewRoot},${reviewResult.reviewStep},${reviewResult.reviewChild})">댓글보기</span>
             </c:if>
             <c:if test="${userId == reviewResult.userId || userId == 'admin'}">
-                <a href="reviewdetail?jCode=U&reviewNo=${reviewResult.reviewNo}">수정하기</a>
-                <a href="reviewdelete?reviewNo=${reviewResult.reviewNo}&reviewRoot=${reviewResult.reviewRoot}"
+                <a href="reviewdetail?jCode=U&reviewNo=${reviewResult.reviewNo}&link=${link}">수정하기</a>
+                <a href="reviewdelete?reviewNo=${reviewResult.reviewNo}&reviewRoot=${reviewResult.reviewRoot}&link=${link}"
                    onclick="return confirm('삭제하시겠습니까? 확인/취소');">삭제하기</a>
             </c:if>
         </div>

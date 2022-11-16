@@ -11,71 +11,17 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
+  <link rel="stylesheet" href="<c:url value='/css/user.css'/>">
   <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
-  <style>
-    * { box-sizing:border-box; }
-    form {
-      width:650px;
-      height:700px;
-      display : flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items:center;
-      position : absolute;
-      top:50%;
-      left:50%;
-      transform: translate(-50%, -50%) ;
-      border: 1px solid rgb(89,117,196);
-      border-radius: 10px;
-    }
-    .info-container {
-      display: flex;
-      justify-content: center;
-    }
-    .input-field {
-      width: 400px;
-      height: 40px;
-      border : 1px solid rgb(89,117,196);
-      border-radius:5px;
-      padding: 0 10px;
-      margin-bottom: 10px;
-    }
-    #userAddr {
-      height: 80px;
-    }
-    label {
-      width:100px;
-      height:30px;
-      margin-top :4px;
-    }
-    button {
-      background-color: rgb(89,117,196);
-      border-radius: 5px;
-      border : none;
-      cursor: pointer;
-      color : white;
-      width:100px;
-      height:40px;
-      font-size: 15px;
-      margin : 30px 0 20px 0;
-    }
-    .button_container {
-      width: 300px;
-      display: flex;
-      justify-content: space-evenly;
-    }
-    .title {
-      font-size : 20px;
-      font-weight: bold;
-      margin: 40px 0 30px 0;
-    }
-  </style>
+
   <title>회원 상세 정보</title>
 
 </head>
 
 <body>
+
+<jsp:include page="../include/header.jsp" flush="false" />
+<main>
 
 <script>
   let msg = "${msg}";
@@ -84,44 +30,58 @@
   // if(msg=="UPL_ERR") alert("게시물 등록에 실패했습니다. 다시 시도해주세요.");
 </script>
 
+  <div class="main">
+    <jsp:include page="../include/admin.jsp" flush="false" />
+
+    <div class="userDetail">
+
 <%--등록버튼 누르면 테이블에 insert 되도록 컨트롤러 돌려야될거같음--%>
 <%--<form:form modelAttribute="user">--%>
+  <h3>회원 상세 정보</h3>
+  <hr>
 <form id="form" action="" method="">
-  <div class="title">회원 상세 정보</div>
-  <div class="info-container">
-    <label for="userId">아이디</label>
-    <input class="input-field" type="text" id="userId" name="userId" value="${vo.userId}" readonly>
-  </div>
-  <div class="info-container">
-    <label for="userName">이름</label>
-    <input class="input-field" type="text"  class="user_name" id="userName" name="userName" value="${vo.userName}" readonly>
-  </div>
-  <div class="info-container">
-    <label for="userName">이메일</label>
-    <input class="input-field" type="text"  class="user_email" id="userEmail" name="userEmail" value="${vo.userEmail}" readonly>
-  </div>
-  <div class="info-container">
-    <label for="userPhone">연락처</label>
-    <input class="input-field" type="text" id="userPhone" name="userPhone"  value="${vo.userPhone}" readonly>
-  </div>
-  <div class="info-container">
-    <label for="userAddr">주소</label>
-    <input class="input-field" type="content" id="userAddr" name="userAddr" value="${vo.userAddr}" readonly>
-  </div>
-  <div class="info-container">
-    <label for="userBirth">생일</label>
-    <input class="input-field" type="number" id="userBirth" name="userBirth" value="${vo.userBirth}" readonly>
-  </div>
-  <div class="info-container">
-    <label for="userGender">성별</label>
-    <input class="input-field" type="text" id="userGender" name="userGender" value="${vo.userGender}" readonly>
-  </div>
-  <div class="info-container">
-    <label for="regDate">가입일</label>
-    <input class="input-field" type="text" id="regDate" name="regDate" value="${vo.regDate}" readonly>
-  </div>
+  <table>
+  <tr>
+    <th><label for="userId">아이디</label></th>
+    <td><input class="input-field" type="text" id="userId" name="userId" value="${vo.userId}" readonly></td>
+  </tr>
+  <tr >
+    <th><label for="userName">이름</label></th>
+    <td><input class="input-field" type="text"  class="user_name" id="userName" name="userName" value="${vo.userName}" readonly>
+    </td>
+  </tr>
+  <tr>
+    <th><label for="userName">이메일</label></th>
+    <td><input class="input-field" type="text"  class="user_email" id="userEmail" name="userEmail" value="${vo.userEmail}" readonly>
+    </td>
+   </tr>
+  <tr>
+    <th><label for="userPhone">연락처</label></th>
+    <td><input class="input-field" type="text" id="userPhone" name="userPhone"  value="${vo.userPhone}" readonly>
+    </td>
+  </tr>
+  <tr>
+    <th><label for="userAddr">주소</label></th>
+    <td><input class="input-field" type="content" id="userAddr" name="userAddr" value="${vo.userAddr}" readonly></td>
+   </tr>
+  <tr>
+    <th><label for="userBirth">생일</label></th>
+    <td><input class="input-field" type="number" id="userBirth" name="userBirth" value="${vo.userBirth}" readonly>
+    </td>
+  </tr>
+  <tr>
+    <th><label for="userGender">성별</label></th>
+    <td><input class="input-field" type="text" id="userGender" name="userGender" value="${vo.userGender}" readonly>
+    </td>
+   </tr>
+  <tr>
+    <th><label for="regDate">가입일</label></th>
+    <td><input class="input-field" type="text" id="regDate" name="regDate" value="${vo.regDate}" readonly></td>
+  </tr>
+  </table>
+
   <div class="button_container">
-    <button type="button" id="listBtn" class="btn-cancel">회원목록</button>
+    <button type="button" id="listBtn" class="btn-cancel">목록으로</button>
     <button type="button" id="removeBtn" class="btn-remove">강제탈퇴</button>
   </div>
 
@@ -146,6 +106,10 @@
   });
 
 </script>
+    </div>
+  </div>
+</main>
+<jsp:include page="../include/footer.jsp" flush="false" />
 
 </body>
 

@@ -18,7 +18,13 @@
 
 <main class="main_container">
     <div class="main">
-        <jsp:include page="../include/center.jsp" flush="false" />
+        <c:if test="${link eq 'A'}">
+            <jsp:include page="../include/admin.jsp" flush="false" />
+        </c:if>
+        <c:if test="${link eq 'C'}">
+            <jsp:include page="../include/center.jsp" flush="false" />
+        </c:if>
+
 
         <div class="noticeInsert">
     <h3>공지사항 작성</h3>
@@ -35,29 +41,29 @@
                         </select>
                     </td>
                 </tr>
-
                 <tr>
                     <td>제목</td>
                     <td><input type="text" name="noticeTitle" minlength="2" placeholder="제목을 입력하세요" required></td>
                 </tr>
-
                 <tr>
                     <td>내용</td>
                     <td><textarea  name="noticeContent" minlength="10" placeholder="내용을 입력하세요" required></textarea></td>
                 </tr>
-
                 <tr>
                     <td colspan="2">
                         <input type="reset" value="취소">
                         <input type="submit" value="등록" onclick="return confirm('등록하시겠습니까? 등록/취소');">
                     </td>
                 </tr>
+                <tr hidden>
+                    <td><input  name="${link}" value="${link}"></td>
+                </tr>
             </table>
         </form>
     </section>
     <div class="linkBtn_container">
         <div class="linkBtn">
-            <a href="noticelist">목록으로</a>
+            <a href="noticelist?link=${link}">목록으로</a>
         </div>
     </div>
         </div>

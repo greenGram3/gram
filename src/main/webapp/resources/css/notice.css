@@ -165,7 +165,7 @@ main * {
     width: 100px;
 }
 
-.noticeInsert tr:last-of-type td {
+.noticeInsert tr:nth-of-type(4) td {
     background-color: white;
 }
 .noticeInsert select {
@@ -191,7 +191,7 @@ main * {
     margin-left: 648px;
 }
 
-.noticeInsert tr:last-of-type input {
+.noticeInsert tr:nth-of-type(4) input {
     text-align: center;
     padding: 4px 10px;
     background-color: whitesmoke;

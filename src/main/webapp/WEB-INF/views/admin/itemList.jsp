@@ -32,16 +32,7 @@
         <jsp:include page="../include/admin.jsp" flush="false" />
 
         <div class="itemList">
-<%--<div id="menu">--%>
-<%--    <ul>--%>
-<%--        <li id="logo">meal</li>--%>
-<%--        <li><a href="<c:url value='/'/>">Home</a></li>--%>
-<%--        <li class="item-admin">상품관리</li>--%>
-<%--        <li><a href="<c:url value='/order/list'/>">판매관리</a></li>--%>
-<%--        <li><a href="<c:url value='/user/list'/>">회원관리</a></li>--%>
-<%--        <li><a href=""><i class="fa fa-search"></i></a></li>--%>
-<%--    </ul>--%>
-<%--</div>--%>
+
 
 <div class="pageTitle_container">
     <h1>상품 및 재고목록</h1>

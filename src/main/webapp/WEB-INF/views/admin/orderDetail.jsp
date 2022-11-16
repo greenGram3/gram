@@ -102,7 +102,7 @@
             </table>
 
             <div class="button_container">
-                <button type="button" id="listBtn" class="btn-cancel">목록</button>
+                <button type="button" id="listBtn" class="btn-cancel">목록으로</button>
                 <button type="button" id="returnBtn" class="btn-return">반품처리</button>
                 <button type="button" id="sendBtn" class="btn-send">발송처리</button>
             </div>

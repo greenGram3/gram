@@ -186,7 +186,7 @@ main * {
     background-color: white;
 }
 
-.qnaInsert tr:last-of-type input {
+.qnaInsert .qnaCheck input {
     text-align: center;
     margin-top: 10px;
     padding: 4px 10px;

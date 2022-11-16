@@ -21,15 +21,16 @@
 
 <main class="main_container">
     <div class="main">
-
-        <c:if test="${link eq 'M'}">
+        <c:if test="${link eq 'A'}">
+            <jsp:include page="../include/admin.jsp" flush="false" />
+        </c:if>
+        <c:if test="${link eq 'C'}">
             <jsp:include page="../include/center.jsp" flush="false" />
         </c:if>
 
-        <c:if test="${link ne 'M'}">
+        <c:if test="${link eq 'M'}">
             <jsp:include page="../include/mypage.jsp" flush="false" />
         </c:if>
-
 
         <div class="qnaDetail">
     <h3>1:1문의</h3>
@@ -62,7 +63,7 @@
 
     <div class="linkBtn_container">
         <div class="linkBtn">
-            <a href="qnalist${link}">목록으로</a>
+            <a href="qnalist?link=${link}">목록으로</a>
             <c:if test="${userId == 'admin' && qnaResult.qnaChild < 1}">
         <span class="textLink"
               onclick="qnaReplyF(${qnaResult.qnaRoot},${qnaResult.qnaStep},${qnaResult.qnaChild})">답글달기</span>

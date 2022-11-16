@@ -1,0 +1,155 @@
+
+/*userList*/
+
+
+.userList {
+    margin-top: 250px;
+    margin-bottom: 50px;
+    width: 900px;
+}
+
+main * {
+    margin:auto;
+    text-align: center;
+}
+
+
+.userList h1 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+
+.userList hr {
+    color: #cccccc;
+    margin-bottom: 20px;
+}
+
+.board-container input{
+    margin: 5px 10px;
+    border: 1px solid darkgrey;
+}
+
+.userList select {
+    width: 80px;
+    height: 30px;
+}
+
+.search-button {
+    width: 90px;
+    height: 30px;
+    background-color: rgb(84, 108, 92);
+    color: #eeecec;
+    cursor: pointer;
+    border: none;
+}
+
+.userList .search-container {
+    margin-bottom: 20px;
+}
+
+
+.userList table {
+    width: 100%;
+    border-top: 1px solid lightgray;
+    border-collapse: collapse;
+}
+
+.userList th {
+    background-color: #eeecec;
+    border-bottom: 1px solid lightgray;
+    padding: 10px;
+}
+
+.userList td {
+    border-bottom: 1px solid lightgray;
+    padding: 10px;
+}
+
+.userList .administration a {
+    padding: 2px 10px;
+    background-color: whitesmoke;
+    border: 1px solid darkgray;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+
+.paging-active {
+    background-color: rgb(216, 216, 216);
+    border-radius: 5px;
+    color: rgb(24, 24, 24);
+    padding: 2px;
+}
+.paging-container {
+    width:100%;
+    height: 70px;
+    /*display: inline-flex;*/
+    position: relative;
+    margin-top: 50px;
+    margin : auto;
+}
+.paging {
+    color: black;
+    width: 80%;
+    align-items: center;
+    position: absolute;
+    transform: translate(calc(1/8*100%), 0);
+    margin: 20px 0;
+}
+
+/*userDetail*/
+
+
+.userDetail {
+    margin-top: 250px;
+    margin-bottom: 50px;
+    width: 900px;
+}
+
+.userDetail * {
+    text-align: left;
+}
+
+.userDetail h3 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.userDetail hr {
+    color: #cccccc;
+    margin-bottom: 20px;
+}
+
+.userDetail table {
+    width: 100%;
+    border-top: 1px solid lightgray;
+    border-collapse: collapse;
+}
+
+.userDetail th,
+.userDetail td {
+    border-bottom: 1px solid lightgray;
+    padding: 5px;
+    margin-left: 10px;
+}
+
+.userDetail th{
+    width: 120px;
+    padding-left: 10px;
+    background-color: #eeecec;
+}
+.userDetail .button_container {
+    margin-left: 720px;
+    margin-top: 20px;
+}
+
+.userDetail .button_container * {
+    text-align: center;
+    padding: 4px 10px;
+    background-color: whitesmoke;
+    border: 1px solid darkgray;
+    cursor: pointer;
+    width: 80px;
+    margin-left: 5px;
+}

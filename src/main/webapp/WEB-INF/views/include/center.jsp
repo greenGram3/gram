@@ -9,8 +9,8 @@
   <h3>고객센터</h3>
   <div>
     <ul>
-      <li><a href="<c:url value='/noticelist'/>">　- 공지사항</a></li>
-      <li><a href="<c:url value='/qnalistM'/>">　- 1:1 문의하기</a></li>
+      <li><a href="<c:url value='/noticelist?link=C'/>">　- 공지사항</a></li>
+      <li><a href="<c:url value='/qnalist?link=C'/>">　- 1:1 문의하기</a></li>
     </ul>
   </div>
 

@@ -29,8 +29,8 @@
 
   <div>게시판 관리
     <ul>
-      <li><a href="<c:url value='/noticelist'/>">　- 공지사항</a></li>
-      <li><a href="<c:url value='/qnalist'/>">　- 1:1문의</a></li>
+      <li><a href="<c:url value='/noticelist?link=A'/>">　- 공지사항</a></li>
+      <li><a href="<c:url value='/qnalist?link=A'/>">　- 1:1문의</a></li>
       <li><a href="<c:url value='/reviewlist'/>">　- 상품후기</a></li>
     </ul>
   </div>
