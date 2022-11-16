@@ -119,7 +119,7 @@
           let test = /01[016789]-[^0][0-9]{2,3}-[0-9]{3,4}/;
           let test2 = $('#newPhone')[0].value;
           if(test.test(test2)){
-            $('#PhoneForm').submit();
+            $('#phoneForm').submit();
           }else{
             $('#msgPhone')[0].innerHTML = "핸드폰 번호를 확인해주세요.";
             $('#newPhone').focus();

@@ -25,6 +25,7 @@
                         <li>　비밀번호　<input type="password" name="userPwd" placeholder="　비밀번호">　</li>　
                     </div>
                     <button>로그인</button></div>
+                <a href="<c:url value="/login/naverLogin2"/>"><img height="50" src="http://static.nid.naver.com/oauth/small_g_in.PNG"/></a>
                 <div class="rememberId">
                     <label>
                         <input type="checkbox" name="rememberId" value="on" ${empty cookie.userId.value ? "":"checked"}>　아이디 저장　</label>
