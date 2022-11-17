@@ -141,11 +141,6 @@ main * {
 .gram_mission {
     width: 1200px;
     height: 480px;
-    background: url(../icon/misson.png) 0/100% no-repeat;
+    background: url(../eventImage/misson.png) 0/100% no-repeat;
 }
 
-.gram_motto {
-    width: 1200px;
-    height: 470px;
-    background: url(../image/motto.png) 0/100% no-repeat;
-}

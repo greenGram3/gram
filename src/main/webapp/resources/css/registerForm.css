@@ -59,3 +59,7 @@ main * {
     font-weight: 500;
     cursor: pointer;
 }
+
+button#addrBtn {
+    margin-left: 10px;
+}
