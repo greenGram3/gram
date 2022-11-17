@@ -89,12 +89,12 @@
       <li class="topImage">대표이미지</li>
       <li><img src="${vo.imgName}" class="select_img" width="100px" height="100px"></li>
       <li><input type="hidden" name="imgName" id="imgName" value="${vo.imgName}"></li>
-      <li><input type="file" name="imgNamef" id="imgNamef"></li>
+      <li><input type="file" name="imgNamef" id="imgNamef" value=""></li>
     </td>
     <td>
-      <li> <img src="${vo1.imgName}" class="select_img1" width="100px" height="100px"></li>
+      <li><img src="${vo1.imgName}" class="select_img1" width="100px" height="100px"></li>
       <li><input type="hidden" name="imgName" id="imgName1" value="${vo1.imgName}"></li>
-      <li><input type="file" name="imgNamef1" id="imgNamef1"></li>
+      <li><input type="file" name="imgNamef1" id="imgNamef1" value=""></li>
     </td>
 
     </tr>
@@ -152,6 +152,16 @@
         form.itemPrice.focus();
         return false;
       }
+      // ** Heejeong 첨부파일 업로드 체크
+      if(form.imgNamef.value=="") {
+        alert("좌측 대표 이미지를 첨부해주세요.");
+        return false;
+      }
+
+      if(form.imgNamef1.value=="") {
+        alert("우측 상세 이미지를 첨부해주세요.");
+        return false;
+      }
       return true;
     }
 
@@ -171,6 +181,7 @@
     $("#removeBtn").on("click", function(){
       if(!confirm("정말로 삭제하시겠습니까?")) return;
       let form = $("#form");
+      form.attr("enctype","multipart/form-data")
       form.attr("action", "<c:url value='/item/remove${searchCondition.queryString}'/>");
       form.attr("method", "post");
       form.submit();
