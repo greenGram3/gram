@@ -65,6 +65,7 @@ public class UserOrderController {
         setOrder(orderList);
 
         model.addAttribute("orderList",orderList);
+        model.addAttribute("cancel","cancel");
 
         return "userOrderList";
     }

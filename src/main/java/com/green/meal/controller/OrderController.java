@@ -79,6 +79,27 @@ public class OrderController {
         return "redirect:/order/read";
 
     }
+
+    @PostMapping("/return")
+    public String returnModify(Integer orderNo, Integer[] itemNoArr, Integer[] itemAmountArr, SearchCondition sc, Model m) {
+
+        try {
+
+            orderService.returnUpdate(itemNoArr, itemAmountArr, orderNo);
+
+            m.addAttribute("orderNo", orderNo);
+            m.addAttribute("page", sc.getPage());
+            m.addAttribute("pageSize", sc.getPageSize());
+            m.addAttribute("msg", "SEND_OK");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            m.addAttribute("msg", "SEND_ERR");
+        }
+
+        return "redirect:/order/read";
+
+    }
 }
 
 
