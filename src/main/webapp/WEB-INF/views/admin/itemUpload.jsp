@@ -41,10 +41,10 @@
     <td colspan="2"> <select class="category_option" id="itemCategory1" name="itemCategory1">
       <option class="current_option" value="" selected>선택</option>
       <option value="한식">한식</option>
-      <option value="중식">중식</option>
-      <option value="일식">일식</option>
-      <option value="분식">분식</option>
-      <option value="야식">야식</option>
+      <option value="양식">양식</option>
+      <option value="중식/일식">중식/일식</option>
+      <option value="분식/야식">분식/야식</option>
+      <option value="세트상품">세트상품</option>
     </select></td>
   </tr>
 
@@ -52,11 +52,11 @@
     <th><label for="itemCategory2">카테고리2</label></th>
     <td colspan="2">  <select class="category_option" id="itemCategory2" name="itemCategory2">
       <option class="current_option" value="" selected>선택</option>
-      <option value="한식">한식</option>
-      <option value="중식">중식</option>
-      <option value="일식">일식</option>
-      <option value="분식">분식</option>
-      <option value="야식">야식</option>
+      <option value="비오는날">비오는날</option>
+      <option value="집들이">집들이</option>
+      <option value="캠핑">캠핑</option>
+      <option value="술안주">술안주</option>
+      <option value="혼밥">혼밥</option>
       <option value="선택안함">선택안함</option>
     </select></td>
   </tr>
