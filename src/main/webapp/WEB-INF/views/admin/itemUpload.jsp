@@ -79,11 +79,11 @@
       <td>
         <li class="topImage">대표이미지</li>
         <li><img src="" class="select_img"></li> <!-- 대표이미지 -->
-        <li><input type="file" name="imgNamef" id="imgNamef"></li>
+        <li><input type="file" name="imgNamef" id="imgNamef" value=""></li>
       </td>
       <td>
         <li><img src="" class="select_img1"></li> <!-- 파일 미리보기(js이용) -->
-       <li> <input type="file" name="imgNamef1" id="imgNamef1"></li>
+        <li><input type="file" name="imgNamef1" id="imgNamef1" value=""></li>
       </td>
     </tr>
     <script>
@@ -150,9 +150,23 @@
         form.itemPrice.focus();
         return false;
       }
+      /*return true;*/
+      //---------------------------------------//
+      // ** Heejeong 첨부파일 업로드 체크
+      if(form.imgNamef.value=="") {
+        alert("좌측 대표 이미지를 첨부해주세요.");
+        return false;
+      }
+
+      if(form.imgNamef1.value=="") {
+        alert("우측 상세 이미지를 첨부해주세요.");
+        return false;
+      }
       return true;
     }
 
+    //---------------------------------------------------//
+    // ** 이미지 첨부파일 업로드 function
     $("#uploadBtn").on("click", function(){
       let form = $("#form");
       form.attr("enctype","multipart/form-data");
