@@ -11,6 +11,8 @@ public interface OrderService {
 
     void sendUpdate(Integer[] itemNoArr, Integer[] itemNoAmount, Integer orderNo) throws Exception;
 
+    void returnUpdate(Integer[] itemNoArr, Integer[] itemNoAmount, Integer orderNo) throws Exception;
+
     List<OrderDetailVO> orderDetail(Integer orderNo) throws Exception;
 
     int getSearchResultCnt(SearchCondition sc) throws Exception;

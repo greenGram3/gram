@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8"  language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt" %>
+<c:set var="state" value="${cancel=='cancel' ? '반품' : '주문'}"/>
 <%@ page session="true"%>
 <!DOCTYPE html>
 <html>
@@ -22,13 +23,11 @@
         <jsp:include page="include/mypage.jsp" flush="false" />
 
         <div class="orderList">
-            <h3>주문목록 / 조회</h3>
+            <h3>${state}목록 / 조회</h3>
             <div class="search-container">
-                <form action="<c:url value="/user/order/list"/>" id = "form" class="search-form" method="post">
+                <form action="<c:url value="/mypage/list"/>" id = "form" class="search-form" method="post">
                     　조회기간　<input type="date" name="startDate"  value="${orderSearch.startDate}">  ~
-
                     <input type="date" name="endDate" value="${orderSearch.endDate}">
-
                     <input type="submit" class="searchBtn" value="조회">
                 </form>
             </div>
@@ -47,11 +46,11 @@
                     <tbody>
                     <c:forEach var="orderListVO" items="${orderList}">
                         <tr>
-                            <td class="orderDate"><a href="<c:url value="/user/order/list?order=${orderListVO.order}"/>" >${orderListVO.order}</a></td>
+                            <td class="orderDate"><a href="<c:url value="/mypage/list?order=${orderListVO.order}"/>" >${orderListVO.order}</a></td>
                             <td>${orderListVO.totalItem}</td>
                             <td><fmt:formatNumber pattern="###,###,###" value="${orderListVO.totalPay}"/> 원</td>
                             <td>${orderListVO.orderState}</td>
-                            <c:if test="${orderListVO.orderState eq 'n'}">
+                            <c:if test="${orderListVO.orderState eq '주문완료'}">
                                 <td>
                                     <li name="${orderListVO.orderNo}">
                                         <button  class="fixBtn" >구매확정</button></li>
@@ -115,7 +114,6 @@
                             },
                             error   : function(){ alert("구매 확정이 실패하였습니다") }
                         });
-                        alert("구매 확정 중")
                     });
 
                     $(".backBtn").click(function(){
@@ -134,9 +132,7 @@
                             },
                             error   : function(){ alert("반품 신청을 실패하였습니다") }
                         });
-                        alert("반품 신청 중")
                     });
-
                 });
             </script>
         </div>

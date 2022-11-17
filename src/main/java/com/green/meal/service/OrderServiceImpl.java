@@ -22,7 +22,6 @@ public class OrderServiceImpl implements OrderService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void sendUpdate(Integer[] itemNoArr, Integer[] itemAmountArr, Integer orderNo) throws Exception {
-
         for(int i = 0; i < itemNoArr.length; i++) {
 
             HashMap map = new HashMap();
@@ -39,6 +38,27 @@ public class OrderServiceImpl implements OrderService {
             throw new Exception();
         }
 
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void returnUpdate(Integer[] itemNoArr, Integer[] itemAmountArr, Integer orderNo) throws Exception {
+
+        for(int i = 0; i < itemNoArr.length; i++) {
+
+            HashMap map = new HashMap();
+            map.put("itemNo", itemNoArr[i]);
+            map.put("itemAmount", itemAmountArr[i]);
+
+            if(mapper.returnAmountUpdate(map)!=1){
+                throw new Exception();
+            }
+
+        }
+
+        if(mapper.returnStateUpdate(orderNo)!=1){
+            throw new Exception();
+        }
     }
 
 

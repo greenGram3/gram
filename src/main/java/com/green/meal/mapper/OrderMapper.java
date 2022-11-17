@@ -13,12 +13,17 @@ import java.util.List;
 public interface OrderMapper {
 
     int sendAmountUpdate(HashMap map);
+    int returnAmountUpdate(HashMap map);
 
     int sendStateUpdate(Integer orderNo);
+    int returnStateUpdate(Integer orderNo);
+
+
 
     List<OrderDetailVO> selectDetail(Integer orderNo);
 
     int searchResultCnt(SearchCondition sc);
+
 
     List<OrderDetailVO> searchSelectPage(SearchCondition sc);
 

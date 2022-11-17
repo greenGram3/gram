@@ -52,13 +52,25 @@
 
     <update id="sendStateUpdate" parameterType="int">
         update order_list
-        set order_state = "d"
+        set order_state = '배송중'
+        where order_no = #{orderNo}
+    </update>
+
+    <update id="returnStateUpdate" parameterType="int">
+        update order_list
+        set order_state = '반품확정'
         where order_no = #{orderNo}
     </update>
 
     <update id="sendAmountUpdate" parameterType="map">
         update item
         set item_amount = item_amount - #{itemAmount}
+        where item_no = #{itemNo}
+    </update>
+
+    <update id="returnAmountUpdate" parameterType="map">
+        update item
+        set item_amount = item_amount + #{itemAmount}
         where item_no = #{itemNo}
     </update>
 

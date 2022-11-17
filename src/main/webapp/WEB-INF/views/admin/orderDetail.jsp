@@ -81,21 +81,21 @@
                 <tr>
                     <th class="item-no">상품번호</th>
                     <c:forEach var="orderDetailVO" items="${list}">
-                    <td name="itemNoArr">${orderDetailVO.itemNo}</td>
+                    <td><input name="itemNoArr" type="text" value="${orderDetailVO.itemNo}"></td>
                      </c:forEach>
                 </tr>
 
                 <tr>
                     <th class="quantity">수량</th>
                     <c:forEach var="orderDetailVO" items="${list}">
-                    <td name="itemAmountArr"> ${orderDetailVO.itemAmount} 개</td>
+                    <td> <input name="itemAmountArr" type="text" value="${orderDetailVO.itemAmount}"> 개</td>
                     </c:forEach>
                 </tr>
 
                 <tr>
                     <th class="item-price">가격</th>
                     <c:forEach var="orderDetailVO" items="${list}">
-                    <td name="itemPriceArr"> <fmt:formatNumber pattern="###,###,###" value="${orderDetailVO.itemPrice}"/> 원</td>
+                    <td><input name="itemPriceArr" type="text" value="${orderDetailVO.itemPrice}"> 원</td>
                     </c:forEach>
                 </tr>
 
@@ -121,12 +121,12 @@
         });
 
         $("#sendBtn").on("click", function(){
-
+            if(!confirm('발송처리를 하시겠습니까?')) return;
             let sendCheck = function() {
-                let orderState = document.getElementById("orderState");
+                let orderState = document.getElementById('orderState');
 
-                if(orderState.value=="d") {
-                    alert("이미 발송처리 된 주문입니다.")
+                if(orderState.value!='주문완료') {
+                    alert('이미 처리 된 주문입니다.')
                     return false;
                 }
                 return true;
@@ -140,6 +140,29 @@
             }
 
         });
+
+
+        $("#returnBtn").click(function(){
+            if(!confirm('정말로 반품확정을 하시겠습니까?')) return;
+
+            let returnCheck = function() {
+                let orderState = document.getElementById("orderState");
+
+                if(orderState.value=='반품확정') {
+                    alert('이미 반품 된 주문입니다')
+                    return false;
+                }
+                return true;
+            }
+
+            let form = $("#form");
+            form.attr("action", "<c:url value='/order/return${searchCondition.queryString}'/>");
+            form.attr("method", "post");
+            if(returnCheck()){
+                form.submit();
+            }
+        });
+
 
     });
 
