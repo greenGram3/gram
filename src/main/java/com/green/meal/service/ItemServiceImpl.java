@@ -67,7 +67,7 @@ public class ItemServiceImpl implements ItemService {
 
     // ** image테이블 이미지 여러장 출력
     @Override
-    public List<ImageVO> imageDetail(ImageVO vo1) throws Exception {
+    public ImageVO imageDetail(ImageVO vo1) throws Exception {
         return mapper.imageDetail(vo1);
     }
 

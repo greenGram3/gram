@@ -18,14 +18,10 @@ public class ItemDetailController {
 
     // item 상세페이지------------------------------------------------------------- //
     @RequestMapping(value="/itemDetail")
-    public String itemDetail(ItemVO vo, Model m, ImageVO vo1) {
+    public String itemDetail(ItemVO vo, Model m) {
         try {
-            List<ImageVO> list = new ArrayList<ImageVO>();
             vo = itemService.itemdetail(vo);
-            list = itemService.imageDetail(vo1);
-
             m.addAttribute("itemResult",vo);
-            m.addAttribute("imageResult",list);
 
             return "itemDetail" ;
 
@@ -39,10 +35,14 @@ public class ItemDetailController {
 
     // ** itemDetailPage(Ajax)
     @RequestMapping(value="/itemDetailPage")
-    public String itemDetailPage(ItemVO vo, Model m) {
+    public String itemDetailPage(Model m, ImageVO vo1, ItemVO vo) {
         try {
+            vo1.setItemNo(vo1.getItemNo());
             vo = itemService.itemdetail(vo);
+            vo1 = itemService.imageDetail(vo1);
+
             m.addAttribute("itemResult",vo);
+            m.addAttribute("imageResult",vo1);
 
             return "itemDetailPage" ;
 
@@ -50,7 +50,7 @@ public class ItemDetailController {
             e.printStackTrace();
             m.addAttribute("message", "item_detail_page error");
 
-            return "redirect:itemDetail?itemNo="+vo.getItemNo();
+            return "redirect:itemDetail?itemNo="+vo1.getItemNo();
         }
     }
 

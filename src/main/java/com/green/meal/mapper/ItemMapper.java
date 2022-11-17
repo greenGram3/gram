@@ -32,7 +32,7 @@ public interface ItemMapper {
     ItemVO itemdetail(ItemVO vo);
 
     // ** image테이블 이미지 여러장 출력
-    List<ImageVO> imageDetail(ImageVO vo1);
+    ImageVO imageDetail(ImageVO vo1);
 
     // item등록 이미지 등록
     int itemImgUpload(ImageVO vo1);

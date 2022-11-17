@@ -15,9 +15,9 @@
 
     편한밥상이 준비한</pre>
 
-<img src="" width=700 height=400> <!-- itemResult.imgName -->
+    <img src="${imageResult.imgName}" width=700 height=400> <!-- imageResult.imgName -->
     <div class="itemName">${itemResult.itemName}</div>
-<pre>
+    <pre>
 
     RECIPE
 
@@ -48,8 +48,7 @@
 - 본 제품은 소비자분쟁해결기준에 의거 교환 또는 보상받을 수 없습니다.
 
 - 부정, 불량식품 신고는 국번없이 1399
-
 </pre>
-</body>
 </div>
+</body>
 </html>

@@ -9,7 +9,10 @@
     <script>
         // ** 구매하기 버튼 클릭 시 구매하기 폼으로(action buy)
         $(function () {
-
+            // ** load시 자동으로 제품상세 클릭해서 먼저 보여주기
+            $('#content1').trigger('click');
+//-----------------------------------------------------------------//
+            // ** 구매 action으로 가는 js
             let buyButton = $('#buyButton');
             let orderAmount = $('#cartAmount');
 
@@ -80,8 +83,7 @@
                 }
             }); //ajax
         } //deli_info
-
-
+        //-----------------------------------------------------------------------//
     </script>
 </head>
 <body>
@@ -141,10 +143,9 @@
         </form>
     </div>
     <div class="itemDetail_menu_container">
-            <span onclick="itemDetailPage(${itemResult.itemNo});" class="itemDetail_menu checked" id="content1" >상품상세</span></li>
-            <span onclick="reviewListD(${itemResult.itemNo});" class="itemDetail_menu noChecked" id="content2">상품후기</span></li>
-            <span onclick="deli_info();" id="content3" class="itemDetail_menu noChecked">배송정보</span></li>
-        </ul>
+            <span onclick="itemDetailPage(${itemResult.itemNo});" class="itemDetail_menu checked" id="content1" >상품상세</span>
+            <span onclick="reviewListD(${itemResult.itemNo});" class="itemDetail_menu noChecked" id="content2">상품후기</span>
+            <span onclick="deli_info();" class="itemDetail_menu noChecked" id="content3">배송정보</span>
     </div>
     <div class="resultArea-container">
         <div id="resultArea1"></div>
@@ -153,6 +154,9 @@
     </div>
 
     <script>
+
+
+
         // 상품 +- 시 가격변동 js
         function minAmount() {
             if (document.itemDetailForm.cartAmount.value > 1) {
@@ -176,6 +180,7 @@
             document.itemDetailForm.totalItemPrice.value =
                 document.itemDetailForm.itemPrice.value * document.itemDetailForm.cartAmount.value;
         }
+
         let itemDetail_menus = document.querySelector('.itemDetail_menu_container');
         let menu = itemDetail_menus.getElementsByClassName('itemDetail_menu');
         let tmp = menu[0];
