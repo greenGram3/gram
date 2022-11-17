@@ -38,7 +38,7 @@
   <table>
   <tr>
     <th><label for="itemCategory1">카테고리1</label></th>
-    <td> <select class="category_option" id="itemCategory1" name="itemCategory1">
+    <td colspan="2"> <select class="category_option" id="itemCategory1" name="itemCategory1">
       <option class="current_option" value="" selected>선택</option>
       <option value="한식">한식</option>
       <option value="중식">중식</option>
@@ -50,7 +50,7 @@
 
   <tr>
     <th><label for="itemCategory2">카테고리2</label></th>
-    <td>  <select class="category_option" id="itemCategory2" name="itemCategory2">
+    <td colspan="2">  <select class="category_option" id="itemCategory2" name="itemCategory2">
       <option class="current_option" value="" selected>선택</option>
       <option value="한식">한식</option>
       <option value="중식">중식</option>
@@ -62,27 +62,28 @@
   </tr>
     <tr>
       <th><label for="itemName">상품명</label></th>
-      <td><input class="input-field" type="text" id="itemName" name="itemName"  value=""></td>
+      <td colspan="2"><input class="input-field" type="text" id="itemName" name="itemName"  value=""></td>
     </tr>
     <tr>
       <th><label for="itemAmount">재고수량</label></th>
-      <td> <input class="input-field" type="number" id="itemAmount" name="itemAmount" value=""></td>
+      <td colspan="2"> <input class="input-field" type="number" id="itemAmount" name="itemAmount" value=""></td>
     </tr>
 
     <tr>
       <th><label for="itemPrice">가격</label></th>
-      <td><input class="input-field" type="number" id="itemPrice" name="itemPrice" value=""></td>
+      <td colspan="2"><input class="input-field" type="number" id="itemPrice" name="itemPrice" value=""></td>
     </tr>
 
     <tr>
       <th>상품이미지</th>
       <td>
-        <img src="" class="select_img"><br> <!-- 대표이미지 -->
-        <input type="file" name="imgNamef" id="imgNamef"></td>
+        <li class="topImage">대표이미지</li>
+        <li><img src="" class="select_img"></li> <!-- 대표이미지 -->
+        <li><input type="file" name="imgNamef" id="imgNamef"></li>
       </td>
       <td>
-        <img src="" class="select_img1"><br> <!-- 파일 미리보기(js이용) -->
-        <input type="file" name="imgNamef1" id="imgNamef1"></td>
+        <li><img src="" class="select_img1"></li> <!-- 파일 미리보기(js이용) -->
+       <li> <input type="file" name="imgNamef1" id="imgNamef1"></li>
       </td>
     </tr>
     <script>

@@ -377,3 +377,33 @@ border: none;
     line-height: 18px;
     margin-left: 770px;
 }
+
+/*reviewD*/
+
+.reviewD table {
+    border-top: 1px solid lightgray;
+    border-collapse: collapse;
+    width: 80%;
+}
+
+.reviewD th {
+    background-color: #eeecec;
+    border-bottom: 1px solid lightgray;
+    padding: 10px;
+}
+
+.reviewD th:nth-of-type(2){
+    width: 60%;
+}
+
+.reviewD td {
+    border-bottom: 1px solid lightgray;
+    padding: 10px;
+    /*margin-left: 10px;*/
+}
+
+.reviewD .resultArea {
+    border: none;
+}
+
+

@@ -43,11 +43,11 @@
   <table>
     <tr>
       <th><label for="itemNo">상품번호</label></th>
-      <td><input class="input-field" type="text" id="itemNo" name="itemNo", value="${vo.itemNo}", readonly></td>
+      <td colspan="2"><input class="input-field" type="text" id="itemNo" name="itemNo", value="${vo.itemNo}", readonly></td>
     </tr>
     <tr>
       <th><label for="itemCategory1">카테고리1</label></th>
-      <td> <select class="category_option" id="itemCategory1" name="itemCategory1">
+      <td colspan="2"> <select class="category_option" id="itemCategory1" name="itemCategory1">
         <option class="current_option" value="${vo.itemCategory1}" selected>${vo.itemCategory1}</option>
         <option value="한식">한식</option>
         <option value="중식">중식</option>
@@ -58,7 +58,7 @@
     </tr>
     <tr>
       <th><label for="itemCategory2">카테고리2</label></th>
-      <td><select class="category_option" id="itemCategory2" name="itemCategory2">
+      <td colspan="2"><select class="category_option" id="itemCategory2" name="itemCategory2">
         <option class="current_option" value="${vo.itemCategory2}" selected>${vo.itemCategory2}</option>
         <option value="한식">한식</option>
         <option value="중식">중식</option>
@@ -70,33 +70,33 @@
     </tr>
     <tr>
       <th><label for="itemName">상품명</label></th>
-      <td><input class="input-field" type="text" id="itemName" name="itemName" value="${vo.itemName}"></td>
+      <td colspan="2"><input class="input-field" type="text" id="itemName" name="itemName" value="${vo.itemName}"></td>
     </tr>
     <tr>
       <th><label for="itemAmount">재고수량</label></th>
-      <td><input class="input-field" type="number" id="itemAmount" name="itemAmount" value="${vo.itemAmount}"></td>
+      <td colspan="2"><input class="input-field" type="number" id="itemAmount" name="itemAmount" value="${vo.itemAmount}"></td>
     </tr>
 
     <tr>
       <th><label for="itemPrice">가격</label></th>
-      <td><input class="input-field" type="number" id="itemPrice" name="itemPrice" value="${vo.itemPrice}"></td>
+      <td colspan="2"><input class="input-field" type="number" id="itemPrice" name="itemPrice" value="${vo.itemPrice}"></td>
     </tr>
 
      <!-- Image Update -->
      <tr>
-      <th>상품이미지</th>
-       <td>대표이미지</td>
-       <td>
-         <img src="${vo.imgName}" class="select_img" width="150px" height="150px">
-         <input type="hidden" name="imgName" id="imgName" value="${vo.imgName}">
-         <input type="file" name="imgNamef" id="imgNamef">
-       </td>
+       <th>상품이미지</th>
+    <td>
+      <li class="topImage">대표이미지</li>
+      <li><img src="${vo.imgName}" class="select_img" width="100px" height="100px"></li>
+      <li><input type="hidden" name="imgName" id="imgName" value="${vo.imgName}"></li>
+      <li><input type="file" name="imgNamef" id="imgNamef"></li>
+    </td>
+    <td>
+      <li> <img src="${vo1.imgName}" class="select_img1" width="100px" height="100px"></li>
+      <li><input type="hidden" name="imgName" id="imgName1" value="${vo1.imgName}"></li>
+      <li><input type="file" name="imgNamef1" id="imgNamef1"></li>
+    </td>
 
-       <td>
-         <img src="${vo1.imgName}" class="select_img1" width="150px" height="150px">
-         <input type="hidden" name="imgName" id="imgName1" value="${vo1.imgName}">
-         <input type="file" name="imgNamef1" id="imgNamef1">
-       </td>
     </tr>
 
     <script>

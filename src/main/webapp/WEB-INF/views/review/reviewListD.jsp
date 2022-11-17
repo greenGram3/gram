@@ -35,7 +35,6 @@
     </script>
 </head>
 <body>
-<%@include file="../include/header.jsp"%>
 
 <c:if test="${not empty message}">
     <script type="text/javascript">
@@ -45,14 +44,13 @@
 </c:if>
 <main class="main_container">
     <div class="main">
-
-
+    <div class="reviewD">
     <section class="section_container">
         <table>
             <tr>
-                <th>상품 정보</th>
-                <th colspan="2">제목</th>
-                <th>아이디</th>
+                <th class="reviewItem">상품 정보</th>
+                <th class="reviewTitle">제목</th>
+                <th clss="writer">작성인</th>
             </tr>
             <c:if test="${not empty reviewResult}">
                 <c:forEach var="review" items="${reviewResult}" varStatus="reviewVs">
@@ -62,7 +60,7 @@
                         </c:if>
 
                         <c:if test="${review.reviewStep < 1}">
-                            <td colspan="2">
+                            <td>
                                 <a href="javascript:;"
                                    onclick="reviewDetailD(event, ${review.reviewNo}, ${review.itemNo}, ${reviewVs.count})">${review.reviewTitle}</a>
                             </td>
@@ -70,20 +68,21 @@
 
                         <!-- Step > 0 이면 관리자가 단글 -> 여기만 &nbsp; 적용 & colspan 3  -->
                         <c:if test="${review.reviewStep > 0}">
-                            <td colspan="3" text-align="right">
+                            <td></td>
+                            <td>
                                 <a href="javascript:;"
                                    onclick="reviewDetailD(event, ${review.reviewNo}, ${review.itemNo}, ${reviewVs.count})">&nbsp;&nbsp;ㄴ답변&nbsp;${review.reviewTitle}</a>
                             </td>
                         </c:if>
                         <td>${review.userId}</td>
                     </tr>
+
                     <tr>
-                        <td colspan="4"><span class="reviewD resultArea" id="${reviewVs.count}"></span></td>
+                        <td class="resultArea"><span class="reviewD resultArea" id="${reviewVs.count}"></span></td>
                     </tr>
                     <tr hidden>
                         <td>${review.itemNo}</td>
                     </tr>
-                    <br>
                 </c:forEach>
             </c:if>
         </table>
@@ -111,7 +110,7 @@
             i가 현재페이지라면(현재page 가 현재page라면) -->
             <c:if test="${i==pageMaker.cri.currPage}">
                 <!-- 현재페이지 표식 -->
-                <span class="currPage">${i}</span>&nbsp;
+                <span class="currPage">${i}</span>
             </c:if>
 
             <c:if test="${i!=pageMaker.cri.currPage}">
@@ -136,7 +135,7 @@
         </c:choose>
         </div>
     </div>
+    </div>
 </main>
-<jsp:include page="../include/footer.jsp" flush="false" />
 </body>
 </html>
