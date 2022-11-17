@@ -33,6 +33,28 @@ main * {
     vertical-align: bottom;
 }
 
+#naverLogin  {
+    display: flex;
+    width: 390px;
+    border: 1px solid darkgray;
+    margin-left: 89px;
+}
+
+#naverLogin li:first-of-type {
+    border-right: 1px solid darkgray;
+}
+
+#naverLogin img {
+    margin-left: -50px;
+    margin-top: 5px;
+}
+
+#naverLogin li:nth-of-type(2) {
+    font-size: 16px;
+    padding-right: 30px;
+    margin-left: 30px;
+}
+
 .loginForm button {
     width: 160px;
     height: 80px;
