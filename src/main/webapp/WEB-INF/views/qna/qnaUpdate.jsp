@@ -59,7 +59,7 @@
                 </tr>
 
                 <tr hidden>
-                    <td><input name="${link}" value="${link}"></td>
+                    <td><input name="link" value="${link}" id="link"></td>
                 </tr>
 
             </table>

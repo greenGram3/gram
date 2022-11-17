@@ -43,7 +43,8 @@ $(function(){
             },
             success: function (resultData) {
                 if(resultData.code == 200) { //json insert 성공 시
-                    location.replace('qnalist');
+                    location.reload();
+                    /*location.replace('qnalist');*/
                 } else { //json insert 실패 시
                     $('#resultArea2').html(resultData.message);
                 }
@@ -71,12 +72,13 @@ $(function(){
                 userId: $('#userId').val(),
                 qnaTitle: $('#qnaTitle').val(),
                 qnaContent: $('#qnaContent').val(),
-                qnaNo: $('#qnaNo').val()
+                qnaNo: $('#qnaNo').val(),
+                link: $('#link').val()
             },
             success: function (resultData) {
                 if(resultData.code == 200) { //json update 성공 시
-                        location.replace('qnalist');
-                } else { //json insert 실패 시
+                    location.replace("qnadetail?qnaNo="+$('#qnaNo').val()+"&link="+$('#link').val());
+                } else { //json update 실패 시
                     alert('error:'+resultData);
                 }
             },

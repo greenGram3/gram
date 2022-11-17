@@ -173,8 +173,7 @@ public class QnaController {
     // -----------------------------------------------------------------------------------------//
     // ** QnA reply insert
     @RequestMapping(value="/qnarinsertf")
-    public String qnarinsertf(HttpServletRequest request, HttpServletResponse response,
-                                 Model model,String link, QnaVO vo) { //vo에 detail의 root 담김
+    public String qnarinsertf(Model model,String link, QnaVO vo) {
         if(link != null){
             model.addAttribute("link",link);
         }
@@ -183,8 +182,7 @@ public class QnaController {
     }
 
     @RequestMapping(value="/qnarinsert", method=RequestMethod.POST)
-    public String qnarinsert(HttpServletRequest request, HttpServletResponse response,
-                                Model model, QnaVO vo, RedirectAttributes rttr) {
+    public String qnarinsert(HttpServletResponse response, Model model, QnaVO vo) {
         // 한글처리
         response.setContentType("text/html; charset=UTF-8");
 
