@@ -393,6 +393,17 @@ img.select_img1 {
 }
 
 
+/*itemDetailPage*/
+
+.itemDetailPage pre:first-of-type {
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+.itemDetailPage .itemName {
+    margin-top: 20px;
+    font-size: 16px;
+}
+
 
 
 
