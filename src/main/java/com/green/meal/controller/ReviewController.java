@@ -73,13 +73,11 @@ public class ReviewController {
     //------------------------------------------------------------------------------------------------------//
     // ** ReviewContent Detail 출력(Json)
     @RequestMapping(value="/reviewDetailD")
-    public String reviewDetailD(HttpServletRequest request, HttpServletResponse response, Model model, ReviewVO vo) {
-        ReviewVO voRe;
+    public String reviewDetailD(HttpServletResponse response, Model model, ReviewVO vo) {
         response.setContentType("text/html; charset=UTF-8");
 
-        voRe = reviewService.reviewdetail(vo);
-
-        model.addAttribute("reviewContent", voRe.getReviewContent());
+        vo = reviewService.reviewdetail(vo);
+        model.addAttribute("reviewContent", vo.getReviewContent());
         return "jsonView";
     }
     //------------------------------------------------------------------------------------------------------//
