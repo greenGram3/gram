@@ -27,7 +27,17 @@
 
 	<section class="best_container">
 		<h2>베스트 상품</h2>
-		<div class="best_section">
+		<div class="best_section 01">
+			<div class="best_box">
+				<ul class="best_list">
+				</ul>
+				<P> event Zone  ${serverTime}. </P>
+			</div>
+			<button class="btn_back nonVisible"></button>
+			<button class="btn_after"></button>
+		</div>
+
+		<div class="best_section 02">
 			<div class="best_box">
 				<ul class="best_list">
 				</ul>
@@ -37,8 +47,10 @@
 			<button class="btn_after"></button>
 		</div>
 	</section>
+
+
 	<div class="gram_mission"></div>
-	<div class ='gram_motto'></div>
+
 
 </main>
 

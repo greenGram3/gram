@@ -97,12 +97,6 @@ const best_container = document.querySelector('.best_container'),
     ],
     btn = best_container.querySelectorAll('button');
 
-    // let list = "${list}";
-    // let g_imgList;
-    // let sum;
-    // for(let i = 0; i <list.length; i++){
-    //     sum+=list.itemVO.path+',';
-    // }
 
 
 for(let i = 0; i < b_imgList.length; i++) {
