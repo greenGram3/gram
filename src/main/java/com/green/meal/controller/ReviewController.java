@@ -1,20 +1,15 @@
 package com.green.meal.controller;
 
-import com.green.meal.domain.QnaVO;
 import com.green.meal.domain.ReviewVO;
 import com.green.meal.paging.PageMaker;
 import com.green.meal.paging.SearchCriteria;
 import com.green.meal.service.ReviewService;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -90,11 +85,12 @@ public class ReviewController {
     //------------------------------------------------------------------------------------------------------//
     // ** ReviewDetail 출력
     @RequestMapping(value="/reviewdetail")
-    public String reviewdetail(HttpServletRequest request, HttpServletResponse response, String link,Model model, ReviewVO vo) {
-        ReviewVO voRe;
-        if(link != null){
+    public String reviewdetail(HttpServletRequest request, HttpServletResponse response, Model model, ReviewVO vo) {
+        /*if(link != null){
             model.addAttribute("link",link);
-        }
+        }*/
+
+        ReviewVO voRe;
         // 1. 성공 시 detail폼
         String uri = "/review/reviewDetail";
 
@@ -117,23 +113,22 @@ public class ReviewController {
     //------------------------------------------------------------------------------------------------------//
     // ** Review 작성
     @RequestMapping(value="/reviewinsertf")
-    public String reviewinsertf(HttpServletRequest request, String link, HttpServletResponse response, ReviewVO vo, Model model) {
-        model.addAttribute("link",link);
+    public String reviewinsertf(HttpServletRequest request, HttpServletResponse response, ReviewVO vo, Model model) {
+        /*model.addAttribute("link",link);*/
+
         return "/review/reviewInsert";
     }
 
     //------------------------------------------------------------------------------------------------------//
     // ** 후기 insert(+이미지까지)
     @RequestMapping(value="/reviewinsert", method= RequestMethod.POST)
-    public String reviewinsert(HttpServletRequest request, HttpServletResponse response,
-                               Model model, @RequestBody String link, ReviewVO vo) throws IOException {
-
-        Integer index = link.length();
+    public String reviewinsert(HttpServletRequest request, Model model, ReviewVO vo) throws IOException {
+        /*Integer index = link.length();
         String link2 = link.substring(index - 1);
-        model.addAttribute("link",link2);
+        model.addAttribute("link",link2);*/
 
         // 1. 요청분석
-        String uri = "redirect:reviewlist?link="+link2;
+        String uri = "redirect:reviewlist";
 
 //------------------------------------------------------------------------//
         String realPath = request.getRealPath("/");
@@ -198,36 +193,34 @@ public class ReviewController {
     }
     //------------------------------------------------------------------------------------------------------//
     // ** Review Update
-    @RequestMapping(value="/reviewupdate", method= RequestMethod.POST)
-    public String reviewupdate(HttpServletRequest request, HttpServletResponse response,
-                               @RequestBody String link, Model model, ReviewVO vo) throws IOException {
-        Integer index = link.length();
+    @RequestMapping(value="/reviewupdate", method = RequestMethod.POST)
+    public String reviewupdate(HttpServletRequest request, Model model, ReviewVO vo) throws IOException {
+        /*Integer index = link.length();
         String link2 = link.substring(index - 1);
-        model.addAttribute("link",link2);
+        model.addAttribute("link",link2);*/
 
         // 1. 요청분석
-        String uri = "redirect:reviewdetail?reviewNo="+vo.getReviewNo()+"&link="+link2;
+        String uri = "redirect:reviewdetail?reviewNo="+vo.getReviewNo();
         model.addAttribute("reviewResult",vo); //업뎃 실패시에도 값 저장
         //------------------------------------------------------------------------//
         // * 이미지 저장
-        String realPath = request.getRealPath("/");
-        System.out.println("** realPath => "+realPath);
-        // 2) 위 값을 이용해서 실제저장위치 확인
-        realPath = "C:\\Users\\Eom hee jeong\\IdeaProjects\\gram\\src\\main\\webapp\\resources\\reviewImage\\";
-        // ** 기본 이미지 지정하기
-        String file1, file2="reviewImage/noImage.JPG";
-        // ** MultipartFile
-        MultipartFile imgNamef = vo.getImgNamef();//이미지정보들 모두 들어있음.
-        if ( imgNamef !=null && !imgNamef.isEmpty() ) {//이미지 첨부하고 이미지정보도 있는 경우
-            // ** Image를 선택 -> Image저장
-            // 1) 물리적 저장경로에 Image저장
-            file1 = realPath + imgNamef.getOriginalFilename(); // 경로완성(ctrlc)
-            imgNamef.transferTo(new File(file1)); // Image저장(ctrlv[경로]->File타입으로 변환★)
-            // 2) Table 저장 준비
-            file2="reviewImage/"+imgNamef.getOriginalFilename();
-            // ** Table에 완성 String경로 set
-            vo.setImgName(file2);
-        }
+            String realPath = request.getRealPath("/");
+            System.out.println("** realPath => "+realPath);
+            // 실제 폴더 저장 위치
+            realPath = "C:\\Users\\Eom hee jeong\\IdeaProjects\\gram\\src\\main\\webapp\\resources\\reviewImage\\";
+            // ** 기본 이미지 지정하기
+            String file1, file2="reviewImage/noImage.JPG";
+            // ** MultipartFile
+            MultipartFile imgNamef = vo.getImgNamef();
+
+            if ( imgNamef !=null && !imgNamef.isEmpty() ) {
+                // 1) 물리적 저장경로에 Image저장
+                file1 = realPath + imgNamef.getOriginalFilename();
+                imgNamef.transferTo(new File(file1));
+                // 2) Table 저장 준비
+                file2="reviewImage/"+imgNamef.getOriginalFilename();
+                vo.setImgName(file2);
+            }
 //-----------------------------------------------------------------------------//
         // 2. service처리
         if(reviewService.reviewupdate(vo)>0) {
@@ -240,17 +233,16 @@ public class ReviewController {
     //------------------------------------------------------------------------------------------------------//
     // ** Review Delete
     @RequestMapping(value="reviewdelete")
-    public String reviewdelete(HttpServletRequest request, HttpServletResponse response,
-                            String link,ReviewVO vo, Model model, RedirectAttributes rttr) {
+    public String reviewdelete( ReviewVO vo, RedirectAttributes rttr) {
         // 1. 요청분석
-        String uri ="redirect:reviewlist?link="+link;
+        String uri ="redirect:reviewlist";
 
         // 2. service처리
         if (reviewService.reviewdelete(vo)>0) {
             rttr.addFlashAttribute("message","후기 삭제 성공");
         } else {
             rttr.addFlashAttribute("message","삭제 실패. 다시 시도하시기 바랍니다.");
-            uri ="redirect:reviewdetail?reviewNo="+vo.getReviewNo()+"&link="+link;
+            uri ="redirect:reviewdetail?reviewNo="+vo.getReviewNo();
         }
         return uri;
     }
@@ -280,14 +272,14 @@ public class ReviewController {
 
     @RequestMapping(value="/reviewlistM")
     public String reviewlistM(HttpServletRequest request, HttpServletResponse response,
-                              SearchCriteria cri,String link, Model model, PageMaker pageMaker) {
+                              SearchCriteria cri, Model model, PageMaker pageMaker) {
+        /*        if(link != null){
+            model.addAttribute("link",link);
+        }*/
+
         // 1. 요청분석
         String uri = "/review/reviewListM"; // 성공 시 list
         String userId = null;
-
-        if(link != null){
-            model.addAttribute("link",link);
-        }
 
         // 2. session의 userId 받아서/ userId변수에 저장
         HttpSession session = request.getSession(false);

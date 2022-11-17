@@ -36,8 +36,12 @@
 
 <main class="main_container">
     <div class="main">
+        <c:if test="${userId == 'admin'}">
             <jsp:include page="../include/admin.jsp" flush="false" />
-
+        </c:if>
+        <c:if test="${userId != 'admin'}">
+            <jsp:include page="../include/mypage.jsp" flush="false" />
+        </c:if>
         <div class="reviewList">
 
     <h1>상품후기</h1>

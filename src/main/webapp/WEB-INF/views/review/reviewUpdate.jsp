@@ -20,25 +20,31 @@
 
 <main class="main_container">
     <div class="main">
-        <c:if test="${link eq 'A'}">
+        <c:if test="${userId == 'admin'}">
+            <jsp:include page="../include/admin.jsp" flush="false" />
+        </c:if>
+        <c:if test="${userId != 'admin'}">
+            <jsp:include page="../include/mypage.jsp" flush="false" />
+        </c:if>
+<%--        <c:if test="${link eq 'A'}">
             <jsp:include page="../include/admin.jsp" flush="false" />
         </c:if>
         <c:if test="${link eq 'M'}">
             <jsp:include page="../include/mypage.jsp" flush="false" />
-        </c:if>
+        </c:if>--%>
     <div class="reviewUpdate">
 
     <h3>상품 후기 수정</h3>
     <section class="section_container">
-        <form action="reviewupdate" method="post" enctype="multipart/form-data">
+        <form action="reviewupdate" method="post" enctype="multipart/form-data" id="reviewUpForm">
             <table>
                 <tr>
                     <td>아이디</td>
-                    <td><input type="text" name="userId" value="${reviewResult.userId}" readonly></td>
+                    <td><input type="text" name="userId" id="userId" value="${reviewResult.userId}" readonly></td>
                 </tr>
                 <tr>
                     <td>제목</td>
-                    <td><input type="text" name="reviewTitle" value="${reviewResult.reviewTitle}" minlength="2"
+                    <td><input type="text" name="reviewTitle" id="reviewTitle" value="${reviewResult.reviewTitle}" minlength="2"
                                required></td>
                 </tr>
                 <tr>
@@ -71,7 +77,7 @@
                 </c:if>
                 <tr class="modBtn">
                     <td colspan="2">
-                        <input type="submit" value="수정" onclick="return confirm('수정하시겠습니까? 수정/취소');">
+                        <input type="submit" value="수정">
                     </td>
                 </tr>
                 <tr hidden>
@@ -79,7 +85,7 @@
                     <td><input type="text" name="reviewNo" id="reviewNo" value="${reviewResult.reviewNo}"></td>
                 </tr>
                 <tr hidden>
-                    <td><input  name="${link}" value="${link}"></td>
+                    <td><input name="link" value="${link}"></td>
                 </tr>
             </table>
         </form>

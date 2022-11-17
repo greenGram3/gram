@@ -16,12 +16,18 @@
 <main class="main_container">
 
     <div class="main">
-        <c:if test="${link eq 'A'}">
+        <c:if test="${userId == 'admin'}">
+            <jsp:include page="../include/admin.jsp" flush="false" />
+        </c:if>
+        <c:if test="${userId != 'admin'}">
+            <jsp:include page="../include/mypage.jsp" flush="false" />
+        </c:if>
+<%--        <c:if test="${link eq 'A'}">
             <jsp:include page="../include/admin.jsp" flush="false" />
         </c:if>
         <c:if test="${link eq 'M'}">
             <jsp:include page="../include/mypage.jsp" flush="false" />
-        </c:if>
+        </c:if>--%>
         <div class="reviewInsert">
 
     <h1>상품 후기 작성</h1>

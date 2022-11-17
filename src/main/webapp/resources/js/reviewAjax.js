@@ -36,39 +36,6 @@ $(function(){
         }); //ajax
     });
 //-------------------------------------------------------------------------------------------------//
-    // ** Review Reply Update Json
-/*    $('#ReUpdateBtn').click(function () {
-
-        var result = confirm('수정하시겠습니까? (수정/취소)');
-
-        if(result==true) {
-            alert('답변이 수정 되었습니다');
-        } else {
-            return false;
-        }
-
-        $.ajax({
-            type: 'Post',
-            url: 'reviewrupdate',
-            data: {
-                userId: $('#userId').val(),
-                reviewTitle: $('#reviewTitle').val(),
-                reviewContent: $('#reviewContent').val(),
-                reviewNo: $('#reviewNo').val()
-            },
-            success: function (resultData) {
-                if(resultData.code == 200) { //json update 성공 시
-                        opener.parent.location.reload();
-                        window.close();
-                } else { //json insert 실패 시
-                    alert('error:'+resultData);
-                }
-            },
-            error: function () {
-                $('#resultArea2').html('Reply수정 error');
-            }
-        }) //ajax
-    }); // ReUpdateBtn*/
 }); //ready
 
 //-------------------------------------------------------------------------------------------------//
@@ -173,4 +140,75 @@ function reviewReplyD(reviewRoot,reviewStep,reviewChild) {
         $('#'+count).html('');
     }
 } //reviewDetailD*/
+
+//----------------------------------------------------------------------------------//
+// ** 보류
+// ** Review Reply Update Json
+/*    $('#ReUpdateBtn').click(function () {
+
+        var result = confirm('수정하시겠습니까? (수정/취소)');
+
+        if(result==true) {
+            alert('답변이 수정 되었습니다');
+        } else {
+            return false;
+        }
+
+        $.ajax({
+            type: 'Post',
+            url: 'reviewrupdate',
+            data: {
+                userId: $('#userId').val(),
+                reviewTitle: $('#reviewTitle').val(),
+                reviewContent: $('#reviewContent').val(),
+                reviewNo: $('#reviewNo').val()
+            },
+            success: function (resultData) {
+                if(resultData.code == 200) { //json update 성공 시
+                        opener.parent.location.reload();
+                        window.close();
+                } else { //json insert 실패 시
+                    alert('error:'+resultData);
+                }
+            },
+            error: function () {
+                $('#resultArea2').html('Reply수정 error');
+            }
+        }) //ajax
+    }); // ReUpdateBtn*/
+
+//--------------------------------------------------------------------------------//
+// ** Review Update JSON(Multipart/FormData JSON)
+/*    $('#reviewUpdateBtn').click(function(){
+        var result = confirm('수정하시겠습니까? (수정/취소)');
+
+        if(result==true) {
+            alert('수정되었습니다');
+        } else {
+            return false;
+        }
+        let formData = new FormData($('#reviewUpForm')[0]); //id이용 form 객체 준비
+
+        formData.append(userId,$('#userId').val()); //객체에 데이터 담기
+        formData.append(reviewTitle,$('#reviewTitle').val());
+        formData.append(reviewContent,$('#reviewContent').val());
+        if ( $('#imgNamef')[0].files[0] != null ) {
+            formData.append('imgNamef', $('#imgNamef')[0].files[0]);
+        }
+        formData.append(reviewNo,$('#reviewNo').val());
+
+        $.ajax({
+            type: 'Post',
+            url: 'reviewupdate',
+            processData:false,
+            contentType:false,
+            data: formData,
+            success:function(){
+                history.back();
+            },
+            error: function () {
+                $('#resultArea2').html('Review Update 등록 error');
+            }
+        }); //ajax
+    }); // reviewUpdateBtn*/
 
