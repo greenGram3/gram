@@ -82,10 +82,13 @@ public class ItemController {
 
             // --------------------------------------------------------------------------//
             // * 이미지 업데이트 - itemImage
-            String realPath = request.getRealPath("/");
+            String realPath = request.getSession().getServletContext().getRealPath("/");
+            /*String realPath = request.getRealPath("/");*/
             System.out.println("** realPath => "+realPath);
             // 실제 저장 위치(배포 전 - 컴마다 다름)
-            realPath = "C:\\Users\\Eom hee jeong\\IdeaProjects\\gram\\src\\main\\webapp\\resources\\itemImage\\";
+            /*realPath = "C:\\Users\\Eom hee jeong\\IdeaProjects\\gram\\src\\main\\webapp\\resources\\itemImage\\";*/
+            realPath += "resources\\itemImage\\";
+
             // 기본 이미지 지정
             String file1, file2="../itemImage/noImage.JPG";
             String file3, file4="../itemImage/noImage.JPG";
@@ -173,11 +176,13 @@ public class ItemController {
         try {
             //----------------------------------------------------------------------//
             // ** 이미지 업로드
-            String realPath = request.getRealPath("/");
+            String realPath = request.getSession().getServletContext().getRealPath("/");
+            /*String realPath = request.getRealPath("/");*/
             System.out.println("** realPath => "+realPath);
 
             // 이미지 실제 저장 위치 - 배포 전: 컴마다 다름
-            realPath = "C:\\Users\\Eom hee jeong\\IdeaProjects\\gram\\src\\main\\webapp\\resources\\itemImage\\";
+            /*realPath = "C:\\Users\\Eom hee jeong\\IdeaProjects\\gram\\src\\main\\webapp\\resources\\itemImage\\";*/
+            realPath += "resources\\itemImage\\";
 
             // 기본 이미지 지정
             String file1, file2="../itemImage/noImage.JPG";
