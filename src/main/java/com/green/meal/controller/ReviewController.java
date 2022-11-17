@@ -127,15 +127,17 @@ public class ReviewController {
         String link2 = link.substring(index - 1);
         model.addAttribute("link",link2);*/
 
-        // 1. 요청분석
+        // 1. 요청
         String uri = "redirect:reviewlist";
 
 //------------------------------------------------------------------------//
-        String realPath = request.getRealPath("/");
+        String realPath = request.getSession().getServletContext().getRealPath("/");
+        /*String realPath = request.getRealPath("/");*/
         System.out.println("** realPath => "+realPath);
 
         // 2) 위 값을 이용해서 실제저장위치 확인
-        realPath = "C:\\Users\\Eom hee jeong\\IdeaProjects\\gram\\src\\main\\webapp\\resources\\reviewImage\\";
+        /*realPath = "C:\\Users\\Eom hee jeong\\IdeaProjects\\gram\\src\\main\\webapp\\resources\\reviewImage\\";*/
+        realPath += "resources\\reviewImage\\";
 
         // ** 기본 이미지 지정하기
         String file1, file2="reviewImage/noImage.JPG";
@@ -204,10 +206,12 @@ public class ReviewController {
         model.addAttribute("reviewResult",vo); //업뎃 실패시에도 값 저장
         //------------------------------------------------------------------------//
         // * 이미지 저장
-            String realPath = request.getRealPath("/");
+            String realPath = request.getSession().getServletContext().getRealPath("/");
+            /*String realPath = request.getRealPath("/");*/
             System.out.println("** realPath => "+realPath);
             // 실제 폴더 저장 위치
-            realPath = "C:\\Users\\Eom hee jeong\\IdeaProjects\\gram\\src\\main\\webapp\\resources\\reviewImage\\";
+            /*realPath = "C:\\Users\\Eom hee jeong\\IdeaProjects\\gram\\src\\main\\webapp\\resources\\reviewImage\\";*/
+            realPath += "resources\\reviewImage\\";
             // ** 기본 이미지 지정하기
             String file1, file2="reviewImage/noImage.JPG";
             // ** MultipartFile
