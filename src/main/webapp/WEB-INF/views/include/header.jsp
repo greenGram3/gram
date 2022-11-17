@@ -54,7 +54,6 @@
           <li><a href="">양식</a></li>
           <li><a href="">중식/일식</a></li>
           <li><a href="">분식/야식</a></li>
-          <li><a href="">동남아</a></li>
           <li><a href="">세트상품</a></li>
         </ul>
       </div>
@@ -62,10 +61,10 @@
       <div class="thema">
         <ul>
           <li><a href="">비오는날</a></li>
-          <li><a href="">손님 요리</a></li>
-          <li><a href="">캠핑 요리</a></li>
-          <li><a href="">분식/야식</a></li>
-          <li><a href="">술안주/야식</a></li>
+          <li><a href="">집들이</a></li>
+          <li><a href="">캠핑</a></li>
+          <li><a href="">술안주</a></li>
+          <li><a href="">혼밥</a></li>
         </ul>
       </div>
     </div>
