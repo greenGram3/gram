@@ -16,6 +16,8 @@ public interface ReviewMapper {
     // Reviewlist 출력
     List<ReviewVO> reviewlist(SearchCriteria cri);
     int searchCount(SearchCriteria cri);
+    int searchCount2(String userId);
+    int searchCount3(ReviewVO vo);
 
     // Reviewlist(MyPage) 출력
     List<ReviewVO> reviewlistM(Map map);

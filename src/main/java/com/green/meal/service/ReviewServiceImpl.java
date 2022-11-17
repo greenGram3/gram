@@ -31,6 +31,8 @@ public class ReviewServiceImpl implements ReviewService {
     @Override
     public List<ReviewVO> reviewlist(SearchCriteria cri) { return reviewMapper.reviewlist(cri); }
     public int searchCount(SearchCriteria cri) { return reviewMapper.searchCount(cri); }
+    public int searchCount2(String userId) { return reviewMapper.searchCount2(userId); }
+    public int searchCount3(ReviewVO vo) { return reviewMapper.searchCount3(vo); }
 
     // Reviewlist(MyPage) 출력
     @Override

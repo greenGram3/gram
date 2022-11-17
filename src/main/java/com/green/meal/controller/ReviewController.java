@@ -37,7 +37,7 @@ public class ReviewController {
             model.addAttribute("reviewResult", list);
 
             pageMaker.setCri(cri);
-            pageMaker.setTotalRowsCount(reviewService.searchCount(cri));
+            pageMaker.setTotalRowsCount(reviewService.searchCount3(vo));
             model.addAttribute("pageMaker",pageMaker);
 
         } else {
@@ -273,10 +273,8 @@ public class ReviewController {
 
     //-------------------------------------------------------------------------------------------------//
     //-------------------------------------------------------------------------------------------------//
-
     @RequestMapping(value="/reviewlistM")
-    public String reviewlistM(HttpServletRequest request, HttpServletResponse response,
-                              SearchCriteria cri, Model model, PageMaker pageMaker) {
+    public String reviewlistM(HttpServletRequest request, SearchCriteria cri, Model model, PageMaker pageMaker) {
         /*        if(link != null){
             model.addAttribute("link",link);
         }*/
@@ -299,13 +297,16 @@ public class ReviewController {
 
         if(list != null) {
             model.addAttribute("reviewResult", list);
+
+            pageMaker.setCri(cri);
+            pageMaker.setTotalRowsCount(reviewService.searchCount2(userId));
+            model.addAttribute("pageMaker",pageMaker);
+
         } else {
             model.addAttribute("message", "작성한 후기가 없습니다.");
             uri = "redirect:home";
         }
-        pageMaker.setCri(cri);
-        pageMaker.setTotalRowsCount(reviewService.searchCount(cri));
-        model.addAttribute("pageMaker",pageMaker);
+
 
         return uri;
     }

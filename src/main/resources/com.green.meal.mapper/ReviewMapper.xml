@@ -9,10 +9,23 @@
         limit #{sno}, #{rowsPerPage}
     </select>
 
+    <select id="searchCount3" resultType="int">
+        select count(*)
+        from review
+        where item_no=#{itemNo}
+    </select>
+
     <!-- Reviewlist(MyPage) 출력 -->
     <select id="reviewlistM" parameterType="map" resultType="com.green.meal.domain.ReviewVO">
         select * from review where user_id=#{userId} order by review_root desc, review_step asc
         limit #{sno}, #{rowsPerPage}
+    </select>
+
+    <!-- SearchCount 매서드 문제 - reviewlistM에서 는 같은 상품의 관리자거까지 count되버림 -> SearchCount2 매서드 -->
+    <select id="searchCount2" resultType="int">
+        select count(*)
+        from review
+        where user_id=#{userId}
     </select>
 
     <sql id="search">
