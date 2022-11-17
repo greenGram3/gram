@@ -181,6 +181,7 @@
     $("#removeBtn").on("click", function(){
       if(!confirm("정말로 삭제하시겠습니까?")) return;
       let form = $("#form");
+      form.attr("enctype","multipart/form-data")
       form.attr("action", "<c:url value='/item/remove${searchCondition.queryString}'/>");
       form.attr("method", "post");
       form.submit();
