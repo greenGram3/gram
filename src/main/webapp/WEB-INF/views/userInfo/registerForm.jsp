@@ -46,12 +46,12 @@
             <form:errors path="userEmail" cssClass="class" cssStyle="color: red"></form:errors>
             <hr>
             <label for="userPwd">비밀번호　</label>
-            <input type="text" id="userPwd" name="userPwd" placeholder="　비밀번호(8~20자 이내, 하나이상의 영문,숫자,특수문자)" style="width: 450px" value="${user.userPwd}">
+            <input type="password" id="userPwd" name="userPwd" placeholder="　비밀번호(8~20자 이내, 하나이상의 영문,숫자,특수문자)" style="width: 450px" value="${user.userPwd}">
             <br>
             <form:errors path="userPwd" cssClass="class" cssStyle="color: red"></form:errors>
             <hr>
             <label for="pwdCheck">비밀번호 확인　</label>
-            <input type="text" id="pwdCheck" name="pwdCheck" value="${pwdCheck}">
+            <input type="password" id="pwdCheck" name="pwdCheck" value="${pwdCheck}">
             <div id="msgPwd" style="color: red; display: none"></div>
             <hr>
             <label for="userPhone">휴대폰번호　</label>
@@ -59,14 +59,17 @@
             <br>
             <form:errors path="userPhone" cssClass="class" cssStyle="color: red"></form:errors>
             <hr>
-            <label for="userAddr">주소　</label>
-            <input type="text" id="userAddr" name="userAddr" value="${user.userAddr}">
-            <br>
+            주소　</label>
+            <input type="text" id="zipNo" style="width: 100px" name="zipNo" placeholder="우편번호" value="${zipNo}" readonly/>
+            <input type="text" id="roadAddrPart1" style="width: 300px" name="roadAddrPart1" value="${roadAddrPart1}" placeholder="도로명주소" readonly/>
+            <input type="text" id="addrDetail" name="addrDetail" placeholder="상세주소" value="${addrDetail}" readonly/>
+            <button type="button" id="addrBtn" style="width: 100px" onClick="goPopup();">우편번호 검색</button>
+            <div id="msgAddr" style="color: red; display: none"></div>
             <hr>
             <label for="userBirth">생일　</label>
             <input type="date" name="userBirth" id="userBirth">
 
-            <label for="">　　|　　성별　</label>
+            　　|　　성별　</label>
             <input type="radio" name="userGender" value="man">　남　
             <input type="radio" name="userGender" value="woman">　여　
             <input type="radio" name="userGender" value="선택안함">　선택안함
@@ -84,6 +87,17 @@
 </html>
 
 <script>
+    // 주소 우편번호 팝업창 api
+    function goPopup(){
+        let pop = window.open("<c:url value='/addr'/>","pop","_blank","width=570,height=420, scrollbars=yes, resizable=yes");
+    }
+
+    function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAddr, jibunAddr, zipNo){
+        document.querySelector("#roadAddrPart1").value = roadAddrPart1+roadAddrPart2;
+        document.querySelector("#addrDetail").value = addrDetail;
+        document.querySelector("#zipNo").value = zipNo;
+    }
+
     const selectEmail = document.querySelector("#selectEmail");
     const selectedEmail = document.querySelector("#selectedEmail");
     const dupliCheck = document.querySelector("#dupliCheck");
@@ -100,11 +114,14 @@
         if($('#pwdCheck')[0].value != $('#userPwd')[0].value){
             $('#msgPwd')[0].style.display = 'block';
             $('#msgPwd')[0].innerHTML = '비밀번호와 맞지 않습니다';
-            console.log( $('#msgPwd')[0].getAttribute('display'));
         }
-        else{
+
+        if($('#zipNo')[0].value==''){
+            $('#msgAddr')[0].style.display = 'block';
+            $('#msgAddr')[0].innerHTML = '주소를 입력하셔야 합니다.';
+        }
+        if($('#pwdCheck')[0].value == $('#userPwd')[0].value && $('#zipNo')[0].value!='')
             $('#userVO').submit();
-        }
     });
 
     //아이디 중복검사 버튼 누를시 중복체크

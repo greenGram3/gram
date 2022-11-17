@@ -17,7 +17,7 @@ public class PhoneValidator implements ConstraintValidator<PhoneCheck, String> {
         Pattern pattern = Pattern.compile("\\d{3}-\\d{4}-\\d{4}");
         Matcher matcher = pattern.matcher(s);
 
-        if (matcher.matches()) {
+        if (matcher.matches() && s.length()==13) {
             log.info("Valid phone number success");
         } else {
             log.info("Valid phone number fail");

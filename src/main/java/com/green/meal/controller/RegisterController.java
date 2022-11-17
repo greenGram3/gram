@@ -31,14 +31,21 @@ public class RegisterController {
 
     //회원가입 -> 메인
     @PostMapping("/register")
-    public String register2(@Valid UserVO user, BindingResult result, RedirectAttributes attr, String[] userEmailArr, Model model, String pwdCheck) {
+    public String register2(@Valid UserVO user, BindingResult result, RedirectAttributes attr, String[] userEmailArr, Model model, String pwdCheck,
+                            String zipNo, String roadAddrPart1, String addrDetail) {
 
         if(result.hasErrors()){
             model.addAttribute("pwdCheck", pwdCheck);
             model.addAttribute("userEmailArr", userEmailArr);
             model.addAttribute("user", user);
+            model.addAttribute("zipNo",zipNo);
+            model.addAttribute("roadAddrPart1",roadAddrPart1);
+            model.addAttribute("addrDetail",addrDetail);
             return "userInfo/registerForm";
         }
+
+        //주소 받아와서 수동으로 넣기
+        user.setUserAddr(roadAddrPart1+" "+addrDetail);
 
         //UserEmail 수동으로 넣기
         user.setUserEmail(addArr(userEmailArr));

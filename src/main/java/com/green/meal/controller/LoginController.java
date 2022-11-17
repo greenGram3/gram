@@ -194,11 +194,10 @@ public class LoginController {
                 userName = userName.substring(userName.indexOf("\"name\":")+7).replace("\"","");
                 userEmail = userEmail.substring(userEmail.indexOf("\"email\":")+8).replace("\"","");
                 userPhone = userPhone.substring(userPhone.indexOf("\"mobile\":")+9).replace("\"","");
-                birthday = birthday.substring(birthday.indexOf("\"birthday\":")+11).replace("\"","");
-                birthyear = birthyear.substring(birthyear.indexOf("\"birthyear\":")+12).replace("\"","");
+                if(birthday!="")birthday = birthday.substring(birthday.indexOf("\"birthday\":")+11).replace("\"","");
+                if(birthyear!="")birthyear = birthyear.substring(birthyear.indexOf("\"birthyear\":")+12).replace("\"","");
                 userBirth = birthyear+"-"+birthday;
-                userGender = userGender.substring(userGender.indexOf("\"gender\":")+9).replace("\"","");
-
+                if(userGender!="") userGender = userGender.substring(userGender.indexOf("\"gender\":")+9).replace("\"","");
                 UserVO user = new UserVO();
                 user.setUserId(userId);
                 user.setUserName(userName);
@@ -224,7 +223,6 @@ public class LoginController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-//        return "redirect:/login/naverLogin3";
         return "redirect:/";
     }
 
