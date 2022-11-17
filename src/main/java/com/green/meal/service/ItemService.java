@@ -6,6 +6,7 @@ import com.green.meal.domain.SearchCondition;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 public interface ItemService {
     ItemVO itemAdmin(Integer itemNo) throws Exception;
@@ -37,5 +38,12 @@ public interface ItemService {
 
     // item 업데이트 이미지 업데이트
     int imageModify(ImageVO vo1) throws Exception;
+
+
+
+    // seolhee home 페이지 --------------------------------------------------------------
+    List<ItemVO> homeItems(Map map);
+
+    int selectItemNo(String itemName);
 
 }

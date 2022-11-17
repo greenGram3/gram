@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface ItemMapper {
@@ -40,4 +41,8 @@ public interface ItemMapper {
     // item 업데이트 이미지 업데이트
     int imageModify(ImageVO vo1);
 
+    // seolhee home 페이지 -------------------------------------------------------
+    List<ItemVO> homeItems(Map map);
+
+    int selectItemNo(String itemName);
 }

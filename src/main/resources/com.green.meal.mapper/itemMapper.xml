@@ -53,11 +53,17 @@
 
     <!-- Image Insert 추가 -->
     <insert id="itemImgUpload" parameterType="com.green.meal.domain.ImageVO">
-        <selectKey keyProperty="itemNo" resultType="int" order="BEFORE">
-            select IFNULL(max(item_no),0)+1 from image
-        </selectKey>
-        insert into image(item_no, img_name, img_type) values(#{itemNo},#{imgName},"e")
+        insert into image
+            (item_no, img_name, img_type)
+        values
+            (#{itemNo},#{imgName},#{imgType})
     </insert>
+
+    <select id="selectItemNo" parameterType="string" resultType="int">
+        select item_no
+        from item
+        where item_name = #{itemName}
+    </select>
 
     <delete id="delete" parameterType="int">
         delete from item where item_no = #{itemNo}
@@ -119,6 +125,13 @@
     <select id="imageDetail" resultType="com.green.meal.domain.ImageVO">
         select * from image
         where item_no=#{itemNo}
+    </select>
+
+    <select id="homeItems" resultType="ItemVO" parameterType="map">
+        select *
+        from item
+        where item_price <![CDATA[ >= ]]> #{itemPrice}
+        limit #{limit}
     </select>
 
 </mapper>

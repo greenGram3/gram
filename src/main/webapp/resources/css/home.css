@@ -71,6 +71,7 @@ main * {
 
 .best_container {
     text-align: center;
+    width: 1200px;
 }
 
 .best_container h2 {
@@ -80,7 +81,7 @@ main * {
 .best_section {
     position: relative;
     width:1200px;
-    height: 624px;
+    /*height: 624px;*/
 }
 
 .best_box{

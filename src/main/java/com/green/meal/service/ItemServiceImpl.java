@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class ItemServiceImpl implements ItemService {
@@ -82,5 +83,16 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public int imageModify(ImageVO vo1) throws Exception {
         return mapper.imageModify(vo1);
+    }
+
+    // seolhee home 페이지 --------------------------------------------------------------
+    @Override
+    public List<ItemVO> homeItems(Map map) {
+        return mapper.homeItems(map);
+    }
+
+    @Override
+    public int selectItemNo(String itemName) {
+        return mapper.selectItemNo(itemName);
     }
 }

@@ -121,6 +121,12 @@ public class ItemController {
             // --------------------------------------------------------------------------//
 
             int rowCnt = itemService.itemModify(vo);
+
+
+            vo1.setItemNo(vo.getItemNo());
+            int itemNo = vo1.getItemNo();
+            System.out.println("itemNo = " + itemNo);
+
             int rowCnt1 = itemService.imageModify(vo1);
 
             if(rowCnt!=1 && rowCnt1!=1)
@@ -177,11 +183,7 @@ public class ItemController {
             //----------------------------------------------------------------------//
             // ** 이미지 업로드
             String realPath = request.getSession().getServletContext().getRealPath("/");
-            /*String realPath = request.getRealPath("/");*/
-            System.out.println("** realPath => "+realPath);
 
-            // 이미지 실제 저장 위치 - 배포 전: 컴마다 다름
-            /*realPath = "C:\\Users\\Eom hee jeong\\IdeaProjects\\gram\\src\\main\\webapp\\resources\\itemImage\\";*/
             realPath += "resources\\itemImage\\";
 
             // 기본 이미지 지정
@@ -215,12 +217,25 @@ public class ItemController {
             }
             // Table에 완성 String경로 set
             vo1.setImgName(file4);
+
  //--------------------------------------------------------------//
             int rowCnt = itemService.itemUpload(vo);
+
+            int itemNo = itemService.selectItemNo(vo.getItemName());
+            vo1.setItemNo(itemNo);
+            vo1.setImgType("e");
+
+            String imgType = vo1.getImgType();
+
+
             int rowCntI = itemService.itemImgUpload(vo1);
 
-            if(rowCnt!=1 && rowCntI!=1)
+            if(rowCnt!=1 && rowCntI!=1){
+                System.out.println("rowCntI = " + rowCntI);
+                System.out.println("rowCnt = " + rowCnt);
                 throw new Exception("item upload failed");
+            }
+
 
             rattr.addFlashAttribute("msg", "UPL_OK");
 
