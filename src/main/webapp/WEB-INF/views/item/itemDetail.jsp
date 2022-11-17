@@ -87,7 +87,7 @@
     </script>
 </head>
 <body>
-<jsp:include page="include/header.jsp" flush="false"/>
+<jsp:include page="../include/header.jsp" flush="false"/>
 
 <c:if test="${not empty msg}">
     <script type="text/javascript">
@@ -104,7 +104,7 @@
                     <div class="itemImage">
                         <input hidden type="text" name="itemNo" value="${itemResult.itemNo}" readonly>
                         <%--<input type="text" name="userId" value="${userId}" disabled>--%>
-                        <img src="${itemResult.imgName}" width=300 height=300></td>
+                        <img src="<c:url value='${itemResult.imgName}'/>" width=500 height=500>
                     </div>
                 <table>
                 <tr>
@@ -116,7 +116,7 @@
                 </tr>
                 <tr>
                     <th>배송정보</th>
-                    <td>  지정일배송</td>
+                    <td> 지정일배송</td>
                 </tr>
                 <tr>
                     <th>배송비</th>
@@ -205,6 +205,6 @@
     </script>
     </div>
 </main>
-<jsp:include page="include/footer.jsp" flush="false"/>
+<jsp:include page="../include/footer.jsp" flush="false"/>
 </body>
 </html>

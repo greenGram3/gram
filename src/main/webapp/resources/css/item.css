@@ -289,7 +289,7 @@ img.select_img1 {
 .itemDetail {
     margin-top: 250px;
     margin-bottom: 50px;
-    width: 900px;
+    width: 1000px;
 }
 
 .itemDetail .itemInfo {
@@ -300,6 +300,7 @@ img.select_img1 {
     height: 300px;
     width: 500px;
     border-collapse: collapse;
+    margin-left: 70px;
 }
 
 .itemDetail-container table * {
@@ -316,9 +317,12 @@ img.select_img1 {
     width: 50px;
     text-align: center;
 }
-
+.itemDetail-container th {
+  height: 70px;
+}
 .itemDetail-container td {
     width: 80%;
+    height: 70px;
 }
 .itemDetail-container #itemName {
     font-size: 30px;
@@ -340,7 +344,7 @@ img.select_img1 {
 }
 
  .itemCheck {
-    margin-left: 100px;
+    margin-left: 560px;
     margin-top: 30px;
     margin-bottom: 50px;
 }
@@ -391,19 +395,5 @@ img.select_img1 {
     padding-top: 10px;
     background-color: white;
 }
-
-
-/*itemDetailPage*/
-
-.itemDetailPage pre:first-of-type {
-    margin-top: 10px;
-    margin-bottom: 30px;
-}
-.itemDetailPage .itemName {
-    margin-top: 20px;
-    font-size: 16px;
-}
-
-
 
 
