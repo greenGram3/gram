@@ -29,7 +29,7 @@ public class ItemDetailController {
             vo = itemService.itemdetail(vo);
             m.addAttribute("itemResult",vo);
 
-            return "itemDetail" ;
+            return "item/itemDetail" ;
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -50,7 +50,7 @@ public class ItemDetailController {
             m.addAttribute("itemResult",vo);
             m.addAttribute("imageResult",vo1);
 
-            return "itemDetailPage" ;
+            return "item/itemDetailPage" ;
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -63,7 +63,7 @@ public class ItemDetailController {
     // ** DeliInfo(Ajax)
     @RequestMapping(value="/deliInfo")
     public String itemDetailPage(Model m) {
-        return "itemDelyInfo";
+        return "item/itemDelyInfo";
     }
 
 
