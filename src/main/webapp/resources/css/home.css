@@ -80,7 +80,8 @@ main * {
     font-size: 50px;
 }
 
-.best_section {
+.best_section01,
+.best_section02 {
     position: relative;
     width:1230px;
 }
@@ -120,20 +121,20 @@ main * {
 
 .btn_back {
     background: url(../icon/before.png);
-    right:92%;
+    right:100%;
 }
 
 .btn_after {
     background: url(../icon/after.png);
-    left:92%;
+    left:100%;
 }
 
 .best_section01 button {
     position: absolute;
     width: 51px;
     height: 85px;
-    top: 80%;
-    transform: translateY(-80%);
+    top: 30%;
+    transform: translateY(-30%);
     opacity: .5;
     border: none;
 }
@@ -142,8 +143,8 @@ main * {
     position: absolute;
     width: 51px;
     height: 85px;
-    top: 125%;
-    transform: translateY(-122%);
+    top: 30%;
+    transform: translateY(-30%);
     opacity: .5;
     border: none;
 }
