@@ -148,7 +148,6 @@
           <script>
             $("#openBtn${status.index}").on("click", function(){
 
-              let selectedPlace = $("#delyPlace").val();
               window.open("<c:url value='/delivery/select'/>?delyPlace=${list.delyPlace}","Child","left=400,top=200,width=500,height=500");
 
             });
@@ -204,7 +203,7 @@
       buyer_email : 'Iamport@chai.finance',
       buyer_name : '아임포트 기술지원팀',
       // buyer_tel : '010-1234-5678',
-      // buyer_addr : '서울특별시 강남구 삼성동',
+      buyer_addr : '서울특별시 강남구 삼성동',
       // buyer_postcode : '123-456',
     }, function (rsp) {
       if(rsp.success) {
