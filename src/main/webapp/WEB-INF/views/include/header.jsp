@@ -40,7 +40,7 @@
   <nav>
     <ul class="menu">
       <li><a href="#">편한밥상 소개</a></li>
-      <li><a href="#">전체보기</a></li>
+      <li><a href="<c:url value='/item/allItems?category=전체보기'/>">전체보기</a></li>
       <li><a class="meal" href="#">밀키트</a></li>
       <li><a class="them" href="#">테마별</a></li>
       <li><a href="<c:url value='/item/bestMeal?category=베스트'/>">베스트</a></li>

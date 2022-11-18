@@ -326,6 +326,23 @@ public class ItemController {
         return "/item/itemList";
     }
 
+    @GetMapping("/allItems")
+    public String allList(String category,Model model)  {
+
+        try {
+            List<ItemVO> itemList = itemService.selectAll();
+            model.addAttribute("category",category);
+            model.addAttribute("itemList",itemList);
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+
+        }
+
+        return  "/item/itemList";
+
+    }
+
 }
 
 
