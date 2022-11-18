@@ -27,4 +27,14 @@
     <select id="selectBase" resultType="int">
         select count(*) from delivery where dely_no = 1 and user_id = #{userId};
     </select>
+
+    <select id="delyList" resultType="com.green.meal.domain.DeliveryVO">
+        select * from delivery where user_id = #{userId}
+    </select>
+
+    <select id="selectedDely" parameterType="map" resultType="com.green.meal.domain.DeliveryVO">
+        select * from delivery where user_id = #{userId} and dely_place = #{delyPlace}
+    </select>
 </mapper>
+
+

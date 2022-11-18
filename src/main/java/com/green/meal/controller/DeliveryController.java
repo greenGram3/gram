@@ -8,9 +8,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.util.LinkedList;
+import java.util.*;
 
 
 @Controller
@@ -106,4 +107,22 @@ public class DeliveryController {
         }
         return list;
     }
+
+    @GetMapping("/select")
+    public String delySelect(HttpServletRequest request, Model m, String delyPlace, DeliveryVO vo) {
+
+        HttpSession session = request.getSession();
+        String userId = (String)session.getAttribute("userId");
+
+        HashMap map = new HashMap();
+        map.put("userId", userId);
+        map.put("delyPlace", delyPlace);
+
+        vo = delyService.selectedDely(map);
+
+        m.addAttribute("vo", vo);
+
+        return "delyView";
+    }
+
 }

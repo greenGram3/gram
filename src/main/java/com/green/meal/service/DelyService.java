@@ -21,4 +21,8 @@ public interface DelyService {
     int updateDelivery2(String userId);
 
     int selectBase(String userId);
+
+    List<DeliveryVO> delySelect(String userId);
+
+    DeliveryVO selectedDely(HashMap map);
 }
