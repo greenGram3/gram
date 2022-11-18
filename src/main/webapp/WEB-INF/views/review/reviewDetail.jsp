@@ -8,6 +8,12 @@
     <link rel="stylesheet" href="<c:url value='/css/review.css'/>">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script src="js/reviewAjax.js"></script>
+    <script>
+        $(function () {
+            // ** load시 자동으로 댓글 클릭해서 댓글 보여주기
+            $('#reviewReply').trigger('click');
+        }) //ready
+    </script>
 </head>
 <body>
 <jsp:include page="../include/header.jsp" flush="false" />
@@ -87,7 +93,7 @@
             </c:if>
             <c:if test="${reviewResult.reviewStep < 1}">
             <span class="textLink"
-                  onclick="reviewReplyD(${reviewResult.reviewRoot},${reviewResult.reviewStep},${reviewResult.reviewChild})">댓글보기</span>
+                  onclick="reviewReplyD(${reviewResult.reviewRoot},${reviewResult.reviewStep},${reviewResult.reviewChild})" id="reviewReply" hidden>댓글보기</span>
             </c:if>
             <c:if test="${userId == reviewResult.userId || userId == 'admin'}">
                 <a href="reviewdetail?jCode=U&reviewNo=${reviewResult.reviewNo}&link=${link}">수정하기</a>

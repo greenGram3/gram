@@ -75,7 +75,7 @@ function reviewReplyD(reviewRoot,reviewStep,reviewChild) {
             $('#resultArea1').html(resultPage);
         },
         error: function () {
-            alert('답글이 없습니다.');
+            $('#resultArea1').html('댓글이 달리지 않았습니다.');
         }
     }); //ajax
 } //qnaReplyD

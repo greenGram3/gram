@@ -7,6 +7,12 @@
     <link rel="stylesheet" href="<c:url value='/css/qna.css'/>">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script src="js/qnaAjax.js"></script>
+    <script>
+        $(function () {
+            // ** load시 자동으로 답변 클릭해서 답변 보여주기
+            $('#qnaReply').trigger('click');
+        }) //ready
+    </script>
 </head>
 <body>
 
@@ -69,7 +75,7 @@
             </c:if>
             <c:if test="${qnaResult.qnaStep < 1}">
                 <span class="textLink"
-                      onclick="qnaReplyD(${qnaResult.qnaRoot},${qnaResult.qnaStep},${qnaResult.qnaChild})">답변보기</span>
+                      onclick="qnaReplyD(${qnaResult.qnaRoot},${qnaResult.qnaStep},${qnaResult.qnaChild})" id="qnaReply" hidden>답변보기</span>
             </c:if>
             <c:if test="${userId == qnaResult.userId || userId == 'admin'}">
                 <a href="qnadetail?jCode=U&qnaNo=${qnaResult.qnaNo}&link=${link}">수정하기</a>

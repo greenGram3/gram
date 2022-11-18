@@ -139,7 +139,7 @@ function qnaReplyD(qnaRoot,qnaStep,qnaChild) {
             $('#resultArea1').html(resultPage);
         },
         error: function () {
-            alert('아직 답글이 달리지 않았습니다.');
+            $('#resultArea1').html('아직 답변이 달리지 않았습니다.');
         }
     }); //ajax
 } //qnaReplyD
