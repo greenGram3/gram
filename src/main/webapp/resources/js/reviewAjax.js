@@ -161,7 +161,7 @@ function reviewReplyD(reviewRoot,reviewStep,reviewChild) {
                 userId: $('#userId').val(),
                 reviewTitle: $('#reviewTitle').val(),
                 reviewContent: $('#reviewContent').val(),
-                reviewNo: $('#reviewNo').val()
+                reviewNo: $('#reviewNo').val( )
             },
             success: function (resultData) {
                 if(resultData.code == 200) { //json update 성공 시
