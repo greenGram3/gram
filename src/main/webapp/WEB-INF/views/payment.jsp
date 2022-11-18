@@ -134,7 +134,7 @@
           <script>
             $("#openBtn${status.index}").on("click", function(){
 
-              window.open("<c:url value='/delyView'/>?delyPlace=${list.delyPlace}","Child","left=400,top=200,width=500,height=500");
+              window.open("<c:url value='/buy/delyView'/>?delyPlace=${list.delyPlace}","Child","left=400,top=200,width=500,height=500");
 
             });
           </script>
@@ -202,7 +202,7 @@
     }, function (rsp) {
       if(rsp.success) {
         jQuery.ajax({
-          url: "paymentConfirm",
+          url: "<c:url value='/buy/confirm' />",
           method: "POST",
           headers: { "Content-Type": "application/json" },
           data: {
@@ -212,7 +212,7 @@
         }).done(function (data) {
           alert("결제에 성공했습니다.");
           let form = $("#form");
-          form.attr("action", "<c:url value='/paymentConfirm' />");
+          form.attr("action", "<c:url value='/buy/confirm' />");
           form.attr("method", "post");
           form.submit();
         })

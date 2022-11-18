@@ -27,7 +27,7 @@
                 orderAmount.attr("id", "itemAmount");
 
                 const itemDetailForm = $('#itemDetailForm');
-                itemDetailForm.attr("action", "buy");
+                itemDetailForm.attr("action", "buy/payment");
                 itemDetailForm.attr("method", "post");
                 itemDetailForm.submit();
             })
