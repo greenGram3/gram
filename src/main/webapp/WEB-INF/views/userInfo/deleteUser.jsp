@@ -62,6 +62,10 @@ delBtn2.addEventListener('click',function (){
     }else return;
 });
 
+//회원별 버튼막기
+if("${sessionScope.userId.length()}" > 12) {
+    $('#delBtn')[0].disabled = true;
+}else $('#delBtn2')[0].disabled = true;
 </script>
     </div>
     </div>

@@ -18,7 +18,7 @@
       <h3>회원정보변경</h3>
       <hr>
       <div class="userId">
-        <p>아이디</p>　<p>${sessionScope.userId.length() > 13 ?  '********'  : user.userId}</p>
+        <p>아이디</p>　<p>${sessionScope.userId.length() > 12 ?  '********'  : user.userId}</p>
       </div>
       <div class="userPwd">
         <p>비밀번호</p>　<p>********</p>　<c:if test="${sessionScope.userId.length() < 13} "><input type="button" class="pwd" value="비밀번호 변경"></c:if>
