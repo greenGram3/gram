@@ -87,12 +87,12 @@
        <th>상품이미지</th>
     <td>
       <li class="topImage">대표이미지</li>
-      <li><img src="${vo.imgName}" class="select_img" width="100px" height="100px"></li>
+      <li><img src="<c:url value='${vo.imgName}'/>" class="select_img" width="100px" height="100px"></li>
       <li><input type="hidden" name="imgName" id="imgName" value="${vo.imgName}"></li>
       <li><input type="file" name="imgNamef" id="imgNamef" value=""></li>
     </td>
     <td>
-      <li><img src="${vo1.imgName}" class="select_img1" width="100px" height="100px"></li>
+      <li><img src="<c:url value='${vo1.imgName}'/>" class="select_img1" width="100px" height="100px"></li>
       <li><input type="hidden" name="imgName" id="imgName1" value="${vo1.imgName}"></li>
       <li><input type="file" name="imgNamef1" id="imgNamef1" value=""></li>
     </td>
