@@ -89,7 +89,7 @@ public class LoginController {
         return "redirect:/";
     }
 
-    @GetMapping("/naverLogin2")
+    @GetMapping("/naverLogin2") //네이버 로그인 했을때 첫번째 요청보내기
     public String naverLogin2(HttpSession session, Model model) {
         String clientId = "eELpwpqlV0GXGymjU5cB";//애플리케이션 클라이언트 아이디값";
         String redirectURI = null;
@@ -109,7 +109,7 @@ public class LoginController {
         return "redirect:"+apiURL;
     }
 
-    @GetMapping("/naverLogin")
+    @GetMapping("/naverLogin") // 첫번째 요청후 코드받기, 받은 코드로 접큰 토큰 생성후 유저 정보가져오기
     public String naverLogin(String code, String state, HttpServletRequest request, RedirectAttributes rettr) {
         request.setAttribute("code", code);
         request.setAttribute("state", state);
@@ -155,7 +155,7 @@ public class LoginController {
             e.printStackTrace();
         }
 //========================================================================================================================
-        String apiURL2 = "https://openapi.naver.com/v1/nid/me";
+        String apiURL2 = "https://openapi.naver.com/v1/nid/me";  //두번째 요청
 
         try {
             URL url = new URL(apiURL2);

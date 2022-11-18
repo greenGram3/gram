@@ -3,6 +3,7 @@
 			 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 			 xmlns:beans="http://www.springframework.org/schema/beans"
 			 xmlns:context="http://www.springframework.org/schema/context"
+			 xmlns:mvc="http://www.springframework.org/schema/mvc"
 			 xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
@@ -45,6 +46,22 @@
 		</beans:property>
 		<beans:property name="defaultEncoding" value="UTF-8"></beans:property>
 	</beans:bean>
+
+	<beans:bean id="loginInterceptor" class="com.green.meal.LoginInterceptor" />
+	<!--
+        2) url 과 인터셉터 설정
+        => Namespaces 에서 mvc 확인 ,
+        => mvc 사용하면 위에 있는 다음 2 Tag 수정 필요함
+               <mvc:annotation-driven  ,  <mvc:resources
+    -->
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/update/**" />
+			<mvc:mapping path="/delivery/**" />
+			<!-- 인터셉터로 사용할 빈 등록 -->
+			<beans:ref bean="loginInterceptor" />
+		</mvc:interceptor>
+	</mvc:interceptors>
 
 	<context:component-scan base-package="com.green.meal"/>
 

@@ -1,4 +1,4 @@
-package com.green.meal;
+package com.green.meal.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
