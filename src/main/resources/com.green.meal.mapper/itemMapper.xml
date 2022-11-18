@@ -91,7 +91,7 @@
         select *
         from item
     </select>
-
+<!--    이건 쓸일이 별로 없는거 같음-->
 
     <select id="searchResultCnt" parameterType="SearchCondition" resultType="int">
         select count(*)
