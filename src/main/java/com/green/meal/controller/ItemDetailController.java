@@ -66,7 +66,7 @@ public class ItemDetailController {
 
     // ** DeliInfo(Ajax)
     @RequestMapping(value="/deliInfo")
-    public String itemDetailPage(Model m) {
+    public String itemDetailPage() {
         return "item/itemDelyInfo";
     }
 
