@@ -1,4 +1,3 @@
-
 .updateUser {
     margin-top: 250px;
     margin-bottom: 50px;
@@ -29,9 +28,11 @@
 .userName,
 .userEmail,
 .userPhone,
-.userGender {
+.userGender,
+.userAddr {
     display: flex;
     border-top: 1px solid lightgrey;
+    flex-wrap: wrap;
 }
 
 .userGender {
@@ -49,7 +50,7 @@
     background-color: #eeecec;
 }
 
-.updateUser p:nth-of-type(2){
+.updateUser p:nth-of-type(2):not(.userAddr p){
     width: 300px;
     height: 40px;
 }
@@ -63,7 +64,8 @@
 .updateUser .pwd,
 .updateUser .name,
 .updateUser .email,
-.updateUser .phone {
+.updateUser .phone,
+.updateUser .addr {
     width: 100px;
     background-color: #eeecec;
     cursor: pointer;
@@ -215,3 +217,38 @@
     width: 80px;
     cursor: pointer;
 }
+
+
+#addr{
+    width: 1000%;
+    background-color: white;
+}
+
+
+.addr span {
+    width: 200px;
+    padding-left: 20px;
+    background-color: #eeecec;
+    line-height: 42px;
+}
+
+.addr>div{
+    display: flex;
+    align-items: center;
+}
+
+#addr input{
+    height: 35px;
+}
+
+#addrBtn{
+    width: 90px;
+    height: 35px;
+}
+
+#addrCancel,
+#addrComplete {
+    width: 80px;
+    cursor: pointer;
+}
+

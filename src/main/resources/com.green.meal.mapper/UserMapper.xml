@@ -31,6 +31,10 @@
         update user set user_phone = #{newPhone} where user_id = #{userId}
     </update>
 
+    <update id="updateUserAddr" parameterType="map">
+        update user set user_addr = #{newAddr} where user_id = #{userId}
+    </update>
+
     <delete id="deleteUser">
         delete from user where user_id = #{userId}
     </delete>

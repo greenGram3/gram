@@ -78,7 +78,7 @@
                   <option value="daum.net">daum.net</option>
                   <option value="gmail.com">gmail.com</option>
                   <option value="nate.com">nate.com</option>
-                </select>
+                </select> &nbsp; <div id="msgEmail" style="color: red"></div>
               </div>
               <div>
                 <input type="button" id="emailCancel" value="취소">
@@ -93,8 +93,14 @@
         selectEmail.addEventListener('change', function (e) {
           selectedEmail.setAttribute('value', e.target.value);
         });
+
         $('#emailComplete')[0].addEventListener('click', function (){
-          $('#emailForm').submit();
+          if($('#userEmailArr')[0].value == '' || $('#selectedEmail')[0].value == ''){
+            $('#emailForm').submit();
+          }else{
+            $('#msgEmail')[0].innerHTML = "이메일을 확인해주세요";
+            $('#newEmail').focus();
+          }
         })
       </script>
       <div>
@@ -112,9 +118,42 @@
             </div>
           </form>
         </div>
+
+        <div class="userAddr">
+          <p>주소</p>　<p>${user.userAddr}</p>　<input type="button" class="addr" value="주소 변경"> </div>
+
+        <div class="userAddrForm">
+          <form action="<c:url value='/update/userAddr'/>" method="post" id="addrForm">
+            <div class="addr hidden" id="addr">
+              <div>
+                <span>주소입력</span>
+                <input type="text" id="zipNo" style="width: 80px" name="zipNo" placeholder="우편번호" readonly/>
+                <input type="text" id="roadAddrPart1" style="width: 400px" name="roadAddrPart1" placeholder="도로명주소" readonly/>
+                <input type="text" id="addrDetail" name="addrDetail" placeholder="상세주소" readonly/>
+                <button type="button" id="addrBtn" onClick="goPopup();">우편번호 검색</button> &nbsp;
+                <div id="msgAddr" style="color: red"></div></div>
+              <div>
+                <input type="button" id="addrCancel" value="취소">
+                <input type="button" id="addrComplete" value="완료">
+              </div>
+            </div>
+          </form>
+        </div>
       </div>
 
       <script>
+        // 주소 우편번호 팝업창 api
+        function goPopup(){
+          let pop = window.open("<c:url value='/addr'/>","pop","_blank","width=570,height=420, scrollbars=yes, resizable=yes");
+        }
+
+        function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAddr, jibunAddr, zipNo){
+          document.querySelector("#roadAddrPart1").value = roadAddrPart1+roadAddrPart2;
+          document.querySelector("#addrDetail").value = addrDetail;
+          document.querySelector("#zipNo").value = zipNo;
+        }
+
+        //핸드폰 입력값 검사
         $('#phoneComplete')[0].addEventListener('click', function (){
           let test = /01[016789]-[^0][0-9]{2,3}-[0-9]{3,4}/;
           let test2 = $('#newPhone')[0].value;
@@ -123,6 +162,16 @@
           }else{
             $('#msgPhone')[0].innerHTML = "핸드폰 번호를 확인해주세요.";
             $('#newPhone').focus();
+          }
+        })
+
+        //주소 입력값 검사
+        $('#addrComplete')[0].addEventListener('click', function (){
+          if($('#zipNo')[0].value != ''){
+            $('#addrForm').submit();
+          }else{
+            $('#msgAddr')[0].innerHTML = "주소를 확인해주세요.";
+            $('#newAddr').focus();
           }
         })
       </script>
@@ -141,15 +190,21 @@
           if(e.target.value == '취소'){
             $('.'+e.target.id.replace("Cancel", ""))[0].classList.remove('hidden');
             $('.'+e.target.id.replace("Cancel", ""))[1].classList.add('hidden');
+            clearMsg();
           }else if(e.target.value == '완료'){
             return;
-          }else visible(e.target);
+          }else{
+            clearMsg();
+            visible(e.target);
+          }
         })
+
         function visible(object) {
           $('.'+object.className)[1].classList.remove('hidden');
           hidden(object.className);
           object.classList.add('hidden');
         }
+
         document.querySelector("#pwdComplete").addEventListener('click',function(){
           //신규 비밀번호 형식이 안맞을경우
           let reg = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/g;
@@ -191,11 +246,21 @@
           $('.name')[0].classList.remove('hidden');
           $('.email')[0].classList.remove('hidden');
           $('.phone')[0].classList.remove('hidden');
+          $('.addr')[0].classList.remove('hidden');
           $('.pwd')[1].classList.add('hidden');
           $('.name')[1].classList.add('hidden');
           $('.email')[1].classList.add('hidden');
           $('.phone')[1].classList.add('hidden');
+          $('.addr')[1].classList.add('hidden');
           $('.'+name)[1].classList.remove('hidden');
+        }
+
+        function clearMsg(){
+          $('#msgName')[0].innerHTML = '';
+          $('#msgAddr')[0].innerHTML = '';
+          $('#msgPwd')[0].innerHTML = '';
+          $('#msgPhone')[0].innerHTML = '';
+          $('#msgEmail')[0].innerHTML = '';
         }
       </script>
 

@@ -18,6 +18,8 @@ public interface UserService {
 
     int changePhone(String newPhone, String userId);
 
+    int changeAddr(String newAddr, String userId);
+
     int deleteUser(String userId);
 
 

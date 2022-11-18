@@ -19,6 +19,7 @@ public interface UserMapper {
     int updateUserEmail(Map map);
 
     int updateUserPhone(Map map);
+    int updateUserAddr(Map map);
 
     int deleteUser(String userId);
 

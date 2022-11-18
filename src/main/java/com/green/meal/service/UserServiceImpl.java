@@ -59,6 +59,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public int changeAddr(String newAddr, String userId){
+        Map map = new HashMap();
+        map.put("newAddr", newAddr);
+        map.put("userId", userId);
+        return mapper.updateUserAddr(map);
+    }
+    @Override
     public int deleteUser(String userId){
         return mapper.deleteUser(userId);
     }

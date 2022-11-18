@@ -68,6 +68,14 @@ public class UpdateController {
         updateUser(newPhone, session);
         return "redirect:/update/user";
     }
+
+    // 주소 변경
+    @PostMapping("/userAddr")
+    public String updateUserAddr(String roadAddrPart1, String addrDetail, HttpSession session){
+        String newAddr = roadAddrPart1+" "+addrDetail;
+        userService.changeAddr(newAddr, (String) session.getAttribute("userId"));
+        return "redirect:/update/user";
+    }
     //============================================================================================================
     //회원탈퇴
     @GetMapping("/userDelete")
