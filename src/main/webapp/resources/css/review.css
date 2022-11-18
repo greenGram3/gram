@@ -407,3 +407,66 @@ border: none;
 }
 
 
+/*reviewInsert*/
+
+.reviewInsert {
+    margin-top: 250px;
+    margin-bottom: 50px;
+    width: 900px;
+}
+
+.reviewInsert * {
+    text-align: left;
+}
+
+
+.reviewInsert h3 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+}
+
+.reviewInsert table {
+    width: 100%;
+    border-top: 1px solid lightgray;
+    border-collapse: collapse;
+}
+
+.reviewInsert td {
+    border-bottom: 1px solid lightgray;
+    padding: 10px 30px
+}
+
+.reviewInsert td:first-of-type {
+    background-color: #eeecec;
+    text-align: center;
+}
+.reviewInsert .reviewTitle {
+    border: 1px solid darkgray;
+    padding: 4px 10px;
+}
+
+.reviewInsert textarea {
+    width: 700px;
+    height: 300px;
+    padding: 5px;
+}
+
+.reviewInsert tr:last-of-type td {
+    background-color: white;
+
+}
+.reviewInsert .reviewCheck input {
+    text-align: center;
+    margin-top: 10px;
+    padding: 4px 10px;
+    background-color: whitesmoke;
+    border: 1px solid darkgray;
+    cursor: pointer;
+    margin-right: 10px;
+    width: 80px;
+}
+
+.reviewInsert .reviewCheck {
+    margin-left: 650px;
+}

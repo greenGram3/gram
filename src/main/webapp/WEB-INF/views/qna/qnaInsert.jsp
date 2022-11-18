@@ -35,6 +35,7 @@
 
         <div class="qnaInsert">
     <h3>1:1문의 작성</h3>
+
     <section class="section_container">
         <form action="qnainsert" method="post">
             <table>
@@ -42,6 +43,7 @@
                     <td>아이디</td>
                     <td>
                         <input type="text" name="userId" value="${userId}" readonly>
+                        <input hidden name="${link}" value="${link}">
                     </td>
                 </tr>
                 <tr>
@@ -61,9 +63,7 @@
                     </div>
                     </td>
                 </tr>
-                <tr hidden>
-                    <td><input  name="${link}" value="${link}"></td>
-                </tr>
+
             </table>
         </form>
     </section>

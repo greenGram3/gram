@@ -3,10 +3,13 @@
 <html>
 <head>
     <title>reviewInsert</title>
+    <link rel="stylesheet" href="<c:url value='/css/review.css'/>">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script src="js/reviewAjax.js"></script>
 </head>
 <body>
+<jsp:include page="../include/header.jsp" flush="false" />
+
 <c:if test="${not empty message}">
     <script type="text/javascript">
         let message = "${message}";
@@ -22,15 +25,11 @@
         <c:if test="${userId != 'admin'}">
             <jsp:include page="../include/mypage.jsp" flush="false" />
         </c:if>
-<%--        <c:if test="${link eq 'A'}">
-            <jsp:include page="../include/admin.jsp" flush="false" />
-        </c:if>
-        <c:if test="${link eq 'M'}">
-            <jsp:include page="../include/mypage.jsp" flush="false" />
-        </c:if>--%>
+
         <div class="reviewInsert">
 
-    <h1>상품 후기 작성</h1>
+    <h3>상품 후기 작성</h3>
+
     <section class="section_container">
         <form action="reviewinsert" method="post" enctype="multipart/form-data">
             <table>
@@ -55,7 +54,7 @@
                 </tr>
                 <tr>
                     <td>제목</td>
-                    <td><input type="text" name="reviewTitle" minlength="2" placeholder="제목을 입력하세요" required></td>
+                    <td><input type="text" class="reviewTitle" name="reviewTitle" minlength="2" placeholder="제목을 입력하세요" required></td>
                 </tr>
                 <tr>
                     <td>내용</td>
@@ -65,8 +64,8 @@
                 <tr>
                     <td>첨부파일</td>
                     <td>
-                        <img src="" class="select_img"><br><!-- 선택한 파일 미리보기(js이용) -->
-                        <input type="file" name="imgNamef" id="imgNamef"></td>
+                       <li><img src="" class="select_img"></li><!-- 선택한 파일 미리보기(js이용) -->
+                        <li><input type="file" name="imgNamef" id="imgNamef"></li></td>
                 </tr>
                 <script>
                     $('#imgNamef').change(function () {
@@ -82,20 +81,22 @@
                 </script>
                 <tr>
                     <td colspan="2">
+                        <div class="reviewCheck">
                         <input type="submit" value="저장" onclick="return confirm('등록하시겠습니까? 등록/취소');">
-                        <input type="reset" value="취소">&nbsp;&nbsp;&nbsp;
+                        <input type="reset" value="취소">
+                     </div>
                     </td>
                 </tr>
             </table>
         </form>
     </section>
     <div class="linkBtn_container">
-        <div class="linkBtn">
-            &nbsp;&nbsp;<a href="reviewlist">목록으로</a>
+        <div class="linkBtn"><a href="reviewlist">목록으로</a>
         </div>
     </div>
         </div>
     </div>
 </main>
+<jsp:include page="../include/footer.jsp" flush="false" />
 </body>
 </html>
