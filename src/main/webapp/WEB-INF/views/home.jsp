@@ -31,7 +31,7 @@
 		<div class="best_section01">
 			<div class="best_box">
 				<ul class="best_list">
-					<c:forEach var="itemVO" items="${itemList01}">
+					<c:forEach var="itemVO" items="${bestItems}">
 						<c:set var="pageLink" value="/itemDetail?itemNo=${itemVO.itemNo}"/>
 						<li>
 							<a href="<c:url value='${pageLink}'/>"> <img src="<c:url value='${itemVO.imgName}'/>" width="300"></a>
@@ -44,11 +44,11 @@
 			<button class="btn_back nonVisible"></button>
 			<button class="btn_after"></button>
 		</div>
-
+		<h1>신메뉴</h1>
 		<div class="best_section02">
 			<div class="best_box">
 				<ul class="best_list">
-				<c:forEach var="itemVO" items="${itemList02}">
+				<c:forEach var="itemVO" items="${newItems}">
 					<c:set var="pageLink" value="/itemDetail?itemNo=${itemVO.itemNo}"/>
 					<li>
 						<a href="<c:url value='${pageLink}'/>"> <img src="<c:url value='${itemVO.imgName}'/>" width="300"></a>

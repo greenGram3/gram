@@ -16,6 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.servlet.http.HttpServletRequest;
 import java.awt.*;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -24,6 +25,9 @@ public class ItemController {
 
     @Autowired
     ItemService itemService;
+
+    List<ItemVO> itemList = new ArrayList<>();
+
 
     @GetMapping("/list")
     public String itemList(SearchCondition sc, Model m) {
@@ -301,6 +305,26 @@ public class ItemController {
         return "/item/itemList";
     }
 
+    @GetMapping("/bestMeal")
+    public String bestList(String category,Model model){
+        List<ItemVO> list = itemService.bestItems();
+        itemList=list.subList(0,16);
+
+        model.addAttribute("category",category);
+        model.addAttribute("itemList",itemList);
+
+        return "/item/itemList";
+    }
+    @GetMapping("/newMeal")
+    public String newList(String category,Model model){
+        List<ItemVO> list = itemService.newItems();
+        itemList=list.subList(0,16);
+
+        model.addAttribute("category",category);
+        model.addAttribute("itemList",itemList);
+
+        return "/item/itemList";
+    }
 
 }
 

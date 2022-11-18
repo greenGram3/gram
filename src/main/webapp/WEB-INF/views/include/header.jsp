@@ -43,8 +43,8 @@
       <li><a href="#">전체보기</a></li>
       <li><a class="meal" href="#">밀키트</a></li>
       <li><a class="them" href="#">테마별</a></li>
-      <li><a href="#">베스트</a></li>
-      <li><a href="#">신메뉴</a></li>
+      <li><a href="<c:url value='/item/bestMeal?category=베스트'/>">베스트</a></li>
+      <li><a href="<c:url value='/item/newMeal?category=신메뉴'/>">신메뉴</a></li>
       <li><a href="#">커뮤니티</a></li>
     </ul>
     <div class="menus">

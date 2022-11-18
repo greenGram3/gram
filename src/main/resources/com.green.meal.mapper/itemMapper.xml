@@ -127,11 +127,16 @@
         where item_no=#{itemNo}
     </select>
 
-    <select id="homeItems" resultType="ItemVO" parameterType="map">
+    <select id="bestItems" resultType="ItemVO">
         select *
         from item
-        where item_price <![CDATA[ >= ]]> #{itemPrice}
-        limit #{limit}
+        order by item_amount
+    </select>
+
+    <select id="newItems" resultType="ItemVO">
+        select *
+        from item
+        order by item_no desc
     </select>
 
     <select id="category1" resultType="ItemVO" parameterType="String">

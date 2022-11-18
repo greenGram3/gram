@@ -87,11 +87,18 @@ public class ItemServiceImpl implements ItemService {
         return mapper.imageModify(vo1);
     }
 
+
     // seolhee home 페이지 --------------------------------------------------------------
     @Override
-    public List<ItemVO> homeItems(Map map) {
-        return mapper.homeItems(map);
+    public List<ItemVO> bestItems() {
+        return mapper.bestItems();
     }
+
+    @Override
+    public List<ItemVO> newItems() {
+        return mapper.newItems();
+    }
+
 
     @Override
     public int selectItemNo(String itemName) {

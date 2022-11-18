@@ -42,7 +42,9 @@ public interface ItemService {
 
 
     // seolhee home 페이지 --------------------------------------------------------------
-    List<ItemVO> homeItems(Map map);
+    List<ItemVO> bestItems();
+    List<ItemVO> newItems();
+
 
     int selectItemNo(String itemName);
 

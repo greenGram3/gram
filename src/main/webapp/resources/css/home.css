@@ -83,7 +83,7 @@ main * {
 .best_section01,
 .best_section02 {
     position: relative;
-    width:1230px;
+    width:1240px;
 }
 
 .best_box{
@@ -101,7 +101,8 @@ main * {
 }
 
 .best_list li {
-    margin-right: 10px;
+    margin-left: 5px;
+    margin-right: 5px;
 }
 
 .best_list img {
