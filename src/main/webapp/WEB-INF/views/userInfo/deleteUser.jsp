@@ -42,15 +42,26 @@
          <input type="button" value="탈퇴하기" id="delBtn">
      </form>
 
+            <form action="<c:url value='/update/userDelete2' />" method="post" id="form2">
+                <input type="button" value="네이버회원 탈퇴하기" id="delBtn2">
+            </form>
+
 <script>
 const delBtn = document.querySelector("#delBtn");
+const delBtn2 = document.querySelector("#delBtn2");
 
 delBtn.addEventListener('click',function (){
    if(confirm("정말로 탈퇴하시겠습니까?")){
        document.querySelector("#form").submit();
    }else return;
-
 });
+
+delBtn2.addEventListener('click',function (){
+    if(confirm("정말로 탈퇴하시겠습니까?")){
+        document.querySelector("#form2").submit();
+    }else return;
+});
+
 </script>
     </div>
     </div>

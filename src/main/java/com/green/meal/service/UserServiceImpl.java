@@ -71,6 +71,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public int deleteNaverUser(String userId){
+        return mapper.deleteNaverUser(userId);
+    }
+
+    @Override
     public UserVO userDetail(String userId) {
         return mapper.selectOne(userId);
     }

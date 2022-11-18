@@ -22,6 +22,8 @@ public interface UserService {
 
     int deleteUser(String userId);
 
+    int deleteNaverUser(String userId);
+
 
     UserVO userDetail(String userId) throws Exception;
 

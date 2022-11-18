@@ -6,6 +6,7 @@
 	if('${msg}'=='register_ok') alert("회원가입 되셨습니다.");
 	if('${msg}'=='login_ok') alert("로그인 되셨습니다.");
 	if('${msg}'=='logout_ok') alert("로그아웃 되셨습니다.");
+	if('${msg}'=='deleteUser_ok') alert("회원탈퇴 되셨습니다.");
 </script>
 <html>
 <head>

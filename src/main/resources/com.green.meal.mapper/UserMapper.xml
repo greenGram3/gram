@@ -39,6 +39,10 @@
         delete from user where user_id = #{userId}
     </delete>
 
+    <delete id="deleteNaverUser">
+        delete from user where user_id = #{userId}
+    </delete>
+
     <sql id="searchCondition">
         <choose>
             <when test='option=="Id"'>
