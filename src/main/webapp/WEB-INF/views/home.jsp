@@ -1,7 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt" %>
-<%@ page session="true" %>
+<%@ page session="false" %>
 <script>
 	if('${msg}'=='register_ok') alert("회원가입 되셨습니다.");
 	if('${msg}'=='login_ok') alert("로그인 되셨습니다.");
