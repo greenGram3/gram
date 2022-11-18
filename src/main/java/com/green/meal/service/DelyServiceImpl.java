@@ -48,6 +48,14 @@ public class DelyServiceImpl implements DelyService {
         return mapper.selectBase(userId);
     }
 
+    @Override
+    public List<DeliveryVO> delySelect(String userId) {
+        return mapper.delyList(userId);
+    }
 
+    @Override
+    public DeliveryVO selectedDely(HashMap map) {
+        return mapper.selectedDely(map);
+    }
 
 }

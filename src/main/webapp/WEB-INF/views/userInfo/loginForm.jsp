@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>orderList</title>
+    <title>login</title>
     <link rel="stylesheet" href="<c:url value='/css/loginForm.css'/>">
     <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
 

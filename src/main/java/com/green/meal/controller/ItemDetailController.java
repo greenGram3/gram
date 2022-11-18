@@ -8,6 +8,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
 public class ItemDetailController {
     @Autowired
@@ -20,7 +23,7 @@ public class ItemDetailController {
             vo = itemService.itemdetail(vo);
             m.addAttribute("itemResult",vo);
 
-            return "item/itemDetail";
+            return "itemDetail" ;
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -41,7 +44,7 @@ public class ItemDetailController {
             m.addAttribute("itemResult",vo);
             m.addAttribute("imageResult",vo1);
 
-            return "item/itemDetailPage";
+            return "itemDetailPage" ;
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -54,7 +57,7 @@ public class ItemDetailController {
     // ** DeliInfo(Ajax)
     @RequestMapping(value="/deliInfo")
     public String itemDetailPage(Model m) {
-        return "item/itemDelyInfo";
+        return "itemDelyInfo";
     }
 
 

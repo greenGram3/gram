@@ -2,6 +2,7 @@ package com.green.meal.mapper;
 
 import com.green.meal.domain.DeliveryVO;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -18,5 +19,8 @@ public interface DeliveryMapper {
 
     int selectBase(String userId);
 
+    List<DeliveryVO> delyList(String userId);
+
+    DeliveryVO selectedDely(HashMap map);
 
 }

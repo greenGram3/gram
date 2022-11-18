@@ -9,12 +9,13 @@
 <head>
   <meta charset="UTF-8">
   <title>payment</title>
-  <link rel="stylesheet" href="<c:url value='/css/menu.css'/>">
+<%--  <link rel="stylesheet" href="<c:url value='/css/menu.css'/>">--%>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <!-- jQuery -->
   <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
   <!-- iamport.payment.js -->
   <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+
   <style>
     * {
       box-sizing: border-box;
@@ -22,65 +23,48 @@
       padding: 0;
       font-family: "Noto Sans KR", sans-serif;
     }
-    a {
-      text-decoration: none;
-      color: black;
-    }
-    button,
-    input {
-      border: none;
-      outline: none;
-    }
+
     .board-container {
       width: 60%;
       height: 1200px;
-      margin: 0 auto;
+      margin: 50px auto 0 auto;
     }
+
     table {
-      border-collapse: collapse;
       width: 100%;
+      border-collapse: collapse;
+    }
+
+    .table-one {
       border-top: 2px solid rgb(39, 39, 39);
     }
-    .tr1, .tr3, .tr6, .tr8 {
+
+    .item-tr,
+    .addr-tr,
+    .req-tr,
+    .payment-tr {
+      width: 100%;
       background-color: #f0f0f070;
     }
-    .tr2 td, .tr6 td, tr4 td {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
+
+
     th,
     td {
       width:100px;
       text-align: center;
       padding: 10px 12px;
     }
-    td {
-      color: rgb(53, 53, 53);
-    }
-    .tr2 {
-      width: 100%;
-    }
-    .tr1, .tr2, .tr3, .tr4, .tr5, .tr6, .tr7 {
-      display: flex;
-      justify-content: space-evenly;
-      width: 100%;
-    }
-    .dely-addr, .order-req {
-      width: 100%;
-    }
-    .delyAddr-select, .orderReq-select {
-      width: 100%;
-    }
+
+
+
+
+
+
     .block-div {
       width: 100%;
       height: 50px;
       border-bottom: 1px solid rgb(39, 39, 39);
     }
-    .board-container {
-      margin-top: 50px;
-    }
-
     .pageTitle_container {
       margin-top: 50px;
       display: flex;
@@ -97,22 +81,17 @@
       font-size: 15px;
       margin : 30px 0 20px 0;
     }
-    .tr5 input {
-      text-align: center;
-      border: 1px solid black;
-      height: 100px;
-    }
     .order-req-input {
       width: 100%;
       border: 1px solid black;
+    }
+    .hidden {
+      display: none;
     }
   </style>
 </head>
 
 <body>
-
-<div id="menu">
-</div>
 
 <div class="pageTitle_container">
   <h2>결제하기</h2>
@@ -121,59 +100,86 @@
 <div style="text-align:center">
 
   <div class="board-container">
+
     <form id="form" action="" method="">
-      <table>
-        <tr class="tr1">
-          <th class="item-no">상품번호</th>
-          <th class="item-name">상품명</th>
-          <th class="item-amount">수량</th>
-          <th class="item-price">가격</th>
-          <th class="total-price">총금액</th>
+
+      <table class="table-one">
+        <tr class="item-tr">
+          <th>상품번호</th>
+          <th>상품명</th>
+          <th>수량</th>
+          <th>가격</th>
+          <th>총금액</th>
         </tr>
-        <tr class="tr2">
+        <tr class="itemList-tr">
           <td><input name="itemNo" type="text" value="${dto.itemNo}"></td>
           <td><input name="itemName" type="text" value="${dto.itemName}"></td>
           <td><input name="itemAmount" type="text" value="${dto.itemAmount}"></td>
           <td><input name="itemPrice" type="text" value="${dto.itemPrice}"></td>
           <td><input name="totalItemPrice" type="text" value="${totalItemPrice}"></td>
         </tr>
-
         <tr class="block-div"></tr>
+        <tr class="addr-tr">
+          <th>배송지</th>
+        </tr>
+        <c:forEach var="list" items="${list}" varStatus="status">
+          <table>
+            <tr>
+              <td>선택 <input type="radio" id="delyPlace" name="delyPlace" value="${list.delyPlace}" ${list.delyNo==1 ? "checked" : ""}/></td>
+              <td>${list.delyPlace} ${list.delyNo==1 ? "(기본배송지)" : ""}</td>
+              <td><button type="button" id="openBtn${status.index}">상세보기</button></td>
+            </tr>
+          </table>
+          <table class="hidden">
+            <tr>
+              <td>주소</td>
+              <td><input type="text" id="delyAddr" name="delyAddr" value="${list.delyAddr}" /></td>
+            </tr>
+            <tr>
+              <td>수령자</td>
+              <td><input type="text" id="receiver" name="receiver" value="${list.receiver}" /></td>
+            </tr>
+            <tr>
+              <td>연락처</td>
+              <td><input type="text" id="delyPhone" name="delyPhone" value="${list.delyPhone}" /></td>
+            </tr>
+          </table>
 
-        <tr class="tr3">
-          <th class="dely-addr">배송지</th>
-        </tr>
-        <tr class="tr4">
-          <td><button type="button" id="delySelectBtn" class="delySelect-Btn">배송지선택</button></td>
-        </tr>
-        <tr class="tr5">
-          <td class="dely-addr"><input class="delyAddr-select" name="delyAddr" type="content" value=""></td>
-        </tr>
+          <script>
+            $("#openBtn${status.index}").on("click", function(){
 
+              let selectedPlace = $("#delyPlace").val();
+              window.open("<c:url value='/delivery/select'/>?delyPlace=${list.delyPlace}","Child","left=400,top=200,width=500,height=500");
+
+            });
+          </script>
+
+        </c:forEach>
+      </table>
+
+      <table>
         <tr class="block-div"></tr>
-
-        <tr class="tr6">
-          <th class="order-req">요청사항</th>
+        <tr class="req-tr">
+          <th>요청사항</th>
         </tr>
         <tr class="tr7">
           <td class="order-req"><input class="order-req-input" name="orderReq" type="content" value=""></td>
         </tr>
-
         <tr class="block-div"></tr>
-
-        <tr class="tr8">
-          <th class="order-payment">결제수단</th>
+        <tr class="payment-tr">
+          <th>결제수단</th>
         </tr>
-        <tr class="tr9">
-          <td class="order-payment"><input class="orderPayment-select" name="payment" type="content" value=""></td>
+        <tr>
+          <td>
+            <select>
+              <option id="payment" name="payment" value="card">card</option>
+            </select>
+          </td>
         </tr>
-
         <tr class="block-div"></tr>
-
-        <tr class="tr10">
+        <tr>
           <td><button type="button" id="check_module" class="payment-Btn">결제하기</button></td>
         </tr>
-
       </table>
 
     </form>
@@ -191,15 +197,15 @@
 
     IMP.request_pay({
       pg : 'html5_inicis',
-      pay_method : 'card',
-      merchant_uid: "57008833-33010",
-      name : '당근 10kg',
-      amount : 1000,
+      merchant_uid: "57008833-33014",
+      name : '${dto.itemName} ${dto.itemAmount}개',
+      amount : ${totalItemPrice},
+      pay_method : $("#payment").val(),
       buyer_email : 'Iamport@chai.finance',
       buyer_name : '아임포트 기술지원팀',
-      buyer_tel : '010-1234-5678',
-      buyer_addr : '서울특별시 강남구 삼성동',
-      buyer_postcode : '123-456',
+      // buyer_tel : '010-1234-5678',
+      // buyer_addr : '서울특별시 강남구 삼성동',
+      // buyer_postcode : '123-456',
     }, function (rsp) {
       if(rsp.success) {
         jQuery.ajax({
@@ -223,6 +229,14 @@
 
     });
   })
+
+
+
+  // 배송지 목록 팝업창으로 띄워서 배송지 선택하기 (실패)
+  <%--document.querySelector("#delySelectBtn").addEventListener('click',function (){--%>
+  <%--  window.open("<c:url value="/delivery/select"/>","Child","left=400,top=200,width=500,height=500")--%>
+  <%--})--%>
+
 </script>
 
 </body>
