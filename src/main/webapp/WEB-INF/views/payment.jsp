@@ -130,25 +130,11 @@
               <td><button type="button" id="openBtn${status.index}">상세보기</button></td>
             </tr>
           </table>
-          <table class="hidden">
-            <tr>
-              <td>주소</td>
-              <td><input type="text" id="delyAddr" name="delyAddr" value="${list.delyAddr}" /></td>
-            </tr>
-            <tr>
-              <td>수령자</td>
-              <td><input type="text" id="receiver" name="receiver" value="${list.receiver}" /></td>
-            </tr>
-            <tr>
-              <td>연락처</td>
-              <td><input type="text" id="delyPhone" name="delyPhone" value="${list.delyPhone}" /></td>
-            </tr>
-          </table>
 
           <script>
             $("#openBtn${status.index}").on("click", function(){
 
-              window.open("<c:url value='/delivery/select'/>?delyPlace=${list.delyPlace}","Child","left=400,top=200,width=500,height=500");
+              window.open("<c:url value='/delyView'/>?delyPlace=${list.delyPlace}","Child","left=400,top=200,width=500,height=500");
 
             });
           </script>
@@ -181,6 +167,17 @@
         </tr>
       </table>
 
+      <table class="hidden">
+        <tr>
+          <th>구매자이름</th>
+          <td><input type="text" name="userId" value="${vo.userName}"></td>
+        </tr>
+        <tr>
+          <th>구매자이메일</th>
+          <td><input type="text" name="userEmail" value="${vo.userEmail}"></td>
+        </tr>
+      </table>
+
     </form>
 
   </div>
@@ -196,15 +193,12 @@
 
     IMP.request_pay({
       pg : 'html5_inicis',
-      merchant_uid: "57008833-33014",
+      merchant_uid: "${uniqueNo}",
       name : '${dto.itemName} ${dto.itemAmount}개',
       amount : ${totalItemPrice},
       pay_method : $("#payment").val(),
-      buyer_email : 'Iamport@chai.finance',
-      buyer_name : '아임포트 기술지원팀',
-      // buyer_tel : '010-1234-5678',
-      buyer_addr : '서울특별시 강남구 삼성동',
-      // buyer_postcode : '123-456',
+      buyer_email : '${vo.userEmail}',
+      buyer_name : '${vo.userName}',
     }, function (rsp) {
       if(rsp.success) {
         jQuery.ajax({
