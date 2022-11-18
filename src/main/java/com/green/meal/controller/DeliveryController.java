@@ -108,21 +108,4 @@ public class DeliveryController {
         return list;
     }
 
-    @GetMapping("/select")
-    public String delySelect(HttpServletRequest request, Model m, String delyPlace, DeliveryVO vo) {
-
-        HttpSession session = request.getSession();
-        String userId = (String)session.getAttribute("userId");
-
-        HashMap map = new HashMap();
-        map.put("userId", userId);
-        map.put("delyPlace", delyPlace);
-
-        vo = delyService.selectedDely(map);
-
-        m.addAttribute("vo", vo);
-
-        return "delyView";
-    }
-
 }
