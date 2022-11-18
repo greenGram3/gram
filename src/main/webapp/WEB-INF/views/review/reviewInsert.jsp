@@ -7,6 +7,8 @@
     <script src="js/reviewAjax.js"></script>
 </head>
 <body>
+<jsp:include page="../include/header.jsp" flush="false" />
+
 <c:if test="${not empty message}">
     <script type="text/javascript">
         let message = "${message}";
@@ -97,5 +99,6 @@
         </div>
     </div>
 </main>
+<jsp:include page="../include/footer.jsp" flush="false" />
 </body>
 </html>
