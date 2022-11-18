@@ -134,6 +134,20 @@
         limit #{limit}
     </select>
 
+    <select id="category1" resultType="ItemVO" parameterType="String">
+        select *
+        from item
+        where item_category1=#{itemCategory1}
+    </select>
+
+    <select id="category2" resultType="ItemVO" parameterType="String">
+        select *
+        from item
+        where item_category2=#{itemCategory2}
+    </select>
+
+
+
 </mapper>
 
 

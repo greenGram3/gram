@@ -46,4 +46,8 @@ public interface ItemService {
 
     int selectItemNo(String itemName);
 
+    //카테고리 별 리스트 페이지 --------------------------------------------------------------
+    List<ItemVO> category1(String category);
+    List<ItemVO> category2(String category);
+
 }

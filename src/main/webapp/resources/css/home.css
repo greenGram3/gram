@@ -77,12 +77,12 @@ main * {
 .best_container h1 {
     width: 1230px;
     margin-bottom: 30px;
+    font-size: 50px;
 }
 
 .best_section {
     position: relative;
     width:1230px;
-    /*height: 624px;*/
 }
 
 .best_box{
@@ -105,7 +105,9 @@ main * {
 
 .best_list img {
     cursor: pointer;
+    border-radius: 20px;
 }
+
 
 .best_list *{
     margin-top: 10px;
@@ -130,7 +132,7 @@ main * {
     position: absolute;
     width: 51px;
     height: 85px;
-    top: 78%;
+    top: 80%;
     transform: translateY(-80%);
     opacity: .5;
     border: none;
@@ -140,7 +142,7 @@ main * {
     position: absolute;
     width: 51px;
     height: 85px;
-    top: 128%;
+    top: 125%;
     transform: translateY(-122%);
     opacity: .5;
     border: none;

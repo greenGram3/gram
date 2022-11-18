@@ -29,29 +29,29 @@ public class HomeController {
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model model, HttpServletRequest request) {
-//
-//		Items item = new Items();
-//		item.setItemPrice(10000);
-//		item.setLimit(8);
-//		Integer itemPrice1 = item.getItemPrice();
-//		Integer limit1 = item.getLimit();
-//		Map map = new HashMap<>();
-//		map.put("itemPrice", itemPrice1);
-//		map.put("limit", limit1);
-//
-//		List<ItemVO> itemList01 = itemService.homeItems(map);
-//
-//		model.addAttribute("itemList01", itemList01);
-//
-//		item.setItemPrice(15000);
-//		Integer itemPrice2 = item.getItemPrice();
-//
-//
-//		map.put("itemPrice", itemPrice2);
-//
-//		List<ItemVO> itemList02 = itemService.homeItems(map);
-//
-//		model.addAttribute("itemList02", itemList02);
+
+		Items item = new Items();
+		item.setItemPrice(10000);
+		item.setLimit(8);
+		Integer itemPrice1 = item.getItemPrice();
+		Integer limit1 = item.getLimit();
+		Map map = new HashMap<>();
+		map.put("itemPrice", itemPrice1);
+		map.put("limit", limit1);
+
+		List<ItemVO> itemList01 = itemService.homeItems(map);
+
+		model.addAttribute("itemList01", itemList01);
+
+		item.setItemPrice(15000);
+		Integer itemPrice2 = item.getItemPrice();
+
+
+		map.put("itemPrice", itemPrice2);
+
+		List<ItemVO> itemList02 = itemService.homeItems(map);
+
+		model.addAttribute("itemList02", itemList02);
 
 		HttpSession session = request.getSession();
 		session.setAttribute("userId", "admin");

@@ -176,6 +176,7 @@ public class ItemController {
         return "admin/itemUpload";
     }
 
+
     @PostMapping("/upload")
     public String upload(ItemVO vo, ImageVO vo1, Model m, RedirectAttributes rattr, HttpServletRequest request) {
 
@@ -231,8 +232,7 @@ public class ItemController {
             int rowCntI = itemService.itemImgUpload(vo1);
 
             if(rowCnt!=1 && rowCntI!=1){
-                System.out.println("rowCntI = " + rowCntI);
-                System.out.println("rowCnt = " + rowCnt);
+
                 throw new Exception("item upload failed");
             }
 
@@ -278,6 +278,29 @@ public class ItemController {
 //        m.addAttribute("msg", "UiqueKey_ERR");
 //        return "itemUpload";
 //    }
+
+//    ==============================================================================
+    @GetMapping("/category1")
+    public String category1( String category1, Model model){
+
+        List<ItemVO> itemList = itemService.category1(category1);
+        model.addAttribute("category",category1);
+        model.addAttribute("itemList",itemList);
+
+
+    return "/item/itemList";
+    }
+
+    @GetMapping("/category2")
+    public String category2(String category2, Model model){
+
+        List<ItemVO> itemList = itemService.category2(category2);
+        model.addAttribute("category",category2);
+        model.addAttribute("itemList",itemList);
+
+        return "/item/itemList";
+    }
+
 
 }
 

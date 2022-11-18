@@ -50,21 +50,21 @@
     <div class="menus">
       <div id="category01">
         <ul>
-          <li><a href="">한식</a></li>
-          <li><a href="">양식</a></li>
-          <li><a href="">중식/일식</a></li>
-          <li><a href="">분식/야식</a></li>
-          <li><a href="">세트상품</a></li>
+          <li><a href="<c:url value='/item/category1?category1=한식'/>">한식</a></li>
+          <li><a href="<c:url value='/item/category1?category1=양식'/>">양식</a></li>
+          <li><a href="<c:url value='/item/category1?category1=중식/일식'/>">중식/일식</a></li>
+          <li><a href="<c:url value='/item/category1?category1=분식/야식'/>">분식/야식</a></li>
+          <li><a href="<c:url value='/item/category1?category1=세트상품'/>">세트상품</a></li>
         </ul>
       </div>
 
       <div class="thema">
         <ul>
-          <li><a href="">비오는날</a></li>
-          <li><a href="">집들이</a></li>
-          <li><a href="">캠핑</a></li>
-          <li><a href="">술안주</a></li>
-          <li><a href="">혼밥</a></li>
+          <li><a href="<c:url value='/item/category2?category2=비오는날'/>">비오는날</a></li>
+          <li><a href="<c:url value='/item/category2?category2=집들이'/>">집들이</a></li>
+          <li><a href="<c:url value='/item/category2?category2=캠핑'/>">캠핑</a></li>
+          <li><a href="<c:url value='/item/category2?category2=술안주'/>">술안주</a></li>
+          <li><a href="<c:url value='/item/category2?category2=혼밥'/>">혼밥</a></li>
         </ul>
       </div>
     </div>

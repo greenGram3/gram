@@ -31,31 +31,31 @@
 		<div class="best_section01">
 			<div class="best_box">
 				<ul class="best_list">
-<%--					<c:forEach var="itemVO" items="${itemList01}">--%>
-<%--						<c:set var="pageLink" value="/itemDetail?itemNo=${itemVO.itemNo}"/>--%>
-<%--						<li>--%>
-<%--							<a href="<c:url value='${pageLink}'/>"> <img src="<c:url value='${itemVO.imgName}'/>" width="300"></a>--%>
-<%--							<h4>${itemVO.itemName}</h4>--%>
-<%--							<p><fmt:formatNumber pattern="###,###,###" value="${itemVO.itemPrice}"/> 원</p>--%>
-<%--						</li>--%>
-<%--					</c:forEach>--%>
-<%--				</ul>--%>
-<%--			</div>--%>
-<%--			<button class="btn_back nonVisible"></button>--%>
-<%--			<button class="btn_after"></button>--%>
-<%--		</div>--%>
+					<c:forEach var="itemVO" items="${itemList01}">
+						<c:set var="pageLink" value="/itemDetail?itemNo=${itemVO.itemNo}"/>
+						<li>
+							<a href="<c:url value='${pageLink}'/>"> <img src="<c:url value='${itemVO.imgName}'/>" width="300"></a>
+							<h3>${itemVO.itemName}</h3>
+							<h4><fmt:formatNumber pattern="###,###,###" value="${itemVO.itemPrice}"/> 원</h4>
+						</li>
+					</c:forEach>
+				</ul>
+			</div>
+			<button class="btn_back nonVisible"></button>
+			<button class="btn_after"></button>
+		</div>
 
-<%--		<div class="best_section02">--%>
-<%--			<div class="best_box">--%>
-<%--				<ul class="best_list">--%>
-<%--				<c:forEach var="itemVO" items="${itemList02}">--%>
-<%--					<c:set var="pageLink" value="/itemDetail?itemNo=${itemVO.itemNo}"/>--%>
-<%--					<li>--%>
-<%--						<a href="<c:url value='${pageLink}'/>"> <img src="<c:url value='${itemVO.imgName}'/>" width="300"></a>--%>
-<%--						<h4>${itemVO.itemName}</h4>--%>
-<%--						<p><fmt:formatNumber pattern="###,###,###" value="${itemVO.itemPrice}"/> 원</p>--%>
-<%--					</li>--%>
-<%--				</c:forEach>--%>
+		<div class="best_section02">
+			<div class="best_box">
+				<ul class="best_list">
+				<c:forEach var="itemVO" items="${itemList02}">
+					<c:set var="pageLink" value="/itemDetail?itemNo=${itemVO.itemNo}"/>
+					<li>
+						<a href="<c:url value='${pageLink}'/>"> <img src="<c:url value='${itemVO.imgName}'/>" width="300"></a>
+						<h3>${itemVO.itemName}</h3>
+						<h4><fmt:formatNumber pattern="###,###,###" value="${itemVO.itemPrice}"/> 원</h4>
+					</li>
+				</c:forEach>
 				</ul>
 			</div>
 			<button class="btn_back nonVisible"></button>
