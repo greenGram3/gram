@@ -83,6 +83,7 @@
     }
     .order-req-input {
       width: 100%;
+      height: 80px;
       border: 1px solid black;
     }
     .hidden {

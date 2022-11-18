@@ -12,10 +12,12 @@ public class OrderListVO {
     private String payment;
     private String orderReq;
     private String orderState;
+    private String receiver;
+    private String itemName;
 
     public OrderListVO() {}
 
-    public OrderListVO(int orderNo, String userId, String delyAddr, String userPhone, String orderDate, String payment, String orderReq, String orderState) {
+    public OrderListVO(int orderNo, String userId, String delyAddr, String userPhone, String orderDate, String payment, String orderReq, String orderState, String receiver, String itemName) {
         this.orderNo = orderNo;
         this.userId = userId;
         this.delyAddr = delyAddr;
@@ -24,6 +26,8 @@ public class OrderListVO {
         this.payment = payment;
         this.orderReq = orderReq;
         this.orderState = orderState;
+        this.receiver = receiver;
+        this.itemName = itemName;
     }
 
     public int getOrderNo() {
@@ -90,17 +94,33 @@ public class OrderListVO {
         this.orderState = orderState;
     }
 
+    public String getReceiver() {
+        return receiver;
+    }
+
+    public void setReceiver(String receiver) {
+        this.receiver = receiver;
+    }
+
+    public String getItemName() {
+        return itemName;
+    }
+
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         OrderListVO that = (OrderListVO) o;
-        return orderNo == that.orderNo && Objects.equals(userId, that.userId) && Objects.equals(delyAddr, that.delyAddr) && Objects.equals(userPhone, that.userPhone) && Objects.equals(orderDate, that.orderDate) && Objects.equals(payment, that.payment) && Objects.equals(orderReq, that.orderReq) && Objects.equals(orderState, that.orderState);
+        return orderNo == that.orderNo && Objects.equals(userId, that.userId) && Objects.equals(delyAddr, that.delyAddr) && Objects.equals(userPhone, that.userPhone) && Objects.equals(orderDate, that.orderDate) && Objects.equals(payment, that.payment) && Objects.equals(orderReq, that.orderReq) && Objects.equals(orderState, that.orderState) && Objects.equals(receiver, that.receiver) && Objects.equals(itemName, that.itemName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(orderNo, userId, delyAddr, userPhone, orderDate, payment, orderReq, orderState);
+        return Objects.hash(orderNo, userId, delyAddr, userPhone, orderDate, payment, orderReq, orderState, receiver, itemName);
     }
 
     @Override
@@ -114,7 +134,8 @@ public class OrderListVO {
                 ", payment='" + payment + '\'' +
                 ", orderReq='" + orderReq + '\'' +
                 ", orderState='" + orderState + '\'' +
+                ", receiver='" + receiver + '\'' +
+                ", itemName='" + itemName + '\'' +
                 '}';
     }
-
 }

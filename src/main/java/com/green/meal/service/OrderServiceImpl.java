@@ -77,4 +77,9 @@ public class OrderServiceImpl implements OrderService {
         return mapper.searchSelectPage(sc);
     }
 
+    @Override
+    public int buyInfoToList(OrderDetailVO vo) throws Exception {
+        return mapper.buyInfoToList(vo);
+    }
+
 }

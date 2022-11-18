@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.green.meal.mapper.ItemMapper">
+
+    <sql id="searchCondition">
+        <choose>
+            <when test='option=="No"'>
+                and item_no = #{keyword}
+            </when>
+            <when test='option=="Na"'>
+                and item_name like concat('%', #{keyword}, '%')
+            </when>
+            <when test='option=="Pr"'>
+                and item_price = #{keyword}
+            </when>
+            <when test='option=="Ca"'>
+                and item_category1 like concat('%', #{keyword}, '%')
+                or item_category2 like concat('%', #{keyword}, '%')
+            </when>
+            <otherwise>
+                and item_no = #{keyword}
+                or item_category1 like concat('%', #{keyword}, '%')
+                or item_category2 like concat('%', #{keyword}, '%')
+                or item_name like concat('%', #{keyword}, '%')
+                or item_price = #{keyword}
+            </otherwise>
+        </choose>
+    </sql>
+
+    <select id="selectOne" parameterType="int" resultType="ItemVO">
+        select * from item
+        WHERE item_no = #{itemNo}
+    </select>
+    <select id="imageAdmin" resultType="com.green.meal.domain.ImageVO">
+        select * from image
+        WHERE item_no = #{itemNo}
+    </select>
+
+    <!-- Image Table -->
+    <insert id="insert" parameterType="ItemVO">
+        insert into item
+            (item_category1, item_category2, item_name, item_amount, item_price, img_name)
+        values
+            (#{itemCategory1}, #{itemCategory2}, #{itemName}, #{itemAmount}, #{itemPrice}, #{imgName})
+    </insert>
+
+    <!-- 이미지 한개 등록용 이전 구버전 -->
+    <!--    <selectKey keyProperty="itemNo" resultType="int" order="AFTER">
+                SELECT LAST_INSERT_ID()
+            </selectKey> -->
+
+    <!-- Image Insert 추가 -->
+    <insert id="itemImgUpload" parameterType="com.green.meal.domain.ImageVO">
+        insert into image
+            (item_no, img_name, img_type)
+        values
+            (#{itemNo},#{imgName},#{imgType})
+    </insert>
+
+    <select id="selectItemNo" parameterType="string" resultType="int">
+        select item_no
+        from item
+        where item_name = #{itemName}
+    </select>
+
+    <delete id="delete" parameterType="int">
+        delete from item where item_no = #{itemNo}
+    </delete>
+
+    <update id="update" parameterType="ItemVO">
+        update item
+        set item_category1 = #{itemCategory1},
+            item_category2 = #{itemCategory2},
+            item_name = #{itemName},
+            item_amount = #{itemAmount},
+            item_price = #{itemPrice},
+            img_name=#{imgName}
+        where item_no = #{itemNo}
+    </update>
+
+    <!-- Image Update 추가 -->
+   <update id="imageModify" parameterType="com.green.meal.domain.ImageVO">
+        update image
+        set img_name = #{imgName}
+        where item_no = #{itemNo}
+    </update>
+
+    <select id="selectAll" resultType="itemVO">
+        select *
+        from item
+    </select>
+<!--    이건 쓸일이 별로 없는거 같음-->
+
+    <select id="searchResultCnt" parameterType="SearchCondition" resultType="int">
+        select count(*)
+        from item
+        where true
+        <include refid="searchCondition"/>
+    </select>
+
+    <select id="searchSelectPage" parameterType="SearchCondition" resultType="ItemVO">
+        select *
+        from item
+        where true
+        <include refid="searchCondition"/>
+        order by item_no desc
+        limit #{offset}, #{pageSize}
+    </select>
+
+    <!-- heeJeang item 상세페이지 itemDetail -->
+<!--    <select id="itemdetail" resultType="ItemVO">
+        select item.item_no, item_name, item_price, img_name, img_type
+        from item, image
+        where item.item_no=#{itemNo} and item.item_no=image.item_no;
+    </select>-->
+
+    <select id="itemdetail" resultType="ItemVO">
+        select *
+        from item
+        where item_no=#{itemNo}
+    </select>
+
+    <select id="imageDetail" resultType="com.green.meal.domain.ImageVO">
+        select * from image
+        where item_no=#{itemNo}
+    </select>
+
+    <select id="homeItems" resultType="ItemVO" parameterType="map">
+        select *
+        from item
+        where item_price <![CDATA[ >= ]]> #{itemPrice}
+        limit #{limit}
+    </select>
+
+    <select id="category1" resultType="ItemVO" parameterType="String">
+        select *
+        from item
+        where item_category1=#{itemCategory1}
+    </select>
+
+    <select id="category2" resultType="ItemVO" parameterType="String">
+        select *
+        from item
+        where item_category2=#{itemCategory2}
+    </select>
+
+
+
+</mapper>
+
+
+
+
