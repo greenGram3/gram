@@ -1,5 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt" %>
 <%@ page session="true" %>
 <script>
 	if('${msg}'=='register_ok') alert("회원가입 되셨습니다.");
@@ -26,22 +27,36 @@
 	</section>
 
 	<section class="best_container">
-		<h2>베스트 상품</h2>
-		<div class="best_section 01">
+		<h1>베스트 상품</h1>
+		<div class="best_section01">
 			<div class="best_box">
 				<ul class="best_list">
-				</ul>
-				<P> event Zone  ${serverTime}. </P>
-			</div>
-			<button class="btn_back nonVisible"></button>
-			<button class="btn_after"></button>
-		</div>
+<%--					<c:forEach var="itemVO" items="${itemList01}">--%>
+<%--						<c:set var="pageLink" value="/itemDetail?itemNo=${itemVO.itemNo}"/>--%>
+<%--						<li>--%>
+<%--							<a href="<c:url value='${pageLink}'/>"> <img src="<c:url value='${itemVO.imgName}'/>" width="300"></a>--%>
+<%--							<h4>${itemVO.itemName}</h4>--%>
+<%--							<p><fmt:formatNumber pattern="###,###,###" value="${itemVO.itemPrice}"/> 원</p>--%>
+<%--						</li>--%>
+<%--					</c:forEach>--%>
+<%--				</ul>--%>
+<%--			</div>--%>
+<%--			<button class="btn_back nonVisible"></button>--%>
+<%--			<button class="btn_after"></button>--%>
+<%--		</div>--%>
 
-		<div class="best_section 02">
-			<div class="best_box">
-				<ul class="best_list">
+<%--		<div class="best_section02">--%>
+<%--			<div class="best_box">--%>
+<%--				<ul class="best_list">--%>
+<%--				<c:forEach var="itemVO" items="${itemList02}">--%>
+<%--					<c:set var="pageLink" value="/itemDetail?itemNo=${itemVO.itemNo}"/>--%>
+<%--					<li>--%>
+<%--						<a href="<c:url value='${pageLink}'/>"> <img src="<c:url value='${itemVO.imgName}'/>" width="300"></a>--%>
+<%--						<h4>${itemVO.itemName}</h4>--%>
+<%--						<p><fmt:formatNumber pattern="###,###,###" value="${itemVO.itemPrice}"/> 원</p>--%>
+<%--					</li>--%>
+<%--				</c:forEach>--%>
 				</ul>
-				<P> event Zone  ${serverTime}. </P>
 			</div>
 			<button class="btn_back nonVisible"></button>
 			<button class="btn_after"></button>

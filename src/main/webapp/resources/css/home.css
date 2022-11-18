@@ -71,23 +71,24 @@ main * {
 
 .best_container {
     text-align: center;
-    width: 1200px;
+    width: 1230px;
 }
 
-.best_container h2 {
-    width: 1200px;
+.best_container h1 {
+    width: 1230px;
+    margin-bottom: 30px;
 }
 
 .best_section {
     position: relative;
-    width:1200px;
+    width:1230px;
     /*height: 624px;*/
 }
 
 .best_box{
     position: relative;
     overflow: hidden;
-    height: 100%;
+    height: 500px;
 }
 
 .best_list {
@@ -96,6 +97,10 @@ main * {
     left: 0;
     position:absolute;
     transition: all 1s;
+}
+
+.best_list li {
+    margin-right: 10px;
 }
 
 .best_list img {
@@ -111,25 +116,34 @@ main * {
 }
 
 
-.best_container button {
-    position: absolute;
-    width: 51px;
-    height: 85px;
-    top: 50%;
-    transform: translateY(-50%);
-    opacity: .5;
-    border: none;
-}
-
-
 .btn_back {
     background: url(../icon/before.png);
-    right:100%;
+    right:92%;
 }
 
 .btn_after {
     background: url(../icon/after.png);
-    left:100%;
+    left:92%;
+}
+
+.best_section01 button {
+    position: absolute;
+    width: 51px;
+    height: 85px;
+    top: 78%;
+    transform: translateY(-80%);
+    opacity: .5;
+    border: none;
+}
+
+.best_section02 button {
+    position: absolute;
+    width: 51px;
+    height: 85px;
+    top: 128%;
+    transform: translateY(-122%);
+    opacity: .5;
+    border: none;
 }
 
 
