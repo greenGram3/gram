@@ -8,7 +8,6 @@
     <title>orderList</title>
     <link rel="stylesheet" href="<c:url value='/css/userOrderDetail.css'/>">
     <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
-
 </head>
 
 <body>
@@ -31,6 +30,9 @@
                             <th>상품정보</th>
                             <th>상품금액(수량)</th>
                             <th>주문상태</th>
+                            <c:if test="${orderListDto.orderState == '구매확정'}">
+                                <th>상품후기</th>
+                            </c:if>
                         </tr>
                         <c:forEach var="orderDetailDto" items="${orderListDto.list}">
                             <tr>
@@ -42,6 +44,13 @@
                                     <li>( ${orderDetailDto.itemAmount} 개)</li>
                                 </td>
                                 <td>${orderListDto.orderState}</td>
+                                <c:if test="${orderListDto.orderState == '구매확정'}">
+                                    <td>
+                                        <button type="button"
+                                                onclick="location.href='<c:url value='/reviewinsertf?itemName=${orderDetailDto.itemName}&itemNo=${orderDetailDto.itemNo}&orderNo=${orderDetailDto.orderNo}'/>'">
+                                            후기작성하기</button>
+                                    </td>
+                                </c:if>
                             </tr>
                         </c:forEach>
                     </table>
