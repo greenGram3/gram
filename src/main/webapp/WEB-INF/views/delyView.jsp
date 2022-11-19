@@ -10,6 +10,9 @@
             border: 1px solid black;
             margin: 10px;
         }
+        .input-field-delyPlace {
+            border: none;
+        }
     </style>
 </head>
 <body>
@@ -20,7 +23,8 @@
 <table>
     <tr>
         <td><label for="delyPlace">배송지명</label></td>
-        <td><input class="input-field" type="text" id="delyPlace" name="delyPlace" value="${vo.delyPlace}" ></td>
+        <td>${vo.delyPlace}</td>
+        <td><input class="input-field-delyPlace" type="hidden" id="delyPlace" name="delyPlace" value="${vo.delyPlace}"></td>
     </tr>
     <tr>
         <td><label for="receiver">수령자</label></td>

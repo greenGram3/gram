@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -100,7 +101,9 @@ public class PaymentController {
         try {
             //세션으로 아이디 얻어오기
             HttpSession session = request.getSession();
+            session.setAttribute("userId", "aaa1111");
             String userId = (String)session.getAttribute("userId");
+
 
             //아이디와 배송지명을 이용해서 배송지 주소 얻어오기
             HashMap map = new HashMap();
@@ -111,8 +114,8 @@ public class PaymentController {
             System.out.println("vo = " + vo);
 
             //order_list에 구매정보 insert (실패)
-//            String test = vo.getDelyAddr();
-//            System.out.println("test = " + test);
+            String test = vo.getDelyAddr();
+            System.out.println("test = " + test);
 //
 //            odvo.setUserId(userId);
 //            odvo.setDelyAddr(vo.getDelyAddr());

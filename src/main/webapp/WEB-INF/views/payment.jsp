@@ -184,7 +184,14 @@
   </div>
 
 </div>
-
+<%--<script>--%>
+<%--  $("#check_module").on("click", function () {--%>
+<%--    let form = $("#form");--%>
+<%--    form.attr("action", "<c:url value='/buy/confirm' />");--%>
+<%--    form.attr("method", "post");--%>
+<%--    form.submit();--%>
+<%--  });--%>
+<%--</script>--%>
 <script>
 
   $("#check_module").on("click", function () {
@@ -202,21 +209,27 @@
       buyer_name : '${vo.userName}',
     }, function (rsp) {
       if(rsp.success) {
-        jQuery.ajax({
-          url: "<c:url value='/buy/confirm' />",
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          data: {
-            imp_uid: rsp.imp_uid,
-            merchant_uid: rsp.merchant_uid
-          }
-        }).done(function (data) {
-          alert("결제에 성공했습니다.");
-          let form = $("#form");
-          form.attr("action", "<c:url value='/buy/confirm' />");
-          form.attr("method", "post");
-          form.submit();
-        })
+
+        <%--jQuery.ajax({--%>
+        <%--  url: "<c:url value='/buy/confirm' />",--%>
+        <%--  method: "POST",--%>
+        <%--  headers: { "Content-Type": "application/json" },--%>
+        <%--  data: {--%>
+        <%--    imp_uid: rsp.imp_uid,--%>
+        <%--    merchant_uid: rsp.merchant_uid--%>
+        <%--  }--%>
+        <%--  --%>
+        <%--}).done(function (data) {--%>
+        <%--  alert("결제에 성공했습니다.");--%>
+        <%--  let form = $("#form");--%>
+        <%--  form.attr("action", "<c:url value='/buy/confirm' />");--%>
+        <%--  form.attr("method", "post");--%>
+        <%--  form.submit();--%>
+        <%--})--%>
+        let form = $("#form");
+        form.attr("action", "<c:url value='/buy/confirm' />");
+        form.attr("method", "post");
+        form.submit();
       } else {
         alert("결제에 실패했습니다. 에러 내용: " + rsp.error_msg);
       }

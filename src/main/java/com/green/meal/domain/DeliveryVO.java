@@ -9,4 +9,5 @@ public class DeliveryVO {
     String delyAddr;
     String receiver;
     String delyPhone;
+
 }
