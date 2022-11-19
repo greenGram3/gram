@@ -79,5 +79,10 @@
         values (#{userId}, #{delyAddr}, #{userPhone}, #{payment}, #{orderReq}, #{receiver})
     </insert>
 
+    <insert id="buyInfoToDetail" parameterType="OrderDetailVO">
+        insert into order_detail(item_no, item_price, item_amount)
+        values (#{itemNo}, #{itemPrice}, #{itemAmount})
+    </insert>
+
 </mapper>
 

@@ -189,10 +189,10 @@
   $("#check_module").on("click", function () {
 
     //테스트용 코드
-    <%--let form = $("#form");--%>
-    <%--form.attr("action", "<c:url value='/buy/confirm' />");--%>
-    <%--form.attr("method", "post");--%>
-    <%--form.submit();--%>
+    let form = $("#form");
+    form.attr("action", "<c:url value='/buy/confirm' />");
+    form.attr("method", "post");
+    form.submit();
 
     let IMP = window.IMP;
     IMP.init("imp12500623")

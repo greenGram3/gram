@@ -118,9 +118,15 @@ public class PaymentController {
             odvo.setReceiver(vo.getReceiver());
 
             //order_list에 주문정보 넣기
-            int rowCnt = orderService.buyInfoToList(odvo);
-            if(rowCnt!=1) {
+            int rowCnt_list = orderService.buyInfoToList(odvo);
+            if(rowCnt_list!=1) {
                 throw new Exception("buyInfoToList error");
+            }
+
+            //order_detail에 주문정보 넣기
+            int rowCnt_detail = orderService.buyInfoToDetail(odvo);
+            if(rowCnt_detail!=1) {
+                throw new Exception("buyInfoToDetail error");
             }
 
             //구매한 제품 정보, 총 구매금액, 배송지 정보 -> jsp로 전달

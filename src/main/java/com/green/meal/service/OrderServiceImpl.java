@@ -82,4 +82,9 @@ public class OrderServiceImpl implements OrderService {
         return mapper.buyInfoToList(vo);
     }
 
+    @Override
+    public int buyInfoToDetail(OrderDetailVO vo) throws Exception {
+        return mapper.buyInfoToDetail(vo);
+    }
+
 }

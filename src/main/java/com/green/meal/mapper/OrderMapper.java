@@ -29,4 +29,6 @@ public interface OrderMapper {
 
     int buyInfoToList(OrderDetailVO vo);
 
+    int buyInfoToDetail(OrderDetailVO vo);
+
 }
