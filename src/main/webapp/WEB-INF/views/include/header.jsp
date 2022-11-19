@@ -19,11 +19,13 @@
     <div class="user_input">
       <div class="memberShip">
         <a href="<c:url value='${loginOutLink}'/>">${loginOut}</a>|
-        <a href="<c:url value='/register/register'/>" >회원가입</a>|
+        <c:if test="${loginOut == '로그인'}">
+          <a href="<c:url value='/register/register'/>">회원가입</a>|
+        </c:if>
 
         <a href="<c:url value='${MyPageLink}'/>" >${pageName}</a>|
         <a href="<c:url value='/noticelist?link=C'/>">고객센터</a>
-        <a href="<c:url value='/cart'/>">　</a>
+        <a class="cartImage" href="<c:url value='/cart'/>">　</a>
       </div>
 
       <form action="" role="input">

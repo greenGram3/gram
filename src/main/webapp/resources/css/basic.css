@@ -56,17 +56,22 @@
 }
 
 
-.memberShip a:nth-of-type(-n + 4) {
+.memberShip {
+    display: flex;
+    justify-content: end;
+}
+
+.memberShip a {
     margin: 0 5px;
     font-size: 12px;
 }
 
-.memberShip a:nth-of-type(5) {
-    padding: 2px 6px;
+.memberShip .cartImage {
     background: url(../icon/cart.png) center no-repeat;
+    width: 20px;
     text-indent: -9999em;
+    margin-left: 0;
 }
-
 
 form {
     margin-top: 10px;

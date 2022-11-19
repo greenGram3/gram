@@ -25,6 +25,8 @@
 
         <div class="reviewList">
             <h1>상품후기</h1>
+            <hr>
+
             <section class="section_container">
                 <table>
                     <tr>
@@ -47,7 +49,6 @@
                                 <tr hidden>
                                     <td>${review.itemNo}</td>
                                 </tr>
-                                <br>
                             </c:if>
                         </c:forEach>
                     </c:if>
@@ -58,7 +59,7 @@
                     </c:if>
                 </table>
             </section>
-            <hr>
+
             <c:if test="${not empty reviewResult}">
                 <div class="paging">
                     <!-- 1. First, Prev button: ver01.pageMaker.makeQuery / ver02.SearchQuery -->
