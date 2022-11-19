@@ -96,7 +96,7 @@ public class PaymentController {
 
     //결제 후 결제확인 창으로 이동하는 메서드
     @PostMapping("/confirm")
-    public String paymentConfirm(Integer totalItemPrice, String delyPlace, Model m, HttpServletRequest request, DeliveryVO vo, OrderDetailVO odvo) {
+    public String paymentConfirm(Integer totalItemPrice, String delyPlace, Model m, HttpServletRequest request, OrderDetailVO odvo) {
 
         try {
             //세션으로 아이디 얻어오기
@@ -104,25 +104,24 @@ public class PaymentController {
             session.setAttribute("userId", "aaa1111");
             String userId = (String)session.getAttribute("userId");
 
-
             //아이디와 배송지명을 이용해서 배송지 주소 얻어오기
             HashMap map = new HashMap();
             map.put("userId", userId);
             map.put("delyPlace", delyPlace);
-
+            DeliveryVO vo = new DeliveryVO();
             vo = delyService.selectedDely(map);
-            System.out.println("vo = " + vo);
 
-            //order_list에 구매정보 insert (실패)
-            String test = vo.getDelyAddr();
-            System.out.println("test = " + test);
-//
-//            odvo.setUserId(userId);
-//            odvo.setDelyAddr(vo.getDelyAddr());
-//            int rowCnt = orderService.buyInfoToList(odvo);
-//            if(rowCnt!=1) {
-//                throw new Exception("buyInfoToList error");
-//            }
+            //구매자 정보 주문내용에 담기
+            odvo.setUserId(userId);
+            odvo.setUserPhone(vo.getDelyPhone());
+            odvo.setDelyAddr(vo.getDelyAddr());
+            odvo.setReceiver(vo.getReceiver());
+
+            //order_list에 주문정보 넣기
+            int rowCnt = orderService.buyInfoToList(odvo);
+            if(rowCnt!=1) {
+                throw new Exception("buyInfoToList error");
+            }
 
             //구매한 제품 정보, 총 구매금액, 배송지 정보 -> jsp로 전달
             m.addAttribute("dto", odvo);

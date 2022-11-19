@@ -144,7 +144,6 @@
       </table>
 
       <table>
-        <tr class="block-div"></tr>
         <tr class="req-tr">
           <th>요청사항</th>
         </tr>
@@ -157,8 +156,8 @@
         </tr>
         <tr>
           <td>
-            <select>
-              <option id="payment" name="payment" value="card">card</option>
+            <select name="payment">
+              <option value="card" selected>card</option>
             </select>
           </td>
         </tr>
@@ -171,7 +170,7 @@
       <table class="hidden">
         <tr>
           <th>구매자이름</th>
-          <td><input type="text" name="userId" value="${vo.userName}"></td>
+          <td><input type="text" name="userName" value="${vo.userName}"></td>
         </tr>
         <tr>
           <th>구매자이메일</th>
@@ -184,17 +183,16 @@
   </div>
 
 </div>
-<%--<script>--%>
-<%--  $("#check_module").on("click", function () {--%>
-<%--    let form = $("#form");--%>
-<%--    form.attr("action", "<c:url value='/buy/confirm' />");--%>
-<%--    form.attr("method", "post");--%>
-<%--    form.submit();--%>
-<%--  });--%>
-<%--</script>--%>
+
 <script>
 
   $("#check_module").on("click", function () {
+
+    //테스트용 코드
+    <%--let form = $("#form");--%>
+    <%--form.attr("action", "<c:url value='/buy/confirm' />");--%>
+    <%--form.attr("method", "post");--%>
+    <%--form.submit();--%>
 
     let IMP = window.IMP;
     IMP.init("imp12500623")
@@ -209,23 +207,7 @@
       buyer_name : '${vo.userName}',
     }, function (rsp) {
       if(rsp.success) {
-
-        <%--jQuery.ajax({--%>
-        <%--  url: "<c:url value='/buy/confirm' />",--%>
-        <%--  method: "POST",--%>
-        <%--  headers: { "Content-Type": "application/json" },--%>
-        <%--  data: {--%>
-        <%--    imp_uid: rsp.imp_uid,--%>
-        <%--    merchant_uid: rsp.merchant_uid--%>
-        <%--  }--%>
-        <%--  --%>
-        <%--}).done(function (data) {--%>
-        <%--  alert("결제에 성공했습니다.");--%>
-        <%--  let form = $("#form");--%>
-        <%--  form.attr("action", "<c:url value='/buy/confirm' />");--%>
-        <%--  form.attr("method", "post");--%>
-        <%--  form.submit();--%>
-        <%--})--%>
+        alert("결제가 완료되었습니다.");
         let form = $("#form");
         form.attr("action", "<c:url value='/buy/confirm' />");
         form.attr("method", "post");
@@ -234,15 +216,10 @@
         alert("결제에 실패했습니다. 에러 내용: " + rsp.error_msg);
       }
 
-    });
-  })
+    }); //request_pay
 
+  }); //check_module
 
-
-  // 배송지 목록 팝업창으로 띄워서 배송지 선택하기 (실패)
-  <%--document.querySelector("#delySelectBtn").addEventListener('click',function (){--%>
-  <%--  window.open("<c:url value="/delivery/select"/>","Child","left=400,top=200,width=500,height=500")--%>
-  <%--})--%>
 
 </script>
 
