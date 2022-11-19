@@ -5,7 +5,7 @@
 <html>
 <head>
   <title>orderList</title>
-  <link rel="stylesheet" href="<c:url value='/css/updateUser. css'/>">
+  <link rel="stylesheet" href="<c:url value='/css/updateUser.css'/>">
   <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
 </head>
 <body>

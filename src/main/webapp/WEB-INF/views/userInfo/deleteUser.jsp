@@ -36,6 +36,7 @@
 
      <h3>02.회원탈퇴 하기</h3>
             <hr>
+            <div class="deleteUserForm">
      <form action="<c:url value='/update/userDelete' />" method="post" id="form">
          <span>비밀번호</span><input type="text" name="userPwd" autofocus/>
          <span>탈퇴사유</span><input type="text" autofocus/>
@@ -45,6 +46,7 @@
             <form action="<c:url value='/update/userDelete2' />" method="post" id="form2">
                 <input type="button" value="네이버회원 탈퇴하기" id="delBtn2">
             </form>
+            </div>
 
 <script>
 const delBtn = document.querySelector("#delBtn");
