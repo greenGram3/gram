@@ -72,27 +72,23 @@ public class QnaController {
     }
 
     @RequestMapping(value="/qnainsert", method = RequestMethod.POST)
-    public String qnainsert(HttpServletRequest request, HttpServletResponse response, QnaVO vo,
-                            Model model, @RequestBody String link, RedirectAttributes rttr) {
+    public String qnainsert(QnaVO vo, Model model, String link, HttpServletResponse response) {
+        response.setContentType("text/html; charset=UTF-8");
 
-       Integer index = link.length();
+        Integer index = link.length();
         String link2 = link.substring(index - 1);
-        // 1. 요청분석
-        String uri = "redirect:qnalist?link="+link2;
 
-
-        if(link != null){
-            model.addAttribute("link",link2);
-        }
-
-        // 2. service 처리
+        // 1. service 처리
         if (qnaService.qnainsert(vo)>0) { //인서트 성공
-            rttr.addFlashAttribute("message","문의 등록 성공");
+            model.addAttribute("code","200");
+            if(link != null){
+                model.addAttribute("link",link2);
+            }
         } else {
-            model.addAttribute("message","문의 등록 실패. 다시하시기 바랍니다.");
-            uri = "/qna/qnaInsert";
+            model.addAttribute("code","500");
+            model.addAttribute("message","QnA Insert 오류. 다시 시도 하시기 바랍니다.");
         }
-        return uri;
+        return "jsonView";
     }
     // -----------------------------------------------------------------------------------------//
     // ** QnA Detail
