@@ -21,8 +21,13 @@
         <p>아이디</p>　<p>${sessionScope.userId.length() > 12 ?  '********'  : user.userId}</p>
       </div>
       <div class="userPwd">
-        <p>비밀번호</p>　<p>********</p>　<c:if test="${sessionScope.userId.length() < 13} "><input type="button" class="pwd" value="비밀번호 변경"></c:if>
+        <p>비밀번호</p>　<p>********</p>　<input type="button" class="pwd" value="비밀번호 변경" id="updPwdBtb">
       </div>
+      <script>
+        if("${sessionScope.userId.length()}">12){
+          $('#updPwdBtb')[0].style.display = 'none';
+        }
+      </script>
       <div class="pwd hidden" id="pwd">
         <div><span>현재비밀번호</span><input type="text" id="currentPwd"></div>
         <div><span>신규비밀번호</span><input type="text" id="newPwd1"><div id="msgPwd" style="color: red"></div></div>

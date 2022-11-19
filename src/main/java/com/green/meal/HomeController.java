@@ -43,7 +43,7 @@ public class HomeController {
 
 
 //		HttpSession session = request.getSession();
-//		session.setAttribute("userId", "asdf");
+//		session.setAttribute("userId", "admin");
 		return "home";
 
 	}
