@@ -92,46 +92,27 @@
 
             <c:if test="${not empty reviewResult}">
                 <div>
-                    <!-- 1. First, Prev button: ver01.pageMaker.makeQuery / ver02.SearchQuery -->
                     <c:choose>
                         <c:when test="${pageMaker.prev && pageMaker.spageNo>1}">
-
                             <a href="reviewlistD${pageMaker.searchQuery(1)}" class="firstBtn">◀◀</a>&nbsp;
-                            <a href="reviewlistD${pageMaker.searchQuery(pageMaker.spageNo-1)}"
-                               class="forwardBtn">&lt;</a>&nbsp;&nbsp;
-                            <!-- 앞으로가기 : 현재페이지의 이전 그룹(spage-1)
-                            => rowsPerPage는 그대로, currPage=spage-1 : EL로 기재 -->
+                            <a href="reviewlistD${pageMaker.searchQuery(pageMaker.spageNo-1)}" class="forwardBtn">&lt;</a>&nbsp;&nbsp;
                         </c:when>
                         <c:otherwise>
                             <span class="firstBtn none">◀◀&nbsp;&nbsp;&lt;&nbsp;</span>
                         </c:otherwise>
                     </c:choose>
-
-                    <!-- 2. Display PageNo - 반복문 begin(spage)-end(epage)(범위지정) 사용
-                          : ver01.pageMaker.makeQuery / ver02.searchQuery -->
                     <c:forEach var="i" begin="${pageMaker.spageNo}" end="${pageMaker.epageNo}">
-                        <!-- currPage 는 cri안에 있으니까 .cri로 부르기
-                        i가 현재페이지라면(현재page 가 현재page라면) -->
                         <c:if test="${i==pageMaker.cri.currPage}">
-                            <!-- 현재페이지 표식 -->
                             <span class="currPage">${i}</span>
                         </c:if>
-
                         <c:if test="${i!=pageMaker.cri.currPage}">
-                            <!-- i가 현재페이지가 아닐 때 - 클릭하면 넘어가야 하니까 a href
-                            현재페이지 param으로 controller에 넣어줘서 기준 주고, controll동작하게 하기-->
                             <a href="reviewlistD${pageMaker.searchQuery(i)}">${i}</a>
                         </c:if>
                     </c:forEach>
-
-                    <!-- 3. Next, Last button: ver01.pageMaker.makeQuery / ver02.SearchQuery -->
                     <c:choose>
                         <c:when test="${pageMaker.next && pageMaker.epageNo>0}">
                             <a href="reviewlistD${pageMaker.searchQuery(pageMaker.epageNo+1)}" class="backBtn">&nbsp;&nbsp;&gt;</a>
-                            <!-- 뒤로가기 : 현재 페이지의 다음그룹
-                            => rowsPerPage는 그대로, currPage=epage+1 -->
                             <a href="reviewlistD${pageMaker.searchQuery(pageMaker.lastPageNo)}" class="lastBtn">▶▶</a>
-                            <!-- lastPage는 pageMaker에서 계산해놨으니까 그대로 넣어주기 -->
                         </c:when>
                         <c:otherwise>
                             <span class="lastBtn none">&nbsp;&gt;&nbsp;&nbsp;▶▶</span>

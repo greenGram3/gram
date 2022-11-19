@@ -19,9 +19,6 @@ main * {
 
 .registerForm hr {
     color: #cccccc;
-}
-
-.registerForm hr {
     border: 1px solid gainsboro;
 }
 
@@ -36,7 +33,6 @@ main * {
     border-radius: 2px;
     cursor: pointer;
 }
-
 
 .registerFormBtn {
     text-align: center;

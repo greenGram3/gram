@@ -26,8 +26,7 @@ public class ReviewController {
 
     // ** 상세페이지 리뷰리스트
     @RequestMapping(value="/reviewlistD")
-    public String reviewlistD(HttpServletRequest request, HttpServletResponse response,
-                              Model model, SearchCriteria cri, PageMaker pageMaker, ReviewVO vo) {
+    public String reviewlistD(Model model, SearchCriteria cri, PageMaker pageMaker, ReviewVO vo) {
         cri.setSnoEno(); //Sno, Eno 계산
 
         List<ReviewVO> list = new ArrayList<ReviewVO>();
@@ -46,12 +45,10 @@ public class ReviewController {
 
         return "/review/reviewListD";
     }
-
     //-------------------------------------------------------------------------------------------------//
     // ** ReviewList 출력
     @RequestMapping(value="/reviewlist")
-    public String reviewlist (HttpServletRequest request, HttpServletResponse response, Model model,
-                              SearchCriteria cri, String link, PageMaker pageMaker) {
+    public String reviewlist (Model model, SearchCriteria cri, String link, PageMaker pageMaker) {
         cri.setSnoEno(); //Sno, Eno 계산
         if(link != null){
             model.addAttribute("link",link);
@@ -83,11 +80,7 @@ public class ReviewController {
     //------------------------------------------------------------------------------------------------------//
     // ** ReviewDetail 출력
     @RequestMapping(value="/reviewdetail")
-    public String reviewdetail(HttpServletRequest request, HttpServletResponse response, Model model, ReviewVO vo) {
-        /*if(link != null){
-            model.addAttribute("link",link);
-        }*/
-
+    public String reviewdetail(HttpServletRequest request, Model model, ReviewVO vo) {
         ReviewVO voRe;
         // 1. 성공 시 detail폼
         String uri = "/review/reviewDetail";
@@ -112,8 +105,6 @@ public class ReviewController {
     // ** Review 작성
     @RequestMapping(value="/reviewinsertf")
     public String reviewinsertf(HttpServletRequest request, HttpServletResponse response, ReviewVO vo, Model model) {
-        /*model.addAttribute("link",link);*/
-
         return "/review/reviewInsert";
     }
 
@@ -130,11 +121,9 @@ public class ReviewController {
 
 //------------------------------------------------------------------------//
         String realPath = request.getSession().getServletContext().getRealPath("/");
-        /*String realPath = request.getRealPath("/");*/
         System.out.println("** realPath => "+realPath);
 
         // 2) 위 값을 이용해서 실제저장위치 확인
-        /*realPath = "C:\\Users\\Eom hee jeong\\IdeaProjects\\gram\\src\\main\\webapp\\resources\\reviewImage\\";*/
         realPath += "resources\\reviewImage\\";
 
         // ** 기본 이미지 지정하기
@@ -205,10 +194,8 @@ public class ReviewController {
         //------------------------------------------------------------------------//
         // * 이미지 저장
             String realPath = request.getSession().getServletContext().getRealPath("/");
-            /*String realPath = request.getRealPath("/");*/
             System.out.println("** realPath => "+realPath);
             // 실제 폴더 저장 위치
-            /*realPath = "C:\\Users\\Eom hee jeong\\IdeaProjects\\gram\\src\\main\\webapp\\resources\\reviewImage\\";*/
             realPath += "resources\\reviewImage\\";
             // ** 기본 이미지 지정하기
             String file1, file2="reviewImage/noImage.JPG";
@@ -253,7 +240,7 @@ public class ReviewController {
     // ** Review Reply Detail 출력
     // ** ReviewDetail 출력
     @RequestMapping(value="/reviewrDetail")
-    public String reviewrDetail(HttpServletRequest request, HttpServletResponse response, Model model, ReviewVO vo) {
+    public String reviewrDetail(Model model, ReviewVO vo) {
         // 1. 성공 시 detail폼
         String uri = "/review/reviewRdetail";
 
@@ -311,7 +298,7 @@ public class ReviewController {
     //---------------------------------------------------------------------------------//
     // ** review 답변 업데이트 폼 띄우기
     @RequestMapping(value="/reviewrupdatef")
-    public String reviewrupdatef(HttpServletRequest request, HttpServletResponse response, ReviewVO vo, Model model) {
+    public String reviewrupdatef(ReviewVO vo, Model model) {
         vo.setUserId(vo.getUserId());
         vo.setReviewNo(vo.getReviewNo());
 

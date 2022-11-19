@@ -41,7 +41,7 @@
     <!-- Image Table -->
     <insert id="insert" parameterType="ItemVO">
         insert into item
-            (item_category1, item_category2, item_name, item_amount, item_price, img_name)
+        (item_category1, item_category2, item_name, item_amount, item_price, img_name)
         values
             (#{itemCategory1}, #{itemCategory2}, #{itemName}, #{itemAmount}, #{itemPrice}, #{imgName})
     </insert>
@@ -81,7 +81,7 @@
     </update>
 
     <!-- Image Update 추가 -->
-   <update id="imageModify" parameterType="com.green.meal.domain.ImageVO">
+    <update id="imageModify" parameterType="com.green.meal.domain.ImageVO">
         update image
         set img_name = #{imgName}
         where item_no = #{itemNo}
@@ -91,7 +91,7 @@
         select *
         from item
     </select>
-<!--    이건 쓸일이 별로 없는거 같음-->
+    <!--    이건 쓸일이 별로 없는거 같음-->
 
     <select id="searchResultCnt" parameterType="SearchCondition" resultType="int">
         select count(*)
@@ -110,11 +110,11 @@
     </select>
 
     <!-- heeJeang item 상세페이지 itemDetail -->
-<!--    <select id="itemdetail" resultType="ItemVO">
-        select item.item_no, item_name, item_price, img_name, img_type
-        from item, image
-        where item.item_no=#{itemNo} and item.item_no=image.item_no;
-    </select>-->
+    <!--    <select id="itemdetail" resultType="ItemVO">
+            select item.item_no, item_name, item_price, img_name, img_type
+            from item, image
+            where item.item_no=#{itemNo} and item.item_no=image.item_no;
+        </select>-->
 
     <select id="itemdetail" resultType="ItemVO">
         select *
@@ -152,9 +152,4 @@
     </select>
 
 
-
 </mapper>
-
-
-
-

@@ -27,6 +27,8 @@ public interface UserMapper {
 
     int delete(String userId);
 
+    int deleteNaverUser(String userId);
+
     int searchResultCnt(SearchCondition sc);
 
     List<UserVO> searchSelectPage(SearchCondition sc);

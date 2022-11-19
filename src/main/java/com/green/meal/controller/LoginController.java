@@ -4,15 +4,12 @@ import com.green.meal.domain.UserVO;
 import com.green.meal.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import net.sf.json.JSONObject;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpRequest;
-import org.springframework.http.MediaType;
-import org.springframework.security.core.userdetails.User;
+import org.apache.commons.lang.StringEscapeUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.util.StringUtils;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -26,7 +23,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.security.SecureRandom;
-import java.util.Map;
+import java.util.Random;
 
 import static com.green.meal.controller.RegisterController.passwordEncoder;
 import static java.lang.System.out;
@@ -113,7 +110,6 @@ public class LoginController {
     public String naverLogin(String code, String state, HttpServletRequest request, RedirectAttributes rettr) {
         request.setAttribute("code", code);
         request.setAttribute("state", state);
-        log.info("code : "+code+" "+state);
 
         String clientId = "eELpwpqlV0GXGymjU5cB";//애플리케이션 클라이언트 아이디값";
         String clientSecret = "fuLNwvC5Wz";//애플리케이션 클라이언트 시크릿값";
@@ -150,6 +146,7 @@ public class LoginController {
             br.close();
             if (responseCode == 200) {
                 accessToken = res.toString().split(":")[1].replace(",\"refresh_token\"", "");
+                request.getSession().setAttribute("access_token", accessToken.replace("\"",""));  //접근토근 세션저장
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -166,9 +163,9 @@ public class LoginController {
             int responseCode = con.getResponseCode();
             BufferedReader br;
             if (responseCode == 200) { // 정상 호출
-                br = new BufferedReader(new InputStreamReader(con.getInputStream()));
+                br = new BufferedReader(new InputStreamReader(con.getInputStream(), "UTF-8"));
             } else {  // 에러 발생
-                br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
+                br = new BufferedReader(new InputStreamReader(con.getErrorStream(), "UTF-8"));
             }
             String inputLine;
             StringBuilder res = new StringBuilder();
@@ -190,14 +187,18 @@ public class LoginController {
                     if(info[i].contains("\"birthyear\":")) birthyear = info[i];
                     if(info[i].contains("\"gender\":")) userGender = info[i];
                 }
-                userId = userId.substring(userId.indexOf("\"id\":")+5).replace("\"","");
+                userId = userId.substring(userId.indexOf("\"id\":")+5).replace("\"","");  //네이버에서 받아온 실제아이디
+//                userId = userId + "Naver";
                 userName = userName.substring(userName.indexOf("\"name\":")+7).replace("\"","");
+                userName = StringEscapeUtils.unescapeJava(userName);
                 userEmail = userEmail.substring(userEmail.indexOf("\"email\":")+8).replace("\"","");
                 userPhone = userPhone.substring(userPhone.indexOf("\"mobile\":")+9).replace("\"","");
                 if(birthday!="")birthday = birthday.substring(birthday.indexOf("\"birthday\":")+11).replace("\"","");
                 if(birthyear!="")birthyear = birthyear.substring(birthyear.indexOf("\"birthyear\":")+12).replace("\"","");
                 userBirth = birthyear+"-"+birthday;
                 if(userGender!="") userGender = userGender.substring(userGender.indexOf("\"gender\":")+9).replace("\"","");
+                if(userGender == "M") userGender = "man";
+                if(userGender == "W") userGender = "woman";
                 UserVO user = new UserVO();
                 user.setUserId(userId);
                 user.setUserName(userName);
@@ -208,13 +209,9 @@ public class LoginController {
                 user.setUserBirth(userBirth);
                 user.setUserGender(userGender);
 
-                try{
+                //네이버 로그인시 회원가입 시키기 - 이미 회원일경우 로그인 시키기
+                if(userService.idDupliCheck(user.getUserId()) == null)
                     userService.register(user);
-                }catch (Exception e){
-                    HttpSession session = request.getSession();
-                    session.setAttribute("userId", userId);
-                    rettr.addFlashAttribute("msg","login_ok");
-                }
 
                 HttpSession session = request.getSession();
                 session.setAttribute("userId", userId);
@@ -233,4 +230,16 @@ public class LoginController {
         user = userService.idDupliCheck(userId);
         return user!=null && passwordEncoder.matches(userPwd,user.getUserPwd());
     }
+
+//    private String tempId(){
+//        Random random = new Random();
+//        String randomUpper = (char)((int)(Math.random()*26)+65)+""+(char)((int)(Math.random()*26)+65)+""+(char)((int)(Math.random()*26)+65);
+//        String randomLower = (char)((int)(Math.random()*26)+97)+""+(char)((int)(Math.random()*26)+97)+""+(char)((int)(Math.random()*26)+97);
+//        String randomNum = Integer.toString(random.nextInt(9) + 1)+Integer.toString(random.nextInt(9) + 1)+Integer.toString(random.nextInt(9) + 1);
+//        String id = "N"+randomUpper + randomLower + randomNum;
+//        if(userService.idDupliCheck(id) != null){
+//            id = tempId();
+//        }
+//        return id;
+//    }
 }

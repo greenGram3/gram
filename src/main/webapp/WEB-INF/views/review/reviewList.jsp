@@ -56,6 +56,7 @@
             <input type="text" name="scKeyword" id="scKeyword" value="${pageMaker.cri.scKeyword}">
             <button id="reviewSearchBtn">검색</button>
         </div>
+        <br>
         <table>
             <tr>
                 <th>상품</th>
@@ -86,7 +87,6 @@
                         <tr hidden>
                             <td>${review.itemNo}</td>
                         </tr>
-                        <br>
                 </c:forEach>
             </c:if>
         </table>

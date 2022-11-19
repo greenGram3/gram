@@ -13,7 +13,9 @@
     color: #cccccc;
     margin-bottom: 20px;
 }
-
+.deleteUserForm {
+    display: flex;
+}
 .deleteUser input{
     margin: 5px 10px;
     border: 1px solid darkgrey;
@@ -25,60 +27,10 @@
     padding-top: 10px;
 }
 
-#delBtn {
-    width: 80px;
+#delBtn,#delBtn2  {
+    padding: 0px 10px;
     cursor: pointer;
-}
-
-/*delyForm*/
-
-.delyForm {
-    margin-top: 250px;
-    margin-bottom: 50px;
-    width: 900px;
-}
-
-.delyForm h3 {
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
-
-
-
-.delyForm table {
-    width: 100%;
-    border-top: 1px solid lightgray;
-    border-collapse: collapse;
-    text-align: center;
-}
-
-.delyForm td {
-    border-bottom: 1px solid lightgray;
-    border-top: 1px solid lightgray;
-    padding: 10px;
-}
-
-.delyForm th {
     background-color: #eeecec;
-    border-bottom: 1px solid lightgray;
-    padding: 10px;
 }
 
-.delyForm input {
-    width: 60px;
-    height: 30px;
-    background-color: white;
-    border: 1px solid lightgrey;
-    cursor: pointer;
-}
 
-.delyForm button{
-    width: 100px;
-    height: 32px;
-    margin-left: 400px;
-    margin-top: 30px;
-    background-color: rgb(84, 108, 92);
-    color: #eeecec;
-    cursor: pointer;
-    border: none;
-}

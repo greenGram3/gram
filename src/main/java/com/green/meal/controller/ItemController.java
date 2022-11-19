@@ -288,8 +288,7 @@ public class ItemController {
     public String category1( String category1, Model model){
 
         List<ItemVO> itemList = itemService.category1(category1);
-        model.addAttribute("category",category1);
-        model.addAttribute("itemList",itemList);
+        giveCategoryPage(category1,itemList,model);
 
 
     return "/item/itemList";
@@ -299,29 +298,28 @@ public class ItemController {
     public String category2(String category2, Model model){
 
         List<ItemVO> itemList = itemService.category2(category2);
-        model.addAttribute("category",category2);
-        model.addAttribute("itemList",itemList);
+        giveCategoryPage(category2,itemList,model );
 
         return "/item/itemList";
     }
 
     @GetMapping("/bestMeal")
-    public String bestList(String category,Model model){
+    public String bestList(String category, Model model){
+
         List<ItemVO> list = itemService.bestItems();
         itemList=list.subList(0,16);
 
-        model.addAttribute("category",category);
-        model.addAttribute("itemList",itemList);
+        giveCategoryPage(category,itemList,model );
 
         return "/item/itemList";
     }
     @GetMapping("/newMeal")
     public String newList(String category,Model model){
+
         List<ItemVO> list = itemService.newItems();
         itemList=list.subList(0,16);
 
-        model.addAttribute("category",category);
-        model.addAttribute("itemList",itemList);
+        giveCategoryPage(category, itemList,model );
 
         return "/item/itemList";
     }
@@ -331,8 +329,8 @@ public class ItemController {
 
         try {
             List<ItemVO> itemList = itemService.selectAll();
-            model.addAttribute("category",category);
-            model.addAttribute("itemList",itemList);
+
+            giveCategoryPage(category, itemList, model);
 
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -343,6 +341,12 @@ public class ItemController {
 
     }
 
+//모델에 카테고리, 아이템리스트 넘겨주기
+    private void giveCategoryPage(String category, List<ItemVO> itemList, Model model ) {
+        model.addAttribute("category", category);
+
+        model.addAttribute("itemList",itemList);
+    }
 }
 
 

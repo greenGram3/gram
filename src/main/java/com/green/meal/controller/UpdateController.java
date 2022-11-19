@@ -11,6 +11,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
 import static com.green.meal.controller.RegisterController.passwordEncoder;
 
 @Controller
@@ -95,6 +100,51 @@ public class UpdateController {
 
         return "redirect:/update/userDelete";
     }
+
+    @PostMapping("/userDelete2")
+    public String delUserPost2(HttpSession session, RedirectAttributes rettr){
+        // User DB에서삭제
+        rettr.addFlashAttribute("msg","deleteUser_ok");
+        userService.deleteNaverUser((String) session.getAttribute("userId"));
+
+        //네이버 접근 토근 삭제
+        String clientId = "eELpwpqlV0GXGymjU5cB";
+        String clientSecret = "fuLNwvC5Wz";
+        String access_token = (String) session.getAttribute("access_token");
+        log.info("access_token : "+access_token);
+        String apiURL = "https://nid.naver.com/oauth2.0/token?grant_type=delete"
+                + "&client_id=" + clientId
+                + "&client_secret=" + clientSecret
+                + "&access_token=" + access_token
+                + "&&service_provider=NAVER";
+        try {
+            URL url = new URL(apiURL);
+            HttpURLConnection con = (HttpURLConnection)url.openConnection();
+            con.setRequestMethod("GET");
+            int responseCode = con.getResponseCode();
+            BufferedReader br;
+            if (responseCode == 200) { // 정상 호출
+                br = new BufferedReader(new InputStreamReader(con.getInputStream()));
+            } else {  // 에러 발생
+                br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
+            }
+            String inputLine;
+            StringBuilder res = new StringBuilder();
+            while ((inputLine = br.readLine()) != null) {
+                res.append(inputLine);
+            }
+            br.close();
+            if (responseCode == 200) {
+                log.info("deleteToken_ok "+res.toString());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        session.invalidate();
+        return "redirect:/";
+    }
+
 
     public int updateUser(String userInfo, HttpSession session){
         String userId = (String) session.getAttribute("userId");
