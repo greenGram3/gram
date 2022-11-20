@@ -77,7 +77,11 @@ main * {
     margin-top: 10px;
     margin-bottom: 20px;
 }
-
+.reviewList .currPage {
+    background-color: lightgrey;
+    border-radius: 4px;
+    padding: 0px 2px;
+}
 
 /*reviewDetail*/
 
@@ -205,7 +209,7 @@ border: none;
 }
 
 .reviewUpdate input {
-    margin: 5px 10px;
+    margin: 4px 10px;
 }
 
 .reviewUpdate .imgCheck input {
@@ -220,6 +224,11 @@ border: none;
 
 .reviewUpdate tr:nth-of-type(2) input {
     border: 1px solid darkgrey;
+}
+
+.reviewUpdate #reviewTitle {
+    padding: 0px 5px;
+    width: 700px;
 }
 
 .reviewUpdate textarea {
@@ -348,6 +357,7 @@ border: none;
     width: 100px;
 }
 
+
 .reviewRupdate textarea {
     margin: 5px 10px;
     border: 1px solid darkgray;
@@ -443,7 +453,8 @@ border: none;
 }
 .reviewInsert .reviewTitle {
     border: 1px solid darkgray;
-    padding: 4px 10px;
+    padding: 0px 5px;
+    width: 700px;
 }
 
 .reviewInsert textarea {
@@ -470,3 +481,4 @@ border: none;
 .reviewInsert .reviewCheck {
     margin-left: 650px;
 }
+

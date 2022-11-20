@@ -48,7 +48,7 @@
                                     <td>
                                         <button type="button"
                                                 onclick="location.href='<c:url value='/reviewinsertf?itemName=${orderDetailDto.itemName}&itemNo=${orderDetailDto.itemNo}&orderNo=${orderDetailDto.orderNo}'/>'">
-                                            후기작성하기</button>
+                                            후기 작성하기</button>
                                     </td>
                                 </c:if>
                             </tr>

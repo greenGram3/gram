@@ -31,7 +31,7 @@
         select order_list.order_no, user_id, item_no, item_price, item_amount, dely_addr, user_phone, order_date, payment, order_req, order_state
         from order_list, order_detail
         where order_list.order_no = order_detail.order_no
-        and order_list.order_no = #{orderNo};
+          and order_list.order_no = #{orderNo};
     </select>
 
     <select id="searchResultCnt" parameterType="SearchCondition" resultType="int">

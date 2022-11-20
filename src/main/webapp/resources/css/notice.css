@@ -75,6 +75,13 @@ main * {
     margin-bottom: 20px;
 }
 
+.noticeList .currPage {
+    background-color: lightgrey;
+    border-radius: 4px;
+    padding: 0px 2px;
+}
+
+
 .linkBtn_container a {
     margin-top: 10px;
     padding: 4px 15px;
@@ -176,8 +183,10 @@ main * {
 .noticeInsert input {
     margin: 5px 10px;
     border: 1px solid darkgrey;
-    padding-left: 5px;
+    width: 700px;
+    padding: 0px 5px;
 }
+
 
 .noticeInsert textarea {
     margin: 5px 10px;
@@ -248,7 +257,8 @@ main * {
 .noticeUpdate input {
     margin: 5px 10px;
     border: 1px solid darkgrey;
-    padding-left: 5px;
+    width: 700px;
+    padding: 0px 5px;
 }
 
 .noticeUpdate textarea {

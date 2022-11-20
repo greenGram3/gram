@@ -43,7 +43,7 @@
 
                 <tr>
                     <td>제목</td>
-                    <td><input type="text" name="noticeTitle" value="${noticeResult.noticeTitle}" minlength="2" required></td>
+                    <td><input type="text" class="noticeTitle"  name="noticeTitle" value="${noticeResult.noticeTitle}" minlength="2" required></td>
                 </tr>
 
                 <tr>

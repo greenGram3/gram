@@ -3,6 +3,7 @@
 <html>
 <head>
     <title>qnaReplyInsert</title>
+    <link rel="stylesheet" href="<c:url value='/css/qna.css'/>">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script src="js/qnaAjax.js"></script>
 </head>

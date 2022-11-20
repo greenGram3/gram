@@ -93,10 +93,9 @@ main * {
 
 
 .paging-active {
-    background-color: rgb(216, 216, 216);
-    border-radius: 5px;
-    color: rgb(24, 24, 24);
-    padding: 2px;
+    background-color: lightgrey;
+    border-radius: 4px;
+    padding: 0px 2px;
 }
 .paging-container {
     width:100%;
