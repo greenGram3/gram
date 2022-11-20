@@ -43,7 +43,7 @@
                 </tr>
                 <tr>
                     <td>제목</td>
-                    <td><input type="text" name="noticeTitle" minlength="2" placeholder="제목을 입력하세요" required></td>
+                    <td><input type="text" class="noticeTitle" name="noticeTitle" minlength="2" placeholder="제목을 입력하세요" required></td>
                 </tr>
                 <tr>
                     <td>내용</td>

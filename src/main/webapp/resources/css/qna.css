@@ -83,6 +83,12 @@ main * {
     cursor: pointer;
 }
 
+.qnaList .currPage {
+    background-color: lightgrey;
+    border-radius: 4px;
+    padding: 0px 2px;
+}
+
 /* qnaDetail */
 
 
@@ -174,7 +180,9 @@ main * {
 
 .qnaInsert .qnaTitle {
     border: 1px solid darkgray;
-    padding: 4px 10px;
+    width: 700px;
+    padding: 0px 5px;
+    width: 700px;
 }
 
 .qnaInsert textarea {
@@ -201,6 +209,9 @@ main * {
     margin-left: 530px;
 }
 
+.qnaInsert .qnaTitle {
+    width: 700px;
+}
 
 /* qnaUpdate */
 
@@ -237,7 +248,8 @@ main * {
 
 .qnaUpdate #qnaTitle {
     border: 1px solid darkgray;
-    padding: 4px 10px;
+    width: 700px;
+    padding: 0px 5px;
 }
 
 .qnaUpdate textarea {
@@ -274,10 +286,16 @@ main * {
     background-color: white;
 }
 
+.qnaRInsert #qnaTitle {
+    border: 1px solid darkgrey;
+    width: 700px;
+    padding: 0px 5px;
+}
+
 .qnaRInsert tr:last-of-type span {
     text-align: center;
     margin-top: 10px;
-    padding: 4px 10px;
+    padding: 5px 10px;
     background-color: whitesmoke;
     border: 1px solid darkgray;
     cursor: pointer;
@@ -311,4 +329,62 @@ main * {
     margin-top: 20px;
 }
 
+/*qnaRupdate*/
 
+.qnaRupdate * {
+    text-align: left;
+}
+
+.qnaRupdate h3 {
+    margin-top: 50px;
+    margin-bottom: 20px;
+    margin-left: 10px;
+}
+
+.qnaRupdate table {
+    width: 100%;
+    border-top: 1px solid lightgray;
+    border-collapse: collapse;
+}
+
+.qnaRupdate td {
+    border-bottom: 1px solid lightgray;
+    padding: 10px 30px
+}
+
+.qnaRupdate td:first-of-type {
+    background-color: #eeecec;
+}
+
+.qnaRupdate input#userId {
+    border: none;
+    background-color: white;
+}
+
+.qnaRupdate #qnaTitle {
+    border: 1px solid darkgray;
+    width: 700px;
+    padding:5px;
+}
+
+.qnaRupdate textarea {
+    width: 700px;
+    height: 150px;
+    padding: 5px;
+}
+.qnaRupdate tr:nth-of-type(4) td {
+    background-color: white;
+    border: none;
+}
+
+.qnaRupdate tr:nth-of-type(4) input {
+    text-align: center;
+    margin-top: 10px;
+    padding: 4px 10px;
+    background-color: whitesmoke;
+    border: 1px solid darkgray;
+    cursor: pointer;
+    margin-right: 10px;
+    width: 80px;
+    margin-left: 730px;
+}

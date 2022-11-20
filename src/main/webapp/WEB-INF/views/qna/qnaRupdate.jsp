@@ -3,6 +3,7 @@
 <html>
 <head>
     <title>QnaReplyUpdate</title>
+    <link rel="stylesheet" href="<c:url value='/css/qna.css'/>">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script>
         $(function () {
@@ -42,7 +43,7 @@
 </head>
 <body>
 <main class="main_container">
-    <div class="main">
+    <div class="qnaRupdate">
         <form action="qnarupdate" method="post">
             <h3>1:1문의 답변 수정</h3>
             <table>
