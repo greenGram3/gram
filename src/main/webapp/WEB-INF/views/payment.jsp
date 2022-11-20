@@ -194,29 +194,29 @@
     form.attr("method", "post");
     form.submit();
 
-    let IMP = window.IMP;
-    IMP.init("imp12500623")
+    <%--let IMP = window.IMP;--%>
+    <%--IMP.init("imp12500623")--%>
 
-    IMP.request_pay({
-      pg : 'html5_inicis',
-      merchant_uid: "${uniqueNo}",
-      name : '${dto.itemName} ${dto.itemAmount}개',
-      amount : ${totalItemPrice},
-      pay_method : $("#payment").val(),
-      buyer_email : '${vo.userEmail}',
-      buyer_name : '${vo.userName}',
-    }, function (rsp) {
-      if(rsp.success) {
-        alert("결제가 완료되었습니다.");
-        let form = $("#form");
-        form.attr("action", "<c:url value='/buy/confirm' />");
-        form.attr("method", "post");
-        form.submit();
-      } else {
-        alert("결제에 실패했습니다. 에러 내용: " + rsp.error_msg);
-      }
+    <%--IMP.request_pay({--%>
+    <%--  pg : 'html5_inicis',--%>
+    <%--  merchant_uid: "${uniqueNo}",--%>
+    <%--  name : '${dto.itemName} ${dto.itemAmount}개',--%>
+    <%--  amount : ${totalItemPrice},--%>
+    <%--  pay_method : $("#payment").val(),--%>
+    <%--  buyer_email : '${vo.userEmail}',--%>
+    <%--  buyer_name : '${vo.userName}',--%>
+    <%--}, function (rsp) {--%>
+    <%--  if(rsp.success) {--%>
+    <%--    alert("결제가 완료되었습니다.");--%>
+    <%--    let form = $("#form");--%>
+    <%--    form.attr("action", "<c:url value='/buy/confirm' />");--%>
+    <%--    form.attr("method", "post");--%>
+    <%--    form.submit();--%>
+    <%--  } else {--%>
+    <%--    alert("결제에 실패했습니다. 에러 내용: " + rsp.error_msg);--%>
+    <%--  }--%>
 
-    }); //request_pay
+    <%--}); //request_pay--%>
 
   }); //check_module
 
