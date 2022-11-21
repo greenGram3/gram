@@ -79,6 +79,7 @@
                                 <td>${review.userId}</td>
                             </tr>
                             <tr>
+                                <td style="border-bottom: none;"></td>
                                 <td class="resultArea"><span class="reviewD resultArea" id="${reviewVs.count}"></span></td>
                                 <%--<td><span class="reviewD" id="${reviewVs.count}"></span></td>--%>
                             </tr>
