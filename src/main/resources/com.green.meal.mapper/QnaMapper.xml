@@ -69,4 +69,11 @@
         select * from qna
         where qna_root = #{qnaRoot} and qna_child > 0
     </select>
+
+    <!-- QnA 답변 중복체크 -->
+    <select id="qnaDupCheck" resultType="com.green.meal.domain.QnaVO">
+        select * from qna
+        where qna_root = #{qnaRoot} and qna_step > 0
+    </select>
+
 </mapper>

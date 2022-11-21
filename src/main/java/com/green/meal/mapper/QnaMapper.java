@@ -8,6 +8,9 @@ import java.util.List;
 
 public interface QnaMapper {
 
+    // QnA답변 중복체크
+    QnaVO qnaDupCheck(int qnaRoot);
+
     // 관리자용 QNA list 출력
     List<QnaVO> qnalistAll(SearchCriteria cri);
     int searchCount(SearchCriteria cri);

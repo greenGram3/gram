@@ -24,6 +24,20 @@ public class QnaController {
     @Autowired
     QnaService qnaService;
 
+    // ** QnA Dup Check(답변 중복체크)
+    @RequestMapping(value="/qnaDupCheck")
+    public String qnaDupCheck(int qnaRoot, Model model) {
+
+        System.out.println("qnaRoot"+qnaRoot);
+
+        if (qnaService.qnaDupCheck(qnaRoot) != null) { //답글 있음
+            model.addAttribute("code","200");
+        } else { //답글 없음
+            model.addAttribute("code","500");
+        }
+        return "jsonView";
+    }
+   //------------------------------------------------------------------------------------------------------//
     // ** QnA List
     @RequestMapping(value="/qnalist")
     public String qnalist(HttpServletRequest request, HttpServletResponse response, Model model,

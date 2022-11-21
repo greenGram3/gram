@@ -14,6 +14,10 @@ public class QnaServiceImpl implements QnaService {
     @Autowired
     QnaMapper qnaMapper;
 
+    // qna답변 중복 체크
+    @Override
+    public QnaVO qnaDupCheck(int qnaRoot) {return qnaMapper.qnaDupCheck(qnaRoot);}
+
     // 관리자용 list 불러오기
     @Override
     public List<QnaVO> qnalistAll(SearchCriteria cri) {

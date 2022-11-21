@@ -7,6 +7,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 
 public interface QnaService {
+
+    // 답변 중복 체크
+    QnaVO qnaDupCheck(int qnaRoot);
+
     // 관리자용 QNA list 출력
     List<QnaVO> qnalistAll(SearchCriteria cri);
     int searchCount(SearchCriteria cri);

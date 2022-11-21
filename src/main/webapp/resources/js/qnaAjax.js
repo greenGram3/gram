@@ -87,42 +87,6 @@ $(function(){
             }
         }) //ajax
     }) // updateBtn
-    //----------------------------------------------------------------//
-    // ** QnA 답변 업데이트 json => qnaRupdate.jsp 상단에 구현
-/*        $('#qrUpdateBtn').click(function () {
-
-            var result = confirm('수정하시겠습니까? (수정/취소)');
-
-            if(result==true) {
-                alert('답변이 수정 되었습니다');
-            } else {
-                return false;
-            }
-
-            $.ajax({
-                type: 'Post',
-                url: 'qnarupdate',
-                data: {
-                    userId: $('#userId').val(),
-                    reviewTitle: $('#qnaTitle').val(),
-                    reviewContent: $('#qnaContent').val(),
-                    reviewNo: $('#qnaNo').val()
-                },
-                success: function (resultData) {
-                    if(resultData.code == 200) { //json update 성공 시
-                        self.close();
-                        opener.document.location.reload();
-                        /!*opener.parent.location.reload();
-                        window.close();*!/
-                    } else { //json update실패 시
-                        alert('error:'+resultData);
-                    }
-                },
-                error: function () {
-                    $('#resultArea2').html('Reply수정 error');
-                }
-            }) //ajax
-        }); // ReUpdateBtn*/
 }) //ready
 //-----------------------------------------------------------------------//
 // ** Detail에서 댓글보기
@@ -137,14 +101,13 @@ function qnaReplyD(qnaRoot,qnaStep,qnaChild) {
         },
         success: function (resultPage) {
             $('#resultArea1').html(resultPage);
+            $('#DupCk').trigger('click');
         },
         error: function () {
             $('#resultArea1').html('아직 답변이 달리지 않았습니다.');
+            $('#DupCk').trigger('click');
         }
     }); //ajax
 } //qnaReplyD
-
-//-----------------------------------------------------------------------//
-//-----------------------------------------------------------------------//
 
 
