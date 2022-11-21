@@ -74,15 +74,5 @@
         where item_no = #{itemNo}
     </update>
 
-    <insert id="buyInfoToList" parameterType="OrderDetailVO">
-        insert into order_list(user_id, dely_addr, user_phone, payment, order_req, receiver)
-        values (#{userId}, #{delyAddr}, #{userPhone}, #{payment}, #{orderReq}, #{receiver})
-    </insert>
-
-    <insert id="buyInfoToDetail" parameterType="OrderDetailVO">
-        insert into order_detail(item_no, item_price, item_amount)
-        values (#{itemNo}, #{itemPrice}, #{itemAmount})
-    </insert>
-
 </mapper>
 

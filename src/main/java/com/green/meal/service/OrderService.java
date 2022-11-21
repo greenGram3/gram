@@ -19,8 +19,4 @@ public interface OrderService {
 
     List<OrderDetailVO> getSearchResultPage(SearchCondition sc) throws Exception;
 
-    int buyInfoToList(OrderDetailVO vo) throws Exception;
-
-    int buyInfoToDetail(OrderDetailVO vo) throws Exception;
-
 }

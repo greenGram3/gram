@@ -77,12 +77,12 @@ public class ItemController {
 
         try {
 
+            //원래 있던 페이지로 돌아가기 위해 필요함 -> 파라미터로 전달
+            //이렇게 안하고 리다이렉트에 sc.겟쿼리스트링 적는 방법도 있음 => 적용 잘 안돼서 일단 포기
             rattr.addAttribute("page", sc.getPage());
             rattr.addAttribute("pageSize", sc.getPageSize());
             rattr.addAttribute("option", sc.getOption());
             rattr.addAttribute("keyword", sc.getKeyword());
-            //원래 있던 페이지로 돌아가기 위해 필요함 -> 파라미터로 전달
-            //이렇게 안하고 리다이렉트에 sc.겟쿼리스트링 적는 방법도 있음 => 적용 잘 안돼서 일단 포기
 
             // --------------------------------------------------------------------------//
             // * 이미지 업데이트 - itemImage
@@ -152,9 +152,9 @@ public class ItemController {
     public String remove(ItemVO vo, SearchCondition sc, Model m, RedirectAttributes rattr) {
         try {
 
+            // 원래 있던 페이지로 돌아가기 위해 꼭 필요함 -> 파라미터로 전달해야되기 때문
             rattr.addAttribute("page", sc.getPage());
             rattr.addAttribute("pageSize", sc.getPageSize());
-            // 원래 있던 페이지로 돌아가기 위해 꼭 필요함 -> 파라미터로 전달해야되기 때문
 
             int rowCnt = itemService.itemRemove(vo.getItemNo());
 
@@ -252,38 +252,6 @@ public class ItemController {
         }
     }
 
-//    ============= 사용 보류 ================
-
-//    @PostMapping("/upload")
-//    public String upload(ItemVO vo, Model m, RedirectAttributes rattr) throws Exception {
-//
-//
-//            int rowCnt = itemService.itemUpload(vo);
-//
-//            if(rowCnt!=1)
-//                throw new Exception("item upload failed");
-//
-//            rattr.addFlashAttribute("msg", "UPL_OK");
-//
-//            return "redirect:/item/list";
-//
-//    }
-
-//    @ExceptionHandler(Exception.class)
-//    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR) // 200 -> 500
-//    public String catcher1(Model m) {
-//        m.addAttribute("msg", "UPL_ERR");
-//        System.out.println("Exception.class - start");
-//        return "itemUpload";
-//    }
-//
-//    @ExceptionHandler(SQLIntegrityConstraintViolationException.class)
-//    public String catcher2(Model m) {
-//        m.addAttribute("msg", "UiqueKey_ERR");
-//        return "itemUpload";
-//    }
-
-//    ==============================================================================
     @GetMapping("/category1")
     public String category1( String category1, Model model){
 

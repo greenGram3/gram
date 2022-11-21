@@ -1,6 +1,7 @@
 package com.green.meal.service;
 
 import com.green.meal.domain.OrderDetailDto;
+import com.green.meal.domain.OrderDetailVO;
 import com.green.meal.domain.OrderListDto;
 import com.green.meal.domain.OrderSearch;
 import com.green.meal.mapper.UserOrderMapper;
@@ -21,12 +22,12 @@ public class UserOrderServiceImpl implements UserOrderService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public int save(List<OrderDetailDto> orderDetailVO, OrderListDto orderListVO){
+    public int save(List<OrderDetailVO> list, OrderDetailVO odvo){
         int rowCnt =0;
-        userOrderMapper.insertUser(orderListVO);
+        userOrderMapper.insertUser(odvo);
 
-        for (OrderDetailDto vo : orderDetailVO) {
-            vo.setOrderNo(orderListVO.getOrderNo());
+        for (OrderDetailVO vo : list) {
+            vo.setOrderNo(odvo.getOrderNo());
             userOrderMapper.insertItem(vo);
 
             rowCnt ++;

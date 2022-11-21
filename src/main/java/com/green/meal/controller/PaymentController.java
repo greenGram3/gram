@@ -6,6 +6,7 @@ import com.green.meal.domain.OrderDetailVO;
 import com.green.meal.domain.UserVO;
 import com.green.meal.service.DelyService;
 import com.green.meal.service.OrderService;
+import com.green.meal.service.UserOrderService;
 import com.green.meal.service.UserService;
 import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 @Controller
 @RequestMapping("/buy")
@@ -32,6 +30,8 @@ public class PaymentController {
     UserService userService;
     @Autowired
     OrderService orderService;
+    @Autowired
+    UserOrderService userOrderService;
 
     //제품 상세페이지에서 바로 주문 결제페이지로 넘어가는 메서드
     @PostMapping("/payment")
@@ -142,23 +142,17 @@ public class PaymentController {
             DeliveryVO vo = new DeliveryVO();
             vo = delyService.selectedDely(map);
 
-            //구매자 정보 주문내용에 담기
+            //구매자 정보 주문내용에 담기 (구매상품에 대한 정보는 이미 담겨있음)
             odvo.setUserId(userId);
             odvo.setUserPhone(vo.getDelyPhone());
             odvo.setDelyAddr(vo.getDelyAddr());
             odvo.setReceiver(vo.getReceiver());
+            //구매상품 종류가 한개여도 리스트에 담아서 보내기
+            List<OrderDetailVO> list = new ArrayList<>();
+            list.add(odvo);
 
-            //order_list에 주문정보 넣기
-            int rowCnt_list = orderService.buyInfoToList(odvo);
-            if(rowCnt_list!=1) {
-                throw new Exception("buyInfoToList error");
-            }
-
-            //order_detail에 주문정보 넣기
-            int rowCnt_detail = orderService.buyInfoToDetail(odvo);
-            if(rowCnt_detail!=1) {
-                throw new Exception("buyInfoToDetail error");
-            }
+            //구매정보 order_list, order_detail에 넣기
+            userOrderService.save(list, odvo);
 
             //구매한 제품 정보, 총 구매금액, 배송지 정보 -> jsp로 전달
             m.addAttribute("dto", odvo);

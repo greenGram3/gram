@@ -27,8 +27,4 @@ public interface OrderMapper {
 
     List<OrderDetailVO> searchSelectPage(SearchCondition sc);
 
-    int buyInfoToList(OrderDetailVO vo);
-
-    int buyInfoToDetail(OrderDetailVO vo);
-
 }

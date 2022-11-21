@@ -30,13 +30,12 @@ public class UserOrderController {
     UserController userController;
 
     //결제페이지 에서 주문내역으로 저장
-    @PostMapping("/save")
-    public void save(List<OrderDetailDto> orderItemVO, OrderListDto orderListVO){
-
-
-        userOrderService.save(orderItemVO, orderListVO);
-
-    }
+//    @PostMapping("/save")
+//    public void save(List<OrderDetailDto> orderItemVO, OrderListDto orderListVO){
+//
+//        userOrderService.save(orderItemVO, orderListVO);
+//
+//    }
 
     @GetMapping("/order")
     public String getList( Model model, HttpSession httpSession){

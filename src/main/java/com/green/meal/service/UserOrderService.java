@@ -1,6 +1,7 @@
 package com.green.meal.service;
 
 import com.green.meal.domain.OrderDetailDto;
+import com.green.meal.domain.OrderDetailVO;
 import com.green.meal.domain.OrderListDto;
 import com.green.meal.domain.OrderSearch;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,7 +11,7 @@ import java.util.Map;
 
 public interface UserOrderService {
     @Transactional(rollbackFor = Exception.class)
-    int save(List<OrderDetailDto> orderItemVO, OrderListDto orderListVO);
+    int save(List<OrderDetailVO> list, OrderDetailVO odvo);
 
     List<OrderDetailDto> orderItemInfo(Integer orderNo);
 

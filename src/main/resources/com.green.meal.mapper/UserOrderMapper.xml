@@ -51,16 +51,16 @@
         </update>
 
 
-        <insert id="insertUser" parameterType="OrderListDto">
+        <insert id="insertUser" parameterType="OrderDetailVO">
             <selectKey keyProperty="orderNo" resultType="int" order="BEFORE">
                 select  IFNULL(max(order_no),0)+1 from order_list
             </selectKey>
-            insert  into order_list
+            insert into order_list
             (order_no, user_id,receiver, dely_addr,user_phone, payment,order_req)
             values
             (#{orderNo},#{userId},#{receiver},#{delyAddr},#{userPhone},#{payment},#{orderReq})
         </insert>
-        <insert id="insertItem" parameterType="OrderDetailDto">
+        <insert id="insertItem" parameterType="OrderDetailVO">
             insert into order_detail
                 (order_no, item_no, item_price, item_amount)
             values
