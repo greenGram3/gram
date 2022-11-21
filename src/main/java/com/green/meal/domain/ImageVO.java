@@ -7,7 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class ImageVO {
     private int itemNo;
     private String imgName;
-    private MultipartFile imgNamef1;
+    private MultipartFile imgNamef;
     private String imgType;
 
 }

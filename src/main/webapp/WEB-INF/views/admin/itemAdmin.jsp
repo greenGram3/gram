@@ -87,20 +87,20 @@
        <th>상품이미지</th>
     <td>
       <li class="topImage">대표이미지</li>
-      <li><img src="<c:url value='${vo.imgName}'/>" class="select_img" width="100px" height="100px"></li>
-      <li><input type="hidden" name="imgName" id="imgName" value="${vo.imgName}"></li>
-      <li><input type="file" name="imgNamef" id="imgNamef" value=""></li>
+      <li><img src="<c:url value='${vo.fileName}'/>" class="select_img" width="100px" height="100px"></li>
+      <li><input type="hidden" name="fileName" id="fileName" value="${vo.fileName}"></li>
+      <li><input type="file" name="fileNamef" id="fileNamef"></li>
     </td>
     <td>
       <li><img src="<c:url value='${vo1.imgName}'/>" class="select_img1" width="100px" height="100px"></li>
-      <li><input type="hidden" name="imgName" id="imgName1" value="${vo1.imgName}"></li>
-      <li><input type="file" name="imgNamef1" id="imgNamef1" value=""></li>
+      <li><input type="hidden" name="imgName" id="imgName" value="${vo1.imgName}"></li>
+      <li><input type="file" name="imgNamef" id="imgNamef"></li>
     </td>
 
     </tr>
 
     <script>
-      $('#imgNamef').change(function () {
+      $('#fileNamef').change(function () {
         if (this.files && this.files[0]) {
           let reader = new FileReader;
           reader.readAsDataURL(this.files[0]);
@@ -111,7 +111,7 @@
         }
       });
 
-      $('#imgNamef1').change(function () {
+      $('#imgNamef').change(function () {
         if (this.files && this.files[0]) {
           let reader = new FileReader;
           reader.readAsDataURL(this.files[0]);
@@ -153,7 +153,7 @@
         return false;
       }
       // ** Heejeong 첨부파일 업로드 체크
-      if(form.imgNamef.value=="") {
+/*      if(form.imgNamef.value=="") {
         alert("좌측 대표 이미지를 첨부해주세요.");
         return false;
       }
@@ -161,7 +161,7 @@
       if(form.imgNamef1.value=="") {
         alert("우측 상세 이미지를 첨부해주세요.");
         return false;
-      }
+      }*/
       return true;
     }
 

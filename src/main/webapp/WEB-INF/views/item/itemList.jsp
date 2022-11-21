@@ -23,7 +23,7 @@
       <div class="itemVO">
         <ul>
           <li>
-            <a href="<c:url value='${pageLink}'/>"> <img src="<c:url value='${itemVO.imgName}'/>" width="300"></a>
+            <a href="<c:url value='${pageLink}'/>"> <img src="<c:url value='${itemVO.fileName}'/>" width="300"></a>
             <h2>${itemVO.itemName}</h2>
             <h3><fmt:formatNumber pattern="###,###,###" value="${itemVO.itemPrice}"/> 원</h3>
           </li>

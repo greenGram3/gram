@@ -105,7 +105,7 @@
                     <div class="itemImage">
                         <input hidden type="text" name="itemNo" value="${itemResult.itemNo}" readonly>
                         <%--<input type="text" name="userId" value="${userId}" disabled>--%>
-                        <img src="<c:url value='${itemResult.imgName}'/>" width=500 height=500>
+                        <img src="<c:url value='${itemResult.fileName}'/>" width=500 height=500>
                     </div>
                 <table>
                 <tr>

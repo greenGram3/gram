@@ -76,6 +76,8 @@ public class ItemController {
     public String modify(Model m, SearchCondition sc, ItemVO vo, ImageVO vo1, RedirectAttributes rattr, HttpServletRequest request) {
 
         try {
+            System.out.println("** vo.getImageName"+vo.getFileName());
+            System.out.println("** vo1.getImageName"+vo1.getImgName());
 
             //원래 있던 페이지로 돌아가기 위해 필요함 -> 파라미터로 전달
             //이렇게 안하고 리다이렉트에 sc.겟쿼리스트링 적는 방법도 있음 => 적용 잘 안돼서 일단 포기
@@ -87,41 +89,38 @@ public class ItemController {
             // --------------------------------------------------------------------------//
             // * 이미지 업데이트 - itemImage
             String realPath = request.getSession().getServletContext().getRealPath("/");
-            /*String realPath = request.getRealPath("/");*/
             System.out.println("** realPath => "+realPath);
             // 실제 저장 위치(배포 전 - 컴마다 다름)
-            /*realPath = "C:\\Users\\Eom hee jeong\\IdeaProjects\\gram\\src\\main\\webapp\\resources\\itemImage\\";*/
             realPath += "resources\\itemImage\\";
 
             // 기본 이미지 지정
-            String file1, file2="/itemImage/noImage.JPG";
-            String file3, file4="/itemImage/noImage.JPG";
+            String file1, file2, file3, file4="/itemImage/noImage.JPG";
 
             // ** MultipartFile
-            MultipartFile imgNamef = vo.getImgNamef();
-            if ( imgNamef !=null && !imgNamef.isEmpty() ) {
+            MultipartFile fileNamef = vo.getFileNamef();
+            if ( fileNamef !=null && !fileNamef.isEmpty() ) { //대표이미지가 null이 아니면
                 // ** Image를 선택 -> Image저장
                 // 1) 물리적 저장경로에 Image저장
-                file1 = realPath + imgNamef.getOriginalFilename();
-                imgNamef.transferTo(new File(file1));
+                file1 = realPath + fileNamef.getOriginalFilename();
+                fileNamef.transferTo(new File(file1));
                 // 2) Table 저장 준비
-                file2="/itemImage/"+imgNamef.getOriginalFilename();
+                file2="/itemImage/"+fileNamef.getOriginalFilename();
                 // ** Table에 완성 String경로 set
-                vo.setImgName(file2);
+                vo.setFileName(file2);
             }
             // --------------------------------------------------------------------------//
             // ImageImage 업데이트
-            MultipartFile imgNamef1 = vo1.getImgNamef1();
-            if ( imgNamef1 !=null && !imgNamef1.isEmpty() ) {
+            MultipartFile imgNamef = vo1.getImgNamef();
+            if ( imgNamef !=null && !imgNamef.isEmpty() ) { //상세이미지가 null이면
                 // ** Image를 선택 -> Image저장
                 // 1) 물리적 저장경로에 Image저장
-                file3 = realPath + imgNamef1.getOriginalFilename();
-                imgNamef1.transferTo(new File(file3));
+                file3 = realPath + imgNamef.getOriginalFilename();
+                imgNamef.transferTo(new File(file3));
                 // 2) Table 저장 준비
-                file4 = "/itemImage/"+imgNamef1.getOriginalFilename();
+                file4 = "/itemImage/"+imgNamef.getOriginalFilename();
+                // Table에 완성 String경로 set
+                vo1.setImgName(file4);
             }
-            // Table에 완성 String경로 set
-            vo1.setImgName(file4);
             // --------------------------------------------------------------------------//
 
             int rowCnt = itemService.itemModify(vo);
@@ -188,41 +187,39 @@ public class ItemController {
             //----------------------------------------------------------------------//
             // ** 이미지 업로드
             String realPath = request.getSession().getServletContext().getRealPath("/");
-
             realPath += "resources\\itemImage\\";
 
             // 기본 이미지 지정
-            String file1, file2="/itemImage/noImage.JPG";
-            String file3, file4="/itemImage/noImage.JPG";
+            String file1, file2, file3, file4 ="/itemImage/noImage.JPG";
 
             // item에 저장하는 Image
             // MultipartFile
-            MultipartFile imgNamef = vo.getImgNamef();
-            if ( imgNamef !=null && !imgNamef.isEmpty() ) {
+            MultipartFile fileNamef = vo.getFileNamef();
+            if ( fileNamef !=null && !fileNamef.isEmpty() ) {
                 // ** Image를 선택 -> Image저장
                 // 1) 물리적 저장경로에 Image저장
-                file1 = realPath + imgNamef.getOriginalFilename();
-                imgNamef.transferTo(new File(file1));
+                file1 = realPath + fileNamef.getOriginalFilename();
+                fileNamef.transferTo(new File(file1));
                 // 2) Table 저장 준비
-                file2="/itemImage/"+imgNamef.getOriginalFilename();
+                file2="/itemImage/"+fileNamef.getOriginalFilename();
+                // Table에 완성 String경로 set
+                vo.setFileName(file2);
             }
-            // Table에 완성 String경로 set
-            vo.setImgName(file2);
 //-------------------------------------------------------------//
             // Image에 저장하는 Image
             // MultipartFile
-            MultipartFile imgNamef1 = vo1.getImgNamef1();
-            if ( imgNamef1 !=null && !imgNamef1.isEmpty() ) {
+            MultipartFile imgNamef = vo1.getImgNamef();
+            if ( imgNamef !=null && !imgNamef.isEmpty() ) {
                 // ** Image를 선택 -> Image저장
                 // 1) 물리적 저장경로에 Image저장
-                file3 = realPath + imgNamef1.getOriginalFilename();
-                imgNamef1.transferTo(new File(file3));
+                file3 = realPath + imgNamef.getOriginalFilename();
+                imgNamef.transferTo(new File(file3));
                 // 2) Table 저장 준비
-                file4="/itemImage/"+imgNamef1.getOriginalFilename();
-            }
-            // Table에 완성 String경로 set
-            vo1.setImgName(file4);
+                file4="/itemImage/"+imgNamef.getOriginalFilename();
 
+                // Table에 완성 String경로 set
+                vo1.setImgName(file4);
+            }
  //--------------------------------------------------------------//
             int rowCnt = itemService.itemUpload(vo);
 

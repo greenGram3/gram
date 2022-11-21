@@ -71,7 +71,7 @@
             <c:forEach var="itemVO" items="${list}">
                 <tr>
                     <td class="no">${itemVO.itemNo}</td>
-                    <td class="item-image"><img src="<c:url value='${itemVO.imgName}'/>" width="100px" height="100px"></td>
+                    <td class="item-image"><img src="<c:url value='${itemVO.fileName}'/>" width="100px" height="100px"></td>
                     <td class="category1">${itemVO.itemCategory1}</td>
                     <td class="category1">${itemVO.itemCategory2}</td>
                     <td class="name">${itemVO.itemName}</td>

@@ -79,15 +79,15 @@
       <td>
         <li class="topImage">대표이미지</li>
         <li><img src="" class="select_img"></li> <!-- 대표이미지 -->
-        <li><input type="file" name="imgNamef" id="imgNamef" value=""></li>
+        <li><input type="file" name="fileNamef" id="fileNamef" value=""></li>
       </td>
       <td>
         <li><img src="" class="select_img1"></li> <!-- 파일 미리보기(js이용) -->
-        <li><input type="file" name="imgNamef1" id="imgNamef1" value=""></li>
+        <li><input type="file" name="imgNamef" id="imgNamef" value=""></li>
       </td>
     </tr>
     <script>
-      $('#imgNamef').change(function () {
+      $('#fileNamef').change(function () {
         if (this.files && this.files[0]) {
           let reader = new FileReader;
           reader.readAsDataURL(this.files[0]);
@@ -98,7 +98,7 @@
         }
       }); //change
 
-      $('#imgNamef1').change(function () {
+      $('#imgNamef').change(function () {
         if (this.files && this.files[0]) {
           let reader = new FileReader;
           reader.readAsDataURL(this.files[0]);

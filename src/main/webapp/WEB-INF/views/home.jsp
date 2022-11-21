@@ -35,7 +35,7 @@
 					<c:forEach var="itemVO" items="${bestItems}">
 						<c:set var="pageLink" value="/itemDetail?itemNo=${itemVO.itemNo}"/>
 						<li>
-							<a href="<c:url value='${pageLink}'/>"> <img src="<c:url value='${itemVO.imgName}'/>" width="300"></a>
+							<a href="<c:url value='${pageLink}'/>"> <img src="<c:url value='${itemVO.fileName}'/>" width="300"></a>
 							<h3>${itemVO.itemName}</h3>
 							<h4><fmt:formatNumber pattern="###,###,###" value="${itemVO.itemPrice}"/> 원</h4>
 						</li>
@@ -52,7 +52,7 @@
 				<c:forEach var="itemVO" items="${newItems}">
 					<c:set var="pageLink" value="/itemDetail?itemNo=${itemVO.itemNo}"/>
 					<li>
-						<a href="<c:url value='${pageLink}'/>"> <img src="<c:url value='${itemVO.imgName}'/>" width="300"></a>
+						<a href="<c:url value='${pageLink}'/>"> <img src="<c:url value='${itemVO.fileName}'/>" width="300"></a>
 						<h3>${itemVO.itemName}</h3>
 						<h4><fmt:formatNumber pattern="###,###,###" value="${itemVO.itemPrice}"/> 원</h4>
 					</li>

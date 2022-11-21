@@ -18,9 +18,9 @@ public class ItemVO {
     private int itemPrice;
 
     // 이미지
-    private String imgName; //DB에 저장된 이미지 String경로 꺼내오는 용
+    private String fileName; //DB에 저장된 이미지 String경로 꺼내오는 용
 
-    private MultipartFile imgNamef; //img 진짜 정보 저장 객체 타입
+    private MultipartFile fileNamef; //img 진짜 정보 저장 객체 타입
 
 
 

@@ -41,9 +41,9 @@
     <!-- Image Table -->
     <insert id="insert" parameterType="ItemVO">
         insert into item
-        (item_category1, item_category2, item_name, item_amount, item_price, img_name)
+        (item_category1, item_category2, item_name, item_amount, item_price, file_name)
         values
-            (#{itemCategory1}, #{itemCategory2}, #{itemName}, #{itemAmount}, #{itemPrice}, #{imgName})
+            (#{itemCategory1}, #{itemCategory2}, #{itemName}, #{itemAmount}, #{itemPrice}, #{fileName})
     </insert>
 
     <!-- 이미지 한개 등록용 이전 구버전 -->
@@ -76,7 +76,7 @@
             item_name = #{itemName},
             item_amount = #{itemAmount},
             item_price = #{itemPrice},
-            img_name=#{imgName}
+            file_name=#{fileName}
         where item_no = #{itemNo}
     </update>
 
