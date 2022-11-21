@@ -48,16 +48,16 @@
 <table>
     <tr>
         <th>상품명</th>
-        <td>${dto.itemName}</td>
-    </tr>
-    <tr>
         <th>가격</th>
-        <td>${dto.itemPrice}</td>
-    </tr>
-    <tr>
         <th>수량</th>
-        <td>${dto.itemAmount}</td>
     </tr>
+    <c:forEach var="odvo" items="${odvoList}">
+        <tr>
+            <td>${odvo.itemName}</td>
+            <td>${odvo.itemPrice}</td>
+            <td>${odvo.itemAmount}</td>
+        </tr>
+    </c:forEach>
     <tr>
         <th>총 금액</th>
         <td>${totalItemPrice}</td>

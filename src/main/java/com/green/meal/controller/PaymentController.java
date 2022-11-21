@@ -1,7 +1,6 @@
 package com.green.meal.controller;
 
 import com.green.meal.domain.DeliveryVO;
-import com.green.meal.domain.OrderDetailDto;
 import com.green.meal.domain.OrderDetailVO;
 import com.green.meal.domain.UserVO;
 import com.green.meal.service.DelyService;
@@ -35,7 +34,7 @@ public class PaymentController {
 
     //제품 상세페이지에서 바로 주문 결제페이지로 넘어가는 메서드
     @PostMapping("/payment")
-    public String buy(OrderDetailVO vo, Integer totalItemPrice, Model m, HttpServletRequest request) {
+    public String buy(OrderDetailVO odvo, Integer totalItemPrice, Model m, HttpServletRequest request) {
 
         try {
 
@@ -44,8 +43,14 @@ public class PaymentController {
             session.setAttribute("userId", "aaa1111");
             String userId = (String)session.getAttribute("userId");
 
+            //넘어온 구매상품정보 리스트에 담기(한개여도 리스트에 담기)
+            List<OrderDetailVO> odvoList = new ArrayList<>();
+            odvoList.add(odvo);
+
             //배송지 리스트 얻어오기
-            List<DeliveryVO> list = delyService.delySelect(userId);
+            List<DeliveryVO> delyList = delyService.delySelect(userId);
+
+            //구매고객 정보 얻어오기
             UserVO userVo = userService.userDetail(userId);
 
             //임시주문번호제작
@@ -55,9 +60,9 @@ public class PaymentController {
             uniqueNo = sdf.format(dateTime.getTime())+"_"+ RandomStringUtils.randomAlphanumeric(6);
 
             //전체금액, 구매할상품정보, 구매자배송지정보, 구매자정보, 임시주문정보 -> jsp 전달
+            m.addAttribute("odvoList", odvoList);
             m.addAttribute("totalItemPrice", totalItemPrice);
-            m.addAttribute("vo", vo);
-            m.addAttribute("list", list);
+            m.addAttribute("delyList", delyList);
             m.addAttribute("userVo", userVo);
             m.addAttribute("uniqueNo", uniqueNo);
 
@@ -65,8 +70,7 @@ public class PaymentController {
 
         } catch (Exception e) {
             e.printStackTrace();
-            m.addAttribute("vo", vo);
-            return "redirect:item/itemDetail";
+            return "redirect:/buy/payment";
         }
     }
 
@@ -90,6 +94,7 @@ public class PaymentController {
         return "delyView";
     }
 
+    //주문페이지에서 배송지 정보를 수정할 수 있는 메서드
     @PostMapping("/delyUpdate")
     public String delyUpdate(DeliveryVO vo, String newReceiver, String newDelyPhone, String newDelyAddr, HttpServletResponse response, Model m, HttpSession session){
 
@@ -116,7 +121,6 @@ public class PaymentController {
             m.addAttribute("vo", newDelyVo);
 
         } catch (Exception e) {
-            //error 로그 찍기
             e.printStackTrace();
             m.addAttribute("vo", vo);
         }
@@ -148,22 +152,21 @@ public class PaymentController {
             odvo.setDelyAddr(vo.getDelyAddr());
             odvo.setReceiver(vo.getReceiver());
             //구매상품 종류가 한개여도 리스트에 담아서 보내기
-            List<OrderDetailVO> list = new ArrayList<>();
-            list.add(odvo);
+            List<OrderDetailVO> odvoList = new ArrayList<>();
+            odvoList.add(odvo);
 
             //구매정보 order_list, order_detail에 넣기
-            userOrderService.save(list, odvo);
+            userOrderService.save(odvoList, odvo);
 
-            //구매한 제품 정보, 총 구매금액, 배송지 정보 -> jsp로 전달
-            m.addAttribute("dto", odvo);
+            //총 구매금액, 배송지 정보, 구매한 제품 정보 -> jsp로 전달
             m.addAttribute("totalItemPrice", totalItemPrice);
             m.addAttribute("vo", vo);
+            m.addAttribute("odvoList", odvoList);
 
             return "paymentConfirm";
 
         } catch (Exception e) {
             e.printStackTrace();
-            m.addAttribute("dto", odvo);
             return "redirect:item/itemDetail";
         }
 

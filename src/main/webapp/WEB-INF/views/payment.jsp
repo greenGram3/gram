@@ -112,18 +112,20 @@
           <th>가격</th>
           <th>총금액</th>
         </tr>
-        <tr class="itemList-tr">
-          <td><input name="itemNo" type="text" value="${vo.itemNo}"></td>
-          <td><input name="itemName" type="text" value="${vo.itemName}"></td>
-          <td><input name="itemAmount" type="text" value="${vo.itemAmount}"></td>
-          <td><input name="itemPrice" type="text" value="${vo.itemPrice}"></td>
-          <td><input name="totalItemPrice" type="text" value="${totalItemPrice}"></td>
-        </tr>
+        <c:forEach var="list" items="${odvoList}">
+          <tr class="itemList-tr">
+            <td><input name="itemNo" type="text" value="${list.itemNo}"></td>
+            <td><input name="itemName" type="text" value="${list.itemName}"></td>
+            <td><input name="itemAmount" type="text" value="${list.itemAmount}"></td>
+            <td><input name="itemPrice" type="text" value="${list.itemPrice}"></td>
+            <td><input name="totalItemPrice" type="text" value="${totalItemPrice}"></td>
+          </tr>
+        </c:forEach>
         <tr class="block-div"></tr>
         <tr class="addr-tr">
           <th>배송지</th>
         </tr>
-        <c:forEach var="list" items="${list}" varStatus="status">
+        <c:forEach var="list" items="${delyList}" varStatus="status">
           <table>
             <tr>
               <td>선택 <input type="radio" id="delyPlace" name="delyPlace" value="${list.delyPlace}" ${list.delyNo==1 ? "checked" : ""}/></td>
