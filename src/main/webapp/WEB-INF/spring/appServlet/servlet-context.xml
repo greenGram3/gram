@@ -58,6 +58,7 @@
 		<mvc:interceptor>
 			<mvc:mapping path="/update/**" />
 			<mvc:mapping path="/delivery/**" />
+			<mvc:mapping path="/mypage/**" />
 			<!-- 인터셉터로 사용할 빈 등록 -->
 			<beans:ref bean="loginInterceptor" />
 		</mvc:interceptor>

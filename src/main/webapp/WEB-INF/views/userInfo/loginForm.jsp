@@ -23,6 +23,7 @@
                     <div class="memberLoginDetail">
                         <li>　아이디　<input type="text" name="userId" value="${cookie.userId.value}" placeholder="　아이디 입력" autofocus></li>
                         <li>　비밀번호　<input type="password" name="userPwd" placeholder="　비밀번호">　</li>　
+                        <input type="hidden" name="requestURI" value="${requestURI}">
                     </div>
                     <button>로그인</button></div>
                 <div class="rememberId">

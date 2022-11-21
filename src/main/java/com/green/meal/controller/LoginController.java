@@ -37,7 +37,10 @@ public class LoginController {
     private final UserService userService;
 
     @GetMapping("/login")
-    public String loginForm() {
+    public String loginForm(String requestURI, Model model) {
+        log.info("requestURI : "+requestURI);
+
+        if (requestURI!=null) {model.addAttribute("requestURI",requestURI);}; //인터셉터 preHandle에서 접근할경우
         return "userInfo/loginForm";
     }
 
@@ -53,7 +56,7 @@ public class LoginController {
 
 
     @PostMapping("/login")
-    public String login(String userId, String userPwd, boolean rememberId,
+    public String login(String userId, String userPwd, boolean rememberId, String requestURI,
                         HttpServletRequest request, HttpServletResponse response, RedirectAttributes rettr) throws Exception {
 
         // 1. id와 pwd를 확인
@@ -82,8 +85,14 @@ public class LoginController {
         }
 
         rettr.addFlashAttribute("msg","login_ok");
-//		       3. 홈으로 이동
-        return "redirect:/";
+//		       3. 홈또는 requestURI 으로 이동
+        log.info("requestURI2 : "+requestURI);
+        if (requestURI == "") return "redirect:/";
+        else {
+            requestURI = requestURI.replace("/meal","");
+            log.info("requestURI3 : "+requestURI);
+            return "redirect:"+requestURI;
+        }
     }
 
     @GetMapping("/naverLogin2") //네이버 로그인 했을때 첫번째 요청보내기

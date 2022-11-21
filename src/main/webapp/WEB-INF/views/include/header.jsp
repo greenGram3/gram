@@ -3,7 +3,7 @@
 <c:set var="loginId" value="${sessionScope.userId==null ? '' : sessionScope.userId}"/>
 <c:set var="loginOutLink" value="${loginId=='' ? '/login/login' : '/login/logout'}"/>
 <c:set var="pageName" value="${loginId=='admin' ? '관리자페이지' : '마이페이지'}"/>
-<c:set var="MyPageLink" value="${loginId=='' ?  '/login/login'  :  ( loginId=='admin' ? '/item/list' : '/mypage/order')}"/>
+<c:set var="MyPageLink" value="${loginId=='' ?  '/mypage/order'  :  ( loginId=='admin' ? '/item/list' : '/mypage/order')}"/>
 <c:set var="loginOut" value="${loginId=='' ? '로그인' : '로그아웃'}"/>
 <!DOCTYPE html>
 <html>
