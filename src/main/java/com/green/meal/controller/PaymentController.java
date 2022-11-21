@@ -35,7 +35,7 @@ public class PaymentController {
 
     //제품 상세페이지에서 바로 주문 결제페이지로 넘어가는 메서드
     @PostMapping("/payment")
-    public String buy(OrderDetailDto dto, Integer totalItemPrice, Model m, HttpServletRequest request) {
+    public String buy(OrderDetailVO vo, Integer totalItemPrice, Model m, HttpServletRequest request) {
 
         try {
 
@@ -46,7 +46,7 @@ public class PaymentController {
 
             //배송지 리스트 얻어오기
             List<DeliveryVO> list = delyService.delySelect(userId);
-            UserVO vo = userService.userDetail(userId);
+            UserVO userVo = userService.userDetail(userId);
 
             //임시주문번호제작
             String uniqueNo = "";
@@ -56,16 +56,16 @@ public class PaymentController {
 
             //전체금액, 구매할상품정보, 구매자배송지정보, 구매자정보, 임시주문정보 -> jsp 전달
             m.addAttribute("totalItemPrice", totalItemPrice);
-            m.addAttribute("dto", dto);
-            m.addAttribute("list", list);
             m.addAttribute("vo", vo);
+            m.addAttribute("list", list);
+            m.addAttribute("userVo", userVo);
             m.addAttribute("uniqueNo", uniqueNo);
 
             return "payment";
 
         } catch (Exception e) {
             e.printStackTrace();
-            m.addAttribute("dto", dto);
+            m.addAttribute("vo", vo);
             return "redirect:item/itemDetail";
         }
     }

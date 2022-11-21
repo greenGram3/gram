@@ -113,10 +113,10 @@
           <th>총금액</th>
         </tr>
         <tr class="itemList-tr">
-          <td><input name="itemNo" type="text" value="${dto.itemNo}"></td>
-          <td><input name="itemName" type="text" value="${dto.itemName}"></td>
-          <td><input name="itemAmount" type="text" value="${dto.itemAmount}"></td>
-          <td><input name="itemPrice" type="text" value="${dto.itemPrice}"></td>
+          <td><input name="itemNo" type="text" value="${vo.itemNo}"></td>
+          <td><input name="itemName" type="text" value="${vo.itemName}"></td>
+          <td><input name="itemAmount" type="text" value="${vo.itemAmount}"></td>
+          <td><input name="itemPrice" type="text" value="${vo.itemPrice}"></td>
           <td><input name="totalItemPrice" type="text" value="${totalItemPrice}"></td>
         </tr>
         <tr class="block-div"></tr>
@@ -170,11 +170,11 @@
       <table class="hidden">
         <tr>
           <th>구매자이름</th>
-          <td><input type="text" name="userName" value="${vo.userName}"></td>
+          <td><input type="text" name="userName" value="${userVo.userName}"></td>
         </tr>
         <tr>
           <th>구매자이메일</th>
-          <td><input type="text" name="userEmail" value="${vo.userEmail}"></td>
+          <td><input type="text" name="userEmail" value="${userVo.userEmail}"></td>
         </tr>
       </table>
 
@@ -200,11 +200,11 @@
     <%--IMP.request_pay({--%>
     <%--  pg : 'html5_inicis',--%>
     <%--  merchant_uid: "${uniqueNo}",--%>
-    <%--  name : '${dto.itemName} ${dto.itemAmount}개',--%>
+    <%--  name : '${vo.itemName} ${vo.itemAmount}개',--%>
     <%--  amount : ${totalItemPrice},--%>
     <%--  pay_method : $("#payment").val(),--%>
-    <%--  buyer_email : '${vo.userEmail}',--%>
-    <%--  buyer_name : '${vo.userName}',--%>
+    <%--  buyer_email : '${userVo.userEmail}',--%>
+    <%--  buyer_name : '${userVo.userName}',--%>
     <%--}, function (rsp) {--%>
     <%--  if(rsp.success) {--%>
     <%--    alert("결제가 완료되었습니다.");--%>
