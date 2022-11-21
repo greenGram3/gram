@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,6 +36,23 @@
                     $('#' + count).html('');
                 }
             } //reviewDetailD
+//------------------------------------------------------------------------------------------//
+            $(function () {
+                $('.axPaging').click(function(){
+                    let url = $(this).attr('href');
+                    $.ajax({
+                        type:'Get',
+                        url:url+"&itemNo="+$('#itemNo').val(),
+                        success:function(resultPage){
+                            $('#resultArea1').html(resultPage);
+                        },
+                        error:function(){
+                            $('#resultArea1').html('reviewListD paging 오류');
+                        }
+                    }); //ajax
+                    return false;
+                }); //axPaging click
+            }) //ready
     </script>
 </head>
 <body>
@@ -85,6 +103,7 @@
                             </tr>
                             <tr hidden>
                                 <td>${review.itemNo}</td>
+                                <input type="hidden" value="${review.itemNo}" id="itemNo" name="itemNo" readonly>
                             </tr>
                         </c:forEach>
                     </c:if>
@@ -95,8 +114,8 @@
                 <div>
                     <c:choose>
                         <c:when test="${pageMaker.prev && pageMaker.spageNo>1}">
-                            <a href="reviewlistD${pageMaker.searchQuery(1)}" class="firstBtn">◀◀</a>&nbsp;
-                            <a href="reviewlistD${pageMaker.searchQuery(pageMaker.spageNo-1)}" class="forwardBtn">&lt;</a>&nbsp;&nbsp;
+                            <a href="reviewlistD${pageMaker.searchQuery(1)}" class="axPaging firstBtn">◀◀</a>&nbsp;
+                            <a href="reviewlistD${pageMaker.searchQuery(pageMaker.spageNo-1)}" class="axPaging forwardBtn">&lt;</a>&nbsp;&nbsp;
                         </c:when>
                         <c:otherwise>
                             <span class="firstBtn none">◀◀&nbsp;&nbsp;&lt;&nbsp;</span>
@@ -107,13 +126,13 @@
                             <span class="currPage">${i}</span>
                         </c:if>
                         <c:if test="${i!=pageMaker.cri.currPage}">
-                            <a href="reviewlistD${pageMaker.searchQuery(i)}">${i}</a>
+                            <a href="reviewlistD${pageMaker.searchQuery(i)}" class="axPaging">${i}</a>
                         </c:if>
                     </c:forEach>
                     <c:choose>
                         <c:when test="${pageMaker.next && pageMaker.epageNo>0}">
-                            <a href="reviewlistD${pageMaker.searchQuery(pageMaker.epageNo+1)}" class="backBtn">&nbsp;&nbsp;&gt;</a>
-                            <a href="reviewlistD${pageMaker.searchQuery(pageMaker.lastPageNo)}" class="lastBtn">▶▶</a>
+                            <a href="reviewlistD${pageMaker.searchQuery(pageMaker.epageNo+1)}" class="axPaging backBtn">&nbsp;&nbsp;&gt;</a>
+                            <a href="reviewlistD${pageMaker.searchQuery(pageMaker.lastPageNo)}" class="axPaging lastBtn">▶▶</a>
                         </c:when>
                         <c:otherwise>
                             <span class="lastBtn none">&nbsp;&gt;&nbsp;&nbsp;▶▶</span>
