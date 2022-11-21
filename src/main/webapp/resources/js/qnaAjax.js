@@ -1,12 +1,13 @@
 // ** 답글 달기 클릭 시 function 작동
-function qnaReplyF(qnaRoot,qnaStep,qnaChild) {
+function qnaReplyF(qnaRoot,qnaStep,qnaChild,link) {
     $.ajax({
         type: 'Get',
         url: 'qnarinsertf',
         data: {
             qnaRoot: qnaRoot,
             qnaStep: qnaStep,
-            qnaChild: qnaChild
+            qnaChild: qnaChild,
+            link: link
         },
         success: function (resultPage) {
             $('#resultArea1').html(resultPage);

@@ -20,6 +20,8 @@
                     + $('#searchType').val()
                     + "&scKeyword="
                     + $('#scKeyword').val()
+                    + "&link="
+                    + "${link}"
             }); //click
         }); //ready
     </script>

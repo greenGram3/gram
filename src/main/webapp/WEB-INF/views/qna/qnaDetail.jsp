@@ -12,7 +12,7 @@
             // ** load시 답변 자동으로 보이게
             $('#qnaReply').trigger('click');
 
-            // ** 답변달기 중복체크(Json으로 확인)
+            // ** 답변달기 중복체크(Json)
             $('#DupCk').click(function () {
                 $.ajax({
                     type: 'Post',
@@ -95,7 +95,7 @@
                         <!-- 답변달기 중복체크 -->
                         <span id="DupCk" hidden>답변중복체크</span>
                         <span class="textLink" id="qnaReWrite"
-                              onclick="qnaReplyF(${qnaResult.qnaRoot},${qnaResult.qnaStep},${qnaResult.qnaChild})">답글달기</span>
+                              onclick="qnaReplyF(${qnaResult.qnaRoot},${qnaResult.qnaStep},${qnaResult.qnaChild},'${link}')">답글달기</span>
                     </c:if>
                     <c:if test="${qnaResult.qnaStep < 1}">
                 <span class="textLink"

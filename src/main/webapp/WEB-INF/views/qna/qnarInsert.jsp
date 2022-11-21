@@ -49,7 +49,7 @@
     </section>
     <div class="linkBtn_container">
         <div class="linkBtn">
-            <a href="qnalist">목록으로</a>
+            <a href="qnalist?link=${link}">목록으로</a>
         </div>
     </div>
     </div>

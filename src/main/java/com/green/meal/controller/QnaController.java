@@ -40,8 +40,8 @@ public class QnaController {
    //------------------------------------------------------------------------------------------------------//
     // ** QnA List
     @RequestMapping(value="/qnalist")
-    public String qnalist(HttpServletRequest request, HttpServletResponse response, Model model,
-                          QnaVO vo, SearchCriteria cri, String link, PageMaker pageMaker) {
+    public String qnalist(HttpServletRequest request, Model model, QnaVO vo,
+                          SearchCriteria cri, String link, PageMaker pageMaker) {
         cri.setSnoEno(); //Sno, Eno 계산
         if(link != null){
             model.addAttribute("link",link);
@@ -77,7 +77,7 @@ public class QnaController {
     // -----------------------------------------------------------------------------------------//
     // ** QnA 작성
     @RequestMapping(value="/qnainsertf")
-    public String qnainsertf(HttpServletRequest request, HttpServletResponse response,String link, Model model) {
+    public String qnainsertf(String link, Model model) {
         if(link != null){
             model.addAttribute("link",link);
         }
@@ -107,7 +107,7 @@ public class QnaController {
     // -----------------------------------------------------------------------------------------//
     // ** QnA Detail
     @RequestMapping(value="/qnadetail")
-    public String qnadetail (HttpServletRequest request, HttpServletResponse response, Model model, QnaVO vo,String link) {
+    public String qnadetail (HttpServletRequest request, Model model, QnaVO vo,String link) {
 
         if(link != null){
             model.addAttribute("link",link);
@@ -136,7 +136,7 @@ public class QnaController {
     // -----------------------------------------------------------------------------------------//
     // ** QnA Update
     @RequestMapping(value = "/qnaupdate", method=RequestMethod.POST)
-    public String qnaupdate(HttpServletRequest request, HttpServletResponse response, QnaVO vo, Model model,@RequestBody String link) {
+    public String qnaupdate(HttpServletResponse response, QnaVO vo, Model model,@RequestBody String link) {
         // 한글처리
         response.setContentType("text/html; charset=UTF-8");
 
@@ -164,8 +164,7 @@ public class QnaController {
     // -----------------------------------------------------------------------------------------//
     // ** QnA Delete
     @RequestMapping(value="qnadelete")
-    public String qnadelete(HttpServletRequest request, HttpServletResponse response,
-                               QnaVO vo, String link, Model model, RedirectAttributes rttr) {
+    public String qnadelete(QnaVO vo, String link, Model model, RedirectAttributes rttr) {
         // 1. 요청분석
         String uri ="redirect:qnalist?link="+link;
         if(link != null){
@@ -183,7 +182,7 @@ public class QnaController {
     // -----------------------------------------------------------------------------------------//
     // ** QnA reply insert
     @RequestMapping(value="/qnarinsertf")
-    public String qnarinsertf(Model model,String link, QnaVO vo) {
+    public String qnarinsertf(Model model,String link) {
         if(link != null){
             model.addAttribute("link",link);
         }
@@ -212,7 +211,7 @@ public class QnaController {
     // -----------------------------------------------------------------------------------------//
     // ** QnA Reply Detail
     @RequestMapping(value="/qnarDetail")
-    public String qnarDetail(HttpServletRequest request,String link, HttpServletResponse response, Model model, QnaVO vo) {
+    public String qnarDetail(HttpServletRequest request,String link, Model model, QnaVO vo) {
         // 1. 성공 시 detail폼
         String uri = "/qna/qnaRdetail";
         if(link != null){
@@ -248,7 +247,7 @@ public class QnaController {
 
     // ** QnA 답변 업데이트하기(JSON)
     @RequestMapping(value="/qnarupdate", method= RequestMethod.POST)
-    public String qnarupdate(HttpServletResponse response, Model model, QnaVO vo, HttpServletRequest request) {
+    public String qnarupdate(HttpServletResponse response, Model model, QnaVO vo) {
         // 한글처리
         response.setContentType("text/html; charset=UTF-8");
 
@@ -263,5 +262,4 @@ public class QnaController {
         }
         return "jsonView";
     }
-
 } //qnaController
