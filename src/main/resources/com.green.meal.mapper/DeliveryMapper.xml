@@ -20,6 +20,11 @@
         update delivery set dely_no = 0 where user_id = #{userId}
     </update>
 
+    <update id="updateDelivery3" parameterType="map">
+        update delivery set receiver= #{newDelyVo.receiver}, dely_phone= #{newDelyVo.delyPhone}, dely_addr= #{newDelyVo.delyAddr}
+        where user_id = #{vo.userId} and dely_place = #{vo.delyPlace}
+    </update>
+
     <delete id="deleteDelivery" parameterType="com.green.meal.domain.DeliveryVO">
         delete from delivery where receiver = #{receiver} and dely_place = #{delyPlace} and dely_no = #{delyNo} and dely_addr = #{delyAddr} and dely_phone = #{delyPhone} and user_id = #{userId}
     </delete>

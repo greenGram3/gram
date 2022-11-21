@@ -16,9 +16,12 @@ public interface DelyService {
     int delyProc(DeliveryVO dely);
 
     int updateDelivery(DeliveryVO dely0, DeliveryVO dely1);
+
     public int deleteDelivery(DeliveryVO dely);
 
     int updateDelivery2(String userId);
+
+    int updateDelivery3(DeliveryVO vo, DeliveryVO newDelyVo);
 
     int selectBase(String userId);
 

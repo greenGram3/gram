@@ -11,19 +11,16 @@ import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
-
 
 @Controller
 @RequestMapping("/buy")
@@ -85,13 +82,47 @@ public class PaymentController {
         HashMap map = new HashMap();
         map.put("userId", userId);
         map.put("delyPlace", delyPlace);
-
         vo = delyService.selectedDely(map);
 
         //배송지정보 -> jsp로 전달
         m.addAttribute("vo", vo);
 
         return "delyView";
+    }
+
+    @PostMapping("/delyUpdate")
+    public String delyUpdate(DeliveryVO vo, String newReceiver, String newDelyPhone, String newDelyAddr, HttpServletResponse response, Model m, HttpSession session){
+
+        response.setContentType("text/html; charset=UTF-8");
+
+        try {
+
+            //수정 전 배송지 정보에 아이디 담기
+            vo.setUserId((String) session.getAttribute("userId"));
+
+            // 수정하는 값들 vo에 저장
+            DeliveryVO newDelyVo = new DeliveryVO();
+            newDelyVo.setDelyPlace(vo.getDelyPlace());
+            newDelyVo.setReceiver(newReceiver);
+            newDelyVo.setDelyPhone(newDelyPhone);
+            newDelyVo.setDelyAddr(newDelyAddr);
+
+            //배송지 정보 변경하기
+            int rowCnt = delyService.updateDelivery3(vo, newDelyVo);
+            if(rowCnt!=1) {
+                throw new Exception("update delivery error");
+            }
+
+            m.addAttribute("vo", newDelyVo);
+
+        } catch (Exception e) {
+            //error 로그 찍기
+            e.printStackTrace();
+            m.addAttribute("vo", vo);
+        }
+
+        return "delyView";
+
     }
 
     //결제 후 결제확인 창으로 이동하는 메서드

@@ -15,6 +15,9 @@ public interface DeliveryMapper {
     int updateDelivery(Map map);
 
     int updateDelivery2(String userId);
+
+    int updateDelivery3(Map map);
+
     int deleteDelivery(DeliveryVO dely);
 
     int selectBase(String userId);
