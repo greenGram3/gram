@@ -57,6 +57,8 @@
                                     <li name="${orderListVO.orderNo}">
                                         <button  class="backBtn" >반품신청</button></li>
                                 </td>
+
+
                             </c:if>
                         </tr>
 
@@ -104,7 +106,7 @@
                         let orderState='구매확정';
                         $.ajax({
                             type:'patch',
-                            url: '/meal/user/order/'+orderNo,
+                            url: '/meal/mypage/'+orderNo,
                             headers : { "content-type": "application/json"},
                             dataType : 'text',
                             data : JSON.stringify({orderNo:orderNo,orderState:orderState}),
@@ -122,7 +124,7 @@
                         let orderState='반품요청';
                         $.ajax({
                             type:'patch',
-                            url: '/meal/user/order/'+orderNo,
+                            url: '/meal/mypage/'+orderNo,
                             headers : { "content-type": "application/json"},
                             dataType : 'text',
                             data : JSON.stringify({orderNo:orderNo,orderState:orderState}),
