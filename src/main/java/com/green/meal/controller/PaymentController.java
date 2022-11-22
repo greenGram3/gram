@@ -1,12 +1,13 @@
 package com.green.meal.controller;
 
-import com.green.meal.domain.CartVO;
 import com.green.meal.domain.DeliveryVO;
 import com.green.meal.domain.OrderDetailVO;
 import com.green.meal.domain.UserVO;
-import com.green.meal.service.*;
+import com.green.meal.service.DelyService;
+import com.green.meal.service.OrderService;
+import com.green.meal.service.UserOrderService;
+import com.green.meal.service.UserService;
 import org.apache.commons.lang.RandomStringUtils;
-import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,8 +31,6 @@ public class PaymentController {
     OrderService orderService;
     @Autowired
     UserOrderService userOrderService;
-    @Autowired
-    CartService cartService;
 
     //제품 상세페이지에서 바로 주문 결제페이지로 넘어가는 메서드
     @PostMapping("/payment")
@@ -41,16 +40,16 @@ public class PaymentController {
 
             //세션으로 아이디 얻어오기
             HttpSession session = request.getSession();
-            session.setAttribute("userId", "aaa1111");
+
             String userId = (String)session.getAttribute("userId");
 
-            //단건주문도 리스트로 받기
+            //넘어온 구매상품정보 리스트에 담기(한개여도 리스트에 담기)
             List<OrderDetailVO> odvoList = new ArrayList<>();
             odvoList.add(odvo);
 
             //배송지 리스트 얻어오기
             List<DeliveryVO> delyList = delyService.delySelect(userId);
-
+            System.out.println("delyList = " + delyList);
             //구매고객 정보 얻어오기
             UserVO userVo = userService.userDetail(userId);
 
@@ -75,47 +74,6 @@ public class PaymentController {
         }
     }
 
-    @GetMapping("/cartPayment")
-    public String cartBuy(HttpServletRequest request, Model m) {
-
-        try {
-            //세션으로 아이디 얻어오기
-            HttpSession session = request.getSession();
-            session.setAttribute("userId", "aaa1111");
-            String userId = (String)session.getAttribute("userId");
-
-            //해당 아이디의 장바구니 상품들 가져오기
-            List<OrderDetailVO> odvoList = new ArrayList<>();
-            odvoList = cartService.buyCartList(userId);
-
-            //배송지 리스트 얻어오기
-            List<DeliveryVO> delyList = delyService.delySelect(userId);
-
-            //구매고객 정보 얻어오기
-            UserVO userVo = userService.userDetail(userId);
-
-            //임시주문번호제작
-            String uniqueNo = "";
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssSSS");
-            Calendar dateTime = Calendar.getInstance();
-            uniqueNo = sdf.format(dateTime.getTime())+"_"+ RandomStringUtils.randomAlphanumeric(6);
-
-            //전체금액, 구매할상품정보, 구매자배송지정보, 구매자정보, 임시주문정보 -> jsp 전달
-            m.addAttribute("odvoList", odvoList);
-            m.addAttribute("delyList", delyList);
-            m.addAttribute("userVo", userVo);
-            m.addAttribute("uniqueNo", uniqueNo);
-            m.addAttribute("orderType", "cartOrder");
-
-            return "payment";
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "redirect:/buy/payment";
-        }
-
-    }
-
     //주문페이지에서 배송지 상세정보를 볼 수 있도록 해주는 메서드
     @GetMapping("/delyView")
     public String delyView(HttpServletRequest request, Model m, String delyPlace, DeliveryVO vo) {
@@ -129,7 +87,6 @@ public class PaymentController {
         map.put("userId", userId);
         map.put("delyPlace", delyPlace);
         vo = delyService.selectedDely(map);
-
 
         //배송지정보 -> jsp로 전달
         m.addAttribute("vo", vo);
@@ -174,12 +131,11 @@ public class PaymentController {
 
     //결제 후 결제확인 창으로 이동하는 메서드
     @PostMapping("/confirm")
-    public String paymentConfirm(Integer totalItemPrice, String orderType, String delyPlace, Model m, HttpServletRequest request, OrderDetailVO odvo) {
+    public String paymentConfirm(Integer totalItemPrice, String delyPlace, Model m, HttpServletRequest request, OrderDetailVO odvo) {
 
         try {
             //세션으로 아이디 얻어오기
             HttpSession session = request.getSession();
-            session.setAttribute("userId", "aaa1111");
             String userId = (String)session.getAttribute("userId");
 
             //아이디와 배송지명을 이용해서 배송지 주소 얻어오기
@@ -189,19 +145,14 @@ public class PaymentController {
             DeliveryVO vo = new DeliveryVO();
             vo = delyService.selectedDely(map);
 
-            //구매자 정보 주문내용에 담기(order_list에 넣을 것) (구매상품에 대한 정보는 이미 담겨있음)
+            //구매자 정보 주문내용에 담기 (구매상품에 대한 정보는 이미 담겨있음)
             odvo.setUserId(userId);
             odvo.setUserPhone(vo.getDelyPhone());
             odvo.setDelyAddr(vo.getDelyAddr());
             odvo.setReceiver(vo.getReceiver());
-
-            //카트주문과 단건주문 구분하여 처리
+            //구매상품 종류가 한개여도 리스트에 담아서 보내기
             List<OrderDetailVO> odvoList = new ArrayList<>();
-            if (orderType.equals("cartOrder")) {
-                odvoList = cartService.buyCartList(userId);
-            } else {
-                odvoList.add(odvo);
-            }
+            odvoList.add(odvo);
 
             //구매정보 order_list, order_detail에 넣기
             userOrderService.save(odvoList, odvo);
