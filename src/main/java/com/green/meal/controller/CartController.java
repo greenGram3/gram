@@ -28,8 +28,6 @@ public class CartController {
 
     private final CartService cartService;
 
-    private List<CartVO> list = new ArrayList<>();
-
 
     @GetMapping() // /cart GET
     public String cartList(Model model,HttpServletRequest request){
@@ -57,7 +55,7 @@ public class CartController {
             }
            session.removeAttribute("list");
         }
-            list = cartService.getList(userId);
+        List<CartVO> list = cartService.getList(userId);
         model.addAttribute("list",list);
         return "cart";
     }
@@ -80,7 +78,7 @@ public class CartController {
                     vo.setCartAmount(cartVO.getCartAmount());
                 }
             }
-            session.setAttribute("list",list);
+            session.setAttribute("list",oldList);
             return  new ResponseEntity<>("SAVE_OK",HttpStatus.OK);
 
         } else {
