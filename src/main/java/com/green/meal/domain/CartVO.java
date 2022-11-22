@@ -9,18 +9,6 @@ public class CartVO {
     private String itemName;
     private Integer cartAmount;
     private Integer itemPrice;
-    private String path;
+    private String fileName;
 
-
-    @Override
-    public String toString() {
-        return "CartVO{" +
-                "userId='" + userId + '\'' +
-                ", itemNo=" + itemNo +
-                ", itemName='" + itemName + '\'' +
-                ", cartAmount=" + cartAmount +
-                ", itemPrice=" + itemPrice +
-                ", path='" + path + '\'' +
-                '}';
-    }
 }

@@ -36,7 +36,7 @@
                 <c:forEach var="cartVO" items="${list}" varStatus="status">
                     <tr>
                         <td>
-                            <li><img src="${cartVO.path}"></li>
+                            <li><img src="<c:url value='${cartVO.fileName}'/>" width="100"></li>
                             <input type="text" name="itemName" value="${cartVO.itemName}">
                             <input hidden type="text" name="itemNo" value="${cartVO.itemNo}">
                         </td>
@@ -88,6 +88,7 @@
                             $.ajax({
                                 type:'delete',
                                 url: '/meal/cart/'+itemNo,
+                                async : false,
                                 headers : { "content-type": "application/json"},
                                 dataType : 'text',
                                 data : JSON.stringify({itemNo:itemNo}),
@@ -102,6 +103,11 @@
                     </script>
                     <c:set var="sum"  value="${sum+(cartVO.cartAmount * cartVO.itemPrice)}"/>
                 </c:forEach>
+
+                    <c:if test="${list==null}">
+                        장바구니가 비었습니다
+                    <br>
+                    </c:if>
                 </tbody>
                 <tfoot>
                 <tr>
