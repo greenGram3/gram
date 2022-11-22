@@ -57,6 +57,15 @@
                                     <li name="${orderListVO.orderNo}">
                                         <button  class="backBtn" >반품신청</button></li>
                                 </td>
+                            </c:if>
+
+                            <c:if test="${orderListVO.orderState eq '배송중'}">
+                                <td>
+                                    <li name="${orderListVO.orderNo}">
+                                        <button  class="fixBtn" >구매확정</button></li>
+                                    <li name="${orderListVO.orderNo}">
+                                        <button  class="backBtn" >반품신청</button></li>
+                                </td>
 
 
                             </c:if>
