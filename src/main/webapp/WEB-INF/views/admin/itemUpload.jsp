@@ -158,7 +158,7 @@
         return false;
       }
 
-      if(form.imgNamef1.value=="") {
+      if(form.fileNamef.value=="") {
         alert("우측 상세 이미지를 첨부해주세요.");
         return false;
       }
