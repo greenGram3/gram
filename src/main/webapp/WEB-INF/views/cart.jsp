@@ -23,7 +23,6 @@
             <table >
                 <thead>
                 <tr>
-                    <th><input type="checkbox" class="itemCheck" name="${list}" ></th>
                     <th class="itemName">상품 </th>
                     <th class="cartAmount">수량 </th>
                     <th><li class="itemPrice">(개별금액)</li>
@@ -32,32 +31,32 @@
                 </tr>
                 </thead>
                 <tbody>
+                <form id="form">
                 <c:set var="sum" value="0"/>
                 <c:forEach var="cartVO" items="${list}" varStatus="status">
                     <tr>
                         <td>
-                            <input type="checkbox" class="itemNo" name="${cartVO.itemNo}" value="${cartVO.itemNo}" >
-                        </td>
-                        <td>
                             <li><img src="${cartVO.path}"></li>
-                            <li>${cartVO.itemName}</li>
+                            <input type="text" name="itemName" value="${cartVO.itemName}">
+                            <input hidden type="text" name="itemNo" value="${cartVO.itemNo}">
                         </td>
-                        <td class="cartAmount" name="cartAmount" >
-                            <input type="text"  class="cartAmount${status.index}" name="${cartVO.cartAmount}" value="<c:out value='${cartVO.cartAmount}'/>">
+                        <td class="cartAmount">
+                            <input type="text" class="cartAmount${status.index}" name="cartAmount" value="<c:out value='${cartVO.cartAmount}'/>">
                         </td>
                         <td>
                             <li class="itemPrice">(<fmt:formatNumber pattern="###,###,###" value="${cartVO.itemPrice}"/> 원)</li>
-                            <li class="itemsPrice"><fmt:formatNumber pattern="###,###,###" value="${cartVO.cartAmount*cartVO.itemPrice}"/> 원</li>
+                            <input hidden type="text" name="itemPrice" value="${cartVO.itemPrice}">
+                            <li class="itemsPrice"  ><fmt:formatNumber pattern="###,###,###" value="${cartVO.cartAmount*cartVO.itemPrice}"/> 원</li>
                         </td>
                         <td>
                             <li class = "modBtn" name="${cartVO.itemNo}">
                                 <button class="modBtn${status.index}" >수량 변경</button>
                             </li>
-                            <li class="delBtn">
+                            <li class="delBtn" name="${cartVO.itemNo}">
                                 <button class="delBtn${status.index}">상품 삭제</button>
                             </li>
                         </td>
-                    </tr >
+                    </tr>
                     <script>
 
                         $(".modBtn${status.index}").click(function(){
@@ -101,12 +100,11 @@
                         });
 
                     </script>
-                    <c:set var="sum" value="${sum+(cartVO.cartAmount * cartVO.itemPrice)}"/>
+                    <c:set var="sum"  value="${sum+(cartVO.cartAmount * cartVO.itemPrice)}"/>
                 </c:forEach>
                 </tbody>
                 <tfoot>
                 <tr>
-                    <th></th>
                     <th scope="row">총계</th>
                     <th></th>
                     <th class="totalPrice"><fmt:formatNumber pattern="###,###,###" value="${sum}"/> 원</th>
@@ -116,10 +114,10 @@
             </table>
         </figure>
 
-        <button class="delAllBtn"> 전체 상품 삭제</button>
-        <button class="payBtn"> 선택 상품 주문</button>
-        <button class="shopBtn"> 계속 쇼핑 하기</button>
-        <button class="payAllBtn"> 전체 상품 주문</button>
+        <button class="delAllBtn" type="button" > 전체 상품 삭제</button>
+        <button class="shopBtn" type="button"> 계속 쇼핑 하기</button>
+        <button class="payAllBtn" type="button"> 상품 주문 하기</button>
+        </form>
     </div>
     <script>
 
@@ -129,21 +127,6 @@
 
         $(document).ready(function(){
 
-            $("input[class=itemNo]").click(function () {
-                $(".itemCheck").prop("checked", false);
-            });
-
-            $(".itemCheck").click(function() {
-                // 2. itemCheck 체크되었을 때,
-                //input태그를 찾아 checked를 true로 정의
-                if ($(".itemCheck").prop("checked")) {
-                    $("input[class=itemNo]").prop("checked", true)
-                    // 3. itemCheck 체크되지 않았을 때,
-                    // itemNo class input태그를 찾아 checked를 false로 정의
-                } else {
-                    $("input[class=itemNo]").prop("checked", false)
-                }
-            })
 
             $(".delAllBtn").on("click",function(){
                 if(!confirm("정말로 모두 삭제하시겠습니까?")) return;
