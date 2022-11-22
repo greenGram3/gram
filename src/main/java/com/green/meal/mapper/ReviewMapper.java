@@ -21,7 +21,7 @@ public interface ReviewMapper {
 
 
     // Reviewlist(MyPage) 출력
-    List<ReviewVO> reviewlistM(Map map);
+    List<ReviewVO> myReview(Map map);
 
     // Review Detail 출력
     ReviewVO reviewdetail(ReviewVO vo);

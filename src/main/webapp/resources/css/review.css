@@ -144,7 +144,8 @@ main * {
 }
 
 .reviewDetail textarea {
-border: none;
+    width: 700px;
+    border: none;
 }
 
 .linkBtn_container span,

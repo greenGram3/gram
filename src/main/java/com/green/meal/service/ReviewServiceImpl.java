@@ -36,12 +36,12 @@ public class ReviewServiceImpl implements ReviewService {
 
     // Reviewlist(MyPage) 출력
     @Override
-    public List<ReviewVO> reviewlistM(SearchCriteria cri, String userId) {
+    public List<ReviewVO> myReview(SearchCriteria cri, String userId) {
         Map map = new HashMap();
         map.put("userId", userId);
         map.put("sno", cri.getSno());
         map.put("rowsPerPage", cri.getRowsPerPage());
-        return reviewMapper.reviewlistM(map);
+        return reviewMapper.myReview(map);
     }
 
     // Review Detail 출력

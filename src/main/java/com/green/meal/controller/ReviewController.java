@@ -244,10 +244,10 @@ public class ReviewController {
     }
 
     // ** MyPage reviewList
-    @RequestMapping(value="/reviewlistM")
-    public String reviewlistM(HttpServletRequest request, SearchCriteria cri, Model model, PageMaker pageMaker) {
+    @RequestMapping(value="/myReview")
+    public String myReview(HttpServletRequest request, SearchCriteria cri, Model model, PageMaker pageMaker) {
         // 1. 요청분석
-        String uri = "/review/reviewListM";
+        String uri = "/review/myReview";
         String userId = null;
 
         // 2. session의 userId 받아서 저장
@@ -260,7 +260,7 @@ public class ReviewController {
 
         // 4. service 실행 & 담기
         List<ReviewVO> list = new ArrayList<ReviewVO>();
-        list = reviewService.reviewlistM(cri, userId);
+        list = reviewService.myReview(cri, userId);
 
         if(list != null) {
             model.addAttribute("reviewResult", list);

@@ -30,7 +30,7 @@
 
   <div>나의 상품후기
     <ul>
-      <li><a href="<c:url value='/reviewlistM'/>">　- 나의 상품후기</a></li>
+      <li><a href="<c:url value='/myReview'/>">　- 나의 상품후기</a></li>
     </ul>
   </div>
 </aside>

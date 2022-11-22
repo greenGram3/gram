@@ -17,7 +17,7 @@ public interface ReviewService {
     int searchCount3(ReviewVO vo);
 
     // Reviewlist(MyPage) 출력
-    List<ReviewVO> reviewlistM(SearchCriteria cri, String userId);
+    List<ReviewVO> myReview(SearchCriteria cri, String userId);
 
     // Review Detail 출력
     ReviewVO reviewdetail(ReviewVO vo);
