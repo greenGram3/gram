@@ -74,8 +74,8 @@
                               onclick="qnaReplyF(${qnaResult.qnaRoot},${qnaResult.qnaStep},${qnaResult.qnaChild},'${link}')">답글달기</span>
                     </c:if>
                     <c:if test="${qnaResult.qnaStep < 1}">
-                <span class="textLink"
-                      onclick="qnaReplyD(${qnaResult.qnaRoot},${qnaResult.qnaStep},${qnaResult.qnaChild})" id="qnaReply"
+                <span onclick="qnaReplyD(${qnaResult.qnaRoot},${qnaResult.qnaStep},${qnaResult.qnaChild},'${link}')"
+                      id="qnaReply"
                       hidden>답변보기</span>
                     </c:if>
                     <c:if test="${userId == qnaResult.userId || userId == 'admin'}">

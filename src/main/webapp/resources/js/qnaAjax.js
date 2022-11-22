@@ -91,14 +91,15 @@ $(function(){
 }) //ready
 //-----------------------------------------------------------------------//
 // ** Detail에서 댓글보기
-function qnaReplyD(qnaRoot,qnaStep,qnaChild) {
+function qnaReplyD(qnaRoot,qnaStep,qnaChild,link) {
     $.ajax({
         type: 'Get',
         url: 'qnarDetail',
         data: {
             qnaRoot: qnaRoot,
             qnaStep: qnaStep,
-            qnaChild: qnaChild
+            qnaChild: qnaChild,
+            link: link
         },
         success: function (resultPage) { //답글 Ajax출력
             $('#resultArea1').html(resultPage);

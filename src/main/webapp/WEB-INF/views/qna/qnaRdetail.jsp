@@ -35,6 +35,7 @@
                 <td>${qnaResult.qnaRoot}</td>
                 <td>${qnaResult.qnaStep}</td>
                 <td>${qnaResult.qnaChild}</td>
+                <td>${link}</td>
             </tr>
         </table>
     </section>
@@ -43,7 +44,7 @@
     <c:if test="${not empty userId && userId == 'admin'}">
         <div class="qnaRdetailCheck" >
             <span color="White" id="qnaReplyUpF">답변수정하기</span>
-            <a href="qnadelete?qnaNo=${qnaResult.qnaNo}" onclick="return confirm('삭제하시겠습니까? 확인/취소');">삭제하기</a><br>
+            <a href="qnadelete?qnaNo=${qnaResult.qnaNo}&link=${link}" onclick="return confirm('삭제하시겠습니까? 확인/취소');">삭제하기</a><br>
         </div>
     </c:if>
 
