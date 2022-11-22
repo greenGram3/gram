@@ -27,12 +27,10 @@
         </select>
 
         <select id="orderDetail" resultType="OrderDetailDto" parameterType="int">
-            select o.order_no, o.item_no, i.item_name, o.item_price, o.item_amount , e.path
+            select o.order_no, o.item_no, i.item_name, o.item_price, o.item_amount , i.file_Name
             from order_detail o
                      join item i
                           on o.item_no = i.item_no
-                     join image e
-                          on o.item_no = e.item_no
             where order_no=#{orderNo}
         </select>
 

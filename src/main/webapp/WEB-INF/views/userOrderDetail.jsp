@@ -37,7 +37,7 @@
                         <c:forEach var="orderDetailDto" items="${orderListDto.list}">
                             <tr>
                                 <td>
-                                    <li><img src="${orderDetailDto.path}"></li>
+                                    <li><img src="${orderDetailDto.fileName}"></li>
                                     <li>${orderDetailDto.itemName}</li>
                                 </td>
                                 <td><li><fmt:formatNumber pattern="###,###,###" value="${orderDetailDto.itemPrice}"/> 원</li>

@@ -10,6 +10,5 @@ public class OrderDetailDto {
     private String itemName;
     private Integer itemPrice;
     private Integer itemAmount;
-    private String orderState;
-    private String Path;
+    private String fileName;
 }
