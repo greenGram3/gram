@@ -88,7 +88,6 @@
                             $.ajax({
                                 type:'delete',
                                 url: '/meal/cart/'+itemNo,
-                                async : false,
                                 headers : { "content-type": "application/json"},
                                 dataType : 'text',
                                 data : JSON.stringify({itemNo:itemNo}),

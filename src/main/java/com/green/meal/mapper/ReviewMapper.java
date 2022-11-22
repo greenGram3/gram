@@ -26,8 +26,9 @@ public interface ReviewMapper {
     // Review Detail 출력
     ReviewVO reviewdetail(ReviewVO vo);
 
-    // Review insert
+    // Review insert+후기 중복체크
     int reviewinsert(ReviewVO vo);
+    ReviewVO dupCheck(ReviewVO vo);
 
     // Review 수정
     int reviewupdate(ReviewVO vo);
