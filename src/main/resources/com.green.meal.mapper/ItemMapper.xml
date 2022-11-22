@@ -108,6 +108,16 @@
         limit #{offset}, #{pageSize}
     </select>
 
+    <select id="searchItems" parameterType="SearchCondition" resultType="ItemVO">
+        select *
+        from item
+        where true
+        <include refid="searchCondition"/>
+        order by item_no desc
+    </select>
+
+
+
     <!-- heeJeang item 상세페이지 itemDetail -->
     <!--    <select id="itemdetail" resultType="ItemVO">
             select item.item_no, item_name, item_price, img_name, img_type

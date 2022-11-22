@@ -26,6 +26,7 @@ public interface ItemService {
 
     List<ItemVO> getSearchResultPage(SearchCondition sc) throws Exception;
 
+    List<ItemVO> searchItems(SearchCondition sc) throws Exception; // 홈 검색기능
 
     // heeJeong item 상세페이지------------------------------------------------------------- //
     ItemVO itemdetail(ItemVO vo) throws Exception;

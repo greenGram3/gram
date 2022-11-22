@@ -60,6 +60,11 @@ public class ItemServiceImpl implements ItemService {
         return mapper.searchSelectPage(sc);
     }
 
+    @Override
+    public List<ItemVO> searchItems(SearchCondition sc) throws Exception {     //홈 검색 기능
+        return mapper.searchItems(sc);
+    }
+
     // heeJeong item 상세페이지------------------------------------------------------------- //
     @Override
     public ItemVO itemdetail(ItemVO vo) throws Exception {

@@ -29,6 +29,7 @@ public interface ItemMapper {
 
     List<ItemVO> searchSelectPage(SearchCondition sc);
 
+    List<ItemVO> searchItems(SearchCondition sc); //홈 검색 기능
     // heeJeong item 상세페이지------------------------------------------------------------- //
     ItemVO itemdetail(ItemVO vo);
 

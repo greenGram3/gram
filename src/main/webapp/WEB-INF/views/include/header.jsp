@@ -28,11 +28,12 @@
         <a class="cartImage" href="<c:url value='/cart'/>">　</a>
       </div>
 
-      <form action="" role="input">
+      <form action="<c:url value='/item/search'/>" role="input">
         <fieldset>
           <legend>
-            <input type="text">
-            <button></button>
+            <input type="text" name="keyword">
+            <input type="hidden" name="option" value="Na">
+            <button type="submit"></button>
           </legend>
         </fieldset>
       </form>

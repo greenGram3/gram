@@ -52,6 +52,21 @@ public class ItemController {
         return "admin/itemList";
     }
 
+    @GetMapping("/search")
+    public String itemSearchList(SearchCondition sc, Model m) {
+        try {
+            List<ItemVO> list = itemService.searchItems(sc);
+
+            giveCategoryPage("검색결과", list, m);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+        return "item/itemList";
+    }
+
     @GetMapping("/read")
     public String read(ItemVO vo, SearchCondition sc, Model m, ImageVO vo1) {
         try {
