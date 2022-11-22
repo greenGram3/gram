@@ -14,20 +14,12 @@ public class QnaServiceImpl implements QnaService {
     @Autowired
     QnaMapper qnaMapper;
 
-    // qna답변 중복 체크
-    @Override
-    public QnaVO qnaDupCheck(int qnaRoot) {return qnaMapper.qnaDupCheck(qnaRoot);}
-
     // 관리자용 list 불러오기
     @Override
     public List<QnaVO> qnalistAll(SearchCriteria cri) {
         return qnaMapper.qnalistAll(cri);
     }
     public int searchCount(SearchCriteria cri) {return qnaMapper.searchCount(cri);}
-
-    // user용 list 불러오기
-//    @Override
-//    public List<QnaVO> qnalistOne(SearchCriteria cri, QnaVO vo) { return qnaMapper.qnalistOne(cri, vo); }
 
     // QnA 작성
     @Override
@@ -49,7 +41,7 @@ public class QnaServiceImpl implements QnaService {
     @Override
     public int qnarinsert(QnaVO vo) { return qnaMapper.qnarinsert(vo); }
 
-    // qna답변출력
+    // qna답변출력+답변 중복체크
     @Override
     public QnaVO qnarDetail(QnaVO vo) {
         return qnaMapper.qnarDetail(vo);

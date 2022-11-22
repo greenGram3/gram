@@ -8,9 +8,6 @@ import java.util.List;
 
 public interface QnaMapper {
 
-    // QnA답변 중복체크
-    QnaVO qnaDupCheck(int qnaRoot);
-
     // 관리자용 QNA list 출력
     List<QnaVO> qnalistAll(SearchCriteria cri);
     int searchCount(SearchCriteria cri);
@@ -33,6 +30,6 @@ public interface QnaMapper {
     // qna 답변 작성
     int qnarinsert(QnaVO vo);
 
-    // qna답변 출력
+    // qna답변 출력+답변 중복체크
     QnaVO qnarDetail(QnaVO vo);
 }

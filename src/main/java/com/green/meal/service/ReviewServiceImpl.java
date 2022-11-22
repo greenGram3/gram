@@ -62,7 +62,7 @@ public class ReviewServiceImpl implements ReviewService {
         return reviewMapper.reviewrinsert(vo);
     }
 
-    // Review 답변 출력
+    // Review 답변 출력+답변DupCheck
     @Override
     public ReviewVO reviewrDetail(ReviewVO vo) { return reviewMapper.reviewrDetail(vo); }
 
