@@ -34,10 +34,10 @@
     </script>
     <script>
         // ** 상세페이지 reviewList
-        function reviewListD(itemNo) {
+        function itemReview(itemNo) {
             $.ajax({
                 type: 'Get',
-                url: 'reviewlistD',
+                url: 'itemReview',
                 data: {
                     itemNo: itemNo
                 },
@@ -45,11 +45,11 @@
                     $('#resultArea1').html(resultPage);
                 },
                 error: function () {
-                    $('#resultArea1').html('상세페이지 review 요청 error');
+                    $('#resultArea1').html('itemReview error');
                 }
             }); //ajax
             return false;
-        } //reviewListD
+        } //itemReview
         //==========================================================================//
         // ** 상품 상세페이지 Detail
         function itemDetailPage(itemNo) {
@@ -132,7 +132,7 @@
                 </tr>
                 <tr>
                     <th>총 상품금액</th>
-                    <th> <input type="text" name="totalItemPrice" id="totalItemPrice"  value="${itemResult.itemPrice}"readonly>  원</th>
+                    <th> <input type="text" name="totalItemPrice" id="totalItemPrice"  value="${itemResult.itemPrice}" readonly>  원</th>
                 </tr>
             </table>
             </div>
@@ -144,7 +144,7 @@
     </div>
     <div class="itemDetail_menu_container">
             <span onclick="itemDetailPage(${itemResult.itemNo});" class="itemDetail_menu checked" id="content1" >상품상세</span>
-            <span onclick="reviewListD(${itemResult.itemNo});" class="itemDetail_menu noChecked" id="content2">상품후기</span>
+            <span onclick="itemReview(${itemResult.itemNo});" class="itemDetail_menu noChecked" id="content2">상품후기</span>
             <span onclick="deli_info();" class="itemDetail_menu noChecked" id="content3">배송정보</span>
     </div>
     <div class="resultArea-container">

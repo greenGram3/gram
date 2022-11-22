@@ -26,12 +26,12 @@ public class ReviewController {
     ReviewService reviewService;
 
     // ** 상세페이지 리뷰리스트
-    @RequestMapping(value="/reviewlistD")
-    public String reviewlistD(Model model, SearchCriteria cri, PageMaker pageMaker, ReviewVO vo) {
+    @RequestMapping(value="/itemReview")
+    public String itemReview(Model model, SearchCriteria cri, PageMaker pageMaker, ReviewVO vo) {
         cri.setSnoEno(); //Sno, Eno 계산
 
         List<ReviewVO> list = new ArrayList<ReviewVO>();
-        list = reviewService.reviewlistD(cri, vo);
+        list = reviewService.itemReview(cri, vo);
 
         if (list!=null) {
             model.addAttribute("reviewResult", list);
@@ -44,7 +44,7 @@ public class ReviewController {
             model.addAttribute("message", "아직 후기가 없습니다.");
         }
 
-        return "/review/reviewListD";
+        return "/review/itemReview";
     }
     //-------------------------------------------------------------------------------------------------//
     // ** ReviewList 출력

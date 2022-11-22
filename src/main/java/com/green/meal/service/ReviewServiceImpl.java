@@ -18,13 +18,13 @@ public class ReviewServiceImpl implements ReviewService {
 
     // 상세페이지 ReviewList 출력
     @Override
-    public List<ReviewVO> reviewlistD(SearchCriteria cri, ReviewVO vo) {
+    public List<ReviewVO> itemReview(SearchCriteria cri, ReviewVO vo) {
         Map map = new HashMap();
         map.put("itemNo",vo.getItemNo());
         map.put("sno",cri.getSno());
         map.put("rowsPerPage", cri.getRowsPerPage());
 
-        return reviewMapper.reviewlistD(map);
+        return reviewMapper.itemReview(map);
     }
 
     // Reviewlist 출력

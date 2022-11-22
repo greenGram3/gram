@@ -16,8 +16,6 @@
                 console.log('*** e.type =>' + e.type);
                 console.log('*** e.target =>' + e.target);
 
-                /*$('#resultArea2').html('');*/
-
                 if ($('#' + count).html() == '') {
 
                     $.ajax({
@@ -114,8 +112,8 @@
                 <div>
                     <c:choose>
                         <c:when test="${pageMaker.prev && pageMaker.spageNo>1}">
-                            <a href="reviewlistD${pageMaker.searchQuery(1)}" class="axPaging firstBtn">◀◀</a>&nbsp;
-                            <a href="reviewlistD${pageMaker.searchQuery(pageMaker.spageNo-1)}" class="axPaging forwardBtn">&lt;</a>&nbsp;&nbsp;
+                            <a href="itemReview${pageMaker.searchQuery(1)}" class="axPaging firstBtn">◀◀</a>&nbsp;
+                            <a href="itemReview${pageMaker.searchQuery(pageMaker.spageNo-1)}" class="axPaging forwardBtn">&lt;</a>&nbsp;&nbsp;
                         </c:when>
                         <c:otherwise>
                             <span class="firstBtn none">◀◀&nbsp;&nbsp;&lt;&nbsp;</span>
@@ -126,13 +124,13 @@
                             <span class="currPage">${i}</span>
                         </c:if>
                         <c:if test="${i!=pageMaker.cri.currPage}">
-                            <a href="reviewlistD${pageMaker.searchQuery(i)}" class="axPaging">${i}</a>
+                            <a href="itemReview${pageMaker.searchQuery(i)}" class="axPaging">${i}</a>
                         </c:if>
                     </c:forEach>
                     <c:choose>
                         <c:when test="${pageMaker.next && pageMaker.epageNo>0}">
-                            <a href="reviewlistD${pageMaker.searchQuery(pageMaker.epageNo+1)}" class="axPaging backBtn">&nbsp;&nbsp;&gt;</a>
-                            <a href="reviewlistD${pageMaker.searchQuery(pageMaker.lastPageNo)}" class="axPaging lastBtn">▶▶</a>
+                            <a href="itemReview${pageMaker.searchQuery(pageMaker.epageNo+1)}" class="axPaging backBtn">&nbsp;&nbsp;&gt;</a>
+                            <a href="itemReview${pageMaker.searchQuery(pageMaker.lastPageNo)}" class="axPaging lastBtn">▶▶</a>
                         </c:when>
                         <c:otherwise>
                             <span class="lastBtn none">&nbsp;&gt;&nbsp;&nbsp;▶▶</span>

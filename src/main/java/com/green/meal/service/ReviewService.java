@@ -8,7 +8,7 @@ import java.util.List;
 public interface ReviewService {
 
     // 상세페이지 ReviewList 출력
-    List<ReviewVO> reviewlistD(SearchCriteria cri, ReviewVO vo);
+    List<ReviewVO> itemReview(SearchCriteria cri, ReviewVO vo);
 
     // Reviewlist 출력
     List<ReviewVO> reviewlist(SearchCriteria cri);

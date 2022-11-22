@@ -11,7 +11,7 @@ import java.util.Map;
 public interface ReviewMapper {
 
     // 상세페이지 ReviewList 출력
-    List<ReviewVO> reviewlistD(Map map);
+    List<ReviewVO> itemReview(Map map);
     int searchCount3(ReviewVO vo);
 
     // Reviewlist 출력
