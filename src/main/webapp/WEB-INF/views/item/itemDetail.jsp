@@ -15,7 +15,7 @@
             // ** 구매 action으로 가는 js
             let buyButton = $('#buyButton');
             let orderAmount = $('#cartAmount');
-
+            const itemDetailForm = $('#itemDetailForm');
             buyButton.click(function () {
 
                 if (confirm('구매하시겠습니까?') == true) {
@@ -26,11 +26,12 @@
                 orderAmount.attr("name", "itemAmount");
                 orderAmount.attr("id", "itemAmount");
 
-                const itemDetailForm = $('#itemDetailForm');
                 itemDetailForm.attr("action", "buy/payment");
                 itemDetailForm.attr("method", "post");
                 itemDetailForm.submit();
             })
+
+
         });
     </script>
     <script>
@@ -103,7 +104,7 @@
         <form action="cart" method="post" name="itemDetailForm" id="itemDetailForm">
             <div class="itemInfo">
                     <div class="itemImage">
-                        <input hidden type="text" name="itemNo" value="${itemResult.itemNo}" readonly>
+                        <input hidden type="text" name="itemNo" id="itemNo" value="${itemResult.itemNo}" readonly>
                         <%--<input type="text" name="userId" value="${userId}" disabled>--%>
                         <img src="<c:url value='${itemResult.fileName}'/>" width=500 height=500>
                     </div>
@@ -127,7 +128,7 @@
                     <th>수량</th>
                     <td> <button type="button" value="▼" name="itemMin" id="itemMin" onclick="minAmount();">▼
                     </button>
-                        <input type="text" name="cartAmount" id="cartAmount" value="1" size="3" onkeyup="calc();">
+                        <input type="text" name="cartAmount" id="cartAmount"  size="3" onkeyup="calc();">
                         <button type="button" value="▲" name="itemAdd" id="itemAdd" onclick="addAmount();">▲
                         </button></td>
                 </tr>
@@ -138,7 +139,7 @@
             </table>
             </div>
                 <div class="itemCheck">
-                <button type="submit" onclick="return confirm('장바구니에 추가하시겠습니까?')" id="cartButton">장바구니 담기</button>
+                <button type="button" id="cartButton">장바구니 담기</button>
                 <button type="button" id="buyButton">바로주문</button>
                 </div>
         </form>
@@ -156,12 +157,13 @@
 
     <script>
 
-
+        document.itemDetailForm.cartAmount.value = 1;
 
         // 상품 +- 시 가격변동 js
         function minAmount() {
             if (document.itemDetailForm.cartAmount.value > 1) {
                 document.itemDetailForm.cartAmount.value--;
+
             } else {
                 return false;
             }
@@ -171,6 +173,7 @@
         function addAmount() {
             if (document.itemDetailForm.cartAmount.value < 10) {
                 document.itemDetailForm.cartAmount.value++;
+                console.log(document.itemDetailForm.cartAmount.value);
             } else {
                 return false;
             }
@@ -181,6 +184,33 @@
             document.itemDetailForm.totalItemPrice.value =
                 document.itemDetailForm.itemPrice.value * document.itemDetailForm.cartAmount.value;
         }
+        //-------------------------------------------------------------
+
+        let itemNo=$('#itemNo').val();
+        // let itemPrice=$('#itemPrice').val();
+
+
+        //장바구니 담기
+        $('#cartButton').click(function () {
+            let cartAmount = document.itemDetailForm.cartAmount.value;
+            console.log(cartAmount);
+            if(!confirm("장바구니에 담으시겠습니까")) return;
+
+            $.ajax({
+                type:'post',
+                url: '/meal/cart',
+                headers : { "content-type": "application/json"},
+                dataType : 'text',
+                data : JSON.stringify({itemNo:"${itemResult.itemNo}", itemName:"${itemResult.itemName}",
+                    cartAmount:cartAmount, itemPrice:"${itemResult.itemPrice}", fileName:"${itemResult.fileName}"}),
+                success : function(result){
+                    if(!confirm("장바구니에 추가되었습니다 장바구니로 이동하시겠습니까")) return;
+                    location.href = "cart";
+                },
+                error   : function(){ alert("장바구니 담기 실패") }
+            });
+        })
+
 
         let itemDetail_menus = document.querySelector('.itemDetail_menu_container');
         let menu = itemDetail_menus.getElementsByClassName('itemDetail_menu');
