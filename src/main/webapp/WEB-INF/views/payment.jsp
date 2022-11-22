@@ -8,126 +8,74 @@
 <head>
   <meta charset="UTF-8">
   <title>payment</title>
-<%--  <link rel="stylesheet" href="<c:url value='/css/menu.css'/>">--%>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <link rel="stylesheet" href="<c:url value='/css/pay.css'/>">
   <!-- jQuery -->
   <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
   <!-- iamport.payment.js -->
   <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: "Noto Sans KR", sans-serif;
-    }
-
-    .board-container {
-      width: 60%;
-      height: 1200px;
-      margin: 50px auto 0 auto;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-
-    .table-one {
-      border-top: 2px solid rgb(39, 39, 39);
-    }
-
-    .item-tr,
-    .addr-tr,
-    .req-tr,
-    .payment-tr {
-      width: 100%;
-      background-color: #f0f0f070;
-    }
-
-    th,
-    td {
-      width:100px;
-      text-align: center;
-      padding: 10px 12px;
-    }
-
-    .block-div {
-      width: 100%;
-      height: 50px;
-      border-bottom: 1px solid rgb(39, 39, 39);
-    }
-    .pageTitle_container {
-      margin-top: 50px;
-      display: flex;
-      justify-content: center;
-    }
-    button {
-      background-color: rgb(89,117,196);
-      border-radius: 5px;
-      border : none;
-      cursor: pointer;
-      color : white;
-      width:100px;
-      height:40px;
-      font-size: 15px;
-      margin : 30px 0 20px 0;
-    }
-    .order-req-input {
-      width: 100%;
-      height: 80px;
-      border: 1px solid black;
-    }
-    .hidden {
-      display: none;
-    }
-  </style>
 </head>
 
 <body>
 
-<div class="pageTitle_container">
-  <h2>결제하기</h2>
-</div>
-
-<div style="text-align:center">
+<jsp:include page="include/header.jsp" flush="false" />
+<main>
+  <div class="main">
+    <div class="payment">
+      <h1>주문서작성/결제</h1>
+      <hr>
 
   <div class="board-container">
 
     <form id="form" action="" method="">
-
-      <table class="table-one">
-        <tr class="item-tr">
-          <th>상품번호</th>
-          <th>상품명</th>
+      <h3>주문상세내역</h3>
+      <table>
+        <tr>
+          <th>상품/옵션정보</th>
           <th>수량</th>
-          <th>가격</th>
-          <th>총금액</th>
+          <th>상품금액</th>
         </tr>
         <c:forEach var="list" items="${odvoList}">
-          <tr class="itemList-tr">
-            <td><input name="itemNo" type="text" value="${list.itemNo}"></td>
-            <td><input name="itemName" type="text" value="${list.itemName}"></td>
-            <td><input name="cartAmount" type="text" value="${list.cartAmount}"></td>
-            <td><input name="itemPrice" type="text" value="${list.itemPrice}"></td>
-            <td><input name="totalItemPrice" type="text" value="${totalItemPrice}"></td>
+          <tr >
+            <td>
+<%--             <img src="${list.fileName}" width="100"> --%>
+                <input hidden name="itemNo" type="text" value="${list.itemNo}">
+                <input hidden name="itemName" type="text" value="${list.itemName}">
+                ${list.itemName}
+            </td>
+            <td><input hidden name="cartAmount" type="text" value="${list.cartAmount}">
+                ${list.cartAmount} 개</td>
+            <td><input hidden name="itemPrice" type="text" value="${list.itemPrice}">
+              <fmt:formatNumber pattern="###,###,###" value="${list.itemPrice}"/> 원</td>
           </tr>
-
         </c:forEach>
-        <tr class="block-div"></tr>
-        <tr class="addr-tr">
-          <th>배송지</th>
-        </tr>
-        <c:forEach var="list" items="${delyList}" varStatus="status">
-          <table>
-            <tr>
-              <td>선택 <input type="radio" id="delyPlace" name="delyPlace" value="${list.delyPlace}" ${list.delyNo==1 ? "checked" : ""}/></td>
-              <td>${list.delyPlace} ${list.delyNo==1 ? "(기본배송지)" : ""}</td>
-              <td><button type="button" id="openBtn${status.index}">상세보기</button></td>
-            </tr>
-          </table>
+      </table>
 
+      <h3>주문자 정보</h3>
+      <table>
+        <tr>
+          <th>구매자이름</th>
+          <td><input type="text" name="userName" value="${userVo.userName}" readonly></td>
+        </tr>
+        <tr>
+          <th>구매자이메일</th>
+          <td><input type="text" name="userEmail" value="${userVo.userEmail}" readonly></td>
+        </tr>
+        <tr hidden>
+          <th>주문형태</th>
+          <td><input type="hidden" name="orderType" value="${orderType}" /></td>
+        </tr>
+      </table>
+        <br>
+        <h3>배송정보</h3>
+      <table>  <tr>
+        <th> 배송지 확인</th>
+        <td>
+        <c:forEach var="list" items="${delyList}" varStatus="status">
+             <input type="radio" id="delyPlace" name="delyPlace" value="${list.delyPlace}" ${list.delyNo==1 ? "checked" : ""}/>
+              ${list.delyPlace} ${list.delyNo==1 ? "(기본배송지)" : ""}
+              <button type="button" class="delyBtn" id="openBtn${status.index}">상세보기</button>
           <script>
             $("#openBtn${status.index}").on("click", function(){
 
@@ -135,54 +83,33 @@
 
             });
           </script>
-
         </c:forEach>
-      </table>
-
-      <table>
-        <tr class="req-tr">
-          <th>요청사항</th>
-        </tr>
-        <tr class="tr7">
-          <td class="order-req"><input class="order-req-input" name="orderReq" type="content" value=""></td>
-        </tr>
-        <tr class="block-div"></tr>
-        <tr class="payment-tr">
-          <th>결제수단</th>
+        </td>
         </tr>
         <tr>
+          <th>남기실 말씀</th>
+          <td class="order-req"><input class="order-req-input" name="orderReq" type="content" value=""></td>
+        </tr>
+      </table>
+
+      <br>
+      <h3>결제정보</h3>
+      <table>
+        <tr class="payment-tr">
+          <th>결제수단</th>
           <td>
             <select name="payment">
               <option value="card" selected>card</option>
             </select>
           </td>
         </tr>
-        <tr class="block-div"></tr>
-        <tr>
-          <td><button type="button" id="check_module" class="payment-Btn">결제하기</button></td>
-        </tr>
       </table>
+      <input hidden name="totalItemPrice" type="text" value="${totalItemPrice}">
+      <div class="total"><h3>최종 결제 금액</h3> <h2><fmt:formatNumber pattern="###,###,###" value="${totalItemPrice}"/></h2><h3>원</h3></div>
+        <div class="payCheck"> <button type="button" id="check_module" class="payment-Btn"> 결제하기 </button> </div>
 
-      <table class="hidden">
-        <tr>
-          <th>구매자이름</th>
-          <td><input type="text" name="userName" value="${userVo.userName}"></td>
-        </tr>
-        <tr>
-          <th>구매자이메일</th>
-          <td><input type="text" name="userEmail" value="${userVo.userEmail}"></td>
-        </tr>
-        <tr>
-          <th>주문형태</th>
-          <td><input type="hidden" name="orderType" value="${orderType}" /></td>
-        </tr>
-      </table>
 
     </form>
-
-  </div>
-
-</div>
 
 <script>
 
@@ -220,9 +147,12 @@
 
   }); //check_module
 
-
 </script>
-
+  </div>
+    </div>
+  </div>
+</main>
+<jsp:include page="include/footer.jsp" flush="false" />
 </body>
 
 </html>

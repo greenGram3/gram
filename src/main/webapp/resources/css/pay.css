@@ -1,0 +1,104 @@
+
+/*payment*/
+
+.payment {
+    margin-top: 250px;
+    margin-bottom: 50px;
+    width: 900px;
+    text-align: left;
+}
+
+main * {
+    margin:auto;
+}
+
+hr {
+    color: gainsboro;
+}
+
+h1 {
+    padding-bottom: 20px;
+    display: flex;
+    font-size: 1.8em;
+}
+
+table {
+    width: 100%;
+    border-top: 1px solid lightgray;
+    border-collapse: collapse;
+}
+
+td {
+    border-bottom: 1px solid lightgray;
+    border-left: 1px solid lightgray;
+    padding: 10px 20px;
+}
+
+th {
+    background-color: #eeecec;
+    border-bottom: 1px solid lightgray;
+    padding: 10px 20px;
+}
+
+th:first-child, td:first-child {
+    border-left: none;
+}
+
+table:nth-of-type(1) td,
+table:nth-of-type(3) td {
+    border-left: none;
+}
+
+table:nth-of-type(n+2) th{
+    width: 30%;
+}
+.order-req-input {
+    border: 1px solid lightgray;
+    width: 500px;
+}
+
+.total {
+    text-align: center;
+    border: 1px solid lightgray;
+    margin-top: 50px;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#form>h3 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+select {
+    width: 80px;
+    height: 30px;
+}
+
+.payment-Btn {
+    text-align: center;
+    color: whitesmoke;
+    cursor: pointer;
+      margin: auto;
+    width: 150px;
+    background-color: rgb(84, 108, 92);
+    padding: 8px 10px;
+    border: none;
+    font-weight: 1000;
+    font-size: 18px;
+}
+.delyBtn {
+    margin-left: 10px;
+    margin-right: 20px;
+}
+
+.payCheck {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.total h3, .total h2 {
+    margin: 20px;
+}
