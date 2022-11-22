@@ -28,21 +28,20 @@ public class QnaController {
     @RequestMapping(value="/qnalist")
     public String qnalist(HttpServletRequest request, Model model, QnaVO vo,
                           SearchCriteria cri, String link, PageMaker pageMaker) {
-        cri.setSnoEno(); //Sno, Eno 계산
+        cri.setSnoEno();
         if(link != null){
             model.addAttribute("link",link);
         }
         // 1. 요청분석
-        List<QnaVO> list = new ArrayList<QnaVO>(); // 결과 담을 list
-        String uri = "/qna/qnaList"; //성공 시 list로
-        HttpSession session = request.getSession(false); //session 가져오기
-        String userId = (String)session.getAttribute("userId"); //session의 userID 가져오기
+        String userId = (String)request.getSession().getAttribute("userId"); //session의 Id가져오기
+        List<QnaVO> list = new ArrayList<QnaVO>();
+        String uri = "/qna/qnaList";
 
-        // 1) userId가 null은 로그인X -> 로그인창으로
+        // 1) userId null -> 로그인폼
         if (userId == null) {
             model.addAttribute("message","로그인 하세요.");
             uri = "userInfo/loginForm";
-        } else { // 2) userId != null은 로그인O
+        } else { // 2) userId != null
                 list = qnaService.qnalistAll(cri); // 3) qna list 담기
                 if( list!=null ) {
                     model.addAttribute("qnaResult",list);
@@ -67,7 +66,6 @@ public class QnaController {
         if(link != null){
             model.addAttribute("link",link);
         }
-
         return "/qna/qnaInsert";
     }
 
@@ -123,7 +121,6 @@ public class QnaController {
     // ** QnA Update
     @RequestMapping(value = "/qnaupdate", method=RequestMethod.POST)
     public String qnaupdate(HttpServletResponse response, QnaVO vo, Model model,@RequestBody String link) {
-        // 한글처리
         response.setContentType("text/html; charset=UTF-8");
 
         Integer index = link.length();
@@ -144,18 +141,15 @@ public class QnaController {
             model.addAttribute("message","수정 실패. 다시 시도하시기 바랍니다.");
             model.addAttribute("code","500");
         }
-
         return "jsonView";
     }
     // -----------------------------------------------------------------------------------------//
     // ** QnA Delete
     @RequestMapping(value="qnadelete")
-    public String qnadelete(QnaVO vo, String link, Model model, RedirectAttributes rttr) {
+    public String qnadelete(QnaVO vo, String link, RedirectAttributes rttr) {
+        System.out.println("link(Del): "+link);
         // 1. 요청분석
         String uri ="redirect:qnalist?link="+link;
-        if(link != null){
-            model.addAttribute("link",link);
-        }
         // 2. service처리
         if (qnaService.qnadelete(vo)>0) {
             rttr.addFlashAttribute("message","문의 삭제 성공");
@@ -197,24 +191,24 @@ public class QnaController {
     // -----------------------------------------------------------------------------------------//
     // ** QnA Reply Detail
     @RequestMapping(value="/qnarDetail")
-    public String qnarDetail(HttpServletRequest request,String link, Model model, QnaVO vo) {
-        // 1. 성공 시 detail폼
+    public String qnarDetail(HttpServletRequest request, String link, Model model, QnaVO vo) {
+        System.out.println("link: "+link);
+        // session에서 userId받아 전달 => 관리자만 수정, 삭제 가능하게
+        String userId = (String)request.getSession().getAttribute("userId");
+        model.addAttribute("userId",userId);
+
+        // 1. 성공 시 Detail폼
         String uri = "/qna/qnaRdetail";
         if(link != null){
             model.addAttribute("link",link);
         }
-        // session에서 userId받아 전달 => 관리자만 수정, 삭제 가능하게
-        String userId = (String)request.getSession().getAttribute("userId"); //session의 userID 가져오기
-        model.addAttribute("userId",userId);
-
-        // 2. detail 실행, 저장
+        // 2. Service 실행, 저장
         vo = qnaService.qnarDetail(vo);
-
-        if( vo != null ) { //detail 저장 성공이면
+        if( vo != null ) { //성공
             model.addAttribute("qnaResult",vo);
-        } else { //저장 실패 error면
+        } else { //실패
             model.addAttribute("message","자료를 불러오는 데 실패했습니다.");
-            uri="redirect:qnadetail?qnaNo="+vo.getQnaNo();
+            uri="redirect:qnadetail?qnaNo="+vo.getQnaNo()+"&link="+link;
         }
         return uri;
     }
