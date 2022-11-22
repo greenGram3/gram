@@ -24,19 +24,6 @@ public class ReviewController {
     @Autowired
     ReviewService reviewService;
 
-    // ** Review Dup Check(답변 중복체크)
-    @RequestMapping(value="/reviewDupCheck")
-    public String qnaDupCheck(ReviewVO vo, Model model) {
-        System.out.println("reviewRoot: "+vo.getReviewRoot());
-
-        if (reviewService.reviewrDetail(vo) != null) { //답글 있음
-            model.addAttribute("code","200");
-        } else { //답글 없음
-            model.addAttribute("code","500");
-        }
-        return "jsonView";
-    }
-
     // ** 상세페이지 리뷰리스트
     @RequestMapping(value="/reviewlistD")
     public String reviewlistD(Model model, SearchCriteria cri, PageMaker pageMaker, ReviewVO vo) {
@@ -339,4 +326,17 @@ public class ReviewController {
         return "jsonView";
     }
 
+    //---------------------------------------------------------------------------------------------//
+    // ** Review Dup Check(답변 중복체크-보류)
+/*    @RequestMapping(value="/reviewDupCheck")
+    public String qnaDupCheck(ReviewVO vo, Model model) {
+        System.out.println("reviewRoot: "+vo.getReviewRoot());
+
+        if (reviewService.reviewrDetail(vo) != null) { //답글 있음
+            model.addAttribute("code","200");
+        } else { //답글 없음
+            model.addAttribute("code","500");
+        }
+        return "jsonView";
+    }*/
 } //Controller

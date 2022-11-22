@@ -11,27 +11,6 @@
         $(function () {
             // ** load시 답변 자동으로 보이게
             $('#qnaReply').trigger('click');
-
-            // ** 답변달기 중복체크(Json)
-            $('#DupCk').click(function () {
-                $.ajax({
-                    type: 'Post',
-                    url: 'qnaDupCheck',
-                    data: {
-                        qnaRoot: $('#qnaRoot').val()
-                    },
-                    success: function (resultData) {
-                        if (resultData.code == 200) { // 답글 있을 시
-                            $('#qnaReWrite').hide();
-                        } else { // 답글 없을 시
-                            $('#qnaReWrite').show();
-                        }
-                    },
-                    error: function () {
-                        $('#resultArea2').html('답글중복체크 error');
-                    }
-                }) //ajax
-            });
         }) //ready
     </script>
 </head>
@@ -80,7 +59,6 @@
                         <td>${qnaResult.qnaNo}</td>
                     </tr>
                     <tr hidden>
-                        <input type="hidden" value="${qnaResult.qnaRoot}" id="qnaRoot" disabled>
                         <td>${qnaResult.qnaRoot}</td>
                         <td>${qnaResult.qnaStep}</td>
                         <td>${qnaResult.qnaChild}</td>
@@ -92,9 +70,7 @@
                 <div class="linkBtn">
                     <a href="qnalist?link=${link}">목록으로</a>
                     <c:if test="${userId == 'admin' && qnaResult.qnaChild < 1}">
-                        <!-- 답변달기 중복체크 -->
-                        <span id="DupCk" hidden>답변중복체크</span>
-                        <span class="textLink" id="qnaReWrite"
+                        <span id="qnaReWrite"
                               onclick="qnaReplyF(${qnaResult.qnaRoot},${qnaResult.qnaStep},${qnaResult.qnaChild},'${link}')">답글달기</span>
                     </c:if>
                     <c:if test="${qnaResult.qnaStep < 1}">

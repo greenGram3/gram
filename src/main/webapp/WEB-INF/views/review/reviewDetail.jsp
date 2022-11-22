@@ -12,27 +12,6 @@
         $(function () {
             // ** load시 자동으로 댓글 클릭해서 댓글 보여주기
             $('#reviewReply').trigger('click');
-
-            // ** 답변달기 중복체크(Json)
-            $('#DupCk').click(function () {
-                $.ajax({
-                    type: 'Post',
-                    url: 'reviewDupCheck',
-                    data: {
-                        reviewRoot: $('#reviewRoot').val()
-                    },
-                    success: function (resultData) {
-                        if (resultData.code == 200) { // 답글 있을 시
-                            $('#reviewReWrite').hide();
-                        } else { // 답글 없을 시
-                            $('#reviewReWrite').show();
-                        }
-                    },
-                    error: function () {
-                        $('#resultArea2').html('댓글중복체크 error');
-                    }
-                }) //ajax
-            });
         }) //ready
     </script>
 </head>
@@ -97,7 +76,6 @@
                         <td>${reviewResult.reviewNo}</td>
                     </tr>
                     <tr hidden>
-                        <input type="hidden" value="${reviewResult.reviewRoot}" id="reviewRoot" disabled>
                         <td>${reviewResult.orderNo}</td>
                         <td>${reviewResult.itemNo}</td>
                         <td>${reviewResult.reviewRoot}</td>
@@ -111,7 +89,6 @@
                 <div class="linkBtn">
                     <a href="reviewlist?link=${link}">목록으로</a>
                     <c:if test="${userId == 'admin' && reviewResult.reviewChild < 1}">
-                        <span id="DupCk" hidden>답변중복체크</span>
                         <span onclick="reviewReplyF(${reviewResult.orderNo},${reviewResult.itemNo},${reviewResult.reviewRoot},
                             ${reviewResult.reviewStep},${reviewResult.reviewChild})" id="reviewReWrite">답글달기</span>
                     </c:if>

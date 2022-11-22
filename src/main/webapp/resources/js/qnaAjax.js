@@ -100,13 +100,12 @@ function qnaReplyD(qnaRoot,qnaStep,qnaChild) {
             qnaStep: qnaStep,
             qnaChild: qnaChild
         },
-        success: function (resultPage) {
+        success: function (resultPage) { //답글 Ajax출력
             $('#resultArea1').html(resultPage);
-            $('#DupCk').trigger('click');
+            $('#qnaReWrite').hide();
         },
-        error: function () {
+        error: function () { //답글 X -> Ajax미출력
             $('#resultArea1').html('아직 답변이 달리지 않았습니다.');
-            $('#DupCk').trigger('click');
         }
     }); //ajax
 } //qnaReplyD
