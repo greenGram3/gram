@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,7 +50,7 @@ public class ReviewController {
     // ** ReviewList 출력
     @RequestMapping(value="/reviewlist")
     public String reviewlist (Model model, SearchCriteria cri, String link, PageMaker pageMaker) {
-        cri.setSnoEno(); //Sno, Eno 계산
+        cri.setSnoEno();
         if(link != null){
             model.addAttribute("link",link);
         }
@@ -100,99 +101,87 @@ public class ReviewController {
         }
         return uri;
     }
-
     //------------------------------------------------------------------------------------------------------//
     // ** Review 작성
     @RequestMapping(value="/reviewinsertf")
-    public String reviewinsertf(HttpServletRequest request, HttpServletResponse response, ReviewVO vo, Model model) {
-        return "/review/reviewInsert";
-    }
+    public String reviewinsertf (ReviewVO vo, HttpServletResponse response) throws IOException {
+        System.out.println("itemNo: "+vo.getItemNo()+","+"orderNo: "+vo.getOrderNo());
+        response.setContentType("text/html; charset=UTF-8"); //response 한글
 
+        PrintWriter out = response.getWriter();
+
+        // Review 중복체크
+        if (reviewService.dupCheck(vo)!=null) { //후기 중복
+            out.println("<script>alert('후기는 한번만 작성가능합니다.'); " +
+                    "history.back(); </script>");
+            out.flush();
+            return null;
+        } else { //중복X, 작성가능
+            return "/review/reviewInsert";
+        }
+    }
     //------------------------------------------------------------------------------------------------------//
     // ** 후기 insert(+이미지까지)
     @RequestMapping(value="/reviewinsert", method= RequestMethod.POST)
-    public String reviewinsert(HttpServletRequest request, Model model, ReviewVO vo) throws IOException {
-        /*Integer index = link.length();
-        String link2 = link.substring(index - 1);
-        model.addAttribute("link",link2);*/
-
-        // 1. 요청
-        String uri = "redirect:reviewlist";
-
+    public String reviewinsert(HttpServletRequest request, Model model,
+                               ReviewVO vo, RedirectAttributes rttr) throws IOException {
+        String uri = "redirect:reviewlist"; // uri경로
 //------------------------------------------------------------------------//
         String realPath = request.getSession().getServletContext().getRealPath("/");
         System.out.println("** realPath => "+realPath);
 
-        // 2) 위 값을 이용해서 실제저장위치 확인
-        realPath += "resources\\reviewImage\\";
-
-        // ** 기본 이미지 지정하기
-        String file1, file2="reviewImage/noImage.JPG";
+        realPath += "resources\\reviewImage\\"; // 실제 폴더 저장위치
+        String file1, file2="reviewImage/noImage.JPG"; // 기본 이미지 지정
 
         // ** MultipartFile
-        MultipartFile imgNamef = vo.getImgNamef();//이미지정보들 모두 들어있음.
-        if ( imgNamef !=null && !imgNamef.isEmpty() ) {//이미지 첨부하고 이미지정보도 있는 경우
-            // ** Image를 선택 -> Image저장
-            // 1) 물리적 저장경로에 Image저장
-            file1 = realPath + imgNamef.getOriginalFilename(); // 경로완성(ctrlc)
-            imgNamef.transferTo(new File(file1)); // Image저장(ctrlv[경로]->File타입으로 변환★)
-            // 2) Table 저장 준비
+        MultipartFile imgNamef = vo.getImgNamef();
+        if ( imgNamef !=null && !imgNamef.isEmpty() ) {
+            file1 = realPath + imgNamef.getOriginalFilename();
+            imgNamef.transferTo(new File(file1));
             file2="reviewImage/"+imgNamef.getOriginalFilename();
         }
-        // ** Table에 완성 String경로 set
         vo.setImgName(file2);
 //-----------------------------------------------------------------------------//
-        // 2. Service 처리
+        // Service 처리
         if ( reviewService.reviewinsert(vo)>0 ) {
-            model.addAttribute("message","후기등록 성공");
+            rttr.addFlashAttribute("message","후기가 등록되었습니다.");
         }else {
             model.addAttribute("message","후기 등록 실패. 다시 이용하시기 바랍니다.");
             uri = "/review/reviewInsert";
         }
         return uri;
     }
-
     //------------------------------------------------------------------------------------------------------//
     // Review 답변
     @RequestMapping(value="/reviewrinsertf")
-    public String reviewrinsertf(HttpServletRequest request, HttpServletResponse response,
-                              Model model, ReviewVO vo) { //vo에 detail의 root 담김
+    public String reviewrinsertf() {
         return "/review/reviewrInsert";
     }
 
     @RequestMapping(value="/reviewrinsert", method = RequestMethod.POST)
-    public String reviewrinsert(HttpServletRequest request, HttpServletResponse response,
-                                 Model model, ReviewVO vo) {
-        // 한글처리
+    public String reviewrinsert(HttpServletResponse response, Model model, ReviewVO vo) {
         response.setContentType("text/html; charset=UTF-8");
 
-        // 요청분석 (json은 jsonView return 해야함)
-        vo.setReviewStep(vo.getReviewStep()+1);
+        vo.setReviewStep(vo.getReviewStep()+1); // 답글 DB입력 위해 step,child +1 set
         vo.setReviewChild(vo.getReviewChild()+1);
 
         // Service 처리
-        if ( reviewService.reviewrinsert(vo)>0 ) { // 인서트 성공 시
-            model.addAttribute("code","200"); // success에 성공 표시 전달
-        } else {
-            model.addAttribute("code","500"); // success에 실패 표시 전달
+        if ( reviewService.reviewrinsert(vo)>0 ) { //성공
+            model.addAttribute("code","200");
+        } else { //실패
+            model.addAttribute("code","500");
             model.addAttribute("message","답변 등록에 실패했습니다.");
         }
-
         return "jsonView";
     }
     //------------------------------------------------------------------------------------------------------//
     // ** Review Update
     @RequestMapping(value="/reviewupdate", method = RequestMethod.POST)
     public String reviewupdate(HttpServletRequest request, Model model, ReviewVO vo) throws IOException {
-        /*Integer index = link.length();
-        String link2 = link.substring(index - 1);
-        model.addAttribute("link",link2);*/
-
         // 1. 요청분석
         String uri = "redirect:reviewdetail?reviewNo="+vo.getReviewNo();
         model.addAttribute("reviewResult",vo); //업뎃 실패시에도 값 저장
-        //------------------------------------------------------------------------//
-        // * 이미지 저장
+        // 이미지 저장
             String realPath = request.getSession().getServletContext().getRealPath("/");
             System.out.println("** realPath => "+realPath);
             // 실제 폴더 저장 위치
@@ -206,11 +195,10 @@ public class ReviewController {
                 // 1) 물리적 저장경로에 Image저장
                 file1 = realPath + imgNamef.getOriginalFilename();
                 imgNamef.transferTo(new File(file1));
-                // 2) Table 저장 준비
+                // 2) Table 저장
                 file2="reviewImage/"+imgNamef.getOriginalFilename();
                 vo.setImgName(file2);
             }
-//-----------------------------------------------------------------------------//
         // 2. service처리
         if(reviewService.reviewupdate(vo)>0) {
             model.addAttribute("message","수정 성공");
@@ -241,34 +229,28 @@ public class ReviewController {
     // ** ReviewDetail 출력
     @RequestMapping(value="/reviewrDetail")
     public String reviewrDetail(Model model, ReviewVO vo) {
-        // 1. 성공 시 detail폼
+        // 1. 요청분석
         String uri = "/review/reviewRdetail";
-
-        // 2. detail 실행, 저장
+        // 2. 디테일 실행, 저장
         vo = reviewService.reviewrDetail(vo);
 
-        if( vo != null ) { //detail 저장 성공이면
+        if( vo != null ) { //성공
             model.addAttribute("reviewResult",vo);
-        } else { //저장 실패 error면
+        } else { //실패
             model.addAttribute("message","후기를 불러오는데 실패했습니다.");
             uri="redirect:reviewdetail?reviewNo="+vo.getReviewNo();
         }
         return uri;
     }
 
-    //-------------------------------------------------------------------------------------------------//
-    //-------------------------------------------------------------------------------------------------//
+    // ** MyPage reviewList
     @RequestMapping(value="/reviewlistM")
     public String reviewlistM(HttpServletRequest request, SearchCriteria cri, Model model, PageMaker pageMaker) {
-        /*        if(link != null){
-            model.addAttribute("link",link);
-        }*/
-
         // 1. 요청분석
-        String uri = "/review/reviewListM"; // 성공 시 list
+        String uri = "/review/reviewListM";
         String userId = null;
 
-        // 2. session의 userId 받아서/ userId변수에 저장
+        // 2. session의 userId 받아서 저장
         HttpSession session = request.getSession(false);
         if ((session.getAttribute("userId"))!=null ) {
             userId = (String)(session.getAttribute("userId"));
@@ -282,17 +264,13 @@ public class ReviewController {
 
         if(list != null) {
             model.addAttribute("reviewResult", list);
-
             pageMaker.setCri(cri);
             pageMaker.setTotalRowsCount(reviewService.searchCount2(userId));
             model.addAttribute("pageMaker",pageMaker);
-
         } else {
             model.addAttribute("message", "작성한 후기가 없습니다.");
             uri = "redirect:home";
         }
-
-
         return uri;
     }
     //---------------------------------------------------------------------------------//

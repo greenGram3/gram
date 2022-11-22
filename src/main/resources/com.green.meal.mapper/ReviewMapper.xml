@@ -74,10 +74,12 @@
         </selectKey>
         insert into review(review_no, user_id, order_no, item_no, review_title, review_content, review_root, review_star, img_name)
         values(#{reviewNo},#{userId},#{orderNo},#{itemNo}, #{reviewTitle}, #{reviewContent}, #{reviewNo}, #{reviewStar}, #{imgName})
-        <!-- root자리에 selectKey reviewNo 넣어서 root==no 맞춰주기, img도 넣기 -->
-        <!-- order_no, item_no 는 뭘로 받아올건지?
-             imgFile은 #{imgName} 하면 됨. -->
     </insert>
+
+    <!-- review 중복체크 -->
+    <select id="dupCheck" resultType="com.green.meal.domain.ReviewVO">
+        select * from review where item_no=#{itemNo} and order_no=#{orderNo}
+    </select>
 
     <!-- Review Update -->
     <update id="reviewupdate">

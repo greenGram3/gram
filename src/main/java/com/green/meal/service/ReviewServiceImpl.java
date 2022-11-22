@@ -48,9 +48,11 @@ public class ReviewServiceImpl implements ReviewService {
     @Override
     public ReviewVO reviewdetail(ReviewVO vo) { return reviewMapper.reviewdetail(vo); }
 
-    // Review Insert
+    // Review Insert+후기중복체크
     @Override
     public int reviewinsert(ReviewVO vo) { return reviewMapper.reviewinsert(vo); }
+    @Override
+    public ReviewVO dupCheck(ReviewVO vo) {return reviewMapper.dupCheck(vo);}
 
     // Review 수정
     @Override
