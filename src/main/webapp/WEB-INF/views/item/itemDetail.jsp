@@ -23,8 +23,6 @@
                 } else {
                     return false;
                 }
-                orderAmount.attr("name", "itemAmount");
-                orderAmount.attr("id", "itemAmount");
 
                 itemDetailForm.attr("action", "buy/payment");
                 itemDetailForm.attr("method", "post");

@@ -43,5 +43,10 @@
         where user_id= #{userId}
     </delete>
 
+    <select id="selectCartItems" parameterType="String" resultType="OrderDetailVO">
+        select cart.item_no, cart.cart_amount, item.item_name, item.item_price
+        from cart, item
+        where user_id = #{userId} and cart.item_no = item.item_no
+    </select>
 
 </mapper>

@@ -1,6 +1,7 @@
 package com.green.meal.mapper;
 
 import com.green.meal.domain.CartVO;
+import com.green.meal.domain.OrderDetailVO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -21,8 +22,6 @@ public interface CartMapper {
 
     int deleteAll(String userId);
 
-
-
-
+    List<OrderDetailVO> selectCartItems(String userId);
 
 }

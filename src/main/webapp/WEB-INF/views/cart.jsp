@@ -117,6 +117,7 @@
                 </tr>
                 </tfoot>
             </table>
+
         </figure>
 
         <button class="delAllBtn" type="button" > 전체 상품 삭제</button>
@@ -147,6 +148,10 @@
                     },
                     error   : function(){ alert("삭제를 실패하였습니다") }
                 });
+            });
+
+            $(".payAllBtn").on("click",function () {
+                location.href="<c:url value='/buy/cartPayment'/>";
             });
 
         });

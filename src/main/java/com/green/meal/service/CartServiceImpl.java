@@ -2,6 +2,7 @@ package com.green.meal.service;
 
 
 import com.green.meal.domain.CartVO;
+import com.green.meal.domain.OrderDetailVO;
 import com.green.meal.mapper.CartMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -48,6 +49,11 @@ public class CartServiceImpl implements CartService {
     @Override
     public int deleteAll(String userId) {
         return cartMapper.deleteAll(userId);
+    }
+
+    @Override
+    public List<OrderDetailVO> buyCartList(String userId) {
+        return cartMapper.selectCartItems(userId);
     }
 
 }

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.*;
 
@@ -63,21 +64,21 @@ public class OrderController {
     }
 
     @PostMapping("/send")
-    public String sendModify(Integer orderNo, Integer[] itemNoArr, Integer[] itemAmountArr, SearchCondition sc, Model m) {
+    public String sendModify(Integer orderNo, Integer[] itemNoArr, Integer[] itemAmountArr, SearchCondition sc, RedirectAttributes rattr) {
 
         try {
 
             //발송처리 눌렀을 때 주문상태를 주문완료->배송중, 아이템 재고 줄이기 두개 동시 실행
             orderService.sendUpdate(itemNoArr, itemAmountArr, orderNo);
 
-            m.addAttribute("orderNo", orderNo);
-            m.addAttribute("page", sc.getPage());
-            m.addAttribute("pageSize", sc.getPageSize());
-            m.addAttribute("msg", "SEND_OK");
+            rattr.addAttribute("orderNo", orderNo);
+            rattr.addAttribute("page", sc.getPage());
+            rattr.addAttribute("pageSize", sc.getPageSize());
+            rattr.addFlashAttribute("msg", "SEND_OK");
 
         } catch (Exception e) {
             e.printStackTrace();
-            m.addAttribute("msg", "SEND_ERR");
+            rattr.addAttribute("msg", "SEND_ERR");
         }
 
         return "redirect:/order/read";

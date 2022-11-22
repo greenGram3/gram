@@ -22,9 +22,8 @@
     let msg = "${msg}";
     if(msg=="LIST_ERR")  alert("주문 목록을 가져오는데 실패했습니다. 다시 시도해 주세요.");
     if(msg=="READ_ERR")  alert("주문 상세 보기를 가져오는데 실패했습니다. 다시 시도해 주세요.");
-    let reMsg = "${param.msg}";
-    if(reMsg=="SEND_OK")  alert("발송 처리를 완료했습니다.");
-    if(reMsg=="SEND_ERR")  alert("발송 처리에 실패했습니다. 다시 시도해 주세요.");
+    if(msg=="SEND_OK")  alert("발송 처리를 완료했습니다.");
+    if(msg=="SEND_ERR")  alert("발송 처리에 실패했습니다. 다시 시도해 주세요.");
 </script>
     <div class="main">
         <jsp:include page="../include/admin.jsp" flush="false" />

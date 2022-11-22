@@ -1,8 +1,7 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt" %>
-<%@ page session="true"%>
-<%--<%@ page import="java.net.URLDecoder"%>--%>
+<%@page session="true"%>
 
 <!DOCTYPE html>
 <html>
@@ -47,18 +46,12 @@
       background-color: #f0f0f070;
     }
 
-
     th,
     td {
       width:100px;
       text-align: center;
       padding: 10px 12px;
     }
-
-
-
-
-
 
     .block-div {
       width: 100%;
@@ -116,10 +109,11 @@
           <tr class="itemList-tr">
             <td><input name="itemNo" type="text" value="${list.itemNo}"></td>
             <td><input name="itemName" type="text" value="${list.itemName}"></td>
-            <td><input name="itemAmount" type="text" value="${list.itemAmount}"></td>
+            <td><input name="cartAmount" type="text" value="${list.cartAmount}"></td>
             <td><input name="itemPrice" type="text" value="${list.itemPrice}"></td>
             <td><input name="totalItemPrice" type="text" value="${totalItemPrice}"></td>
           </tr>
+
         </c:forEach>
         <tr class="block-div"></tr>
         <tr class="addr-tr">
@@ -177,6 +171,10 @@
         <tr>
           <th>구매자이메일</th>
           <td><input type="text" name="userEmail" value="${userVo.userEmail}"></td>
+        </tr>
+        <tr>
+          <th>주문형태</th>
+          <td><input type="hidden" name="orderType" value="${orderType}" /></td>
         </tr>
       </table>
 

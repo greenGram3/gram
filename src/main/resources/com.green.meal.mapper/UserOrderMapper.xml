@@ -64,7 +64,7 @@
             insert into order_detail
                 (order_no, item_no, item_price, item_amount)
             values
-                (#{orderNo},#{itemNo},#{itemPrice},#{itemAmount})
+                (#{orderNo},#{itemNo},#{itemPrice},#{cartAmount})
         </insert>
 
 

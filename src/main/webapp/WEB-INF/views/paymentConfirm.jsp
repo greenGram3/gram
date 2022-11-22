@@ -55,7 +55,7 @@
         <tr>
             <td>${odvo.itemName}</td>
             <td>${odvo.itemPrice}</td>
-            <td>${odvo.itemAmount}</td>
+            <td>${odvo.cartAmount}</td>
         </tr>
     </c:forEach>
     <tr>
