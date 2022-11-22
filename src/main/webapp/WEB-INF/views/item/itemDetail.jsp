@@ -213,12 +213,12 @@
 
 
         let itemDetail_menus = document.querySelector('.itemDetail_menu_container');
-        let menu = itemDetail_menus.getElementsByClassName('itemDetail_menu');
-        let tmp = menu[0];
+        let itemDetail_menu = itemDetail_menus.getElementsByClassName('itemDetail_menu');
+        let tmp = itemDetail_menu[0];
 
-        for(let i=0; i<menu.length;i++){
+        for(let i=0; i<itemDetail_menu.length; i++){
 
-            menu[i].addEventListener('click',(e) => {
+            itemDetail_menu[i].addEventListener('click',(e) => {
 
                 let eventMenu = e.target;
 
