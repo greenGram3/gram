@@ -35,7 +35,7 @@ public interface ReviewMapper {
     // Review 답변작성
     int reviewrinsert(ReviewVO vo);
 
-    // Review 답변 출력
+    // Review 답변 출력+답변DupCheck
     ReviewVO reviewrDetail(ReviewVO vo);
 
     // Review 삭제

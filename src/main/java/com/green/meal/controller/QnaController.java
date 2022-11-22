@@ -26,11 +26,11 @@ public class QnaController {
 
     // ** QnA Dup Check(답변 중복체크)
     @RequestMapping(value="/qnaDupCheck")
-    public String qnaDupCheck(int qnaRoot, Model model) {
+    public String qnaDupCheck(QnaVO vo, Model model) {
 
-        System.out.println("qnaRoot"+qnaRoot);
+        System.out.println("qnaRoot: "+vo.getQnaRoot());
 
-        if (qnaService.qnaDupCheck(qnaRoot) != null) { //답글 있음
+        if (qnaService.qnarDetail(vo) != null) { //답글 있음
             model.addAttribute("code","200");
         } else { //답글 없음
             model.addAttribute("code","500");

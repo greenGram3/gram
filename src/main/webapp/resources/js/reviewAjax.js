@@ -73,9 +73,11 @@ function reviewReplyD(reviewRoot,reviewStep,reviewChild) {
         },
         success: function (resultPage) {
             $('#resultArea1').html(resultPage);
+            $('#DupCk').trigger('click');
         },
         error: function () {
             $('#resultArea1').html('댓글이 달리지 않았습니다.');
+            $('#DupCk').trigger('click');
         }
     }); //ajax
 } //qnaReplyD
