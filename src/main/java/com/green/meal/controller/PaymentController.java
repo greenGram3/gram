@@ -3,10 +3,7 @@ package com.green.meal.controller;
 import com.green.meal.domain.DeliveryVO;
 import com.green.meal.domain.OrderDetailVO;
 import com.green.meal.domain.UserVO;
-import com.green.meal.service.DelyService;
-import com.green.meal.service.OrderService;
-import com.green.meal.service.UserOrderService;
-import com.green.meal.service.UserService;
+import com.green.meal.service.*;
 import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,16 +28,17 @@ public class PaymentController {
     OrderService orderService;
     @Autowired
     UserOrderService userOrderService;
+    @Autowired
+    CartService cartService;
 
     //제품 상세페이지에서 바로 주문 결제페이지로 넘어가는 메서드
     @PostMapping("/payment")
-    public String buy(OrderDetailVO odvo, Integer totalItemPrice, Model m, HttpServletRequest request) {
+    public String buy(OrderDetailVO odvo, Integer totalPrice, Integer totalItemPrice, Model m, HttpServletRequest request) {
 
         try {
 
             //세션으로 아이디 얻어오기
             HttpSession session = request.getSession();
-
             String userId = (String)session.getAttribute("userId");
 
             //넘어온 구매상품정보 리스트에 담기(한개여도 리스트에 담기)
@@ -49,7 +47,7 @@ public class PaymentController {
 
             //배송지 리스트 얻어오기
             List<DeliveryVO> delyList = delyService.delySelect(userId);
-            System.out.println("delyList = " + delyList);
+
             //구매고객 정보 얻어오기
             UserVO userVo = userService.userDetail(userId);
 
@@ -62,6 +60,7 @@ public class PaymentController {
             //전체금액, 구매할상품정보, 구매자배송지정보, 구매자정보, 임시주문정보 -> jsp 전달
             m.addAttribute("odvoList", odvoList);
             m.addAttribute("totalItemPrice", totalItemPrice);
+            m.addAttribute("totalPrice", totalPrice);
             m.addAttribute("delyList", delyList);
             m.addAttribute("userVo", userVo);
             m.addAttribute("uniqueNo", uniqueNo);
@@ -72,6 +71,47 @@ public class PaymentController {
             e.printStackTrace();
             return "redirect:/buy/payment";
         }
+    }
+
+    @GetMapping("/cartPayment")
+    public String cartBuy(HttpServletRequest request, Model m) {
+
+        try {
+            //세션으로 아이디 얻어오기
+            HttpSession session = request.getSession();
+            session.setAttribute("userId", "aaa1111");
+            String userId = (String)session.getAttribute("userId");
+
+            //해당 아이디의 장바구니 상품들 가져오기
+            List<OrderDetailVO> odvoList = new ArrayList<>();
+            odvoList = cartService.buyCartList(userId);
+
+            //배송지 리스트 얻어오기
+            List<DeliveryVO> delyList = delyService.delySelect(userId);
+
+            //구매고객 정보 얻어오기
+            UserVO userVo = userService.userDetail(userId);
+
+            //임시주문번호제작
+            String uniqueNo = "";
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssSSS");
+            Calendar dateTime = Calendar.getInstance();
+            uniqueNo = sdf.format(dateTime.getTime())+"_"+ RandomStringUtils.randomAlphanumeric(6);
+
+            //전체금액, 구매할상품정보, 구매자배송지정보, 구매자정보, 임시주문정보 -> jsp 전달
+            m.addAttribute("odvoList", odvoList);
+            m.addAttribute("delyList", delyList);
+            m.addAttribute("userVo", userVo);
+            m.addAttribute("uniqueNo", uniqueNo);
+            m.addAttribute("orderType", "cartOrder");
+
+            return "payment";
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "redirect:/buy/payment";
+        }
+
     }
 
     //주문페이지에서 배송지 상세정보를 볼 수 있도록 해주는 메서드
