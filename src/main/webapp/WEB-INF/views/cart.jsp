@@ -157,6 +157,11 @@
             });
 
             $(".payAllBtn").on("click",function () {
+
+                if("${userId}" == ""){
+                    alert("로그인 페이지로 이동합니다");
+                    location.href="/meal/login/login?requestURI=/meal/cart"; return false;
+                }
                 <%--location.href="<c:url value='/buy/cartPayment'/>";--%>
                 let form = $("#form");
                 form.attr("action", "<c:url value='/buy/cartPayment' />");
