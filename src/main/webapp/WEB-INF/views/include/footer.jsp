@@ -23,7 +23,7 @@
         <li><a href=>주소 : 경기도 성남시 분당구 구미동</a></li>
         <li><a href=>사업자등록번호 : 880-86-00259</a></li>
         <li><a href=>통신판매업신고번호 : 제 2022-성남분당-0524 호</a></li>
-        <li><a href=>이메일 : damzzamall@naver.com</a></li>
+        <li><a href=>이메일 : gram@naver.com</a></li>
         <li><a href=>Copyright ⓒ 2022 BPR. All Rights Reserved.</a></li>
       </ul>
     </div>

@@ -72,7 +72,7 @@
         </div></a></li>
       <li><a href="<c:url value='/itemList/bestMeal'/>">베스트</a></li>
       <li><a href="<c:url value='/itemList/newMeal'/>">신메뉴</a></li>
-      <li><a href="#">커뮤니티</a></li>
+<%--      <li><a href="#">커뮤니티</a></li>--%>
     </ul>
 
 

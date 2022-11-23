@@ -11,8 +11,13 @@
         img {
             display: block;
         }
-        .info {
-            margin-top: 350px;
+        .companyInfo {
+            margin-top: 250px;
+            margin-bottom: 100px;
+        }
+        #map {
+            width: 600px;
+            height: 400px;
         }
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
@@ -23,14 +28,14 @@
 <body>
 <jsp:include page="include/header.jsp" flush="false"/>
 <main>
-    <div class="info">
+    <div class="companyInfo">
         <%--<img src="<c:url value='/icon/logo.png'/>" style="margin-top:300px;">--%>
         <img src="<c:url value='/icon/company_info.jpg'/>">
         <br><br>
         <h2>편한밥상 본사 위치</h2>
         <h3>경기 성남시 분당구 돌마로 46 광천프라자 5층 503호, 대표번호: 02.0000.0000</h3>
         <br><br>
-        <div id="map" style="width:50%;height:100%;"></div>
+        <div id="map"></div>
         <br>
 
         <!-- 지도만들기 -->
@@ -68,9 +73,9 @@
                 <a href="javascript:history.back();">돌아가기</a>
         </button>
         --%>
-            <jsp:include page="include/footer.jsp" flush="false"/>
+
     </div>
 </main>
-
+<jsp:include page="include/footer.jsp" flush="false"/>
 </body>
 </html>
