@@ -36,12 +36,12 @@
           <th>수량</th>
           <th>상품금액</th>
         </tr>
-        <c:forEach var="list" items="${odvoList}">
+        <c:forEach var="list" items="${odvoList}" varStatus="status">
           <tr >
             <td>
 <%--             <img src="${list.fileName}" width="100"> --%>
                 <input hidden name="itemNo" type="text" value="${list.itemNo}">
-                <input hidden name="itemName" type="text" value="${list.itemName}">
+                <input hidden name="itemName${status.index}" type="text" value="${list.itemName}">
                 ${list.itemName}
             </td>
             <td><input hidden name="cartAmount" type="text" value="${list.cartAmount}">
@@ -88,7 +88,9 @@
         </tr>
         <tr>
           <th>남기실 말씀</th>
-          <td class="order-req"><input class="order-req-input" name="orderReq" type="content" value=""></td>
+          <td class="order-req">
+            <input class="order-req-input" type="text" maxlength="60" name="orderReq" value="" placeholder="60자 이내로 입력 가능합니다." />
+          </td>
         </tr>
       </table>
 
@@ -104,14 +106,26 @@
           </td>
         </tr>
       </table>
-      <input hidden name="totalItemPrice" type="text" value="${totalItemPrice}">
-      <div class="total"><h3>최종 결제 금액</h3> <h2><fmt:formatNumber pattern="###,###,###" value="${totalItemPrice}"/></h2><h3>원</h3></div>
+      <input hidden name="totalPrice" type="text" value="${totalPrice}">
+      <div class="total"><h3>최종 결제 금액</h3> <h2><fmt:formatNumber pattern="###,###,###" value="${totalPrice}"/></h2><h3>원</h3></div>
         <div class="payCheck"> <button type="button" id="check_module" class="payment-Btn"> 결제하기 </button> </div>
 
 
     </form>
 
 <script>
+
+  $('.order-req-input').keyup(function (e) {
+
+    let content = $(this).val();
+
+    // 글자수 제한
+    if (content.length > 60) {
+      // 60자 넘으면 알림창 뜨도록
+      alert('글자수는 60자까지 입력 가능합니다.');
+    };
+
+  });
 
   $("#check_module").on("click", function () {
 

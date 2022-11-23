@@ -39,7 +39,8 @@
     </c:forEach>
     <tr>
         <th>총 금액</th>
-        <td colspan="2"><fmt:formatNumber pattern="###,###,###" value="${totalItemPrice}"/> 원</td>
+        <c:set var="totalPrice" value="${totalPrice}"/>
+        <td colspan="2"><fmt:formatNumber pattern="###,###,###" value="${totalPrice}"/> 원</td>
     </tr>
     <tr>
         <th>배송지 주소</th>

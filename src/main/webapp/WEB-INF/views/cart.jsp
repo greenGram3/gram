@@ -109,12 +109,18 @@
                     </c:if>
                 </tbody>
                 <tfoot>
+
                 <tr>
                     <th scope="row">총계</th>
                     <th></th>
+                    <th hidden>
+                        <input type="hidden" name="totalPrice" value="${sum}" />
+                    </th>
                     <th class="totalPrice"><fmt:formatNumber pattern="###,###,###" value="${sum}"/> 원</th>
                     <th></th>
                 </tr>
+
+                </form>
                 </tfoot>
             </table>
 
@@ -151,7 +157,11 @@
             });
 
             $(".payAllBtn").on("click",function () {
-                location.href="<c:url value='/buy/cartPayment'/>";
+                <%--location.href="<c:url value='/buy/cartPayment'/>";--%>
+                let form = $("#form");
+                form.attr("action", "<c:url value='/buy/cartPayment' />");
+                form.attr("method", "post");
+                form.submit();
             });
 
         });

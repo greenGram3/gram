@@ -33,7 +33,7 @@ public class PaymentController {
 
     //제품 상세페이지에서 바로 주문 결제페이지로 넘어가는 메서드
     @PostMapping("/payment")
-    public String buy(OrderDetailVO odvo, Integer totalPrice, Integer totalItemPrice, Model m, HttpServletRequest request) {
+    public String buy(OrderDetailVO odvo, Integer totalPrice, Model m, HttpServletRequest request) {
 
         try {
 
@@ -59,7 +59,6 @@ public class PaymentController {
 
             //전체금액, 구매할상품정보, 구매자배송지정보, 구매자정보, 임시주문정보 -> jsp 전달
             m.addAttribute("odvoList", odvoList);
-            m.addAttribute("totalItemPrice", totalItemPrice);
             m.addAttribute("totalPrice", totalPrice);
             m.addAttribute("delyList", delyList);
             m.addAttribute("userVo", userVo);
@@ -73,8 +72,8 @@ public class PaymentController {
         }
     }
 
-    @GetMapping("/cartPayment")
-    public String cartBuy(HttpServletRequest request, Model m) {
+    @PostMapping("/cartPayment")
+    public String cartBuy(HttpServletRequest request, Integer totalPrice, Model m) {
 
         try {
             //세션으로 아이디 얻어오기
@@ -99,6 +98,7 @@ public class PaymentController {
             uniqueNo = sdf.format(dateTime.getTime())+"_"+ RandomStringUtils.randomAlphanumeric(6);
 
             //전체금액, 구매할상품정보, 구매자배송지정보, 구매자정보, 임시주문정보 -> jsp 전달
+            m.addAttribute("totalPrice", totalPrice);
             m.addAttribute("odvoList", odvoList);
             m.addAttribute("delyList", delyList);
             m.addAttribute("userVo", userVo);
@@ -171,7 +171,7 @@ public class PaymentController {
 
     //결제 후 결제확인 창으로 이동하는 메서드
     @PostMapping("/confirm")
-    public String paymentConfirm(Integer totalItemPrice, String delyPlace, Model m, HttpServletRequest request, OrderDetailVO odvo) {
+    public String paymentConfirm(Integer totalPrice, String orderType, String delyPlace, Model m, HttpServletRequest request, OrderDetailVO odvo) {
 
         try {
             //세션으로 아이디 얻어오기
@@ -185,20 +185,25 @@ public class PaymentController {
             DeliveryVO vo = new DeliveryVO();
             vo = delyService.selectedDely(map);
 
-            //구매자 정보 주문내용에 담기 (구매상품에 대한 정보는 이미 담겨있음)
+            //구매자 정보 주문내용에 담기(order_list에 넣을 것) (구매상품에 대한 정보는 이미 담겨있음)
             odvo.setUserId(userId);
             odvo.setUserPhone(vo.getDelyPhone());
             odvo.setDelyAddr(vo.getDelyAddr());
             odvo.setReceiver(vo.getReceiver());
-            //구매상품 종류가 한개여도 리스트에 담아서 보내기
+
+            //카트주문과 단건주문 구분하여 처리
             List<OrderDetailVO> odvoList = new ArrayList<>();
-            odvoList.add(odvo);
+            if (orderType.equals("cartOrder")) {
+                odvoList = cartService.buyCartList(userId);
+            } else {
+                odvoList.add(odvo);
+            }
 
             //구매정보 order_list, order_detail에 넣기
             userOrderService.save(odvoList, odvo);
 
             //총 구매금액, 배송지 정보, 구매한 제품 정보 -> jsp로 전달
-            m.addAttribute("totalItemPrice", totalItemPrice);
+            m.addAttribute("totalPrice", totalPrice);
             m.addAttribute("vo", vo);
             m.addAttribute("odvoList", odvoList);
 
