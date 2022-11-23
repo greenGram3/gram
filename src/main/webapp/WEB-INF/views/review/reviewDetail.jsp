@@ -32,13 +32,6 @@
         <c:if test="${userId!='admin'}">
             <jsp:include page="../include/mypage.jsp" flush="false"/>
         </c:if>
-        <%--    <c:if test="${link=='A'}">
-                    <jsp:include page="../include/admin.jsp" flush="false" />
-                </c:if>
-                <c:if test="${link=='M'}">
-                    <jsp:include page="../include/mypage.jsp" flush="false" />
-                </c:if>--%>
-
         <div class="reviewDetail">
 
             <h3>상품 후기</h3>
@@ -87,7 +80,12 @@
 
             <div class="linkBtn_container">
                 <div class="linkBtn">
-                    <a href="reviewlist?link=${link}">목록으로</a>
+                    <c:if test="${userId == 'admin'}">
+                        <a href="<c:url value="reviewlist"/>">목록으로</a>
+                    </c:if>
+                    <c:if test="${userId != 'admin'}">
+                        <a href="<c:url value="myReview"/>">목록으로</a>
+                    </c:if>
                     <c:if test="${userId == 'admin' && reviewResult.reviewChild < 1}">
                         <span onclick="reviewReplyF(${reviewResult.orderNo},${reviewResult.itemNo},${reviewResult.reviewRoot},
                             ${reviewResult.reviewStep},${reviewResult.reviewChild})" id="reviewReWrite">답글달기</span>

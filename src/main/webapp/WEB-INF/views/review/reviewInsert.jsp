@@ -91,7 +91,7 @@
         </form>
     </section>
     <div class="linkBtn_container">
-        <div class="linkBtn"><a href="reviewlist">목록으로</a>
+        <div class="linkBtn"><a href="<c:url value="/mypage/order"/>">목록으로</a>
         </div>
     </div>
         </div>

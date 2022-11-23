@@ -125,7 +125,7 @@ public class ReviewController {
     @RequestMapping(value="/reviewinsert", method= RequestMethod.POST)
     public String reviewinsert(HttpServletRequest request, Model model,
                                ReviewVO vo, RedirectAttributes rttr) throws IOException {
-        String uri = "redirect:reviewlist"; // uri경로
+        String uri = "redirect:myReview"; // uri경로
 //------------------------------------------------------------------------//
         String realPath = request.getSession().getServletContext().getRealPath("/");
         System.out.println("** realPath => "+realPath);
@@ -210,10 +210,14 @@ public class ReviewController {
     //------------------------------------------------------------------------------------------------------//
     // ** Review Delete
     @RequestMapping(value="reviewdelete")
-    public String reviewdelete( ReviewVO vo, RedirectAttributes rttr) {
+    public String reviewdelete( ReviewVO vo, HttpServletRequest request, RedirectAttributes rttr) {
         // 1. 요청분석
-        String uri ="redirect:reviewlist";
-
+        String uri = "";
+        if("admin".equals(request.getSession().getAttribute("userId"))) {
+            uri = "redirect:reviewlist";
+        } else {
+            uri = "redirect:myReview";
+        }
         // 2. service처리
         if (reviewService.reviewdelete(vo)>0) {
             rttr.addFlashAttribute("message","후기 삭제 성공");
