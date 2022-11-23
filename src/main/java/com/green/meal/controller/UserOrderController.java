@@ -83,9 +83,10 @@ public class UserOrderController {
 
             for (OrderDetailDto orderDetailVO : list) {
                 totalPay +=orderDetailVO.getItemPrice();
-                tmp +=" "+ orderDetailVO.getItemName();
+                tmp +="@"+ orderDetailVO.getItemName();
             }
-            String[] splitItem = tmp.split(" ");
+
+            String[] splitItem = tmp.split("@");
             int length = splitItem.length;
 
             //주문리스트 대표상품이름
@@ -93,6 +94,7 @@ public class UserOrderController {
             if(length>2){
                 totalItem = splitItem[1]+" 외"+(length-2)+" 건";
             }
+
 
             listVO.setTotalItem(totalItem);
             listVO.setTotalPay(totalPay);

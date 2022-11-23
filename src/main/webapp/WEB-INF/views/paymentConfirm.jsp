@@ -7,67 +7,49 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link rel="stylesheet" href="<c:url value='/css/pay.css'/>">
     <meta charset="UTF-8">
     <title>paymentConfirm</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 </head>
 <style>
-    /*.paymentSuccess {*/
-    /*    margin-top: 250px;*/
-    /*    margin-bottom: 50px;*/
-    /*    width: 900px;*/
-    /*    margin:auto;*/
-    /*    text-align:center;*/
-    /*}*/
-
-    /*.paymentSuccess a {*/
-    /*    padding: 8px 10px;*/
-    /*    background-color: whitesmoke;*/
-    /*    border: 1px solid darkgray;*/
-    /*    cursor: pointer;*/
-    /*    width: 120px;*/
-    /*    margin-left: 5px;*/
-    /*}*/
 
 </style>
 
 <body>
-<%--<jsp:include page="include/header.jsp" flush="false" />--%>
-
-<%--<main>--%>
-<%--    <div class="paymentSuccess">--%>
-<%--        <h1>결제가 완료 되었습니다</h1>--%>
-<%--        <a href="<c:url value='/'/>">홈으로</a>--%>
-<%--        <a href="<c:url value='/mypage/order'/>">주문 확인</a>--%>
-<%--    </div>--%>
-<%--</main>--%>
-
-<h2>결제완료</h2>
+<jsp:include page="include/header.jsp" flush="false" />
+<main>
+    <div class="main">
+        <div class="paymentConfirm">
+<h1>결제완료</h1>
 <hr>
 
 <table>
     <tr>
         <th>상품명</th>
-        <th>가격</th>
         <th>수량</th>
+        <th>상품금액</th>
     </tr>
     <c:forEach var="odvo" items="${odvoList}">
         <tr>
             <td>${odvo.itemName}</td>
-            <td>${odvo.itemPrice}</td>
-            <td>${odvo.cartAmount}</td>
+            <td>${odvo.cartAmount} 개</td>
+            <td><fmt:formatNumber pattern="###,###,###" value="${odvo.itemPrice}"/> 원</td>
         </tr>
     </c:forEach>
     <tr>
         <th>총 금액</th>
-        <td>${totalItemPrice}</td>
+        <td colspan="2"><fmt:formatNumber pattern="###,###,###" value="${totalItemPrice}"/> 원</td>
     </tr>
     <tr>
         <th>배송지 주소</th>
-        <td>${vo.delyAddr}</td>
+        <td colspan="2">${vo.delyAddr}</td>
     </tr>
 </table>
-
+    </div>
+    </div>
+</main>
+<jsp:include page="include/footer.jsp" flush="false" />
 </body>
 
 </html>

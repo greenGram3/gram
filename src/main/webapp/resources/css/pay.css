@@ -102,3 +102,20 @@ select {
 .total h3, .total h2 {
     margin: 20px;
 }
+
+/*paymentConfirm*/
+
+.paymentConfirm {
+    margin-top: 250px;
+    margin-bottom: 50px;
+    width: 900px;
+    text-align: left;
+}
+
+.paymentConfirm hr{
+    margin-bottom: 50px;
+}
+
+.paymentConfirm tr:nth-of-type(n+3) th {
+    width: 30%;
+}
