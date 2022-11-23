@@ -1,12 +1,14 @@
 package com.green.meal.controller;
 
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.green.meal.domain.CartVO;
 import com.green.meal.domain.ItemVO;
 import com.green.meal.service.CartService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.checkerframework.checker.units.qual.C;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -244,6 +246,15 @@ public class CartController {
             }
 
 
+    }
+    @PostMapping("/test")
+    @ResponseBody
+    public ResponseEntity<String>test(HttpEntity httpEntity, HttpSession session){
+
+        String body =(String) httpEntity.getBody();
+        System.out.println("body = " + body);
+
+        return new ResponseEntity<>("OK",HttpStatus.OK);
     }
 
 

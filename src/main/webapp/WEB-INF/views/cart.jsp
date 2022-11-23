@@ -137,7 +137,26 @@
             location.reload();
         }
 
+        let list='${list}';
+
         $(document).ready(function(){
+
+            console.log(list);
+            $(".shopBtn").on("click",function(){
+
+                $.ajax({
+                    type:'post',
+                    url: '/meal/cart/test',
+                    headers : { "content-type": "application/json"},
+                    dataType : 'json',
+                    data : JSON.stringify(list),
+                    success : function(result){
+                        alert("success");
+                        getList();
+                    },
+                    error   : function(){ alert("error") }
+                });
+            });
 
 
             $(".delAllBtn").on("click",function(){

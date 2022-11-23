@@ -2,7 +2,9 @@ package com.green.meal.domain;
 
 import lombok.*;
 
-@Data @RequiredArgsConstructor
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class CartVO {
     private String userId;
     private Integer itemNo;
