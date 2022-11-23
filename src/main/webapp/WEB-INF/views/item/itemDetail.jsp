@@ -140,7 +140,7 @@
                 </tr>
                 <tr>
                     <th>총 상품금액</th>
-                    <th> <input type="text" name="totalItemPrice" id="totalItemPrice"  value="${itemResult.itemPrice}" readonly>  원</th>
+                    <th> <input type="text" name="totalPrice" id="totalPrice"  value="${itemResult.itemPrice}" readonly>  원</th>
                 </tr>
             </table>
             </div>
@@ -187,7 +187,7 @@
         }
 
         function calc() {
-            document.itemDetailForm.totalItemPrice.value =
+            document.itemDetailForm.totalPrice.value =
                 document.itemDetailForm.itemPrice.value * document.itemDetailForm.cartAmount.value;
         }
         //-------------------------------------------------------------
