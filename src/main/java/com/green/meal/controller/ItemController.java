@@ -273,7 +273,7 @@ public class ItemController {
             case "1004": category = "분식";break;
             case "1005": category = "세트상품";break;
         }
-        List<ItemVO> itemList = itemService.category1(category1);
+        List<ItemVO> itemList = itemService.category1(category);
         giveCategoryPage(category,itemList,model);
 
 
@@ -292,7 +292,7 @@ public class ItemController {
         }
 
         List<ItemVO> itemList = itemService.category2(category);
-        giveCategoryPage(category,itemList,model );
+        giveCategoryPage(category,itemList,model);
 
         return "/item/itemList";
     }
