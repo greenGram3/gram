@@ -43,31 +43,31 @@
   <nav>
     <ul class="menu">
       <li><a href="#">편한밥상 소개</a></li>
-      <li><a href="<c:url value='/item/allItems?category=전체보기'/>">전체보기</a></li>
+      <li><a href="<c:url value='/item/allItems'/>">전체보기</a></li>
       <li><a class="meal" href="#">밀키트</a></li>
       <li><a class="them" href="#">테마별</a></li>
-      <li><a href="<c:url value='/item/bestMeal?category=베스트'/>">베스트</a></li>
-      <li><a href="<c:url value='/item/newMeal?category=신메뉴'/>">신메뉴</a></li>
+      <li><a href="<c:url value='/item/bestMeal'/>">베스트</a></li>
+      <li><a href="<c:url value='/item/newMeal'/>">신메뉴</a></li>
       <li><a href="#">커뮤니티</a></li>
     </ul>
     <div class="menus">
       <div id="category01">
         <ul>
-          <li><a href="<c:url value='/item/category1?category1=한식'/>">한식</a></li>
-          <li><a href="<c:url value='/item/category1?category1=양식'/>">양식</a></li>
-          <li><a href="<c:url value='/item/category1?category1=중식/일식'/>">중식/일식</a></li>
-          <li><a href="<c:url value='/item/category1?category1=분식/야식'/>">분식/야식</a></li>
-          <li><a href="<c:url value='/item/category1?category1=세트상품'/>">세트상품</a></li>
+          <li><a href="<c:url value='/item/category1?category1=1001'/>">한식</a></li>
+          <li><a href="<c:url value='/item/category1?category1=1002'/>">양식</a></li>
+          <li><a href="<c:url value='/item/category1?category1=1003'/>">중식/일식</a></li>
+          <li><a href="<c:url value='/item/category1?category1=1004'/>">분식/야식</a></li>
+          <li><a href="<c:url value='/item/category1?category1=1005'/>">세트상품</a></li>
         </ul>
       </div>
 
       <div class="thema">
         <ul>
-          <li><a href="<c:url value='/item/category2?category2=비오는날'/>">비오는날</a></li>
-          <li><a href="<c:url value='/item/category2?category2=집들이'/>">집들이</a></li>
-          <li><a href="<c:url value='/item/category2?category2=캠핑'/>">캠핑</a></li>
-          <li><a href="<c:url value='/item/category2?category2=술안주'/>">술안주</a></li>
-          <li><a href="<c:url value='/item/category2?category2=혼밥'/>">혼밥</a></li>
+          <li><a href="<c:url value='/item/category2?category2=1001'/>" >비오는날</a></li>
+          <li><a href="<c:url value='/item/category2?category2=1002'/>">집들이</a></li>
+          <li><a href="<c:url value='/item/category2?category2=1003'/>">캠핑</a></li>
+          <li><a href="<c:url value='/item/category2?category2=1004'/>">술안주</a></li>
+          <li><a href="<c:url value='/item/category2?category2=1005'/>">혼밥</a></li>
         </ul>
       </div>
     </div>
