@@ -1,6 +1,7 @@
 package com.green.meal.service;
 
 import com.green.meal.domain.DeliveryVO;
+import com.green.meal.domain.UserVO;
 import com.green.meal.mapper.DeliveryMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -64,6 +65,11 @@ public class DelyServiceImpl implements DelyService {
     @Override
     public DeliveryVO selectedDely(HashMap map) {
         return mapper.selectedDely(map);
+    }
+
+    @Override
+    public int baseDely(UserVO user){
+        return mapper.insertDely(user);
     }
 
 }

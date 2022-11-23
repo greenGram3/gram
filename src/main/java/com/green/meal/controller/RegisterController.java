@@ -1,6 +1,7 @@
 package com.green.meal.controller;
 
 import com.green.meal.domain.UserVO;
+import com.green.meal.service.DelyService;
 import com.green.meal.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,6 +23,7 @@ public class RegisterController {
 
     public static PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
     private final UserService userService;
+    private final DelyService delyService;
 
     //매인 -> 회원가입
     @GetMapping("/register")
@@ -55,6 +57,8 @@ public class RegisterController {
         user.setUserPwd(digest);
 
         userService.register(user);
+        delyService.baseDely(user);
+
         attr.addFlashAttribute("msg","register_ok");
         return "redirect:/";
 

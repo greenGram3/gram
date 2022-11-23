@@ -1,6 +1,7 @@
 package com.green.meal.service;
 
 import com.green.meal.domain.DeliveryVO;
+import com.green.meal.domain.UserVO;
 import org.apache.ibatis.annotations.Mapper;
 
 
@@ -28,4 +29,6 @@ public interface DelyService {
     List<DeliveryVO> delySelect(String userId);
 
     DeliveryVO selectedDely(HashMap map);
+
+    int baseDely(UserVO user);
 }
