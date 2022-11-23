@@ -22,6 +22,10 @@ public class NoticeController {
     @Autowired
     NoticeService noticeService;
 
+    @RequestMapping(value = "/companyInfo")
+    public String infoMap() {
+        return "companyInfo";
+    }
     //---------------------------------------------------------------------------------------------------------//
     @RequestMapping(value="/noticelist")
     public String noticelist (Model model, SearchCriteria cri,String link, PageMaker pageMaker) {

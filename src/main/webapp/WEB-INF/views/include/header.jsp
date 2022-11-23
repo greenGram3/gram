@@ -42,7 +42,7 @@
 
   <nav>
     <ul class="menu">
-      <li><a href="#">편한밥상 소개</a></li>
+      <li><a href="<c:url value='/companyInfo'/>">편한밥상 소개</a></li>
       <li><a href="<c:url value='/itemList/allItems'/>">전체보기</a></li>
       <li><a class="meal" href="#">밀키트
         <div class="menus">
