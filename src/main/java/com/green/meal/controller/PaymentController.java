@@ -79,7 +79,7 @@ public class PaymentController {
         try {
             //세션으로 아이디 얻어오기
             HttpSession session = request.getSession();
-            session.setAttribute("userId", "aaa1111");
+//            session.setAttribute("userId", "aaa1111");
             String userId = (String)session.getAttribute("userId");
 
             //해당 아이디의 장바구니 상품들 가져오기

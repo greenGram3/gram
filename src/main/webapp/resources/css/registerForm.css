@@ -60,3 +60,8 @@ main * {
 button#addrBtn {
     margin-left: 10px;
 }
+
+.star {
+    color: red;
+    margin-right: 5px
+}
