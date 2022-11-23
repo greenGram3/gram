@@ -127,8 +127,13 @@ header {
     display:flex;
     justify-content: space-between;
     width:1200px;
+    height: 30px;
     margin: 120px auto 10px;
+}
 
+/* */
+.menu>li {
+    width: 100px;
 }
 
 .menu li a {
@@ -145,38 +150,47 @@ header {
 
 
 .menus {
-    width: 1200px;
-    margin: auto;
+    width: 150px;
+    display: flex;
+    margin-top: -35px;
+}
 
+.menus *{
+    font-weight: 100;
 }
 
 #category01,
 .thema {
-    border:1px solid;
-    border-top:none;
-    border-color: gainsboro;
     width: 150px;
-    position: absolute;
     background-color:white;
     margin:auto;
     display: none;
 }
 
 #category01{
-    margin-left: 410px;
+    margin-top: 10px;
 }
 
 .thema {
-    margin-left: 590px;
+    margin-top: 10px;
 }
 
 
 .menus li {
+    border-left:1px solid gainsboro;
+    border-right:1px solid gainsboro;
     height:30px;
     line-height: 30px;
     font-size:12px;
 }
 
+.menus li a {
+    font-weight: 300;
+}
+
+.menus li:last-of-type{
+    border-bottom:1px solid gainsboro;
+}
 
 .menus li:hover {
     background-color:rgb(84, 108, 92);
