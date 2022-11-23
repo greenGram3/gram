@@ -33,6 +33,8 @@ public class ItemDetailController {
             vo = itemService.itemdetail(vo);
             m.addAttribute("itemResult",vo);
 
+            String requestURI="itemDetail?itemNo="+vo.getItemNo();
+            m.addAttribute("requestURI",requestURI);
             return "item/itemDetail" ;
 
         } catch (Exception e) {

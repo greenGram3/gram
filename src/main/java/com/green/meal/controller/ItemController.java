@@ -26,7 +26,6 @@ public class ItemController {
     @Autowired
     ItemService itemService;
 
-    List<ItemVO> itemList = new ArrayList<>();
 
 
     @GetMapping("/list")
@@ -287,7 +286,7 @@ public class ItemController {
     public String bestList(String category, Model model){
 
         List<ItemVO> list = itemService.bestItems();
-        itemList=list.subList(0,16);
+        List<ItemVO> itemList=list.subList(0,16);
 
         giveCategoryPage(category,itemList,model );
 
@@ -297,7 +296,7 @@ public class ItemController {
     public String newList(String category,Model model){
 
         List<ItemVO> list = itemService.newItems();
-        itemList=list.subList(0,16);
+        List<ItemVO> itemList=list.subList(0,16);
 
         giveCategoryPage(category, itemList,model );
 

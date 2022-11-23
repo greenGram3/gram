@@ -16,7 +16,14 @@
             let buyButton = $('#buyButton');
             let orderAmount = $('#cartAmount');
             const itemDetailForm = $('#itemDetailForm');
+
+            let requestURI ="/meal/login/login?requestURI=/meal/${requestURI}";
             buyButton.click(function () {
+
+                if("${userId}" == ""){
+                    alert("로그인 페이지로 이동합니다");
+                    location.href=requestURI; return false;
+                }
 
                 if (confirm('구매하시겠습니까?') == true) {
                     alert('구매 페이지로 이동합니다.');
@@ -92,7 +99,8 @@
 <c:if test="${not empty msg}">
     <script type="text/javascript">
         let message = "${msg}";
-        alert(message);
+        if(message =='login_ok')alert("로그인 되었습니다");
+        else alert(message);
     </script>
 </c:if>
 
@@ -108,11 +116,11 @@
                     </div>
                 <table>
                 <tr>
-                    <th colspan="2"><input type="text" name="itemName" id="itemName" value="${itemResult.itemName}"></th>
+                    <th colspan="2"><input type="text" name="itemName" id="itemName" value="${itemResult.itemName}"readonly></th>
                 </tr>
                 <tr>
                     <th>판매가</th>
-                    <td><input type="text" name="itemPrice" id="itemPrice" value="${itemResult.itemPrice}"> 원</td>
+                    <td><input type="text" name="itemPrice" id="itemPrice" value="${itemResult.itemPrice}"readonly> 원</td>
                 </tr>
                 <tr>
                     <th>배송정보</th>
