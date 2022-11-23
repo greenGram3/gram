@@ -33,21 +33,21 @@
       <table>
         <tr>
           <th>상품/옵션정보</th>
-          <th>수량</th>
           <th>상품금액</th>
+          <th>수량</th>
         </tr>
         <c:forEach var="list" items="${odvoList}" varStatus="status">
           <tr >
             <td>
 <%--             <img src="${list.fileName}" width="100"> --%>
                 <input hidden name="itemNo" type="text" value="${list.itemNo}">
-                <input hidden name="itemName${status.index}" type="text" value="${list.itemName}">
+                <input hidden id="itemName${status.index}" name="itemName" type="text" value="${list.itemName}">
                 ${list.itemName}
             </td>
-            <td><input hidden name="cartAmount" type="text" value="${list.cartAmount}">
-                ${list.cartAmount} 개</td>
             <td><input hidden name="itemPrice" type="text" value="${list.itemPrice}">
               <fmt:formatNumber pattern="###,###,###" value="${list.itemPrice}"/> 원</td>
+            <td><input hidden name="cartAmount" type="text" value="${list.cartAmount}">
+                ${list.cartAmount} 개</td>
           </tr>
         </c:forEach>
       </table>
@@ -140,12 +140,12 @@
 
     <%--IMP.request_pay({--%>
     <%--  pg : 'html5_inicis',--%>
-    <%--  merchant_uid: "${uniqueNo}",--%>
-    <%--  name : '${vo.itemName} ${vo.itemAmount}개',--%>
-    <%--  amount : ${totalItemPrice},--%>
+    <%--  merchant_uid: '${uniqueNo}',--%>
+    <%--  name : $("#itemName0").val()+temp ,--%>
+    <%--  amount : ${totalPrice},--%>
     <%--  pay_method : $("#payment").val(),--%>
     <%--  buyer_email : '${userVo.userEmail}',--%>
-    <%--  buyer_name : '${userVo.userName}',--%>
+    <%--  buyer_name : '${userVo.userName}'--%>
     <%--}, function (rsp) {--%>
     <%--  if(rsp.success) {--%>
     <%--    alert("결제가 완료되었습니다.");--%>
