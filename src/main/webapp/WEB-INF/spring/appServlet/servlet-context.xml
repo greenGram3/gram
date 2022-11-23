@@ -60,7 +60,7 @@
 			<mvc:mapping path="/delivery/**" />
 			<mvc:mapping path="/mypage/**" />
 			<mvc:mapping path="/buy/**" />
-<!--			<mvc:mapping path="/item/**" />-->
+			<mvc:mapping path="/item/**" />
 			<mvc:mapping path="/order/**" />
 			<mvc:mapping path="/user/**" />
 
