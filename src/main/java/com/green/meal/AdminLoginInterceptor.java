@@ -20,7 +20,7 @@ public class AdminLoginInterceptor extends HandlerInterceptorAdapter   {
 			requestURI += ("?"+ queryString);
 		}
 
-		if (session!=null && session.getAttribute("userId")=="admin") {
+		if (session!=null && "admin".equals(session.getAttribute("userId"))) {
 			return true;
 		}else {
 			response.sendRedirect("/meal/login/login?alertMsg=wrongAccess&requestURI="+requestURI);
