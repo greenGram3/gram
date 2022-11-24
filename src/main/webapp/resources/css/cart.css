@@ -57,10 +57,11 @@ tr {
 }
 
 button {
+    cusuor:pointer;
     height: 30px;
     padding: 3px;
+    background-color: white;
     border: 1px solid darkgray;
-    cusuor:pointer;
 }
 
 .cartAmount>input {
