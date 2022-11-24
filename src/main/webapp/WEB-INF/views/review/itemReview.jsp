@@ -7,9 +7,8 @@
     <title>reviewList</title>
     <link rel="stylesheet" href="<c:url value='/css/review.css'/>">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-    <%--<script src="js/reviewAjax.js"></script>--%>
     <script>
-            // ** 상세페이지 Detail 바로 밑 출력 Json
+            // ** 후기 내용 게시글 바로 밑 출력 json
             function reviewDetailD(e, reviewNo, itemNo, count) {
                 e.stopPropagation(); //부모로 이벤트 올라가는 거 방지
 
@@ -23,7 +22,6 @@
                         url: 'reviewDetailD?reviewNo=' + reviewNo + "&itemNo=" + itemNo,
 
                         success: function (resultData) {
-                            /*$('.reviewD').html('');*/ // => 이게 원인!!! 이게 있어서 다 닫히는 거고, 근데 이게 없으면 이전 열렸던 후기가 닫히지 않음.
                             $('#' + count).html(resultData.reviewContent);
                         },
                         error: function () {
@@ -35,6 +33,7 @@
                 }
             } //reviewDetailD
 //------------------------------------------------------------------------------------------//
+            // ** 후기 Ajax Paging
             $(function () {
                 $('.axPaging').click(function(){
                     let url = $(this).attr('href');
@@ -84,7 +83,6 @@
                                     </td>
                                 </c:if>
 
-                                <!-- Step > 0 이면 관리자가 단글 -> 여기만 &nbsp; 적용 & colspan 3  -->
                                 <c:if test="${review.reviewStep > 0}">
                                     <td></td>
                                     <td>
@@ -102,7 +100,6 @@
                             <tr>
                                 <td style="border-bottom: none;"></td>
                                 <td class="resultArea"><span class="reviewD resultArea" id="${reviewVs.count}"></span></td>
-                                <%--<td><span class="reviewD" id="${reviewVs.count}"></span></td>--%>
                             </tr>
                             <tr hidden>
                                 <td>${review.itemNo}</td>

@@ -73,7 +73,7 @@ function reviewReplyD(reviewRoot,reviewStep,reviewChild) {
             $('#reviewReWrite').hide();
         },
         error: function () {
-            $('#resultArea1').html('댓글이 달리지 않았습니다.');
+            $('#resultArea1').html('<div class="noAnswer">'+"댓글이 달리지 않았습니다."+'</div>');
         }
     }); //ajax
 } //qnaReplyD

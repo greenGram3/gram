@@ -48,6 +48,7 @@
 	</beans:bean>
 
 	<beans:bean id="loginInterceptor" class="com.green.meal.LoginInterceptor" />
+	<beans:bean id="AdminloginInterceptor" class="com.green.meal.AdminLoginInterceptor" />
 	<!--
         2) url 과 인터셉터 설정
         => Namespaces 에서 mvc 확인 ,
@@ -60,28 +61,41 @@
 			<mvc:mapping path="/delivery/**" />
 			<mvc:mapping path="/mypage/**" />
 			<mvc:mapping path="/buy/**" />
-			<mvc:mapping path="/item/**" />
-			<mvc:mapping path="/order/**" />
-			<mvc:mapping path="/user/**" />
 
 			<mvc:mapping path="/myReview/**" />
 			<mvc:mapping path="/reviewdetail/**" />
 			<mvc:mapping path="/reviewlist/**" />
 			<mvc:mapping path="/reviewinsertf/**" />
-			<mvc:mapping path="/reviewrupdatef/**" />
 
 			<mvc:mapping path="/qnalist/**" />
 			<mvc:mapping path="/qnainsertf/**" />
 			<mvc:mapping path="/qnadetail/**" />
 
-			<mvc:mapping path="/noticeinsertf/**" />
-			<mvc:mapping path="/noticeupdate/**" />
-			<mvc:mapping path="/noticeupdatef/**" />
-
 			<!-- 인터셉터로 사용할 빈 등록 -->
 			<beans:ref bean="loginInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>
+
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/item/**" />
+			<mvc:mapping path="/order/**" />
+			<mvc:mapping path="/user/**" />
+
+			<mvc:mapping path="/noticeinsertf/**" />
+			<mvc:mapping path="/noticeupdate/**" />
+			<mvc:mapping path="/noticeupdatef/**" />
+
+			<mvc:mapping path="/reviewrinsertf/**" />
+			<mvc:mapping path="/reviewrupdatef/**" />
+
+			<mvc:mapping path="/qnarinsertf/**" />
+			<mvc:mapping path="/qnarupdatef/**" />
+			<!-- 인터셉터로 사용할 빈 등록 -->
+			<beans:ref bean="AdminloginInterceptor" />
+		</mvc:interceptor>
+	</mvc:interceptors>
+
 
 	<context:component-scan base-package="com.green.meal"/>
 

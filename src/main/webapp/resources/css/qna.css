@@ -329,6 +329,13 @@ main * {
     margin-top: 20px;
 }
 
+.noAnswer {
+    margin-top: 2px;
+    width: 100%;
+    background-color: #eeecec;
+    text-align: center;
+}
+
 /*qnaRupdate*/
 
 .qnaRupdate * {

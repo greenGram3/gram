@@ -51,6 +51,10 @@ public class OrderController {
 
             //주문상세 정보 상품별로 가져오기 때문에 List에 담기
             List<OrderDetailVO> list = orderService.orderDetail(orderNo);
+            String delyAddrTemp = list.get(0).getDelyAddr();
+            String[] addrs = delyAddrTemp.split("@");
+            String delyAddr = addrs[1] + " " + addrs[2];
+            list.get(0).setDelyAddr(delyAddr);
             m.addAttribute("list", list);
 
             return "admin/orderDetail";

@@ -84,7 +84,6 @@ public class PaymentController {
         try {
             //세션으로 아이디 얻어오기
             HttpSession session = request.getSession();
-//            session.setAttribute("userId", "aaa1111");
             String userId = (String)session.getAttribute("userId");
 
             //해당 아이디의 장바구니 상품들 가져오기
@@ -149,7 +148,8 @@ public class PaymentController {
             response.setContentType("text/html; charset=UTF-8");
 
             //수정 전 배송지 정보에 아이디 담기
-            vo.setUserId((String) session.getAttribute("userId"));
+            String userId = (String)session.getAttribute("userId");
+            vo.setUserId(userId);
 
             //api로 입력받은 도로명 주소 -> 새로운 주소로 조합
             String newDelyAddr = roadAddrPart1+" "+addrDetail;
@@ -198,11 +198,18 @@ public class PaymentController {
             map.put("delyPlace", delyPlace);
             DeliveryVO vo = new DeliveryVO();
             vo = delyService.selectedDely(map);
+            String delyAddrToDb = vo.getDelyAddr();
 
+            //주소 형태 변환
+            String delyAddrTemp = vo.getDelyAddr();
+            String[] addrs = delyAddrTemp.split("@");
+            String delyAddr = addrs[1] + " " + addrs[2];
+            vo.setDelyAddr(delyAddr);
+            
             //구매자 정보 주문내용에 담기(order_list에 넣을 것) (구매상품에 대한 정보는 이미 담겨있음)
             odvo.setUserId(userId);
             odvo.setUserPhone(vo.getDelyPhone());
-            odvo.setDelyAddr(vo.getDelyAddr());
+            odvo.setDelyAddr(delyAddrToDb);
             odvo.setReceiver(vo.getReceiver());
 
             //카트주문과 단건주문 구분하여 처리
@@ -215,6 +222,9 @@ public class PaymentController {
 
             //구매정보 order_list, order_detail에 넣기
             userOrderService.save(odvoList, odvo);
+
+            //주문완료되면 카트에 있던 상품들 삭제
+            cartService.deleteAll(userId);
 
             //총 구매금액, 배송지 정보, 구매한 제품 정보 -> jsp로 전달
             m.addAttribute("totalPrice", totalPrice);

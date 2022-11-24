@@ -327,6 +327,12 @@ main * {
     width: 80px;
 }
 
+.noAnswer {
+    margin-top: 2px;
+    width: 100%;
+    background-color: #eeecec;
+    text-align: center;
+}
 
 /*reviewRupdate*/
 

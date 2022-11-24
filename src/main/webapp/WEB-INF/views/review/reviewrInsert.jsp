@@ -44,7 +44,6 @@
                 </tr>
                 <tr>
                     <td colspan="2"><span id="reviewRinsert" class="textLink">답변등록</span></td>
-                    <%--<td><input type="submit" value="답변등록" id="#reviewReply" class="textLink">&nbsp;</td>--%>
                 </tr>
             </table>
         </form>
