@@ -267,6 +267,11 @@
             alert("아이디 중복검사를 해주세요");
             return;
         }
+        // else if($('#addrDetail')[0].value.length == 0){
+        //     msgAddr.style.display = 'block';
+        //     msgAddr.innerHTML = '주소를 확인해 주세요';
+        //     return;
+        // }
         else {
             alert("필수입력란을 확인해주세요.");
             return;

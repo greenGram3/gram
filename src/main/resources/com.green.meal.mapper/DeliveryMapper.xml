@@ -45,6 +45,10 @@
         insert into delivery(user_id, dely_no, dely_place, dely_addr, receiver, dely_phone) values(#{userId}, 1 ,'기본배송지',#{userAddr}, #{userName}, #{userPhone});
     </insert>
 
+    <select id="countDelyPlace" resultType="int">
+        select count(*) from delivery where user_id = #{userId} and dely_place = #{delyPlace};
+    </select>
+
 <!--    주문페이지에서 배송지 정보 업데이트 테스트(정무혁)  -->
 <!--    <update id="updateDelyInBuy" parameterType="com.green.meal.domain.DeliveryVO">-->
 <!--        update delivery set receiver=#{receiver} and dely_phone=${delyPhone} and dely_addr=#{dely_addr} where user_id=#{userId} and dely_place=#{delyPlace}-->

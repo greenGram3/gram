@@ -45,6 +45,14 @@ public class DeliveryController {
         return "userInfo/delyRegister";
     }
 
+    @PostMapping
+    public String countDelyPlace(HttpSession session, HttpServletResponse response, Model model){
+        String userId = (String) session.getAttribute("userId");
+        response.setContentType("text/html; charset=UTF-8");
+
+        return "jsonView";
+    }
+
     @PostMapping("/register")
     public String delyRegisterPost(HttpSession session, DeliveryVO dely, HttpServletResponse response, Model model){
         String userId = (String) session.getAttribute("userId");

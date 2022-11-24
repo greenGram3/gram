@@ -31,4 +31,6 @@ public interface DelyService {
     DeliveryVO selectedDely(HashMap map);
 
     int baseDely(UserVO user);
+
+    int countDelyPlace(String userId, String delyPlace);
 }

@@ -29,4 +29,6 @@ public interface DeliveryMapper {
 
     int insertDely(UserVO user);
 
+    int countDelyPlace(Map map);
+
 }

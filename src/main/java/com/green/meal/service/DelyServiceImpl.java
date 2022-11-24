@@ -72,4 +72,12 @@ public class DelyServiceImpl implements DelyService {
         return mapper.insertDely(user);
     }
 
+    @Override
+    public int countDelyPlace(String userId, String delyPlace) {
+        Map map = new HashMap();
+        map.put("userId", userId);
+        map.put("delyPlace", delyPlace);
+        return mapper.countDelyPlace(map);
+    }
+
 }
