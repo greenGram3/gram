@@ -105,7 +105,7 @@
                 $('#msgDelyPhone')[0].innerHTML = "핸드폰 번호를 확인해주세요.";
                 last+="1";
             }
-            if($('#zipNo')[0].value.length < 1){
+            if($('#addrDetail')[0].value.length < 1){
                 $('#msgDelyAddr')[0].innerHTML = "빈칸이어서는 안됩니다.";
                 last+="1";
             }else {

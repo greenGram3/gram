@@ -142,7 +142,7 @@
 
         //주소 입력값 검사
         $('#addrComplete')[0].addEventListener('click', function (){
-          if($('#zipNo')[0].value != ''){
+          if($('#addrDetail')[0].value != ''){
             $('#addrForm').submit();
           }else{
             $('#msgAddr')[0].style.display = 'block'
