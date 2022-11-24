@@ -191,8 +191,6 @@ public class LoginController {
                 String res2 = res.toString().replace("{","").replace("}","");
                 String[] info = res2.split(",");
 
-                log.info("info : "+res2);
-
                 for(int i=1; i<info.length; i++){
                     if(info[i].contains("\"id\":")) userId = info[i];
                     if(info[i].contains("\"name\":")) userName = info[i];
@@ -236,94 +234,10 @@ public class LoginController {
             e.printStackTrace();
         }
 
-//=====================================================================================================================
-        log.info("1 :");
-        String apiURL3 = "https://openapi.naver.com/v1/naverpay/address";  //세번째 요청
-
-        try {
-            log.info("2 :");
-            URL url = new URL(apiURL3);
-            HttpURLConnection con = (HttpURLConnection)url.openConnection();
-            con.setRequestProperty("Authorization","Bearer "+accessToken);
-            con.setRequestMethod("GET");
-
-            int responseCode = con.getResponseCode();
-            BufferedReader br;
-            if (responseCode == 200) { // 정상 호출
-                log.info("3 :");
-                br = new BufferedReader(new InputStreamReader(con.getInputStream(), "UTF-8"));
-            } else {  // 에러 발생
-                log.info("4 :");
-                br = new BufferedReader(new InputStreamReader(con.getErrorStream(), "UTF-8"));
-            }
-            log.info("5 :");
-            String inputLine;
-            StringBuilder res = new StringBuilder();
-            while ((inputLine = br.readLine()) != null) {
-                log.info("6 :");
-                res.append(inputLine);
-            }
-            br.close();
-            if (responseCode == 200) {
-                log.info("7 :");
-                log.info("res : "+res.toString());
-            }else {
-                log.info("res : "+res.toString());
-            }
-        } catch (Exception e) {
-            log.info("8 :");
-
-            e.printStackTrace();
-        }
-
         return "redirect:/";
     }
 
-//    private static String get(String apiUrl, Map<String, String> requestHeaders){
-//        HttpURLConnection con = connect(apiUrl);
-//        try {
-//            con.setRequestMethod("GET");
-//            for(Map.Entry<String, String>; header :requestHeaders.entrySet()) {
-//                con.setRequestProperty(header.getKey(), header.getValue());
-//            }
-//
-//            int responseCode = con.getResponseCode();
-//            if (responseCode == HttpURLConnection.HTTP_OK) { // 정상 호출
-//                return readBody(con.getInputStream());
-//            } else { // 에러 발생
-//                return readBody(con.getErrorStream());
-//            }
-//        } catch (IOException e) {
-//            throw new RuntimeException("API 요청과 응답 실패", e);
-//        } finally {
-//            con.disconnect();
-//        }
-//    }
-//
-//    private static HttpURLConnection connect(String apiUrl){
-//        try {
-//            URL url = new URL(apiUrl);
-//            return (HttpURLConnection)url.openConnection();
-//        } catch (MalformedURLException e) {
-//            throw new RuntimeException("API URL이 잘못되었습니다. : " + apiUrl, e);
-//        } catch (IOException e) {
-//            throw new RuntimeException("연결이 실패했습니다. : " + apiUrl, e);
-//        }
-//    }
-//
-//    private static String readBody(InputStream body){
-//        InputStreamReader streamReader = new InputStreamReader(body);
-//        try (BufferedReader lineReader = new BufferedReader(streamReader)) {
-//            StringBuilder responseBody = new StringBuilder();
-//            String line;
-//            while ((line = lineReader.readLine()) != null) {
-//                responseBody.append(line);
-//            }
-//            return responseBody.toString();
-//        } catch (IOException e) {
-//            throw new RuntimeException("API 응답을 읽는데 실패했습니다.", e);
-//        }
-//    }
+
 
     private boolean loginCheck(String userId, String userPwd) {
         UserVO user = null;

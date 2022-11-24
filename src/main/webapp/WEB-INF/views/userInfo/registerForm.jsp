@@ -256,7 +256,11 @@
     $('#regBtn')[0].addEventListener('click',function (){
         if(userId.value.length != 0 && userName.value.length != 0 && $('#userEmailArr')[0].value.length != 0 &&
             $('#selectedEmail')[0].value.length != 0 && userPwd.value.length != 0 && pwdCheck.value.length != 0 &&
-            userPhone.value.length != 0 && $('#zipNo')[0].value.length !=0 && btnNum !=0){
+            userPhone.value.length != 0 && $('#zipNo')[0].value.length !=0 && msgId2.textContent.length==0
+            && msgId3.textContent.length==0 && msgPhone.textContent.length==0 && msgAddr.textContent.length==0
+            && msgName.textContent.length==0 && msgPwd1.textContent.length==0 && msgPwd2.textContent.length==0
+            && msgPwdCheck.textContent.length==0 && btnNum !=0
+        ){
             $('#userVO')[0].submit();
         }
         else if(btnNum == 0 && userId.value.length != 0){
@@ -264,7 +268,6 @@
             return;
         }
         else {
-
             alert("필수입력란을 확인해주세요.");
             return;
         };

@@ -32,7 +32,8 @@ public class UpdateController {
         UserVO user = userService.idDupliCheck(userId);
         // 주소 뽑아서 @ 빼고 정리
         String userAddr = user.getUserAddr();
-        user.setUserAddr(userAddr.split("@")[1]+" "+userAddr.split("@")[2]);
+        log.info("userAddr : "+userAddr);
+        if(userAddr.length() > 0) {user.setUserAddr(userAddr.split("@")[1]+" "+userAddr.split("@")[2]);}
 
         model.addAttribute("user", user);
         return "userInfo/updateUser";

@@ -140,7 +140,7 @@
                     url: 'update2',
                     async: false,
                     success: function (result) {
-                        console.log(result);
+
                     },
                     error: function (result) {
                         alert('error : '+result+" "+result.code);
@@ -164,7 +164,7 @@
                     delyAddr1: $('input[name=delyAddr1]').val(),
                 },
                 success: function (result) {
-                    alert(result.code);
+                    alert("수정되었습니다.");
                     opener.parent.location.reload();
                     window.close();
                 },

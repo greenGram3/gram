@@ -129,7 +129,7 @@
                     delyNo : delyNoValue
                 },
                 success: function (result) {
-                    alert(result.code);
+                    alert("등록되었습니다.");
                     opener.parent.location.reload();
                     window.close();
                 },

@@ -56,6 +56,8 @@ public class RegisterController {
         String digest = passwordEncoder.encode(user.getUserPwd());
         user.setUserPwd(digest);
 
+        if(user.getUserGender()==null) user.setUserGender("선택안함");
+
         userService.register(user);
         delyService.baseDely(user);
 

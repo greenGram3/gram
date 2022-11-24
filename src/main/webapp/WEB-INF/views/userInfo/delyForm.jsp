@@ -64,6 +64,7 @@
                                 if(flag) return;
                             }
 
+                            if(!confirm("삭제하시겠습니까?"))return;
                             $.ajax({
                                 type: 'Post',
                                 url: 'delete',
@@ -76,7 +77,7 @@
                                 },
                                 success: function (result) {
                                     location.reload();
-                                    alert(result.code);
+                                    alert("삭제되었습니다.");
                                 },
                                 error: function (result) {
                                     alert('error : '+result+" "+result.code);

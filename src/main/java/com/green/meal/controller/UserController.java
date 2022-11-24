@@ -54,10 +54,11 @@ public class UserController {
 
             //회원정보 중 주소 형태 변환
             String userAddrTemp = vo.getUserAddr();
-            String[] addrs = userAddrTemp.split("@");
-            String userAddr  = addrs[1] + " " + addrs[2];
-            vo.setUserAddr(userAddr);
-
+            if(userAddrTemp.length() > 0){
+                String[] addrs = userAddrTemp.split("@");
+                String userAddr  = addrs[1] + " " + addrs[2];
+                vo.setUserAddr(userAddr);
+            }
             m.addAttribute("vo", vo);
             m.addAttribute("sc", sc);
 
