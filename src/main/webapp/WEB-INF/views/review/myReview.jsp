@@ -44,7 +44,12 @@
                                     <td colspan="2">
                                         <a href="reviewdetail?reviewNo=${review.reviewNo}&itemNo=${review.itemNo}&link=M">${review.reviewTitle}</a>
                                     </td>
-                                    <td>${review.userId}</td>
+                                    <c:if test="${review.userId != 'admin'}">
+                                        <td>${review.userId}</td>
+                                    </c:if>
+                                    <c:if test="${review.userId == 'admin'}">
+                                        <td>관리자</td>
+                                    </c:if>
                                 </tr>
                                 <tr hidden>
                                     <td>${review.itemNo}</td>

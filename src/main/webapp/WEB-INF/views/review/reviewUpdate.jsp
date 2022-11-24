@@ -26,12 +26,6 @@
         <c:if test="${userId != 'admin'}">
             <jsp:include page="../include/mypage.jsp" flush="false" />
         </c:if>
-<%--        <c:if test="${link eq 'A'}">
-            <jsp:include page="../include/admin.jsp" flush="false" />
-        </c:if>
-        <c:if test="${link eq 'M'}">
-            <jsp:include page="../include/mypage.jsp" flush="false" />
-        </c:if>--%>
     <div class="reviewUpdate">
 
     <h3>상품 후기 수정</h3>
