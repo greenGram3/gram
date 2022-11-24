@@ -254,7 +254,7 @@ public class ReviewController {
         String uri = "/review/myReview";
         String userId = null;
 
-        // 2. session의 userId 받아서 저장
+        // 2. session의 userId(매개변수로 활용)
         HttpSession session = request.getSession(false);
         if ((session.getAttribute("userId"))!=null ) {
             userId = (String)(session.getAttribute("userId"));
@@ -307,18 +307,4 @@ public class ReviewController {
         }
         return "jsonView";
     }
-
-    //---------------------------------------------------------------------------------------------//
-    // ** Review Dup Check(답변 중복체크-보류)
-/*    @RequestMapping(value="/reviewDupCheck")
-    public String qnaDupCheck(ReviewVO vo, Model model) {
-        System.out.println("reviewRoot: "+vo.getReviewRoot());
-
-        if (reviewService.reviewrDetail(vo) != null) { //답글 있음
-            model.addAttribute("code","200");
-        } else { //답글 없음
-            model.addAttribute("code","500");
-        }
-        return "jsonView";
-    }*/
 } //Controller

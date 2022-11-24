@@ -179,8 +179,8 @@ main * {
 .topImage {
     padding: 5px 10px ;
 }
- #imgNamef,
- #imgNamef1 {
+ #fileNamef,
+ #imgNamef {
     border: none;
 }
 
@@ -258,12 +258,12 @@ img.select_img1 {
     border: 1px solid darkgrey;
 }
 
-.itemUpload #imgNamef,
-.itemUpload #imgNamef1 {
+.itemUpload #fileNamef,
+.itemUpload #imgNamef {
     border: none;
 }
 
-.itemUpload #imgNamef1 {
+.itemUpload #imgNamef {
     padding-top: 20px;
 }
 

@@ -33,9 +33,8 @@ public class NoticeController {
         if(link != null){
             model.addAttribute("link",link);
         }
-
         List<NoticeVO> list = new ArrayList<NoticeVO>();
-        list = noticeService.noticelist(cri); //search,Paging적용한 매서드 실행
+        list = noticeService.noticelist(cri);
         if(list != null) {
             model.addAttribute("noticeResult", list);
         } else {
