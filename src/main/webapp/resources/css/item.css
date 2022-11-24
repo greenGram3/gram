@@ -307,6 +307,7 @@ img.select_img1 {
     font-weight: 500;
     text-align: left;
 }
+.itemDetail-container #itemPrice,
 .itemDetail-container #itemPrice {
     width: 100px;
     padding-left: 50px;
@@ -329,7 +330,7 @@ img.select_img1 {
     height: 50px;
 }
 
-.itemDetail-container #totalItemPrice {
+.itemDetail-container #totalPrice {
     width: 100px;
     font-size: 20px;
     font-weight: 1000;
