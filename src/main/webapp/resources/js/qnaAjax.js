@@ -106,7 +106,7 @@ function qnaReplyD(qnaRoot,qnaStep,qnaChild,link) {
             $('#qnaReWrite').hide();
         },
         error: function () { //답글 X -> Ajax미출력
-            $('#resultArea1').html('아직 답변이 달리지 않았습니다.');
+            $('#resultArea1').html('<div class="noAnswer">'+"아직 답변이 달리지 않았습니다."+'</div>');
         }
     }); //ajax
 } //qnaReplyD
