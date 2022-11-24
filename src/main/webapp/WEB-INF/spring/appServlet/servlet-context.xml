@@ -61,9 +61,6 @@
 			<mvc:mapping path="/delivery/**" />
 			<mvc:mapping path="/mypage/**" />
 			<mvc:mapping path="/buy/**" />
-			<mvc:mapping path="/item/**" />
-			<mvc:mapping path="/order/**" />
-			<mvc:mapping path="/user/**" />
 
 			<mvc:mapping path="/myReview/**" />
 			<mvc:mapping path="/reviewdetail/**" />
@@ -81,6 +78,10 @@
 
 	<mvc:interceptors>
 		<mvc:interceptor>
+			<mvc:mapping path="/item/**" />
+			<mvc:mapping path="/order/**" />
+			<mvc:mapping path="/user/**" />
+
 			<mvc:mapping path="/noticeinsertf/**" />
 			<mvc:mapping path="/noticeupdate/**" />
 			<mvc:mapping path="/noticeupdatef/**" />
