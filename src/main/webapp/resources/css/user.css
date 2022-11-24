@@ -152,3 +152,6 @@ main * {
     width: 80px;
     margin-left: 5px;
 }
+input#userAddr {
+    width: 100%;
+}
