@@ -43,7 +43,12 @@
                 <table>
                     <tr>
                         <td>아이디</td>
-                        <td>${qnaResult.userId}</td>
+                        <c:if test="${qnaResult.userId == 'admin'}">
+                            <td>관리자</td>
+                        </c:if>
+                        <c:if test="${qnaResult.userId != 'admin'}">
+                            <td>${qnaResult.userId}</td>
+                        </c:if>
                     </tr>
                     <tr>
                         <td>제목</td>

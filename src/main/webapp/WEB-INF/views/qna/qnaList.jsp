@@ -72,7 +72,12 @@
             <c:if test="${not empty qnaResult}">
                 <c:forEach var="qna" items="${qnaResult}">
                     <tr>
-                        <td>${qna.userId}</td>
+                        <c:if test="${qna.userId == 'admin'}">
+                            <td>관리자</td>
+                        </c:if>
+                        <c:if test="${qna.userId != 'admin'}">
+                            <td>${qna.userId}</td>
+                        </c:if>
                         <td>
                             <c:if test="${qna.qnaChild > 0}">
                                 <c:forEach begin="1" end="${qna.qnaChild}">
