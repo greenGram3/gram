@@ -202,7 +202,7 @@ public class PaymentController {
             //세션으로 아이디 얻어오기
             HttpSession session = request.getSession();
             String userId = (String)session.getAttribute("userId");
-
+            
             //아이디와 배송지명을 이용해서 배송지 주소 얻어오기
             HashMap map = new HashMap();
             map.put("userId", userId);
@@ -216,10 +216,11 @@ public class PaymentController {
             String[] addrs = delyAddrTemp.split("@");
             String delyAddr = addrs[1] + " " + addrs[2];
             vo.setDelyAddr(delyAddr);
-            
+
             //구매자 정보 주문내용에 담기(order_list에 넣을 것) (구매상품에 대한 정보는 이미 담겨있음)
             odvo.setUserId(userId);
             odvo.setUserPhone(vo.getDelyPhone());
+            odvo.setDelyAddr(vo.getDelyAddr());
             odvo.setDelyAddr(delyAddrToDb);
             odvo.setReceiver(vo.getReceiver());
 

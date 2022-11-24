@@ -1,6 +1,7 @@
 <%@page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt" %>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@page session="true"%>
 
 <!DOCTYPE html>
@@ -162,6 +163,15 @@
     form.attr("action", "<c:url value='/buy/confirm' />");
     form.attr("method", "post");
     form.submit();
+
+    <%--let odvoLength = ${fn:length(odvoList)};--%>
+    <%--let temp;--%>
+
+    <%--if(odvoLength > 1) {--%>
+    <%--  temp = ' 등 ' + odvoLength+'건';--%>
+    <%--} else {--%>
+    <%--  temp = '';--%>
+    <%--}--%>
 
     <%--let IMP = window.IMP;--%>
     <%--IMP.init("imp12500623")--%>
