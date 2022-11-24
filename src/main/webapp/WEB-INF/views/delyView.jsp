@@ -3,70 +3,67 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <html>
 <head>
+    <link rel="stylesheet" href="<c:url value='/css/updateDely.css'/>">
     <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
     <title>배송지 정보</title>
     <style>
-        table {
-            border: 1px solid black;
-            margin: 10px;
-        }
-        .addr-input {
-            margin: 10px 0;
-        }
-        .addr-input-form {
-            display: none;
-        }
+
     </style>
 </head>
 <body>
-
-<h3>배송지 정보</h3>
+<main>
+<h2>배송지 정보</h2>
 <hr>
-
+<div class="delyView">
 <form id="form" action="" method="">
 
-    <div>배송지명 <span style="font-size: 14px">${vo.delyPlace}</span></div>
+    <div>배송지명 <span>${vo.delyPlace}</span></div>
     <input type="hidden" name="delyPlace" value="${vo.delyPlace}">
     <div id="msgDelyPlace" style="color: red"></div>
-    <hr>
-
-    <div>배송지 주소 <span style="font-size: 14px">${vo.delyAddr}</span></div>
-    <input type="hidden" name="delyAddr" value="${vo.delyAddr}">
-    <div id="msgDelyAddr" style="color: red"></div>
-    <hr>
-
-    <div>
-        <button type="button" id="addrModifyBtn">주소변경</button>
-        <div id="msgAddr" style="color: red"></div>
-    </div>
-
-    <div class="addr-input-form">
-        <hr>
-        <div>주소입력</div>
-        <div class="addr-input">
-            <input type="text" id="zipNo" style="width: 80px" name="zipNo" placeholder="우편번호" value="${zipNo}" readonly/>
-            <input type="text" id="roadAddrPart1" style="width: 200px" name="roadAddrPart1" placeholder="도로명주소" value="${roadAddrPart1}" readonly/>
-            <input type="text" id="addrDetail" name="addrDetail" placeholder="상세주소" value="${addrDetail}" readonly/>
-        </div>
-        <button type="button" id="addrBtn" onClick="goPopup();">우편번호 검색</button> &nbsp;
-    </div>
     <hr>
 
     <div>수령인 <input type="text" name="newReceiver" id="newReceiver" value="${vo.receiver}"></div>
     <input type="hidden" name="receiver" value="${vo.receiver}">
     <div id="msgReceiver" style="color: red"></div>
     <hr>
-
     <div>연락처 <input type="text" name="newDelyPhone" id="newDelyPhone" value="${vo.delyPhone}"></div>
     <input type="hidden" name="delyPhone" value="${vo.delyPhone}">
     <div id="msgDelyPhone" style="color: red"></div>
     <hr>
 
-</form>
+    <div>배송지 주소
+        <input type="text" id="zipNo" style="width: 100px" name="zipNo" placeholder="우편번호" value="${zipNo}" readonly/>
+        <input type="text" id="roadAddrPart1" style="width: 300px" name="roadAddrPart1" value="${roadAddrPart1}" placeholder="도로명주소" readonly/>
+        <input type="text" id="addrDetail" name="addrDetail" placeholder="상세주소" value="${addrDetail}" readonly/>
+        <button type="button" id="addrBtn" style="width: 100px" onClick="goPopup();">우편번호 검색</button>
+    </div>
+    <input type="hidden" name="delyAddr1" value="${vo.delyAddr}">
+    <div id="msgDelyAddr" style="color: red"></div>
+    <hr class="hr5">
+<%--    <div>--%>
+<%--        <button type="button" id="addrModifyBtn">주소변경</button>--%>
+<%--        <div id="msgAddr" style="color: red"></div>--%>
+<%--    </div>--%>
 
+<%--    <div class="addr-input-form">--%>
+<%--        <hr>--%>
+<%--        <div>주소입력</div>--%>
+<%--        <div class="addr-input">--%>
+<%--            <input type="text" id="zipNo" style="width: 80px" name="zipNo" placeholder="우편번호" value="${zipNo}" readonly/>--%>
+<%--            <input type="text" id="roadAddrPart1" style="width: 200px" name="roadAddrPart1" placeholder="도로명주소" value="${roadAddrPart1}" readonly/>--%>
+<%--            <input type="text" id="addrDetail" name="addrDetail" placeholder="상세주소" value="${addrDetail}" readonly/>--%>
+<%--        </div>--%>
+<%--        <button type="button" id="addrBtn" onClick="goPopup();">우편번호 검색</button> &nbsp;--%>
+<%--    </div>--%>
+<%--    <hr>--%>
+
+
+
+</form>
+    <div class="delyCheck">
 <button type="button" id="updBtn" class="update-btn">수정</button>
 <button type="button" id="closeBtn" class="close-btn">닫기</button>
-
+<div>
 <script>
 
     //주소 우편번호 팝업창 api 열기
@@ -132,6 +129,7 @@
     }); //ready
 
 </script>
-
+</div>
+</main>
 </body>
 </html>

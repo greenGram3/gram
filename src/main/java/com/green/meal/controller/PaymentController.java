@@ -136,6 +136,12 @@ public class PaymentController {
         //배송지정보 -> jsp로 전달
         m.addAttribute("vo", vo);
 
+        String[] delyAddr = vo.getDelyAddr().split("@");
+
+        m.addAttribute("zipNo", delyAddr[0]);
+        m.addAttribute("roadAddrPart1", delyAddr[1]);
+        m.addAttribute("addrDetail", delyAddr[2]);
+
         return "delyView";
     }
 
