@@ -348,7 +348,7 @@ img.select_img1 {
 }
 
  .itemCheck {
-    margin-left: 400px;
+    margin-left: 420px;
     margin-top: 30px;
     margin-bottom: 50px;
 }
@@ -369,7 +369,7 @@ img.select_img1 {
     color: whitesmoke;
     cursor: pointer;
     margin-left: 10px;
-    width: 120px;
+    width: 150px;
     background-color: rgb(84, 108, 92);
     padding: 8px 10px;
     border: none;

@@ -177,21 +177,22 @@ select {
     width: 70%;
 }
 .orderReq>div:nth-of-type(1){
-    border-top: 1px solid lightgray
+    padding-right: 21px;
 }
+
+
 .delySection {
     width: 70%;
     margin: 0px;
-    border: 1px solid lightgray;
-    border-left: none;
-    border-right: none;
+    border-top: 1px solid lightgray;
     position: relative;
-     border-bottom: none;
+
 }
 
 .delySection * {
 margin: 0px;
 }
+
 .delyContainer li:nth-of-type(2) {
 height: 30px;
 margin-top: 20px;
