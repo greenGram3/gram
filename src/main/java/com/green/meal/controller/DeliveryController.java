@@ -26,9 +26,17 @@ public class DeliveryController {
     public String deliveryGet(Model model, HttpSession session){
         LinkedList<DeliveryVO> list = new LinkedList<>() ;
         list.addAll(delyService.selectDelivery((String)session.getAttribute("userId")));
+
+        model.addAttribute("realDely", list); // mapper용 찐 주소인 list
+
+        for(int i=0 ; i<list.size(); i++){
+            String[] addrArr = list.get(i).getDelyAddr().split("@");
+            list.get(i).setDelyAddr(addrArr[1]+" "+addrArr[2]);
+        }
         BaseDelivery(list);
 
         model.addAttribute("list",list);
+
         return "userInfo/delyForm";
     }
 
@@ -59,8 +67,17 @@ public class DeliveryController {
     }
 
     @GetMapping("/update")
-    public String delyUpdateGet(DeliveryVO dely, Model model){
+    public String delyUpdateGet(DeliveryVO dely, Model model, HttpSession session){
+        HashMap map = new HashMap();
+        map.put("userId",session.getAttribute("userId"));
+        map.put("delyPlace", dely.getDelyPlace());
+        dely = delyService.selectedDely(map);
         model.addAttribute("dely", dely);
+        String[] delyAddr = dely.getDelyAddr().split("@");
+
+        model.addAttribute("zipNo", delyAddr[0]);
+        model.addAttribute("roadAddrPart1", delyAddr[1]);
+        model.addAttribute("addrDetail", delyAddr[2]);
         return "userInfo/updateDely";
     }
 

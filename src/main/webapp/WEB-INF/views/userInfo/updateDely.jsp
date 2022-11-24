@@ -14,7 +14,6 @@
 
 <body>
 <main>
-
     <h2>배송지 수정</h2>
     <hr class="hr1">
     <div class="updateDely">
@@ -34,7 +33,13 @@
         <div id="msgDelyPhone" style="color: red"></div>
         <hr class="hr4">
 
-        <div>배송지 주소 <input type="text" name="delyAddr" id="delyAddr" value="${dely.delyAddr}"></div>
+        <div>배송지 주소
+<%--            <input type="text" name="delyAddr" id="delyAddr" value="${dely.delyAddr}">--%>
+            <input type="text" id="zipNo" style="width: 100px" name="zipNo" placeholder="우편번호" value="${zipNo}" readonly/>
+            <input type="text" id="roadAddrPart1" style="width: 300px" name="roadAddrPart1" value="${roadAddrPart1}" placeholder="도로명주소" readonly/>
+            <input type="text" id="addrDetail" name="addrDetail" placeholder="상세주소" value="${addrDetail}" readonly/>
+            <button type="button" id="addrBtn" style="width: 100px" onClick="goPopup();">우편번호 검색</button>
+        </div>
         <input type="hidden" name="delyAddr1" value="${dely.delyAddr}">
         <div id="msgDelyAddr" style="color: red"></div>
         <hr class="hr5">
@@ -59,6 +64,17 @@
 </html>
 
 <script>
+    // 주소 우편번호 팝업창 api
+    function goPopup(){
+        let pop = window.open("<c:url value='/addr'/>","pop","_blank","width=570,height=420, scrollbars=yes, resizable=yes");
+    }
+
+    function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAddr, jibunAddr, zipNo){
+        document.querySelector("#roadAddrPart1").value = roadAddrPart1+roadAddrPart2;
+        document.querySelector("#addrDetail").value = addrDetail;
+        document.querySelector("#zipNo").value = zipNo;
+    }
+
     $('#delBtn').click(function (){
         window.close();
     })
@@ -89,7 +105,7 @@
                 $('#msgDelyPhone')[0].innerHTML = "핸드폰 번호를 확인해주세요.";
                 last+="1";
             }
-            if($('#delyAddr')[0].value.length < 1){
+            if($('#zipNo')[0].value.length < 1){
                 $('#msgDelyAddr')[0].innerHTML = "빈칸이어서는 안됩니다.";
                 last+="1";
             }else {
@@ -139,7 +155,7 @@
                     receiver :  $('#receiver').val(),
                     delyPlace :  $('#delyPlace').val(),
                     delyPhone :  $('#delyPhone').val(),
-                    delyAddr : $('#delyAddr').val(),
+                    delyAddr : $('#zipNo').val()+"@"+$('#roadAddrPart1').val()+"@"+$('#addrDetail').val(),
                     delyNo : delyNoValue,
 
                     receiver1 :  $('input[name=receiver1]').val(),
@@ -156,10 +172,6 @@
                     alert('error : '+result+" "+result.code);
                 }
             })
-
-
-
-
         })
     }) //ready
 </script>

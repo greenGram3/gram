@@ -47,7 +47,7 @@ public class RegisterController {
         }
 
         //주소 받아와서 수동으로 넣기
-        user.setUserAddr(roadAddrPart1+" "+addrDetail);
+        user.setUserAddr(zipNo+"@"+roadAddrPart1+"@"+addrDetail);
 
         //UserEmail 수동으로 넣기
         user.setUserEmail(addArr(userEmailArr));

@@ -1,5 +1,6 @@
 package com.green.meal.controller;
 
+import com.green.meal.domain.UserVO;
 import com.green.meal.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -28,7 +29,12 @@ public class UpdateController {
     @GetMapping("/user")
     public String updateUser(HttpServletRequest request, Model model){
         String userId = (String) request.getSession().getAttribute("userId");
-        model.addAttribute("user", userService.idDupliCheck(userId));
+        UserVO user = userService.idDupliCheck(userId);
+        // 주소 뽑아서 @ 빼고 정리
+        String userAddr = user.getUserAddr();
+        user.setUserAddr(userAddr.split("@")[1]+" "+userAddr.split("@")[2]);
+
+        model.addAttribute("user", user);
         return "userInfo/updateUser";
     }
 
@@ -76,8 +82,8 @@ public class UpdateController {
 
     // 주소 변경
     @PostMapping("/userAddr")
-    public String updateUserAddr(String roadAddrPart1, String addrDetail, HttpSession session){
-        String newAddr = roadAddrPart1+" "+addrDetail;
+    public String updateUserAddr(String roadAddrPart1, String addrDetail, String zipNo,HttpSession session){
+        String newAddr = zipNo+"@"+roadAddrPart1+"@"+addrDetail;
         userService.changeAddr(newAddr, (String) session.getAttribute("userId"));
         return "redirect:/update/user";
     }

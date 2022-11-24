@@ -26,7 +26,7 @@
     </update>
 
     <delete id="deleteDelivery" parameterType="com.green.meal.domain.DeliveryVO">
-        delete from delivery where receiver = #{receiver} and dely_place = #{delyPlace} and dely_no = #{delyNo} and dely_addr = #{delyAddr} and dely_phone = #{delyPhone} and user_id = #{userId}
+        delete from delivery where receiver = #{receiver} and dely_place = #{delyPlace} and dely_no = #{delyNo} and dely_phone = #{delyPhone} and user_id = #{userId}
     </delete>
 
     <select id="selectBase" resultType="int">

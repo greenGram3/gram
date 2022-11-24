@@ -72,7 +72,6 @@
                                     receiver :  '${item.receiver}',
                                     delyPlace :  '${item.delyPlace}',
                                     delyNo : '${item.delyNo}',
-                                    delyAddr : '${item.delyAddr}',
                                     delyPhone :  '${item.delyPhone}'
                                 },
                                 success: function (result) {

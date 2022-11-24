@@ -53,23 +53,6 @@
         </div>
       </div>
 
-      <script>
-        $('#nameComplete')[0].addEventListener('click', function (){
-          let test = /[!?@#$%^&*():;+-=~{}<>\_\[\]\|\\\"\'\,\.\/\`\₩]/g;
-          let test2 = $('#newName')[0].value;
-          if(test.test(test2)){
-            $('#msgName')[0].innerHTML = "특수문자가 있어선 안됩니다.";
-            $('#newName').focus();
-            return;
-          }
-          if(test2.length < 1 || test2.length > 10){
-            $('#msgName')[0].innerHTML = "1~10자 이내로 입력하셔야 합니다.";
-            $('#newName').focus();
-            return;
-          }
-          $('#nameForm').submit();
-        })
-      </script>
       <div>
         <div class="userEmail">
           <p> 이메일</p><p>${user.userEmail}</p>　<input type="button" class="email" value="이메일 변경"></div>
@@ -94,20 +77,6 @@
         </div>
       </div>
 
-      <script>
-        selectEmail.addEventListener('change', function (e) {
-          selectedEmail.setAttribute('value', e.target.value);
-        });
-
-        $('#emailComplete')[0].addEventListener('click', function (){
-          if($('#userEmailArr')[0].value == '' || $('#selectedEmail')[0].value == ''){
-            $('#emailForm').submit();
-          }else{
-            $('#msgEmail')[0].innerHTML = "이메일을 확인해주세요";
-            $('#newEmail').focus();
-          }
-        })
-      </script>
       <div>
         <div class="userPhone">
           <p>휴대전화</p>　<p>${user.userPhone}</p>　<input type="button" class="phone" value="휴대전화 변경"> </div>
@@ -136,7 +105,8 @@
                 <input type="text" id="roadAddrPart1" style="width: 400px" name="roadAddrPart1" placeholder="도로명주소" readonly/>
                 <input type="text" id="addrDetail" name="addrDetail" placeholder="상세주소" readonly/>
                 <button type="button" id="addrBtn" onClick="goPopup();">우편번호 검색</button> &nbsp;
-                <div id="msgAddr" style="color: red"></div></div>
+              </div>
+              <div id="msgAddr" style="color: red; display: none"></div>
               <div>
                 <input type="button" id="addrCancel" value="취소">
                 <input type="button" id="addrComplete" value="완료">
@@ -160,12 +130,12 @@
 
         //핸드폰 입력값 검사
         $('#phoneComplete')[0].addEventListener('click', function (){
-          let test = /01[016789]-[^0][0-9]{2,3}-[0-9]{3,4}/;
+          let test = /^[0-9]{3}-[0-9]{4}-[0-9]{4}/;
           let test2 = $('#newPhone')[0].value;
-          if(test.test(test2)){
+          if(test.test(test2) && test2.length==13){
             $('#phoneForm').submit();
           }else{
-            $('#msgPhone')[0].innerHTML = "핸드폰 번호를 확인해주세요.";
+            $('#msgPhone')[0].innerHTML = "010-0000-0000 형식이어야 합니다.";
             $('#newPhone').focus();
           }
         })
@@ -175,6 +145,7 @@
           if($('#zipNo')[0].value != ''){
             $('#addrForm').submit();
           }else{
+            $('#msgAddr')[0].style.display = 'block'
             $('#msgAddr')[0].innerHTML = "주소를 확인해주세요.";
             $('#newAddr').focus();
           }
@@ -190,6 +161,39 @@
         const newPwd1 = document.querySelector("#newPwd1");
         const newPwd2 = document.querySelector("#newPwd2");
         const msgPwd = document.querySelector("#msgPwd");
+
+        //이름 바꿀때
+        $('#nameComplete')[0].addEventListener('click', function (){
+          let test = /[!?@#$%^&*():;+-=~{}<>\_\[\]\|\\\"\'\,\.\/\`\₩]/g;
+          let test2 = $('#newName')[0].value;
+          if(test.test(test2)){
+            $('#msgName')[0].innerHTML = "특수문자가 있어선 안됩니다.";
+            $('#newName').focus();
+            return;
+          }
+          if(test2.length < 1 || test2.length > 10){
+            $('#msgName')[0].innerHTML = "1~10자 이내로 입력하셔야 합니다.";
+            $('#newName').focus();
+            return;
+          }
+          $('#nameForm').submit();
+        })
+
+        //이메일 세팅
+        selectEmail.addEventListener('change', function (e) {
+          selectedEmail.setAttribute('value', e.target.value);
+        });
+
+        //이메일 바꿀때
+        $('#emailComplete')[0].addEventListener('click', function (){
+          if($('#userEmailArr')[0].value == '' || $('#selectedEmail')[0].value == ''){
+            $('#msgEmail')[0].innerHTML = "이메일을 확인해주세요";
+            $('#newEmail').focus();
+          }else{
+            $('#emailForm').submit();
+          }
+        })
+
         document.getElementsByTagName("main")[0].addEventListener('click', function (e) {
           if (e.target.getAttribute('type') != 'button') return;
           if(e.target.value == '취소'){

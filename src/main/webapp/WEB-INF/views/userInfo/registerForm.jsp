@@ -213,7 +213,7 @@
 
     //휴대폰 번호 체크
     userPhone.addEventListener('keyup', function (){
-        if(!(/^[0-9]{3}-[0-9]{4}-[0-9]{4}/.test(userPhone.value))){
+        if(!(/^[0-9]{3}-[0-9]{4}-[0-9]{4}/.test(userPhone.value)) || userPhone.value.length>13 ){
             msgPhone.style.display = 'block';
             msgPhone.innerHTML = '010-0000-0000 형식이어야 합니다.';
         }else{
