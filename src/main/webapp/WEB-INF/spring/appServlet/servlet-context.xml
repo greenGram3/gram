@@ -48,6 +48,7 @@
 	</beans:bean>
 
 	<beans:bean id="loginInterceptor" class="com.green.meal.LoginInterceptor" />
+	<beans:bean id="AdminloginInterceptor" class="com.green.meal.AdminLoginInterceptor" />
 	<!--
         2) url 과 인터셉터 설정
         => Namespaces 에서 mvc 확인 ,
@@ -74,7 +75,6 @@
 			<mvc:mapping path="/qnainsertf/**" />
 			<mvc:mapping path="/qnadetail/**" />
 
-			<mvc:mapping path="/noticeinsertf/**" />
 			<mvc:mapping path="/noticeupdate/**" />
 			<mvc:mapping path="/noticeupdatef/**" />
 
@@ -82,6 +82,15 @@
 			<beans:ref bean="loginInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>
+
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/noticeinsertf/**" />
+			<!-- 인터셉터로 사용할 빈 등록 -->
+			<beans:ref bean="AdminloginInterceptor" />
+		</mvc:interceptor>
+	</mvc:interceptors>
+
 
 	<context:component-scan base-package="com.green.meal"/>
 

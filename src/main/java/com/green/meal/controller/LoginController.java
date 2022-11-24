@@ -15,14 +15,15 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 import java.math.BigInteger;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.security.SecureRandom;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 import static com.green.meal.controller.RegisterController.passwordEncoder;
@@ -37,10 +38,12 @@ public class LoginController {
     private final UserService userService;
 
     @GetMapping("/login")
-    public String loginForm(String requestURI, Model model) {
+    public String loginForm(String requestURI, Model model, String alertMsg) {
         log.info("requestURI : "+requestURI);
-
-        if (requestURI!=null) {model.addAttribute("requestURI",requestURI);}; //인터셉터 preHandle에서 접근할경우
+        if (requestURI!=null) {
+            model.addAttribute("requestURI",requestURI);
+            model.addAttribute("alertMsg",alertMsg);
+        }; //인터셉터 preHandle에서 접근할경우
         return "userInfo/loginForm";
     }
 
@@ -117,6 +120,7 @@ public class LoginController {
 
     @GetMapping("/naverLogin") // 첫번째 요청후 코드받기, 받은 코드로 접큰 토큰 생성후 유저 정보가져오기
     public String naverLogin(String code, String state, HttpServletRequest request, RedirectAttributes rettr) {
+        UserVO user = new UserVO();
         request.setAttribute("code", code);
         request.setAttribute("state", state);
 
@@ -187,6 +191,8 @@ public class LoginController {
                 String res2 = res.toString().replace("{","").replace("}","");
                 String[] info = res2.split(",");
 
+                log.info("info : "+res2);
+
                 for(int i=1; i<info.length; i++){
                     if(info[i].contains("\"id\":")) userId = info[i];
                     if(info[i].contains("\"name\":")) userName = info[i];
@@ -197,7 +203,7 @@ public class LoginController {
                     if(info[i].contains("\"gender\":")) userGender = info[i];
                 }
                 userId = userId.substring(userId.indexOf("\"id\":")+5).replace("\"","");  //네이버에서 받아온 실제아이디
-//                userId = userId + "Naver";
+                userId = userId.substring(15);
                 userName = userName.substring(userName.indexOf("\"name\":")+7).replace("\"","");
                 userName = StringEscapeUtils.unescapeJava(userName);
                 userEmail = userEmail.substring(userEmail.indexOf("\"email\":")+8).replace("\"","");
@@ -208,7 +214,7 @@ public class LoginController {
                 if(userGender!="") userGender = userGender.substring(userGender.indexOf("\"gender\":")+9).replace("\"","");
                 if(userGender == "M") userGender = "man";
                 if(userGender == "W") userGender = "woman";
-                UserVO user = new UserVO();
+//                UserVO user = new UserVO();
                 user.setUserId(userId);
                 user.setUserName(userName);
                 user.setUserEmail(userEmail);
@@ -229,16 +235,103 @@ public class LoginController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+//=====================================================================================================================
+        log.info("1 :");
+        String apiURL3 = "https://openapi.naver.com/v1/naverpay/address";  //세번째 요청
+
+        try {
+            log.info("2 :");
+            URL url = new URL(apiURL3);
+            HttpURLConnection con = (HttpURLConnection)url.openConnection();
+            con.setRequestProperty("Authorization","Bearer "+accessToken);
+            con.setRequestMethod("GET");
+
+            int responseCode = con.getResponseCode();
+            BufferedReader br;
+            if (responseCode == 200) { // 정상 호출
+                log.info("3 :");
+                br = new BufferedReader(new InputStreamReader(con.getInputStream(), "UTF-8"));
+            } else {  // 에러 발생
+                log.info("4 :");
+                br = new BufferedReader(new InputStreamReader(con.getErrorStream(), "UTF-8"));
+            }
+            log.info("5 :");
+            String inputLine;
+            StringBuilder res = new StringBuilder();
+            while ((inputLine = br.readLine()) != null) {
+                log.info("6 :");
+                res.append(inputLine);
+            }
+            br.close();
+            if (responseCode == 200) {
+                log.info("7 :");
+                log.info("res : "+res.toString());
+            }else {
+                log.info("res : "+res.toString());
+            }
+        } catch (Exception e) {
+            log.info("8 :");
+
+            e.printStackTrace();
+        }
+
         return "redirect:/";
     }
 
-
+//    private static String get(String apiUrl, Map<String, String> requestHeaders){
+//        HttpURLConnection con = connect(apiUrl);
+//        try {
+//            con.setRequestMethod("GET");
+//            for(Map.Entry<String, String>; header :requestHeaders.entrySet()) {
+//                con.setRequestProperty(header.getKey(), header.getValue());
+//            }
+//
+//            int responseCode = con.getResponseCode();
+//            if (responseCode == HttpURLConnection.HTTP_OK) { // 정상 호출
+//                return readBody(con.getInputStream());
+//            } else { // 에러 발생
+//                return readBody(con.getErrorStream());
+//            }
+//        } catch (IOException e) {
+//            throw new RuntimeException("API 요청과 응답 실패", e);
+//        } finally {
+//            con.disconnect();
+//        }
+//    }
+//
+//    private static HttpURLConnection connect(String apiUrl){
+//        try {
+//            URL url = new URL(apiUrl);
+//            return (HttpURLConnection)url.openConnection();
+//        } catch (MalformedURLException e) {
+//            throw new RuntimeException("API URL이 잘못되었습니다. : " + apiUrl, e);
+//        } catch (IOException e) {
+//            throw new RuntimeException("연결이 실패했습니다. : " + apiUrl, e);
+//        }
+//    }
+//
+//    private static String readBody(InputStream body){
+//        InputStreamReader streamReader = new InputStreamReader(body);
+//        try (BufferedReader lineReader = new BufferedReader(streamReader)) {
+//            StringBuilder responseBody = new StringBuilder();
+//            String line;
+//            while ((line = lineReader.readLine()) != null) {
+//                responseBody.append(line);
+//            }
+//            return responseBody.toString();
+//        } catch (IOException e) {
+//            throw new RuntimeException("API 응답을 읽는데 실패했습니다.", e);
+//        }
+//    }
 
     private boolean loginCheck(String userId, String userPwd) {
         UserVO user = null;
         user = userService.idDupliCheck(userId);
         return user!=null && passwordEncoder.matches(userPwd,user.getUserPwd());
     }
+
+
 
 //    private String tempId(){
 //        Random random = new Random();

@@ -4,6 +4,12 @@
 <%@ page session="false" %>
 <!DOCTYPE html>
 <html>
+
+<script>
+let alertMsg = "${alertMsg}";
+if(alertMsg == "wrongAccess") alert("비정상적인 접근입니다.")
+</script>
+
 <head>
     <title>login</title>
     <link rel="stylesheet" href="<c:url value='/css/loginForm.css'/>">
