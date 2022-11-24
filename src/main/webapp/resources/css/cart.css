@@ -60,6 +60,7 @@ button {
     height: 30px;
     padding: 3px;
     border: 1px solid darkgray;
+    cusuor:pointer;
 }
 
 .cartAmount>input {
