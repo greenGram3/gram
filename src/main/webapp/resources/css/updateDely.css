@@ -70,6 +70,7 @@ input#roadAddrPart1 {
 }
 
 button#addrBtn {
+    border: 1px solid gray;
     height: 32px;
     margin-left: 10px;
 }

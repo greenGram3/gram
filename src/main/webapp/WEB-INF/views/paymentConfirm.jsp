@@ -47,8 +47,13 @@
         <td colspan="2">${vo.delyAddr}</td>
     </tr>
 </table>
+            <div class="ConfirmBtn">
+                <button onclick="location.href='/meal'">홈으로</button>
+                <button onclick="location.href='/meal/mypage/order'">주문목록</button>
+            </div>
     </div>
     </div>
+
 </main>
 <jsp:include page="include/footer.jsp" flush="false" />
 </body>

@@ -119,3 +119,15 @@ select {
 .paymentConfirm tr:nth-of-type(n+3) th {
     width: 30%;
 }
+
+.ConfirmBtn {
+    text-align: center;
+    padding: 30px;
+}
+
+.ConfirmBtn button {
+    width: 80px;
+    height: 32px;
+    border: 1px solid darkgray;
+    margin-left: 10px;
+}
