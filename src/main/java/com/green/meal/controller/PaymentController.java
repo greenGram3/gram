@@ -148,11 +148,12 @@ public class PaymentController {
             //api로 입력받은 도로명 주소 -> 새로운 주소로 조합
             String newDelyAddr = roadAddrPart1+" "+addrDetail;
 
-            // 수정하는 값들 vo에 저장
+            //수정하는 값들 vo에 저장
             DeliveryVO newDelyVo = new DeliveryVO();
             newDelyVo.setDelyPlace(vo.getDelyPlace());
             newDelyVo.setReceiver(newReceiver);
             newDelyVo.setDelyPhone(newDelyPhone);
+            //배송지주소 수정 없으면 기존배송지주소 입력되도록
             if(" ".equals(newDelyAddr)) {
                 newDelyVo.setDelyAddr(vo.getDelyAddr());
             } else {

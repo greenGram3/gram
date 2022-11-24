@@ -44,9 +44,9 @@
         <hr>
         <div>주소입력</div>
         <div class="addr-input">
-            <input type="text" id="zipNo" style="width: 80px" name="zipNo" placeholder="우편번호" readonly/>
-            <input type="text" id="roadAddrPart1" style="width: 200px" name="roadAddrPart1" placeholder="도로명주소" readonly/>
-            <input type="text" id="addrDetail" name="addrDetail" placeholder="상세주소" readonly/>
+            <input type="text" id="zipNo" style="width: 80px" name="zipNo" placeholder="우편번호" value="${zipNo}" readonly/>
+            <input type="text" id="roadAddrPart1" style="width: 200px" name="roadAddrPart1" placeholder="도로명주소" value="${roadAddrPart1}" readonly/>
+            <input type="text" id="addrDetail" name="addrDetail" placeholder="상세주소" value="${addrDetail}" readonly/>
         </div>
         <button type="button" id="addrBtn" onClick="goPopup();">우편번호 검색</button> &nbsp;
     </div>
