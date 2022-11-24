@@ -25,10 +25,10 @@
         <c:if test="${link eq 'C'}">
             <jsp:include page="../include/center.jsp" flush="false" />
         </c:if>
-
         <c:if test="${link eq 'M'}">
             <jsp:include page="../include/mypage.jsp" flush="false" />
         </c:if>
+
         <div class="qnaUpdate">
     <h3>1:1문의 수정</h3>
     <section class="section_container">

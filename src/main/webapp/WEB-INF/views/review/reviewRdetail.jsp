@@ -9,7 +9,7 @@
         $(function (){
             // ** Review 답변 업데이트 팝업 띄우기
             $('#reviewReplyUpF').click(function () {
-                window.open("<c:url value='/reviewrupdatef'/>?userId=${userId}&reviewNo=${reviewResult.reviewNo}&reviewTitle=${reviewResult.reviewTitle}&reviewContent=${reviewResult.reviewContent}", "Child","width=920, height=450,left=500, top=500");
+                window.open("<c:url value='/reviewrupdatef'/>?userId=${userId}&reviewNo=${reviewResult.reviewNo}&reviewTitle=${reviewResult.reviewTitle}&reviewContent=${reviewResult.reviewContent}", "Child","width=920, height=450,left=300, top=300");
             }); //reviewReplyUpF
         }) //ready
     </script>

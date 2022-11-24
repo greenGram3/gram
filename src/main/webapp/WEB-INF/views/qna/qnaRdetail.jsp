@@ -11,7 +11,7 @@
         $(function (){
             // ** QnA 답변 업데이트 폼 띄우기(Ajax)
             $('#qnaReplyUpF').click(function () {
-                window.open("<c:url value='/qnarupdatef'/>?userId=${userId}&qnaNo=${qnaResult.qnaNo}", "Child","width=900, height=600,left=300, top=300");
+                window.open("<c:url value='/qnarupdatef'/>?userId=${userId}&qnaNo=${qnaResult.qnaNo}", "Child","width=900, height=400,left=300, top=300");
             }); //qnaReplyUpF
         }) //ready
     </script>
@@ -40,7 +40,6 @@
         </table>
     </section>
 
-    <!-- 수정하기(업데이트) -> Ajax -->
     <c:if test="${not empty userId && userId == 'admin'}">
         <div class="qnaRdetailCheck" >
             <span color="White" id="qnaReplyUpF">답변수정하기</span>

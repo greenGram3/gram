@@ -84,13 +84,6 @@
             </table>
         </form>
     </section>
-<%--    <div class="linkBtn_container">--%>
-<%--        <div class="linkBtn">--%>
-<%--            <c:if test="${userId == reviewResult.userId || userId == 'admin'}">--%>
-<%--                &nbsp;&nbsp;<a href="reviewdelete?reviewNo=${reviewResult.reviewNo}" onclick="return confirm('삭제하시겠습니까? 확인/취소');">삭제하기</a>--%>
-<%--            </c:if>--%>
-<%--        </div>--%>
-<%--    </div>--%>
     </div>
     </div>
 

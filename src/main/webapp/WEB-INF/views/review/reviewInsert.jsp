@@ -64,7 +64,7 @@
                 <tr>
                     <td>첨부파일</td>
                     <td>
-                       <li><img src="" class="select_img"></li><!-- 선택한 파일 미리보기(js이용) -->
+                       <li><img src="" class="select_img"></li><!-- 선택한 파일 미리보기 -->
                         <li><input type="file" name="imgNamef" id="imgNamef"></li></td>
                 </tr>
                 <script>
