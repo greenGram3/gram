@@ -21,12 +21,10 @@
 
 <script>
     let msg = "${msg}";
-    if(msg=="LIST_ERR")  alert("회원 목록을 가져오는데 실패했습니다. 다시 시도해 주세요.");
-    if(msg=="READ_ERR")  alert("탈퇴했거나 없는 회원입니다.");
-    // if(msg=="MOD_OK") alert("성공적으로 수정되었습니다.");
-    <%--let reMsg = "${param.msg}";--%>
-    // if(msg=="DEL_OK") alert("성공적으로 삭제되었습니다.");
-    // if(msg=="UPL_OK") alert("성공적으로 등록 되었습니다.");
+    if(msg=="WDR_OK") alert("탈퇴 처리가 완료되었습니다.");
+    if(msg=="LIST_ERR") alert("회원 목록을 가져오는데 실패했습니다. 다시 시도해 주세요.");
+    if(msg=="READ_ERR") alert("탈퇴했거나 없는 회원입니다.");
+    if(msg=="WDR_ERR") alert("탈퇴 처리에 실패했습니다. 다시 시도해주세요.");
 </script>
     <div class="main">
         <jsp:include page="../include/admin.jsp" flush="false" />

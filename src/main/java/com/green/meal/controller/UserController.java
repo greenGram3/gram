@@ -49,13 +49,14 @@ public class UserController {
     public String read(UserVO vo, SearchCondition sc, Model m) {
         try {
 
+            //회원 정보 불러오기
             vo = userService.userDetail(vo.getUserId());
 
-            String userAddr = vo.getUserAddr();
-            String[] addrs = userAddr.split("@");
-
-            String delyAddr  = addrs[1] + " " + addrs[2];
-            vo.setUserAddr(delyAddr);
+            //회원정보 중 주소 형태 변환
+            String userAddrTemp = vo.getUserAddr();
+            String[] addrs = userAddrTemp.split("@");
+            String userAddr  = addrs[1] + " " + addrs[2];
+            vo.setUserAddr(userAddr);
 
             m.addAttribute("vo", vo);
             m.addAttribute("sc", sc);
