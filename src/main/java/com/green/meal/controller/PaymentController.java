@@ -142,7 +142,8 @@ public class PaymentController {
             response.setContentType("text/html; charset=UTF-8");
 
             //수정 전 배송지 정보에 아이디 담기
-            vo.setUserId((String) session.getAttribute("userId"));
+            String userId = (String)session.getAttribute("userId");
+            vo.setUserId(userId);
 
             //api로 입력받은 도로명 주소 -> 새로운 주소로 조합
             String newDelyAddr = roadAddrPart1+" "+addrDetail;
@@ -214,6 +215,9 @@ public class PaymentController {
 
             //구매정보 order_list, order_detail에 넣기
             userOrderService.save(odvoList, odvo);
+
+            //주문완료되면 카트에 있던 상품들 삭제
+            cartService.deleteAll(userId);
 
             //총 구매금액, 배송지 정보, 구매한 제품 정보 -> jsp로 전달
             m.addAttribute("totalPrice", totalPrice);
