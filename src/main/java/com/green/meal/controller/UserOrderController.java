@@ -82,7 +82,7 @@ public class UserOrderController {
             Integer totalPay = 0;
 
             for (OrderDetailDto orderDetailVO : list) {
-                totalPay +=orderDetailVO.getItemPrice();
+                totalPay +=(orderDetailVO.getItemPrice()*orderDetailVO.getItemAmount());
                 tmp +="@"+ orderDetailVO.getItemName();
             }
 
@@ -152,7 +152,7 @@ public class UserOrderController {
         List<OrderDetailDto> list = userOrderService.orderItemInfo(orderNo);
         Integer totalPay = 0;
         for (OrderDetailDto orderDetailDto : list) {
-            totalPay +=orderDetailDto.getItemPrice();
+            totalPay +=(orderDetailDto.getItemPrice()*orderDetailDto.getItemAmount());
         }
 
         orderListDto.setTotalPay(totalPay);
