@@ -192,6 +192,7 @@ public class PaymentController {
             map.put("delyPlace", delyPlace);
             DeliveryVO vo = new DeliveryVO();
             vo = delyService.selectedDely(map);
+            String delyAddrToDb = vo.getDelyAddr();
 
             //주소 형태 변환
             String delyAddrTemp = vo.getDelyAddr();
@@ -202,7 +203,7 @@ public class PaymentController {
             //구매자 정보 주문내용에 담기(order_list에 넣을 것) (구매상품에 대한 정보는 이미 담겨있음)
             odvo.setUserId(userId);
             odvo.setUserPhone(vo.getDelyPhone());
-            odvo.setDelyAddr(vo.getDelyAddr());
+            odvo.setDelyAddr(delyAddrToDb);
             odvo.setReceiver(vo.getReceiver());
 
             //카트주문과 단건주문 구분하여 처리
