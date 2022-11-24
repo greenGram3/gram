@@ -93,6 +93,11 @@ public class PaymentController {
             //배송지 리스트 얻어오기
             List<DeliveryVO> delyList = delyService.delySelect(userId);
 
+            for(int i=0 ; i<delyList.size(); i++){
+                String[] addrArr = delyList.get(i).getDelyAddr().split("@");
+                delyList.get(i).setDelyAddr(addrArr[1]+" "+addrArr[2]);
+            }
+
             //구매고객 정보 얻어오기
             UserVO userVo = userService.userDetail(userId);
 
