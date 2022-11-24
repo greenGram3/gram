@@ -63,3 +63,21 @@ input#submitBtn {
 }
 
 
+
+input#zipNo {
+    margin-left: 22px;
+}
+
+input#addrDetail ,
+input#roadAddrPart1 {
+    margin-top: 10px;
+    margin-left: 100.5px;
+}
+
+button#addrBtn {
+    height: 32px;
+    margin-left: 10px;
+}
+
+
+
