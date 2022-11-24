@@ -131,7 +131,7 @@ public class UserOrderController {
 
         Integer orderNo = Integer.parseInt(order.substring(15));
         String userId = (String)httpSession.getAttribute("userId");
-        log.info("orderNo={}",orderNo);
+
 
 
         Map map = new HashMap<>();
@@ -141,6 +141,12 @@ public class UserOrderController {
         OrderListDto orderListDto = userOrderService.order(map);
         orderListDto.setOrder(orderListDto.getOrderDate()+"-0000"+orderListDto.getOrderNo());
 
+        String delyAdd = orderListDto.getDelyAddr();
+
+        String[] addrs = delyAdd.split("@");
+
+        String delyAddr  = addrs[1] + " " + addrs[2];
+        orderListDto.setDelyAddr(delyAddr);
 
         //주문번호로 검색한 상품 보여주기( 주문 상세 페이지 )
         List<OrderDetailDto> list = userOrderService.orderItemInfo(orderNo);

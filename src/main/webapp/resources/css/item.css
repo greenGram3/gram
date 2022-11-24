@@ -167,6 +167,10 @@ main * {
     padding-left: 5px;
 }
 
+.itemAdmin fileNamef {
+    border: none;
+}
+
 
 .itemAdmin tr:nth-of-type(n+2) input {
     border: 1px solid darkgrey;
