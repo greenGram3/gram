@@ -53,9 +53,15 @@
         update qna set qna_title=#{qnaTitle}, qna_content=#{qnaContent} where qna_no=#{qnaNo}
     </update>
 
-    <!-- QnA 삭제(원글 삭제 시 원글만, 답글 삭제 시 답글만) -->
+    <!-- QnA 삭제(원글 삭제 시 원글&답글, 답글 삭제 시 답글만) -->
     <delete id="qnadelete">
-        delete from qna where qna_no = #{qnaNo}
+        delete from qna
+        <if test="qnaNo == qnaRoot">
+            where qna_root=#{qnaNo}
+        </if>
+        <if test="qnaNo != qnaRoot">
+            where qna_no=#{qnaNo}
+        </if>
     </delete>
 
     <!-- QnA 답변 작성 -->

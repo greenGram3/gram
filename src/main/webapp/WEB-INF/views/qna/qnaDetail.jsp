@@ -85,7 +85,7 @@
                     </c:if>
                     <c:if test="${userId == qnaResult.userId || userId == 'admin'}">
                         <a href="qnadetail?jCode=U&qnaNo=${qnaResult.qnaNo}&link=${link}">수정하기</a>
-                        <a href="qnadelete?qnaNo=${qnaResult.qnaNo}&link=${link}"
+                        <a href="qnadelete?qnaNo=${qnaResult.qnaNo}&qnaRoot=${qnaResult.qnaRoot}&link=${link}"
                            onclick="return confirm('삭제하시겠습니까? 확인/취소');">삭제하기</a>
                     </c:if>
                 </div>
