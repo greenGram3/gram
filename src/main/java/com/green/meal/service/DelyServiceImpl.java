@@ -35,11 +35,9 @@ public class DelyServiceImpl implements DelyService {
     }
 
     @Override
-    public int updateDelivery3(DeliveryVO vo, DeliveryVO newDelyVo){
-        Map map = new HashMap();
-        map.put("vo", vo);
-        map.put("newDelyVo", newDelyVo);
-        return mapper.updateDelivery3(map);
+    public int updateDelivery3(DeliveryVO vo){
+
+        return mapper.updateDelivery3(vo);
     }
 
     @Override

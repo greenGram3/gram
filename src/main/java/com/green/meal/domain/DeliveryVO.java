@@ -1,7 +1,8 @@
 package com.green.meal.domain;
 import lombok.*;
 
-@Getter @Setter @ToString @EqualsAndHashCode @NoArgsConstructor
+ @NoArgsConstructor
+@Data
 public class DeliveryVO {
     String userId;
     Integer delyNo;

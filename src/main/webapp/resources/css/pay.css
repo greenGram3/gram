@@ -104,6 +104,19 @@ select {
 .total h3, .total h2 {
     margin: 20px;
 }
+.delyBtn {
+    margin-left: 10px;
+    margin-right: 20px;
+    border: 1px solid gray;
+    padding: 2px 5px;
+    position: absolute;
+    width: 70px;
+    left: 85%;
+}
+
+.dely>input {
+    width: 80%;
+}
 
 /*paymentConfirm*/
 
@@ -198,7 +211,7 @@ height: 30px;
 margin-top: 20px;
 position: absolute;
 left: 0;
-
+width: 100%;
 }
 
 .order-req-input {

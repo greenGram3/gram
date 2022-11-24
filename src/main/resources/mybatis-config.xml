@@ -19,6 +19,7 @@
         <typeAlias alias="OrderDetailVO" type="com.green.meal.domain.OrderDetailVO"/>
         <typeAlias alias="OrderItemDTO" type="com.green.meal.domain.OrderItemDTO"/>
         <typeAlias alias="SearchCondition" type="com.green.meal.domain.SearchCondition"/>
+        <typeAlias alias="DeliveryVO" type="com.green.meal.domain.DeliveryVO"/>
 
     </typeAliases>
 

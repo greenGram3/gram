@@ -81,12 +81,12 @@
           <ul class="delyContainer">
              <li><input type="radio" id="delyPlace${status.index}" class="delyPlace" name="delyPlace" value="${list.delyPlace}" ${list.delyNo==1 ? "checked" : ""}/>
               ${list.delyPlace} ${list.delyNo==1 ? "(기본배송지)" : ""}</li>
-            <li class="dely " id="delyAddr">${list.delyAddr}
+            <li class="dely"><input id="delyAddr${status.index}" value="${list.delyAddr}" readonly>
               <button type="button" class="delyBtn" id="openBtn${status.index}">수정하기</button></li>
           <script>
             $("#openBtn${status.index}").on("click", function(){
 
-              window.open("<c:url value='/buy/delyView'/>?delyPlace=${list.delyPlace}","Child","left=400,top=200,width=500,height=500");
+              window.open("<c:url value='/buy/delyView'/>?delyPlace=${list.delyPlace}&dely=delyAddr${status.index}","Child","left=400,top=200,width=500,height=500");
 
             });
 

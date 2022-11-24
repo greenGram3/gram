@@ -37,7 +37,6 @@
         <input type="text" id="addrDetail" name="addrDetail" placeholder="상세주소" value="${addrDetail}" readonly/>
         <button type="button" id="addrBtn" style="width: 100px" onClick="goPopup();">우편번호 검색</button>
     </div>
-    <input type="hidden" name="delyAddr1" value="${vo.delyAddr}">
     <div id="msgDelyAddr" style="color: red"></div>
     <hr class="hr5">
 <%--    <div>--%>
@@ -56,7 +55,7 @@
 <%--        <button type="button" id="addrBtn" onClick="goPopup();">우편번호 검색</button> &nbsp;--%>
 <%--    </div>--%>
 <%--    <hr>--%>
-
+<input hidden name="dely" value="${dely}">
 
 
 </form>
@@ -108,8 +107,8 @@
             $(".addr-input-form").css("display", "block");
         }); //addrModifyBtn
 
-        $('#updBtn').click(function () {
 
+        $('#updBtn').click(function () {
             let form = $("#form");
             form.attr("action", "<c:url value='/buy/delyUpdate'/>");
             form.attr("method", "POST");
@@ -123,6 +122,9 @@
         })  //updBtn
 
         $("#closeBtn").on("click", function () {
+
+            opener.document.getElementById('${dely}').value='${newAdder}';
+
             window.close();
         })  //closeBtn
 

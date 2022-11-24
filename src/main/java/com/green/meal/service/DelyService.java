@@ -22,7 +22,7 @@ public interface DelyService {
 
     int updateDelivery2(String userId);
 
-    int updateDelivery3(DeliveryVO vo, DeliveryVO newDelyVo);
+    int updateDelivery3(DeliveryVO vo);
 
     int selectBase(String userId);
 

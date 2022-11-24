@@ -8,11 +8,15 @@ import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -126,7 +130,7 @@ public class PaymentController {
 
     //주문페이지에서 배송지 상세정보를 볼 수 있도록 해주는 메서드
     @GetMapping("/delyView")
-    public String delyView(HttpServletRequest request, Model m, String delyPlace, DeliveryVO vo) {
+    public String delyView(HttpServletRequest request,Model m, String delyPlace, String dely ,DeliveryVO vo) {
 
         //세션으로 아이디 얻어오기
         HttpSession session = request.getSession();
@@ -146,45 +150,47 @@ public class PaymentController {
         m.addAttribute("zipNo", delyAddr[0]);
         m.addAttribute("roadAddrPart1", delyAddr[1]);
         m.addAttribute("addrDetail", delyAddr[2]);
+        m.addAttribute("dely",dely);
 
         return "delyView";
     }
 
     //주문페이지에서 배송지 정보를 수정할 수 있는 메서드
     @PostMapping("/delyUpdate")
-    public String delyUpdate(DeliveryVO vo, String newReceiver, String newDelyPhone, String roadAddrPart1, String addrDetail, HttpServletResponse response, Model m, HttpSession session){
+    public String delyUpdate(DeliveryVO vo, String newReceiver, String newDelyPhone, String zipNo, String roadAddrPart1, String addrDetail,
+                             String dely, HttpServletRequest request, HttpServletResponse response, Model m, HttpSession session){
 
         try {
 
             response.setContentType("text/html; charset=UTF-8");
 
-            //수정 전 배송지 정보에 아이디 담기
+            //배송지 정보에 아이디 담기
             String userId = (String)session.getAttribute("userId");
             vo.setUserId(userId);
 
             //api로 입력받은 도로명 주소 -> 새로운 주소로 조합
-            String newDelyAddr = roadAddrPart1+" "+addrDetail;
+            String newDelyAddr = (zipNo+"@"+roadAddrPart1+"@"+addrDetail );
 
             //수정하는 값들 vo에 저장
-            DeliveryVO newDelyVo = new DeliveryVO();
-            newDelyVo.setDelyPlace(vo.getDelyPlace());
-            newDelyVo.setReceiver(newReceiver);
-            newDelyVo.setDelyPhone(newDelyPhone);
-            //배송지주소 수정 없으면 기존배송지주소 입력되도록
-            if(" ".equals(newDelyAddr)) {
-                newDelyVo.setDelyAddr(vo.getDelyAddr());
-            } else {
-                newDelyVo.setDelyAddr(newDelyAddr);
-            }
+            vo.setReceiver(newReceiver);
+            vo.setDelyPhone(newDelyPhone);
+            vo.setDelyAddr(newDelyAddr);
+
 
             //배송지 정보 변경하기
-            int rowCnt = delyService.updateDelivery3(vo, newDelyVo);
+            int rowCnt = delyService.updateDelivery3(vo);
             if(rowCnt!=1) {
                 throw new Exception("update delivery error");
             }
 
-            m.addAttribute("vo", newDelyVo);
+            String newAdder = (roadAddrPart1+" "+addrDetail);
 
+            m.addAttribute("vo", vo);
+            m.addAttribute("zipNo", zipNo);
+            m.addAttribute("roadAddrPart1", roadAddrPart1);
+            m.addAttribute("addrDetail", addrDetail);
+            m.addAttribute("newAdder",newAdder);
+            m.addAttribute("dely",dely);
         } catch (Exception e) {
             e.printStackTrace();
             m.addAttribute("vo", vo);
