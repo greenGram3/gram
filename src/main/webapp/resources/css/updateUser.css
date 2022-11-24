@@ -227,10 +227,10 @@
 
 
 .addr span {
-    width: 220px;
+    width: 217px;
     padding-left: 20px;
     background-color: #eeecec;
-    line-height: 48px;
+    line-height: 42px;
 }
 
 .addr>div{
@@ -239,7 +239,7 @@
 }
 
 #addr input{
-    height: 35px;
+    height: 30px;
 }
 
 #addr>div:nth-of-type(2), #addr>div:nth-of-type(3) {
@@ -258,7 +258,7 @@ input#zipNo {
 
 #addrBtn{
     width: 90px;
-    height: 35px;
+    height: 30px;
 }
 
 #addrCancel,
