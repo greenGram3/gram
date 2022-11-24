@@ -2,7 +2,7 @@
     margin-top: 250px;
     margin-bottom: 50px;
     width: 900px;
-    font-size: 15px;
+    font-size: 14px;
 }
 
 .delyForm h3 {
@@ -23,13 +23,13 @@ table {
 .delyForm td {
     border-bottom: 1px solid lightgray;
     border-top: 1px solid lightgray;
-    padding: 10px;
+    padding: 10px 3px;
 }
 
 .delyForm th {
     background-color: #eeecec;
     border-bottom: 1px solid lightgray;
-    padding: 10px;
+    padding: 10px 3px;
 }
 
 .delyForm input {
@@ -49,4 +49,7 @@ table {
     color: #eeecec;
     cursor: pointer;
     border: none;
+}
+th:nth-of-type(4){
+    width: 50%;
 }
