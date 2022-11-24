@@ -78,7 +78,7 @@
 
     <!-- review 중복체크 -->
     <select id="dupCheck" resultType="com.green.meal.domain.ReviewVO">
-        select * from review where item_no=#{itemNo} and order_no=#{orderNo}
+        select * from review where item_no=#{itemNo} and order_no=#{orderNo} and review_step=0
     </select>
 
     <!-- Review Update -->
