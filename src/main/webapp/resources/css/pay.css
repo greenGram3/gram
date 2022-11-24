@@ -92,6 +92,8 @@ select {
 .delyBtn {
     margin-left: 10px;
     margin-right: 20px;
+    border: 1px solid gray;
+    padding: 2px 5px;
 }
 
 .payCheck {
@@ -130,4 +132,85 @@ select {
     height: 32px;
     border: 1px solid darkgray;
     margin-left: 10px;
+}
+
+.delyCheck2,
+.orderReq {
+    display: flex;
+}
+
+
+
+.delyInfo * ,
+.orderReq>div:nth-of-type(1){
+    width: 230px;
+    line-height: 30px;
+    padding: 10px 20px;
+    background-color: #eeecec;
+    border: 1px solid lightgray;
+    border-left: none;
+    font-weight: 1000;
+    margin-left: 0;
+}
+
+.delyInfo {
+    margin-right: 0;
+    margin-left: 0;
+}
+
+.delyContent {
+    display: flex;
+    width: 100%;
+    border-bottom: 1px solid lightgray;
+}
+
+.delyContainer {
+    height: 50px;
+    font-size: 13px;
+}
+.order-req {
+    margin-left: 0;
+    border: 1px solid lightgray;
+    border-left: none;
+    border-right: none;
+    line-height: 50px;
+    width: 70%;
+}
+.orderReq>div:nth-of-type(1){
+    border-top: 1px solid lightgray
+}
+.delySection {
+    width: 70%;
+    margin: 0px;
+    border: 1px solid lightgray;
+    border-left: none;
+    border-right: none;
+    position: relative;
+     border-bottom: none;
+}
+
+.delySection * {
+margin: 0px;
+}
+.delyContainer li:nth-of-type(2) {
+height: 30px;
+margin-top: 20px;
+position: absolute;
+left: 0;
+
+}
+
+.order-req-input {
+border: 1px solid lightgray;
+width: 500px;
+margin-left: 10px;
+}
+
+.delyContainer>li {
+margin-top: 10px;
+margin-left: 10px;
+}
+
+.delyContainer:nth-of-type(n+2) li:nth-of-type(n+2) {
+display: none;
 }

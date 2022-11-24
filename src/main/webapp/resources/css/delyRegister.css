@@ -10,6 +10,10 @@
     font-family: 'IBM Plex Sans KR', sans-serif;
 }
 
+main {
+    width: 500px;
+    height: 430px;
+}
 
 h2 {
     margin-left: 20px;

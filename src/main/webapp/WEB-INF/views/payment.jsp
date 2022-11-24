@@ -69,30 +69,41 @@
       </table>
         <br>
         <h3>배송정보</h3>
-      <table>  <tr>
-        <th> 배송지 확인</th>
-        <td>
+      <div class="delyCheck1">
+        <div class="delyCheck2">
+        <div class="delyInfo">
+        <div> 배송지명</div>
+        <div>배송주소</div>
+        </div>
+        <div class="delySection">
+        <div class="delyContent">
         <c:forEach var="list" items="${delyList}" varStatus="status">
-             <input type="radio" id="delyPlace" name="delyPlace" value="${list.delyPlace}" ${list.delyNo==1 ? "checked" : ""}/>
-              ${list.delyPlace} ${list.delyNo==1 ? "(기본배송지)" : ""}
-              <button type="button" class="delyBtn" id="openBtn${status.index}">상세보기</button>
+          <ul class="delyContainer">
+             <li><input type="radio" id="delyPlace${status.index}" class="delyPlace" name="delyPlace" value="${list.delyPlace}" ${list.delyNo==1 ? "checked" : ""}/>
+              ${list.delyPlace} ${list.delyNo==1 ? "(기본배송지)" : ""}</li>
+            <li class="dely " id="delyAddr">${list.delyAddr}
+              <button type="button" class="delyBtn" id="openBtn${status.index}">수정하기</button></li>
           <script>
             $("#openBtn${status.index}").on("click", function(){
 
               window.open("<c:url value='/buy/delyView'/>?delyPlace=${list.delyPlace}","Child","left=400,top=200,width=500,height=500");
 
             });
+
+
           </script>
+          </ul>
         </c:forEach>
-        </td>
-        </tr>
-        <tr>
-          <th>남기실 말씀</th>
-          <td class="order-req">
+        </div>
+        </div>
+      </div>
+        <div class="orderReq">
+          <div>남기실 말씀</div>
+          <div class="order-req">
             <input class="order-req-input" type="text" maxlength="60" name="orderReq" value="" placeholder="60자 이내로 입력 가능합니다." />
-          </td>
-        </tr>
-      </table>
+          </div>
+        </div>
+      </div>
       <p>※ 새로운 배송지 등록 및 배송지명 수정은 마이페이지-회원정보-배송지관리에서 가능합니다.</p>
 
       <br>
@@ -115,6 +126,22 @@
     </form>
 
 <script>
+
+  let delyPlace = document.getElementsByClassName('delyPlace');
+  let dely = document.getElementsByClassName('dely');
+  let tmp = dely[0];
+  for(let i =0; i<delyPlace.length; i++){
+
+    delyPlace[i].addEventListener('click',() => {
+
+      tmp.style.display = 'none';
+      dely[i].style.display = 'block';
+      tmp = dely[i];
+    });
+
+  }
+
+
 
   $('.order-req-input').keyup(function (e) {
 
