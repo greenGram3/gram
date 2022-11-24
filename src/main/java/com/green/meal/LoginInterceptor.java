@@ -7,6 +7,7 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.LinkedList;
 import java.util.UUID;
 
 @Slf4j
@@ -16,6 +17,12 @@ public class LoginInterceptor extends HandlerInterceptorAdapter   {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 		HttpSession session = request.getSession(false);
 		String requestURI = request.getRequestURI();
+
+		String queryString = request.getQueryString();
+		if(queryString != null) {
+			requestURI += ("?"+ queryString);
+		}
+
 		if (session!=null && session.getAttribute("userId")!=null) {
 			return true;
 		}else {
