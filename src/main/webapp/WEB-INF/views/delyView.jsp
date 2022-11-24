@@ -103,13 +103,6 @@
                 last+="1";
             }
 
-            // if($('#zipNo')[0].value != ''){
-            //     $('#msgAddr')[0].innerHTML = "";
-            // }else{
-            //     $('#msgAddr')[0].innerHTML = "주소를 확인해주세요.";
-            //     last+="1";
-            // }
-
             if (last.length == 0) return true;
 
         }   //formCheck
