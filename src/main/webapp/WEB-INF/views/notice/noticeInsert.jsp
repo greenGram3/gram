@@ -35,6 +35,7 @@
                     <td>분류입력</td>
                     <td>
                         <select name="noticeType" id="noticeType">
+                            <option value="FAQ">FAQ</option>
                             <option value="이벤트">이벤트</option>
                             <option value="공지">공지</option>
                             <option value="편한밥상">편한밥상</option>
