@@ -69,14 +69,10 @@
 			<mvc:mapping path="/reviewdetail/**" />
 			<mvc:mapping path="/reviewlist/**" />
 			<mvc:mapping path="/reviewinsertf/**" />
-			<mvc:mapping path="/reviewrupdatef/**" />
 
 			<mvc:mapping path="/qnalist/**" />
 			<mvc:mapping path="/qnainsertf/**" />
 			<mvc:mapping path="/qnadetail/**" />
-
-			<mvc:mapping path="/noticeupdate/**" />
-			<mvc:mapping path="/noticeupdatef/**" />
 
 			<!-- 인터셉터로 사용할 빈 등록 -->
 			<beans:ref bean="loginInterceptor" />
@@ -86,6 +82,14 @@
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/noticeinsertf/**" />
+			<mvc:mapping path="/noticeupdate/**" />
+			<mvc:mapping path="/noticeupdatef/**" />
+
+			<mvc:mapping path="/reviewrinsertf/**" />
+			<mvc:mapping path="/reviewrupdatef/**" />
+
+			<mvc:mapping path="/qnarinsertf/**" />
+			<mvc:mapping path="/qnarupdatef/**" />
 			<!-- 인터셉터로 사용할 빈 등록 -->
 			<beans:ref bean="AdminloginInterceptor" />
 		</mvc:interceptor>
