@@ -136,14 +136,20 @@ public class PaymentController {
 
     //주문페이지에서 배송지 정보를 수정할 수 있는 메서드
     @PostMapping("/delyUpdate")
-    public String delyUpdate(DeliveryVO vo, String newReceiver, String newDelyPhone, String newDelyAddr, HttpServletResponse response, Model m, HttpSession session){
+    public String delyUpdate(DeliveryVO vo, String newReceiver, String newDelyPhone, String roadAddrPart1, String addrDetail, HttpServletResponse response, Model m, HttpSession session){
 
-        response.setContentType("text/html; charset=UTF-8");
 
         try {
 
+            System.out.println("delyUpdate start");
+
+            response.setContentType("text/html; charset=UTF-8");
+
             //수정 전 배송지 정보에 아이디 담기
             vo.setUserId((String) session.getAttribute("userId"));
+
+            //api로 입력받은 도로명 주소 -> 새로운 주소로 조합
+            String newDelyAddr = roadAddrPart1+" "+addrDetail;
 
             // 수정하는 값들 vo에 저장
             DeliveryVO newDelyVo = new DeliveryVO();

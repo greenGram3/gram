@@ -147,8 +147,8 @@
             let returnCheck = function() {
                 let orderState = document.getElementById("orderState");
 
-                if(orderState.value=='반품확정') {
-                    alert('이미 반품 된 주문입니다')
+                if(orderState.value!='반품요청') {
+                    alert('반품요청 건에 대해서만 반품처리가 가능합니다.');
                     return false;
                 }
                 return true;

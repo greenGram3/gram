@@ -187,7 +187,7 @@
       form.submit();
     });
 
-  });
+  }); //ready
 
 </script>
     </div>
