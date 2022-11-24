@@ -50,7 +50,13 @@ public class UserController {
         try {
 
             vo = userService.userDetail(vo.getUserId());
-            System.out.println("vo = " + vo);
+
+            String userAddr = vo.getUserAddr();
+            String[] addrs = userAddr.split("@");
+
+            String delyAddr  = addrs[1] + " " + addrs[2];
+            vo.setUserAddr(delyAddr);
+
             m.addAttribute("vo", vo);
             m.addAttribute("sc", sc);
 
