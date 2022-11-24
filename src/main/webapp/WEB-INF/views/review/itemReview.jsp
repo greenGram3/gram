@@ -92,7 +92,12 @@
                                            onclick="reviewDetailD(event, ${review.reviewNo}, ${review.itemNo}, ${reviewVs.count})">&nbsp;&nbsp;ㄴ답변&nbsp;${review.reviewTitle}</a>
                                     </td>
                                 </c:if>
-                                <td>${review.userId}</td>
+                                <c:if test="${review.userId != 'admin'}">
+                                    <td>${review.userId}</td>
+                                </c:if>
+                                <c:if test="${review.userId == 'admin'}">
+                                    <td>관리자</td>
+                                </c:if>
                             </tr>
                             <tr>
                                 <td style="border-bottom: none;"></td>
