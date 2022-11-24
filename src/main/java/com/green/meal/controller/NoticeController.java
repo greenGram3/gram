@@ -53,23 +53,16 @@ public class NoticeController {
 
     @RequestMapping(value="/noticedetail")
     public String noticedetail (String link,HttpServletRequest request, Model model, NoticeVO vo) {
-        NoticeVO voRe;
-
         if(link != null){
             model.addAttribute("link",link);
         }
-
-        // 1. 성공 시 detail폼
         String uri = "/notice/noticeDetail";
 
-        // 2. detail 실행, 저장
+        // Service 실행
+        NoticeVO voRe;
         voRe = noticeService.noticedetail(vo);
 
         if( voRe != null ) { //detail 저장 성공이면
-
-            if("U".equals(request.getParameter("jCode"))) { //수정요청이면 수정폼으로
-                uri = "/notice/noticeUpdate";
-            }
             model.addAttribute("noticeResult",voRe);
         } else { //저장 실패 error면
             model.addAttribute("message","자료를 불러오는 데 실패했습니다.");
@@ -110,6 +103,16 @@ public class NoticeController {
     }
 
     //---------------------------------------------------------------------------------------------------------//
+    @RequestMapping(value = "/noticeupdatef")
+    public String noticeupdatef(String link, Model model, NoticeVO vo) {
+        System.out.println("link: "+link);
+        model.addAttribute("noticeResult",noticeService.noticedetail(vo));
+
+        if(link!=null) {
+            model.addAttribute("link",link);
+        }
+        return "/notice/noticeUpdate";
+    }
 
     @RequestMapping(value = "/noticeupdate", method=RequestMethod.POST)
     public String noticeupdate(@RequestBody String link, NoticeVO vo, Model model) {

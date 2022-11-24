@@ -53,7 +53,7 @@
         <div class="linkBtn">
             <a href="noticelist?link=${link}">목록으로</a>
             <c:if test="${userId == 'admin'}">
-                <a href="noticedetail?jCode=U&noticeNo=${noticeResult.noticeNo}&link=${link}">수정하기</a>
+                <a href="noticeupdatef?noticeNo=${noticeResult.noticeNo}&link=${link}">수정하기</a>
                 <a href="noticedelete?noticeNo=${noticeResult.noticeNo}&link=${link}" onclick="return confirm('삭제하시겠습니까? 확인/취소');">삭제하기</a>
             </c:if>
         </div>
