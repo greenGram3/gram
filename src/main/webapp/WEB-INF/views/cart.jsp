@@ -127,7 +127,7 @@
         </figure>
 
         <button class="delAllBtn" type="button" > 전체 상품 삭제</button>
-        <button class="shopBtn" type="button"> 계속 쇼핑 하기</button>
+        <button class="shopBtn" type="button" onclick="location.href='/meal/itemList/allItems'"> 계속 쇼핑 하기</button>
         <button class="payAllBtn" type="button"> 상품 주문 하기</button>
         </form>
     </div>
@@ -137,26 +137,26 @@
             location.reload();
         }
 
-        let list='${list}';
+        <%--let list='${list}';--%>
 
         $(document).ready(function(){
 
-            console.log(list);
-            $(".shopBtn").on("click",function(){
-
-                $.ajax({
-                    type:'post',
-                    url: '/meal/cart/test',
-                    headers : { "content-type": "application/json"},
-                    dataType : 'json',
-                    data : JSON.stringify(list),
-                    success : function(result){
-                        alert("success");
-                        getList();
-                    },
-                    error   : function(){ alert("error") }
-                });
-            });
+            // console.log(list);
+            // $(".shopBtn").on("click",function(){
+            //
+            //     $.ajax({
+            //         type:'post',
+            //         url: '/meal/cart/test',
+            //         headers : { "content-type": "application/json"},
+            //         dataType : 'json',
+            //         data : JSON.stringify(list),
+            //         success : function(result){
+            //             alert("success");
+            //             getList();
+            //         },
+            //         error   : function(){ alert("error") }
+            //     });
+            // });
 
 
             $(".delAllBtn").on("click",function(){
