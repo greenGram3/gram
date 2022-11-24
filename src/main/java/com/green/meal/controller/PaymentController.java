@@ -138,10 +138,7 @@ public class PaymentController {
     @PostMapping("/delyUpdate")
     public String delyUpdate(DeliveryVO vo, String newReceiver, String newDelyPhone, String roadAddrPart1, String addrDetail, HttpServletResponse response, Model m, HttpSession session){
 
-
         try {
-
-            System.out.println("delyUpdate start");
 
             response.setContentType("text/html; charset=UTF-8");
 
@@ -156,7 +153,11 @@ public class PaymentController {
             newDelyVo.setDelyPlace(vo.getDelyPlace());
             newDelyVo.setReceiver(newReceiver);
             newDelyVo.setDelyPhone(newDelyPhone);
-            newDelyVo.setDelyAddr(newDelyAddr);
+            if(" ".equals(newDelyAddr)) {
+                newDelyVo.setDelyAddr(vo.getDelyAddr());
+            } else {
+                newDelyVo.setDelyAddr(newDelyAddr);
+            }
 
             //배송지 정보 변경하기
             int rowCnt = delyService.updateDelivery3(vo, newDelyVo);
