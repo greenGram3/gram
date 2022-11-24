@@ -190,16 +190,13 @@ public class QnaController {
     @RequestMapping(value = "/qnarDetail")
     public String qnarDetail(HttpServletRequest request, String link, Model model, QnaVO vo) {
         System.out.println("link: " + link);
-        // session에서 userId받아 전달 => 관리자만 수정, 삭제 가능하게
-        String userId = (String) request.getSession().getAttribute("userId");
-        model.addAttribute("userId", userId);
 
         // 1. 성공 시 Detail폼
         String uri = "/qna/qnaRdetail";
         if (link != null) {
             model.addAttribute("link", link);
         }
-        // 2. Service 실행, 저장
+        // 2. Service 실행
         vo = qnaService.qnarDetail(vo);
         if (vo != null) { //성공
             model.addAttribute("qnaResult", vo);
@@ -239,19 +236,4 @@ public class QnaController {
         }
         return "jsonView";
     }
-//--------------------------------------------------------------------------------------------------------------//
-    // ** QnA Dup Check(답변 중복체크-보류)
-/*    @RequestMapping(value="/qnaDupCheck")
-    public String qnaDupCheck(QnaVO vo, Model model) {
-
-        System.out.println("qnaRoot: "+vo.getQnaRoot());
-
-        if (qnaService.qnarDetail(vo) != null) {
-            model.addAttribute("code","200");
-        } else {
-            model.addAttribute("code","500");
-        }
-        return "jsonView";
-    }*/
-
 } //qnaController
