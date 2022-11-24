@@ -10,7 +10,6 @@
   <div>상품 관리
     <ul>
       <li><a href="<c:url value='/item/list'/>">　- 상품 목록</a></li>
-      <li><a href="<c:url value='/item/list'/>">　- 이벤트 배너</a></li>
     </ul>
   </div>
 

@@ -186,5 +186,10 @@ main * {
     border: none;
 }
 
+.orderDetail .delyAddr,
+.orderDetail .orderReq {
+    width: 100% ;
+}
+
 
 
