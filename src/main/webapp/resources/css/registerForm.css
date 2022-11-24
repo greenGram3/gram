@@ -23,17 +23,18 @@ main * {
 }
 
 .registerForm h1 {
-    padding-bottom: 30px;
+    padding-bottom: 20px;
 }
 
 select#selectEmail {
     height: 32px;
     width: 90px;
+    margin-left: 15px;
 }
 
 .registerForm button{
-    height: 30px;
-    width: 70px;
+    height: 32px;
+    width: 75px;
     border: 1px solid lightgray;
     background-color: whitesmoke;
     cursor: pointer;
@@ -63,10 +64,50 @@ select#selectEmail {
 }
 
 button#addrBtn {
-    margin-left: 10px;
+    margin-left: 15px;
 }
 
 .star {
     color: red;
     margin-right: 5px
 }
+
+input#userId {
+    margin-left: 80px;
+}
+input#userName {
+    margin-left: 93px;
+}
+input#userEmailArr {
+    margin-left: 78px;
+}
+
+input#userPwd {
+    margin-left: 59px;
+}
+
+input#pwdCheck {
+    margin-left: 30px;
+    width: 350px;
+}
+
+input#userPhone {
+    margin-left: 48px;
+}
+
+input#zipNo {
+    margin-left: 89px;
+}
+
+input#roadAddrPart1 {
+    margin: 0px 10px;
+}
+
+label.birth {
+    margin-left: 11px;
+}
+
+input#userBirth {
+    margin-left: 90px;
+}
+

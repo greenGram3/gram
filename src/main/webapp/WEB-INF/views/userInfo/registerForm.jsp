@@ -18,6 +18,7 @@
 <main>
     <div class="registerForm">
         <h1>회원가입</h1>
+        <span> <span class="star">*</span> 은 필수 입력 사항 입니다</span>
         <hr>
 
         <form:form modelAttribute="userVO" method="post">
@@ -48,7 +49,7 @@
             <form:errors path="userEmail" cssClass="class" cssStyle="color: red"></form:errors>
             <hr>
             <span class="star">*</span> <label for="userPwd">비밀번호　</label>
-            <input type="password" id="userPwd" name="userPwd" placeholder="　비밀번호(8~20자 이내, 하나이상의 영문,숫자,특수문자)" style="width: 450px" value="${user.userPwd}">
+            <input type="password" id="userPwd" name="userPwd" placeholder="　비밀번호(8~20자 이내, 하나이상의 영문,숫자,특수문자)" style="width: 350px" value="${user.userPwd}">
             <div id="msgPwd1" style="color: red; display: none"></div>
             <div id="msgPwd2" style="color: red; display: none"></div>
             <form:errors path="userPwd" cssClass="class" cssStyle="color: red"></form:errors>
@@ -69,7 +70,7 @@
             <button type="button" id="addrBtn" style="width: 100px" onClick="goPopup();">우편번호 검색</button>
             <div id="msgAddr" style="color: red; display: none"></div>
             <hr>
-            <label for="userBirth">생일　</label>
+            <label class="birth" for="userBirth">생일　</label>
             <input type="date" name="userBirth" id="userBirth">
 
             　　|　　성별　</label>
