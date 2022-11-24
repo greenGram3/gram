@@ -76,6 +76,7 @@
 
 			<mvc:mapping path="/noticeinsertf/**" />
 			<mvc:mapping path="/noticeupdate/**" />
+			<mvc:mapping path="/noticeupdatef/**" />
 
 			<!-- 인터셉터로 사용할 빈 등록 -->
 			<beans:ref bean="loginInterceptor" />
