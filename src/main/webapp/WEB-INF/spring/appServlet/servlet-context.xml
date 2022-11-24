@@ -67,8 +67,11 @@
 			<mvc:mapping path="/myReview/**" />
 			<mvc:mapping path="/reviewdetail/**" />
 			<mvc:mapping path="/reviewlist/**" />
+			<mvc:mapping path="/reviewinsertf/**" />
+			<mvc:mapping path="/reviewrupdatef/**" />
 
 			<mvc:mapping path="/qnalist/**" />
+			<mvc:mapping path="/qnainsertf/**" />
 			<mvc:mapping path="/qnadetail/**" />
 
 			<mvc:mapping path="/noticeinsertf/**" />
