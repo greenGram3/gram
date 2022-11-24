@@ -192,6 +192,12 @@ public class PaymentController {
             DeliveryVO vo = new DeliveryVO();
             vo = delyService.selectedDely(map);
 
+            //주소 형태 변환
+            String delyAddrTemp = vo.getDelyAddr();
+            String[] addrs = delyAddrTemp.split("@");
+            String delyAddr = addrs[1] + " " + addrs[2];
+            vo.setDelyAddr(delyAddr);
+            
             //구매자 정보 주문내용에 담기(order_list에 넣을 것) (구매상품에 대한 정보는 이미 담겨있음)
             odvo.setUserId(userId);
             odvo.setUserPhone(vo.getDelyPhone());
