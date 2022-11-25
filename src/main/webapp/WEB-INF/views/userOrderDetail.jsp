@@ -28,7 +28,8 @@
                     <table>
                         <tr>
                             <th>상품정보</th>
-                            <th>상품금액(수량)</th>
+                            <th>수량</th>
+                            <th><li class="itemPrice">(개별금액)</li><li>합계금액</li></th>
                             <th>주문상태</th>
                             <c:if test="${orderListDto.orderState == '구매확정'}">
                                 <th>상품후기</th>
@@ -40,8 +41,9 @@
                                     <li><img src="<c:url value='${orderDetailDto.fileName}'/>" width="100"></li>
                                     <li>${orderDetailDto.itemName}</li>
                                 </td>
-                                <td><li><fmt:formatNumber pattern="###,###,###" value="${orderDetailDto.itemPrice}"/> 원</li>
-                                    <li>( ${orderDetailDto.itemAmount} 개)</li>
+                                <td>${orderDetailDto.itemAmount} 개</td>
+                                <td><li class="itemPrice">(<fmt:formatNumber pattern="###,###,###" value="${orderDetailDto.itemPrice}"/> 원)</li>
+                                    <li><fmt:formatNumber pattern="###,###,###" value="${orderDetailDto.itemAmount*orderDetailDto.itemPrice}"/> 원</li>
                                 </td>
                                 <td>${orderListDto.orderState}</td>
                                 <c:if test="${orderListDto.orderState == '구매확정'}">

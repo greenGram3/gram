@@ -70,6 +70,11 @@ table:nth-of-type(2) th {
     height: 50px;
     width: 20%;
 }
+.orderDetail .itemPrice {
+    font-size: 12px;
+    color: darkgray;
+    margin-left: 5px;
+}
 
 button {
     padding: 2px 5px;

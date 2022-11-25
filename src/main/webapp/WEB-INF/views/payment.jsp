@@ -34,8 +34,9 @@
       <table>
         <tr>
           <th>상품/옵션정보</th>
-          <th>상품금액</th>
           <th>수량</th>
+          <th>개별금액</th>
+          <th>상품별 합계금액</th>
         </tr>
         <c:forEach var="list" items="${odvoList}" varStatus="status">
           <tr >
@@ -45,10 +46,11 @@
                 <input hidden id="itemName${status.index}" name="itemName" type="text" value="${list.itemName}">
                 ${list.itemName}
             </td>
-            <td><input hidden name="itemPrice" type="text" value="${list.itemPrice}">
-              <fmt:formatNumber pattern="###,###,###" value="${list.itemPrice}"/> 원</td>
             <td><input hidden name="cartAmount" type="text" value="${list.cartAmount}">
                 ${list.cartAmount} 개</td>
+            <td><input hidden name="itemPrice" type="text" value="${list.itemPrice}">
+              <fmt:formatNumber pattern="###,###,###" value="${list.itemPrice}"/> 원</td>
+            <td><fmt:formatNumber pattern="###,###,###" value="${list.cartAmount*list.itemPrice}"/> 원</td>
           </tr>
         </c:forEach>
       </table>

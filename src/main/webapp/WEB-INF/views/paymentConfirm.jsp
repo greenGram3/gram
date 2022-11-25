@@ -27,14 +27,18 @@
 <table>
     <tr>
         <th>상품명</th>
-        <th>상품금액</th>
         <th>수량</th>
+        <th><li class="itemPrice">(개별금액)</li>
+            <li>합계금액</li></th>
+
     </tr>
     <c:forEach var="odvo" items="${odvoList}">
         <tr>
             <td>${odvo.itemName}</td>
-            <td><fmt:formatNumber pattern="###,###,###" value="${odvo.itemPrice}"/> 원</td>
             <td>${odvo.cartAmount} 개</td>
+            <td><li class="itemPrice">(<fmt:formatNumber pattern="###,###,###" value="${odvo.itemPrice}"/> 원)</li>
+                <li><fmt:formatNumber pattern="###,###,###" value="${odvo.cartAmount*odvo.itemPrice}"/> 원</li></td>
+
         </tr>
     </c:forEach>
     <tr>
