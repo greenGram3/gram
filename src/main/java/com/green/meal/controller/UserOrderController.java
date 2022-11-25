@@ -134,7 +134,7 @@ public class UserOrderController {
 
         OrderListDto orderListDto = userOrderService.order(map);
         orderListDto.setOrder(orderListDto.getOrderDate()+"-0000"+orderListDto.getOrderNo());
-        //배송지 세팅하기
+        //맵핑된 배송지 세팅하기
         String delyAdd = orderListDto.getDelyAddr();
 
         String[] addrs = delyAdd.split("@");
@@ -183,6 +183,7 @@ public class UserOrderController {
 
     //세션에서 회원 아이디 가져오기
     private static String getUserId(HttpSession httpSession) {
+
         return (String) httpSession.getAttribute("userId");
     }
 

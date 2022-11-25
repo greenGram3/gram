@@ -257,7 +257,7 @@ public class PaymentController {
 
         } catch (Exception e) {
             e.printStackTrace();
-            return "redirect:item/itemDetail";
+            return "redirect:/buy/payment";
         }
 
     }

@@ -18,6 +18,7 @@ public class ItemListController {
 
     private final ItemService itemService;
 
+    //카테고리1 별 아이템 리스트 보여주기
     @GetMapping("/category1")
     public String category1( String category1, Model model){
         String category = null;
@@ -34,7 +35,7 @@ public class ItemListController {
 
         return "/item/itemList";
     }
-
+    //카테고리2 별 아이템 리스트 보여주기
     @GetMapping("/category2")
     public String category2(String category2, Model model){
         String category = null;
@@ -52,6 +53,7 @@ public class ItemListController {
         return "/item/itemList";
     }
 
+    //베스트 아이템 리스트
     @GetMapping("/bestMeal")
     public String bestList( Model model){
         String category = "베스트";
@@ -63,8 +65,11 @@ public class ItemListController {
 
         return "/item/itemList";
     }
+
+    //신메뉴 아이템 리스트
     @GetMapping("/newMeal")
     public String newList(Model model){
+
         String category = "신메뉴";
         List<ItemVO> list = itemService.newItems();
         List<ItemVO> itemList=list.subList(0,16);
@@ -73,7 +78,7 @@ public class ItemListController {
 
         return "/item/itemList";
     }
-
+    //전체보기아이템 리스트
     @GetMapping("/allItems")
     public String allList(Model model)  {
         String category = "전체보기";
@@ -92,7 +97,7 @@ public class ItemListController {
 
     }
 
-
+    //검색별 아이템 리스트
     @GetMapping("/search")
     public String itemSearchList(SearchCondition sc, Model m) {
         try {

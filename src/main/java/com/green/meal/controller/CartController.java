@@ -36,13 +36,13 @@ public class CartController {
 
         HttpSession session = request.getSession();
         //세션에서 장바구니 꺼내기 ( 비회원 장바구니 )
-        List<CartVO> oldList = (List<CartVO>)session.getAttribute("list");
+        List<CartVO> oldList = getList(session);
         //비회원 장바구니 리스트
         if(!loginCheck(session)){
             return "cart";
         }
 
-        String userId =(String) session.getAttribute("userId");
+        String userId = getUserId(session);
         //로그인 전의 장바구니가 있을 때
         if(oldList!=null) {
             Map map = new HashMap();
@@ -66,6 +66,8 @@ public class CartController {
         return "cart";
     }
 
+
+
     //장바구니 수정
     @PatchMapping("/{itemNo}")
     @ResponseBody
@@ -81,7 +83,7 @@ public class CartController {
         //비회원 장바구니 수정
         if(!loginCheck(session)){
             //세션에서 장바구니 꺼내기
-            List<CartVO> oldList = (List<CartVO>)session.getAttribute("list");
+            List<CartVO> oldList = getList(session);
 
             //장바구니 목록중에 같은 상품을 찾아서 수량 변경
             for (CartVO vo : oldList) {
@@ -97,7 +99,7 @@ public class CartController {
 
             try {
                 //회원 장바구니 수정
-                String userId =(String) session.getAttribute("userId");
+                String userId = getUserId(session);
 
                 cartVO.setUserId(userId);
                 int rowCnt = cartService.update(cartVO);
@@ -124,7 +126,7 @@ public class CartController {
         //비회원 장바구니 저장------------------------------------------------------------------
         if(!loginCheck(session)){
             //세션에서 장바구니 꺼내기
-            List<CartVO> oldList = (List<CartVO>) session.getAttribute("list");
+            List<CartVO> oldList = getList(session);
 
             //비회원 장바구니가 없을때
             if(oldList==null){
@@ -155,7 +157,7 @@ public class CartController {
 
 
         //회원 장바구니 저장------------------------------------------------------------------
-        String userId =(String) session.getAttribute("userId");
+        String userId = getUserId(session);
         cartVO.setUserId(userId);
 
         Map map = new HashMap();
@@ -190,7 +192,7 @@ public class CartController {
     public ResponseEntity<String>remove(@PathVariable Integer itemNo, HttpSession session){
         CartVO cartVO = new CartVO();
         cartVO.setItemNo(itemNo);
-        List<CartVO> oldList = (List<CartVO>) session.getAttribute("list");
+        List<CartVO> oldList = getList(session);
 
         //비회원 장바구니 삭제
         if(!loginCheck(session)){
@@ -205,7 +207,7 @@ public class CartController {
             return new ResponseEntity<>("DEL_OK",HttpStatus.OK);
         }
 
-            String userId =(String) session.getAttribute("userId");
+            String userId = getUserId(session);
             //회원 장바구니 삭제
             Map map = new HashMap();
             map.put("userId",userId);
@@ -225,6 +227,8 @@ public class CartController {
 
 
     }
+
+
     //장바구니 모두 삭제
     @ResponseBody
     @DeleteMapping("/cart")
@@ -243,7 +247,7 @@ public class CartController {
 
         }
 
-            String userId =(String) session.getAttribute("userId");
+            String userId = getUserId(session);
             //회원 장바구니 삭제
   
             try {
@@ -267,8 +271,17 @@ public class CartController {
         return session.getAttribute("userId")!=null;
     }
 
-
+    //회원아이디 꺼내오기
+    private static String getUserId(HttpSession session) {
+        return (String) session.getAttribute("userId");
     }
+
+    //세션에서 장바구니 가져오기 ( 비회원 )
+    private static List<CartVO> getList(HttpSession session) {
+        return (List<CartVO>) session.getAttribute("list");
+    }
+
+}
 
 
 
