@@ -55,8 +55,8 @@
         　
 
         <div class="delyCheck">
-            <input type="button" value="취소" id="delBtn">
             <input type="button" value="수정" id="updBtn">
+            <input type="button" value="취소" id="delBtn">
         </div>
     </div>
 </main>
