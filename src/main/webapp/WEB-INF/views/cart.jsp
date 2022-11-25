@@ -137,27 +137,9 @@
             location.reload();
         }
 
-        <%--let list='${list}';--%>
+
 
         $(document).ready(function(){
-
-            // console.log(list);
-            // $(".shopBtn").on("click",function(){
-            //
-            //     $.ajax({
-            //         type:'post',
-            //         url: '/meal/cart/test',
-            //         headers : { "content-type": "application/json"},
-            //         dataType : 'json',
-            //         data : JSON.stringify(list),
-            //         success : function(result){
-            //             alert("success");
-            //             getList();
-            //         },
-            //         error   : function(){ alert("error") }
-            //     });
-            // });
-
 
             $(".delAllBtn").on("click",function(){
                 if(!confirm("정말로 모두 삭제하시겠습니까?")) return;
