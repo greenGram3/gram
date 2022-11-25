@@ -90,7 +90,8 @@ public class DeliveryController {
     }
 
     @PostMapping("/update")
-    public String delyUpdatePost(DeliveryVO dely0, String receiver1, String delyPlace1, String delyPhone1, String delyAddr1, HttpServletResponse response, Model model, HttpSession session){
+    public String delyUpdatePost(DeliveryVO dely0, String receiver1, String delyPlace1, String delyPhone1, String delyAddr1, HttpServletResponse response, Model model, HttpServletRequest request){
+        HttpSession session = request.getSession(false);
         response.setContentType("text/html; charset=UTF-8");
         DeliveryVO dely1 = new DeliveryVO();
         dely0.setUserId((String) session.getAttribute("userId")); dely1.setReceiver(receiver1); dely1.setDelyPlace(delyPlace1); dely1.setDelyPhone(delyPhone1); dely1.setDelyAddr(delyAddr1);
