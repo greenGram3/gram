@@ -103,7 +103,7 @@
                 <span>주소입력</span>
                 <input type="text" id="zipNo" style="width: 80px" name="zipNo" placeholder="우편번호" readonly/>
                 <input type="text" id="roadAddrPart1" style="width: 400px" name="roadAddrPart1" placeholder="도로명주소" readonly/>
-                <input type="text" id="addrDetail" name="addrDetail" placeholder="상세주소" readonly/>
+                <input type="text" id="addrDetail" name="addrDetail" placeholder="상세주소" />
                 <button type="button" id="addrBtn" onClick="goPopup();">우편번호 검색</button> &nbsp;
               </div>
               <div id="msgAddr" style="color: red; display: none"></div>

@@ -34,7 +34,7 @@
     <div>배송지 주소
         <input type="text" id="zipNo" style="width: 100px" name="zipNo" placeholder="우편번호" value="${zipNo}" readonly/>
         <input type="text" id="roadAddrPart1" style="width: 300px" name="roadAddrPart1" value="${roadAddrPart1}" placeholder="도로명주소" readonly/>
-        <input type="text" id="addrDetail" name="addrDetail" placeholder="상세주소" value="${addrDetail}" readonly/>
+        <input type="text" id="addrDetail" name="addrDetail" placeholder="상세주소" value="${addrDetail}"/>
         <button type="button" id="addrBtn" style="width: 100px" onClick="goPopup();">우편번호 검색</button>
     </div>
     <div id="msgDelyAddr" style="color: red"></div>
@@ -98,6 +98,12 @@
                 $('#msgDelyPhone')[0].innerHTML = "핸드폰 번호를 확인해주세요.";
                 last+="1";
             }
+            if($('#addrDetail')[0].value.length < 1){
+                $('#msgDelyAddr')[0].innerHTML = "빈칸이어서는 안됩니다.";
+                last+="1";
+            }else {
+                $('#msgDelyAddr')[0].innerHTML = ""
+            }
 
             if (last.length == 0) return true;
 
@@ -117,6 +123,7 @@
                 alert("수정이 완료되었습니다.");
             } else {
                 alert("수정에 실패했습니다. 다시 시도해주세요.");
+                return;
             }
 
         })  //updBtn

@@ -30,7 +30,7 @@
 <%--            <input type="text" name="delyAddr" id="delyAddr">--%>
             <input type="text" id="zipNo" style="width: 100px" name="zipNo" placeholder="우편번호" value="${zipNo}" readonly/>
             <input type="text" id="roadAddrPart1" style="width: 300px" name="roadAddrPart1" value="${roadAddrPart1}" placeholder="도로명주소" readonly/>
-            <input type="text" id="addrDetail" name="addrDetail" placeholder="상세주소" value="${addrDetail}" readonly/>
+            <input type="text" id="addrDetail" name="addrDetail" placeholder="상세주소" value="${addrDetail}" />
             <button type="button" id="addrBtn" style="width: 100px" onClick="goPopup();">우편번호 검색</button>
         </div>
         <div id="msgDelyAddr" style="color: red"></div>
