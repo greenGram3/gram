@@ -150,6 +150,10 @@ public class PaymentController {
         m.addAttribute("zipNo", delyAddr[0]);
         m.addAttribute("roadAddrPart1", delyAddr[1]);
         m.addAttribute("addrDetail", delyAddr[2]);
+
+        String newAdder = (delyAddr[1]+" "+delyAddr[2]);
+
+        m.addAttribute("newAdder",newAdder);
         m.addAttribute("dely",dely);
 
         return "delyView";
