@@ -46,7 +46,7 @@
 
 <script>
     function goPopup(){
-        let pop = window.open("<c:url value='/addr'/>","pop","_blank","width=570,height=420, scrollbars=yes, resizable=yes");
+        let pop = window.open("<c:url value='/addr'/>","pop","Child","width=570,height=420, scrollbars=yes, resizable=yes");
     }
 
     function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAddr, jibunAddr, zipNo){
@@ -79,7 +79,7 @@
             if(test.test(test2) && test2.length<14){
                 $('#msgDelyPhone')[0].innerHTML = ""
             }else{
-                $('#msgDelyPhone')[0].innerHTML = "핸드폰 번호를 확인해주세요."
+                $('#msgDelyPhone')[0].innerHTML = "010-0000-0000형식 이어야 합니다."
                 last += '1';
             }
 
