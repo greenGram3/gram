@@ -146,7 +146,7 @@ public class PaymentController {
         m.addAttribute("vo", vo);
 
         String[] delyAddr = vo.getDelyAddr().split("@");
-
+        session.setAttribute("userId", userId);
         m.addAttribute("zipNo", delyAddr[0]);
         m.addAttribute("roadAddrPart1", delyAddr[1]);
         m.addAttribute("addrDetail", delyAddr[2]);
