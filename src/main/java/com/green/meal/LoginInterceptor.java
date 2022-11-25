@@ -24,6 +24,9 @@ public class LoginInterceptor extends HandlerInterceptorAdapter   {
 			requestURI += ("?"+ queryString);
 		}
 
+		log.info("requesturi : "+ requestURI);
+		log.info("session : "+session.getAttribute("userId"));
+
 		if (session!=null && session.getAttribute("userId")!=null) {
 			return true;
 		}else {
