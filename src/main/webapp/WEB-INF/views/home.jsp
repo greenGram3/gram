@@ -7,6 +7,10 @@
 	if('${msg}'=='login_ok') alert("로그인 되었습니다.");
 	if('${msg}'=='logout_ok') alert("로그아웃 되었습니다.");
 	if('${msg}'=='deleteUser_ok') alert("회원탈퇴 되었습니다.");
+
+	let reMsg = "${param.msg}";
+	if(reMsg=="CARTPAY_ERR") alert("결제 페이지로 이동하는데 실패했습니다. 다시 시도해주세요.");
+
 </script>
 <html>
 <head>

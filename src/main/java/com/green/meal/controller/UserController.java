@@ -27,11 +27,14 @@ public class UserController {
 
         try {
 
+            //페이징 하기 위해 리스트의 행 총 개수 구하기
             int totalCnt = userService.getSearchResultCnt(sc);
             m.addAttribute("totalCnt", totalCnt);
 
+            //페이징 객체에 전체개수 넣고, 현재페이지와 페이지사이즈 등이 담겨있는 sc객체 넣기
             PageHandler pageHandler = new PageHandler(totalCnt, sc);
 
+            //회원리스트 가져오기, 페이징 위해 매개변수로 sc전달
             List<UserVO> list = userService.getSearchResultPage(sc);
 
             m.addAttribute("list", list);
@@ -49,7 +52,7 @@ public class UserController {
     public String read(UserVO vo, SearchCondition sc, Model m) {
         try {
 
-            //회원 정보 불러오기
+            //회원 상세 정보 불러오기 (회원 리스트에서 행 하나 가져오는 것)
             vo = userService.userDetail(vo.getUserId());
 
             //회원정보 중 주소 형태 변환
@@ -76,21 +79,26 @@ public class UserController {
     public String remove(UserVO vo, SearchCondition sc, Model m, RedirectAttributes rattr) {
         try {
 
+            //원래 있던 페이지로 돌아가기 위해 꼭 필요함 -> 파라미터로 전달해야되기 때문
             rattr.addAttribute("page", sc.getPage());
             rattr.addAttribute("pageSize", sc.getPageSize());
-            // 원래 있던 페이지로 돌아가기 위해 꼭 필요함 -> 파라미터로 전달해야되기 때문
 
+            //회원 삭제하기
             int rowCnt = userService.userWithdraw(vo.getUserId());
 
             if (rowCnt != 1)
                 throw new Exception("user withdraw failed");
 
+            //새로고침시 메세지 계속 발생하는 문제 해결하기 위해
+            //Model -> RedirectAttributes 로 변경
             rattr.addFlashAttribute("msg", "WDR_OK");
 
+            //회원삭제 성공하면 다시 리스트로 이동
             return "redirect:/user/list";
 
         } catch (Exception e) {
             e.printStackTrace();
+            //회원삭제 실패 하면 기존 회원정보 그대로 담아서 회원 상세정보 다시 보여주기
             m.addAttribute("vo", vo);
             m.addAttribute("msg", "WDR_ERR");
             return "admin/userDetail";

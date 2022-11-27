@@ -26,17 +26,21 @@ public class ItemController {
     @Autowired
     ItemService itemService;
 
-
     @GetMapping("/list")
     public String itemList(SearchCondition sc, Model m) {
 
         try {
 
+            //상품 리스트의 상품 개수가 총 몇개인지 구하기(페이징 목적)
             int totalCnt = itemService.getSearchResultCnt(sc);
             m.addAttribute("totalCnt", totalCnt);
 
+            //페이지핸들러 만들고 총 상품 개수 매개변수로 전달
+            //페이지 사이즈, 현재 페이지 등을 알아야되기 때문에 sc도 매개변수로 전달
             PageHandler pageHandler = new PageHandler(totalCnt, sc);
 
+            //item 리스트 중에서 sc에 해당하는 페이지를 가져오기 위해 sc를 매개변수로 전달
+            //sc에는 페이지 사이즈, offset이 포함되어있음(페이징 목적)
             List<ItemVO> list = itemService.getSearchResultPage(sc);
 
             m.addAttribute("list", list);
@@ -53,8 +57,12 @@ public class ItemController {
     @GetMapping("/read")
     public String read(ItemVO vo, SearchCondition sc, Model m, ImageVO vo1) {
         try {
+            
+            //itemNo에 해당하는 image 정보 가져오기
             vo1 = itemService.imageAdmin(vo1.getItemNo());
+            //itemNo에 해당한는 item 정보 가져오기
             vo = itemService.itemAdmin(vo.getItemNo());
+            
             m.addAttribute("vo", vo);
             m.addAttribute("vo1",vo1);
             m.addAttribute("sc", sc);
@@ -64,8 +72,7 @@ public class ItemController {
         } catch (Exception e) {
             e.printStackTrace();
             m.addAttribute("msg", "READ_ERR");
-//            m.addAttribute("sc", sc);
-//            이거 이렇게 전달해주지 않아도 매개변수에 있으면 읽을 수 있는거 같음
+            //상품 상세보기 실패하면 다시 리스트로 돌아가
             return "admin/itemList";
         }
     }
@@ -78,7 +85,7 @@ public class ItemController {
             System.out.println("** vo1.getImageName"+vo1.getImgName());
 
             //원래 있던 페이지로 돌아가기 위해 필요함 -> 파라미터로 전달
-            //이렇게 안하고 리다이렉트에 sc.겟쿼리스트링 적는 방법도 있음 => 적용 잘 안돼서 일단 포기
+            //이렇게 안하고 리다이렉트에 sc.겟쿼리스트링 적는 방법도 있음 => 적용 잘 안돼서 일단 보류
             rattr.addAttribute("page", sc.getPage());
             rattr.addAttribute("pageSize", sc.getPageSize());
             rattr.addAttribute("option", sc.getOption());
@@ -121,8 +128,8 @@ public class ItemController {
             }
             // --------------------------------------------------------------------------//
 
+            //수정 입력된 vo로 item 정보 update
             int rowCnt = itemService.itemModify(vo);
-
 
             vo1.setItemNo(vo.getItemNo());
             int itemNo = vo1.getItemNo();
@@ -135,10 +142,12 @@ public class ItemController {
 
             rattr.addFlashAttribute("msg", "MOD_OK");
 
+            //수정 성공하면 원래 있던 리스트 페이지로
             return "redirect:/item/list";
 
         } catch (Exception e) {
             e.printStackTrace();
+            //수정 실패하면 수정하던 내용 그대로 상품 수정 페이지로
             m.addAttribute("vo", vo);
             m.addAttribute("msg", "MOD_ERR");
             return "admin/itemAdmin";
@@ -149,10 +158,11 @@ public class ItemController {
     public String remove(ItemVO vo, SearchCondition sc, Model m, RedirectAttributes rattr) {
         try {
 
-            // 원래 있던 페이지로 돌아가기 위해 꼭 필요함 -> 파라미터로 전달해야되기 때문
+            //원래 있던 페이지로 돌아가기 위해 꼭 필요함 -> 파라미터로 전달해야되기 때문
             rattr.addAttribute("page", sc.getPage());
             rattr.addAttribute("pageSize", sc.getPageSize());
 
+            //itemNo에 해당하는 상품 테이블에서 delete
             int rowCnt = itemService.itemRemove(vo.getItemNo());
 
             if (rowCnt != 1)
@@ -160,10 +170,12 @@ public class ItemController {
 
             rattr.addFlashAttribute("msg", "DEL_OK");
 
+            //삭제 성공하면 원래 있던 리스트 페이지로
             return "redirect:/item/list";
 
         } catch (Exception e) {
             e.printStackTrace();
+            //실패하면 원래 있던 상품 정보 가지고 상품 상세보기 페이지로
             m.addAttribute("vo", vo);
             m.addAttribute("msg", "DEL_ERR");
             return "admin/itemAdmin";
@@ -174,9 +186,10 @@ public class ItemController {
     @GetMapping("/upload")
     public String upload() {
 
+        //상품목록에서 상품등록 버튼 누르면 상품등록 폼으로 이동
         return "admin/itemUpload";
-    }
 
+    }
 
     @PostMapping("/upload")
     public String upload(ItemVO vo, ImageVO vo1, Model m, RedirectAttributes rattr, HttpServletRequest request) {
@@ -219,6 +232,8 @@ public class ItemController {
                 vo1.setImgName(file4);
             }
  //--------------------------------------------------------------//
+
+            //상품정보 가지고 item 테이블에 insert
             int rowCnt = itemService.itemUpload(vo);
 
             int itemNo = itemService.selectItemNo(vo.getItemName());
@@ -238,11 +253,13 @@ public class ItemController {
 
             rattr.addFlashAttribute("msg", "UPL_OK");
 
+            //상품등록 성공하면 상품 리스트로(원래 페이지로 이동하지는 않음)
             return "redirect:/item/list";
 
         } catch (Exception e) {
             e.printStackTrace();
             m.addAttribute("msg", "UPL_ERR");
+            //실패하면 다시 상품등록 페이지로 이동
             return "admin/itemUpload";
         }
     }

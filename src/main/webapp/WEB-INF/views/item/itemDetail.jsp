@@ -7,6 +7,10 @@
     <link rel="stylesheet" href="<c:url value='/css/item.css'/>">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script>
+
+        let msg = "${param.msg}";
+        if(msg=="PAY_ERR") alert("결제 페이지로 이동하는데 실패했습니다. 다시 시도해주세요.");
+
         // ** 구매하기 버튼 클릭 시 구매하기 폼으로(action buy)
         $(function () {
             // ** load시 자동으로 제품상세 클릭해서 먼저 보여주기

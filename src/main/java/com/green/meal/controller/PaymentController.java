@@ -52,13 +52,14 @@ public class PaymentController {
             //배송지 리스트 얻어오기
             List<DeliveryVO> delyList = delyService.delySelect(userId);
 
-
+            //배송지 리스트에 있는 주소들 모두 구분자 기준으로 쪼개서 다시 리스트에 담아
+            //jsp에 주소 띄워줄 때는 구분자 없이 주소가 나와야되기 때문
             for(int i=0 ; i<delyList.size(); i++){
                 String[] addrArr = delyList.get(i).getDelyAddr().split("@");
                 delyList.get(i).setDelyAddr(addrArr[1]+" "+addrArr[2]);
             }
 
-            //구매고객 정보 얻어오기
+            //구매고객 정보 얻어오기 - 주문시 주문자 정보 띄워주기 위해
             UserVO userVo = userService.userDetail(userId);
 
             //임시주문번호제작
@@ -78,25 +79,30 @@ public class PaymentController {
 
         } catch (Exception e) {
             e.printStackTrace();
-            return "redirect:/buy/payment";
+            //에러 발생하면 메세지 띄워주고 원래 있던 상품 상세페이지로 이동
+            m.addAttribute("itemNo", odvo.getItemNo());
+            m.addAttribute("msg", "PAY_ERR");
+            return "redirect:/item/itemDetail";
         }
     }
 
+    //장바구니에서 결제하기 눌렀을 때 주문페이지로 이동하는 메서드
     @PostMapping("/cartPayment")
     public String cartBuy(HttpServletRequest request, Integer totalPrice, Model m) {
 
         try {
+
             //세션으로 아이디 얻어오기
             HttpSession session = request.getSession();
             String userId = (String)session.getAttribute("userId");
 
-            //해당 아이디의 장바구니 상품들 가져오기
+            //해당 아이디의 장바구니 상품들 db에서 가져오기
             List<OrderDetailVO> odvoList = new ArrayList<>();
             odvoList = cartService.buyCartList(userId);
 
             //배송지 리스트 얻어오기
             List<DeliveryVO> delyList = delyService.delySelect(userId);
-
+            //배송지 리스트 얻어올 때 주소 표시 형태 변환 쪼개기
             for(int i=0 ; i<delyList.size(); i++){
                 String[] addrArr = delyList.get(i).getDelyAddr().split("@");
                 delyList.get(i).setDelyAddr(addrArr[1]+" "+addrArr[2]);
@@ -111,7 +117,7 @@ public class PaymentController {
             Calendar dateTime = Calendar.getInstance();
             uniqueNo = sdf.format(dateTime.getTime())+"_"+ RandomStringUtils.randomAlphanumeric(6);
 
-            //전체금액, 구매할상품정보, 구매자배송지정보, 구매자정보, 임시주문정보 -> jsp 전달
+            //전체금액, 구매할상품정보, 구매자배송지정보, 구매자정보, 임시주문정보, 카트결제여부 -> jsp 전달
             m.addAttribute("totalPrice", totalPrice);
             m.addAttribute("odvoList", odvoList);
             m.addAttribute("delyList", delyList);
@@ -123,7 +129,9 @@ public class PaymentController {
 
         } catch (Exception e) {
             e.printStackTrace();
-            return "redirect:/buy/payment";
+            //주문페이지로 이동 실패하면 홈으로 이동
+            m.addAttribute("msg", "CARTPAY_ERR");
+            return "redirect:/";
         }
 
     }
@@ -145,6 +153,7 @@ public class PaymentController {
         //배송지정보 -> jsp로 전달
         m.addAttribute("vo", vo);
 
+        //주소 띄워줄 때 주소 형태 변경해서 보여주기 (쪼개기)
         String[] delyAddr = vo.getDelyAddr().split("@");
         session.setAttribute("userId", userId);
         m.addAttribute("zipNo", delyAddr[0]);
@@ -172,14 +181,13 @@ public class PaymentController {
             String userId = (String)session.getAttribute("userId");
             vo.setUserId(userId);
 
-            //api로 입력받은 도로명 주소 -> 새로운 주소로 조합
-            String newDelyAddr = (zipNo+"@"+roadAddrPart1+"@"+addrDetail );
+            //api로 입력받은 도로명 주소 -> 새로운 주소로 형태 변환 (조합하기) -> DB에 넣기위해
+            String newDelyAddr = (zipNo+"@"+roadAddrPart1+"@"+addrDetail);
 
-            //수정하는 값들 vo에 저장
+            //수정하는 값들 vo에 저장 -> DB에 넣을 것
             vo.setReceiver(newReceiver);
             vo.setDelyPhone(newDelyPhone);
             vo.setDelyAddr(newDelyAddr);
-
 
             //배송지 정보 변경하기
             int rowCnt = delyService.updateDelivery3(vo);
@@ -187,6 +195,7 @@ public class PaymentController {
                 throw new Exception("update delivery error");
             }
 
+            //주문페이지에 띄워주기 위한 변경된 주소, 모델에 담아 보내줄 것
             String newAdder = (roadAddrPart1+" "+addrDetail);
 
             m.addAttribute("vo", vo);
@@ -195,8 +204,10 @@ public class PaymentController {
             m.addAttribute("addrDetail", addrDetail);
             m.addAttribute("newAdder",newAdder);
             m.addAttribute("dely",dely);
+
         } catch (Exception e) {
             e.printStackTrace();
+            //변경 실패했을 때 기존 주소를 주문페이지에서 띄워주기 위해.
             m.addAttribute("vo", vo);
         }
 
@@ -209,6 +220,7 @@ public class PaymentController {
     public String paymentConfirm(Integer totalPrice, String orderType, String delyPlace, Model m, HttpServletRequest request, OrderDetailVO odvo) {
 
         try {
+
             //세션으로 아이디 얻어오기
             HttpSession session = request.getSession();
             String userId = (String)session.getAttribute("userId");
@@ -221,13 +233,14 @@ public class PaymentController {
             vo = delyService.selectedDely(map);
             String delyAddrToDb = vo.getDelyAddr();
 
-            //주소 형태 변환
+            //주소 형태 변환(쪼개기)
             String delyAddrTemp = vo.getDelyAddr();
             String[] addrs = delyAddrTemp.split("@");
             String delyAddr = addrs[1] + " " + addrs[2];
             vo.setDelyAddr(delyAddr);
 
-            //구매자 정보 주문내용에 담기(order_list에 넣을 것) (구매상품에 대한 정보는 이미 담겨있음)
+            //구매자 정보 주문내용에 담기(order_list에 넣을 것)
+            //구매상품에 대한 정보는 이미 매개변수로 전달 받았음
             odvo.setUserId(userId);
             odvo.setUserPhone(vo.getDelyPhone());
             odvo.setDelyAddr(vo.getDelyAddr());
@@ -257,7 +270,9 @@ public class PaymentController {
 
         } catch (Exception e) {
             e.printStackTrace();
-            return "redirect:/buy/payment";
+            m.addAttribute("msg", "PAYCONFIRM_ERR");
+            //결제~결제 확인 과정에서 에러가 발생했을 때 회원 주문목록으로 이동
+            return "redirect:/mypage/order";
         }
 
     }

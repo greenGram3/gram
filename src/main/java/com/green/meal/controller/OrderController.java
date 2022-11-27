@@ -49,20 +49,25 @@ public class OrderController {
 
         try {
 
-            //주문상세 정보 상품별로 가져오기 때문에 List에 담기
+            //주문상세 정보를 상품별로 가져오기 때문에 List에 담기
             List<OrderDetailVO> list = orderService.orderDetail(orderNo);
+            
+            //DB에는 우편번호, 주소, 상세주소가 있기 때문에 jsp에는 구분자를 없애고 합쳐서 띄워줘야됨
             String delyAddrTemp = list.get(0).getDelyAddr();
             String[] addrs = delyAddrTemp.split("@");
             String delyAddr = addrs[1] + " " + addrs[2];
             list.get(0).setDelyAddr(delyAddr);
+            
             m.addAttribute("list", list);
 
+            //주문 상세보기 페이지로
             return "admin/orderDetail";
 
         } catch (Exception e) {
             e.printStackTrace();
             m.addAttribute("msg", "READ_ERR");
 
+            //상세보기 실패하면 다시 상품 리스트로
             return "admin/orderList";
         }
     }
@@ -85,6 +90,7 @@ public class OrderController {
             rattr.addAttribute("msg", "SEND_ERR");
         }
 
+        //발송처리 하면 주문상태, 상품재고 변경되고 다시 상품 상세보기로
         return "redirect:/order/read";
 
     }
