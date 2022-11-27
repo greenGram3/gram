@@ -66,7 +66,8 @@
 <script>
     // 주소 우편번호 팝업창 api
     function goPopup(){
-        let pop = window.open("<c:url value='/addr'/>","pop","Child","width=570,height=420, scrollbars=yes, resizable=yes");
+        let url = "/meal/addr?userId=${sessionScope.userId}";
+        let pop = window.open(url,"pop","width=570,height=420, scrollbars=yes, resizable=yes");
     }
 
     function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAddr, jibunAddr, zipNo){

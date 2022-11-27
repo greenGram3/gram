@@ -36,6 +36,7 @@
   }
 </script>
 <body onload="init();">
+
 <form id="form" name="form" method="post">
   <input type="hidden" id="confmKey" name="confmKey" value=""/>
   <input type="hidden" id="returnUrl" name="returnUrl" value=""/>

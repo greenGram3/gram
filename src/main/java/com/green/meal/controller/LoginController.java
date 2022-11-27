@@ -39,7 +39,6 @@ public class LoginController {
 
     @GetMapping("/login")
     public String loginForm(String requestURI, Model model, String alertMsg) {
-        log.info("requestURI : "+requestURI);
         if (requestURI!=null) {
             model.addAttribute("requestURI",requestURI);
             model.addAttribute("alertMsg",alertMsg);
@@ -89,11 +88,9 @@ public class LoginController {
 
         rettr.addFlashAttribute("msg","login_ok");
 //		       3. 홈또는 requestURI 으로 이동
-        log.info("requestURI2 : "+requestURI);
         if (requestURI == "") return "redirect:/";
         else {
             requestURI = requestURI.replace("/meal","");
-            log.info("requestURI3 : "+requestURI);
             return "redirect:"+requestURI;
         }
     }

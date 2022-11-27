@@ -67,7 +67,8 @@
 
     //주소 우편번호 팝업창 api 열기
     function goPopup(){
-        let pop = window.open("<c:url value='/addr'/>","pop","Child","width=570,height=420, scrollbars=yes, resizable=yes");
+        let url = "/meal/addr?userId=${sessionScope.userId}";
+        let pop = window.open(url,"pop","width=570,height=420, scrollbars=yes, resizable=yes");
     }
 
     //api에서 주소 입력받기
