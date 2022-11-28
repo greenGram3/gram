@@ -64,6 +64,20 @@
 </html>
 
 <script>
+    let receiver = $('#receiver')[0];
+    let delyPlace = $('#delyPlace')[0];
+    let delyPhone = $('#delyPhone')[0];
+    let addrDetail = $('#addrDetail')[0];
+
+    let msgReceiver = $('#msgReceiver')[0];
+    let msgDelyPlace = $('#msgDelyPlace')[0];
+    let msgDelyPhone = $('#msgDelyPhone')[0];
+    let msgDelyAddr = $('#msgDelyAddr')[0];
+
+    let RAP = $('#roadAddrPart1')[0];
+    let AD = $('#addrDetail')[0];
+    let ZN = $('#zipNo')[0];
+
     // 주소 우편번호 팝업창 api
     function goPopup(){
         let url = "/meal/addr?userId=${sessionScope.userId}";
@@ -71,9 +85,9 @@
     }
 
     function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAddr, jibunAddr, zipNo){
-        document.querySelector("#roadAddrPart1").value = roadAddrPart1+roadAddrPart2;
-        document.querySelector("#addrDetail").value = addrDetail;
-        document.querySelector("#zipNo").value = zipNo;
+        RAP.value = roadAddrPart1+roadAddrPart2;
+        AD.value = addrDetail;
+        ZN.value = zipNo;
     }
 
     $('#delBtn').click(function (){
@@ -83,60 +97,48 @@
     $(function(){
         // ** Json
         $('#updBtn').click(function () {
+            let flag = true;
 
+            //데이터 검증
             let test = /^[0-9]{3}-[0-9]{4}-[0-9]{4}/;
-            let test2 = $('#delyPhone')[0].value
+            let test2 = delyPhone.value
             let last = '';
 
-            if($('#receiver')[0].value.length < 1){
-                $('#msgReceiver')[0].innerHTML = "빈칸이어서는 안됩니다.";
+            if(receiver.value.length < 1){
+                msgReceiver.innerHTML = "빈칸이어서는 안됩니다.";
                 last+="1";
             }else{
-                $('#msgReceiver')[0].innerHTML = ""
+                msgReceiver.innerHTML = ""
             }
-            if($('#delyPlace')[0].value.length < 1){
-                $('#msgDelyPlace')[0].innerHTML = "빈칸이어서는 안됩니다.";
+            if(delyPlace.value.length < 1){
+                msgDelyPlace.innerHTML = "빈칸이어서는 안됩니다.";
                 last+="1";
             }else {
-                $('#msgDelyPlace')[0].innerHTML = ""
+                msgDelyPlace.innerHTML = ""
             }
             if(test.test(test2) && test2.length <14){
-                $('#msgDelyPhone')[0].innerHTML = ""
+                msgDelyPhone.innerHTML = ""
             }else{
-                $('#msgDelyPhone')[0].innerHTML = "010-0000-0000 형식이어야 합니다.";
+                msgDelyPhone.innerHTML = "010-0000-0000 형식이어야 합니다.";
                 last+="1";
             }
-            if($('#addrDetail')[0].value.length < 1){
-                $('#msgDelyAddr')[0].innerHTML = "빈칸이어서는 안됩니다.";
+            if(AD.value.length < 1){
+                msgDelyAddr.innerHTML = "빈칸이어서는 안됩니다.";
                 last+="1";
             }else {
-                $('#msgDelyAddr')[0].innerHTML = ""
+                msgDelyAddr.innerHTML = ""
             }
 
             if (last.length != 0) return;
 
             let delyNoValue = $('#delyNo').is(':checked')?1:0;
 
-            if($('#delyNo')[0].value == 1 && delyNoValue==0){
-                let flag = false;
-                $.ajax({
-                    type: 'Post',
-                    url: 'register2',
-                    async: false,
-                    success: function (result) {
-                        if (result.code == 1) {
-                            flag = !flag
-                            alert("기본배송지는 1개 존재해야합니다.");
-                        };
-                    },
-                    error: function (result) {
-                        alert('error : '+result+" "+result.code);
-                    }
-                }) //ajax
-                if(flag) return;
+            if($('#delyNo')[0].value == 1 && delyNoValue==0){ //기본배송지 였던거 체크박스 해제할경우
+                flag = false;
+                alert("기본배송지는 1개 존재해야합니다.");
             }
-            else if($('#delyNo')[0].value == 0 && delyNoValue==1){
-                $.ajax({
+            else if($('#delyNo')[0].value == 0 && delyNoValue==1){ // 일반배송지에서 기본배송지 체크할경우
+                $.ajax({   // 싸그리 delyNo 0으로 설정
                     type: 'Post',
                     url: 'update2',
                     async: false,
@@ -144,33 +146,57 @@
                     error: function (result) {
                         alert('error : '+result+" "+result.code);
                     }
-                }) //ajax
+                })
             }
-            $.ajax({
-                type: 'Post',
-                url: 'update',
-                async: false,
-                data: {
-                    receiver :  $('#receiver').val(),
-                    delyPlace :  $('#delyPlace').val(),
-                    delyPhone :  $('#delyPhone').val(),
-                    delyAddr : $('#zipNo').val()+"@"+$('#roadAddrPart1').val()+"@"+$('#addrDetail').val(),
-                    delyNo : delyNoValue,
-
-                    receiver1 :  $('input[name=receiver1]').val(),
-                    delyPlace1 :  $('input[name=delyPlace1]').val(),
-                    delyPhone1 :  $('input[name=delyPhone1]').val(),
-                    delyAddr1: $('input[name=delyAddr1]').val(),
-                },
-                success: function (result) {
-                    alert("수정되었습니다.");
-                    opener.parent.location.reload();
-                    window.close();
-                },
-                error: function (result) {
-                    alert('error : '+result+" "+result.code);
+            else{   // 체크박스 안건드릴경우
+                if(delyPlace.value !=  $('input[name=delyPlace1]').val()){ // 배송지 이름 바꿀경우
+                    $.ajax({       //동일한 이름의 배송지 있는지 확인
+                        type: 'Post',
+                        async: false,
+                        url: 'countDelyPlace',
+                        data: {
+                            delyPlace :  delyPlace.value,
+                        },
+                        success: function (result) {
+                            if (result.code != 0) {
+                                flag = false;
+                                alert("동일한 이름의 배송지가 있습니다.")
+                            };
+                        },
+                        error: function (result) {
+                            alert('error : '+result+" "+result.code);
+                        }
+                    })
                 }
-            })
+            }
+
+            if(flag){      // 조건 만족할 경우
+                $.ajax({         // 업데이트
+                    type: 'Post',
+                    url: 'update',
+                    async: false,
+                    data: {
+                        receiver :  receiver.value,
+                        delyPlace :  delyPlace.value,
+                        delyPhone :  delyPhone.value,
+                        delyAddr : ZN.value+"@"+RAP.value+"@"+AD.value,
+                        delyNo : delyNoValue,
+
+                        receiver1 :  $('input[name=receiver1]').val(),
+                        delyPlace1 :  $('input[name=delyPlace1]').val(),
+                        delyPhone1 :  $('input[name=delyPhone1]').val(),
+                        delyAddr1: $('input[name=delyAddr1]').val(),
+                    },
+                    success: function (result) {
+                        alert("수정되었습니다.");
+                        opener.parent.location.reload();
+                        window.close();
+                    },
+                    error: function (result) {
+                        alert('error : '+result+" "+result.code);
+                    }
+                })
+            }
         })
     }) //ready
 </script>

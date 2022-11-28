@@ -45,70 +45,101 @@
 </html>
 
 <script>
+    let receiver = $('#receiver')[0];
+    let delyPlace = $('#delyPlace')[0];
+    let delyPhone = $('#delyPhone')[0];
+    let addrDetail = $('#addrDetail')[0];
+
+    let msgReceiver = $('#msgReceiver')[0];
+    let msgDelyPlace = $('#msgDelyPlace')[0];
+    let msgDelyPhone = $('#msgDelyPhone')[0];
+    let msgDelyAddr = $('#msgDelyAddr')[0];
+
+    let RAP = $('#roadAddrPart1')[0];
+    let AD = $('#addrDetail')[0];
+    let ZN = $('#zipNo')[0];
+
     function goPopup(){
         let url = "/meal/addr?userId=${sessionScope.userId}";
         let pop = window.open(url,"pop","width=570,height=420, scrollbars=yes, resizable=yes");
     }
 
     function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAddr, jibunAddr, zipNo){
-        document.querySelector("#roadAddrPart1").value = roadAddrPart1+roadAddrPart2;
-        document.querySelector("#addrDetail").value = addrDetail;
-        document.querySelector("#zipNo").value = zipNo;
+        RAP.value = roadAddrPart1+roadAddrPart2;
+        AD.value = addrDetail;
+        ZN.value = zipNo;
     }
-
 
     $(function(){
         // ** Json
         $('#submitBtn').click(function () {
-
+            //데이터 검증
             let test = /^[0-9]{3}-[0-9]{4}-[0-9]{4}/;
-            let test2 = $('#delyPhone')[0].value
+            let test2 = delyPhone.value
             let last = '';
 
-            if($('#receiver')[0].value.length < 1){
-                $('#msgReceiver')[0].innerHTML = "빈칸이어서는 안됩니다."
+            if(receiver.value.length < 1){
+                msgReceiver.innerHTML = "빈칸이어서는 안됩니다."
                 last += '1';
             }else {
-                $('#msgReceiver')[0].innerHTML = ""
+                msgReceiver.innerHTML = ""
             }
-            if($('#delyPlace')[0].value.length < 1){
-                $('#msgDelyPlace')[0].innerHTML = "빈칸이어서는 안됩니다."
+            if(delyPlace.value.length < 1){
+                msgDelyPlace.innerHTML = "빈칸이어서는 안됩니다."
                 last += '1';
             }else {
-                $('#msgDelyPlace')[0].innerHTML = ""
+                msgDelyPlace.innerHTML = ""
             }
             if(test.test(test2) && test2.length<14){
-                $('#msgDelyPhone')[0].innerHTML = ""
+                msgDelyPhone.innerHTML = ""
             }else{
-                $('#msgDelyPhone')[0].innerHTML = "010-0000-0000형식 이어야 합니다."
+                msgDelyPhone.innerHTML = "010-0000-0000형식 이어야 합니다."
                 last += '1';
             }
 
-            if($('#addrDetail')[0].value.length < 1){
-                $('#msgDelyAddr')[0].innerHTML = "빈칸이어서는 안됩니다."
+            if(addrDetail.value.length < 1){
+                msgDelyAddr.innerHTML = "빈칸이어서는 안됩니다."
                 last += '1';
             }else {
-                $('#msgDelyAddr')[0].innerHTML = ""
+                msgDelyAddr.innerHTML = ""
             }
 
             if (last.length != 0) return;
 
-            ajax();
+            delyRegister();
         })
     }) //ready
 
-    function ajax() {
+    function delyRegister() {
         let delyNoValue = $('#delyNo').is(':checked')?$('#delyNo').val():0;
         let flag = true;
 
+        $.ajax({       //동일한 이름의 배송지 있는지 확인
+            type: 'Post',
+            async: false,
+            url: 'countDelyPlace',
+            data: {
+                delyPlace :  delyPlace.value,
+            },
+            success: function (result) {
+                if (result.code != 0) {
+                    flag=false;
+                    alert("동일한 이름의 배송지가 있습니다.")
+                };
+            },
+            error: function (result) {
+                alert('error : '+result+" "+result.code);
+            }
+        })
+
         if (delyNoValue == 0){
-            $.ajax({
+            $.ajax({           //기본배송지 없을경우
                 type: 'Post',
                 async: false,
                 url: 'register2',
                 success: function (result) {
                     if (result.code == 0) {
-                        flag = !flag;
+                        flag = false;
                         alert("기본배송지는 1개 존재해야합니다.");
                     };
                 },
@@ -118,15 +149,15 @@
             }) //ajax
         }
         if(flag) {
-            $.ajax({
+            $.ajax({        //조건 만족할경우 배송지 등록
                 type: 'Post',
                 async: false,
                 url: 'register',
                 data: {
-                    receiver :  $('#receiver').val(),
-                    delyPlace :  $('#delyPlace').val(),
-                    delyPhone :  $('#delyPhone').val(),
-                    delyAddr : $('#zipNo').val() + '@' + $('#roadAddrPart1').val()+ '@' +$('#addrDetail').val(),
+                    receiver :  receiver.value,
+                    delyPlace :  delyPlace.value,
+                    delyPhone :  delyPhone.value,
+                    delyAddr : ZN.value + '@' + RAP.value+ '@' + AD.value,
                     delyNo : delyNoValue
                 },
                 success: function (result) {
