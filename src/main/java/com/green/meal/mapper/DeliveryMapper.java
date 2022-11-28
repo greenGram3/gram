@@ -31,4 +31,6 @@ public interface DeliveryMapper {
 
     int countDelyPlace(Map map);
 
+    int countThree(String userId);
+
 }

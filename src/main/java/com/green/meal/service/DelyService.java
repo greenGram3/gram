@@ -33,4 +33,6 @@ public interface DelyService {
     int baseDely(UserVO user);
 
     int countDelyPlace(String userId, String delyPlace);
+
+    int countThree(String userId);
 }
