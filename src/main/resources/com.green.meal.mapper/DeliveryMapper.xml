@@ -50,6 +50,10 @@
         select count(*) from delivery where user_id = #{userId} and dely_place = #{delyPlace};
     </select>
 
+    <select id="countThree" resultType="int">
+        select count(*) from delivery where user_id = #{userId};
+    </select>
+
 <!--    주문페이지에서 배송지 정보 업데이트 테스트(정무혁)  -->
 <!--    <update id="updateDelyInBuy" parameterType="com.green.meal.domain.DeliveryVO">-->
 <!--        update delivery set receiver=#{receiver} and dely_phone=${delyPhone} and dely_addr=#{dely_addr} where user_id=#{userId} and dely_place=#{delyPlace}-->

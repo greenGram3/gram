@@ -122,9 +122,12 @@
                 delyPlace :  delyPlace.value,
             },
             success: function (result) {
-                if (result.code != 0) {
+                if (result.code == 1) {
                     flag=false;
                     alert("동일한 이름의 배송지가 있습니다.")
+                }else if(result.code == 2){
+                    flag=false;
+                    alert("배송지는 3개까지만 등록이 가능합니다.");
                 };
             },
             error: function (result) {

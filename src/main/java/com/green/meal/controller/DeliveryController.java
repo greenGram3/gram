@@ -49,7 +49,13 @@ public class DeliveryController {
     public String countDelyPlace(HttpSession session, HttpServletResponse response, String delyPlace,Model model){
         String userId = (String) session.getAttribute("userId");
         response.setContentType("text/html; charset=UTF-8");
-        int result = delyService.countDelyPlace(userId, delyPlace);
+        int result;
+
+        if(delyService.countThree(userId) >= 3){
+            result = 2;
+        }else {
+             result = delyService.countDelyPlace(userId, delyPlace);
+        }
         model.addAttribute("code", result);
 
         return "jsonView";

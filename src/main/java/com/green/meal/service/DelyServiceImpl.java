@@ -78,4 +78,8 @@ public class DelyServiceImpl implements DelyService {
         return mapper.countDelyPlace(map);
     }
 
+    @Override
+    public int countThree(String userId) {
+        return mapper.countThree(userId);
+    }
 }
