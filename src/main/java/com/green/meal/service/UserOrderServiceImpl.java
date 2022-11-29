@@ -7,6 +7,7 @@ import com.green.meal.domain.OrderSearch;
 import com.green.meal.mapper.UserOrderMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,19 +21,24 @@ public class UserOrderServiceImpl implements UserOrderService {
 
     private final UserOrderMapper userOrderMapper;
 
+
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public int save(List<OrderDetailVO> list, OrderDetailVO odvo){
-        int rowCnt =0;
-        userOrderMapper.insertUser(odvo);
+    public int save(List<OrderDetailVO> list, OrderDetailVO odvo) throws Exception{
+        int rowCntV2 = 0;
+        int rowCntV1 = userOrderMapper.insertUser(odvo);
 
         for (OrderDetailVO vo : list) {
             vo.setOrderNo(odvo.getOrderNo());
-            userOrderMapper.insertItem(vo);
-
-            rowCnt ++;
+             rowCntV2 = userOrderMapper.insertItem(vo);
         }
-        return rowCnt;
+
+
+        if((rowCntV1+rowCntV2) <= 1) {
+            throw new Exception("주문저장실패");
+        }
+
+        return rowCntV1+rowCntV2;
     }
 
     @Override

@@ -4,6 +4,7 @@ import com.green.meal.domain.DeliveryVO;
 import com.green.meal.domain.OrderDetailVO;
 import com.green.meal.domain.UserVO;
 import com.green.meal.service.*;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +21,7 @@ import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+@Slf4j
 @Controller
 @RequestMapping("/buy")
 public class PaymentController {
@@ -256,8 +258,8 @@ public class PaymentController {
             }
 
             //구매정보 order_list, order_detail에 넣기
+            log.info("userOrderService.getClass()={}",userOrderService.getClass());
             userOrderService.save(odvoList, odvo);
-
             //주문완료되면 카트에 있던 상품들 삭제
             cartService.deleteAll(userId);
 

@@ -11,7 +11,7 @@ import java.util.Map;
 
 public interface UserOrderService {
     @Transactional(rollbackFor = Exception.class)
-    int save(List<OrderDetailVO> list, OrderDetailVO odvo);
+    int save(List<OrderDetailVO> list, OrderDetailVO odvo) throws Exception;
 
     List<OrderDetailDto> orderItemInfo(Integer orderNo);
 
