@@ -44,7 +44,7 @@
         });
     </script>
     <script>
-        // ** 상세페이지 reviewList
+        // ** 상세페이지 itemReviewList
         function itemReview(itemNo) {
             $.ajax({
                 type: 'Get',

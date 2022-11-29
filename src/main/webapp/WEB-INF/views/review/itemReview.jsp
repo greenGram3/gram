@@ -33,10 +33,17 @@
                 }
             } //reviewDetailD
 //------------------------------------------------------------------------------------------//
-            // ** 후기 Ajax Paging
+            // ** 상품후기 Ajax Paging
+            // 1) Page버튼에 Ajax 요청 용도의 class 만들기
+            // 2) 요청 URL - 해당 클래스의 href 속성(url = itemReview?currPage=ㅁ&rowsPerPage=ㅁ&searchType=ㅁ&scKeyword=ㅁ)
+            // 3.1) Page클릭 시 ReviewController/itemReview 로 요청
+            // 3.2) 요청 시 itemNo를 매개변수로 전달
+            // 4) 요청 성공 시 itemReview.jsp Ajax로 출력 / 실패 시 오류 메세지
+            // 5) click 한 class에서만 작동하고 종료하도록 return false로 click 종료
             $(function () {
                 $('.axPaging').click(function(){
                     let url = $(this).attr('href');
+
                     $.ajax({
                         type:'Get',
                         url:url+"&itemNo="+$('#itemNo').val(),
@@ -44,7 +51,7 @@
                             $('#resultArea1').html(resultPage);
                         },
                         error:function(){
-                            $('#resultArea1').html('reviewListD paging 오류');
+                            $('#resultArea1').html('itemReview Paging 오류');
                         }
                     }); //ajax
                     return false;
@@ -108,7 +115,11 @@
                         </c:forEach>
                     </c:if>
                 </table>
+                <c:if test="${empty reviewResult}">
+                    <span>아직 후기가 없습니다.</span>
+                </c:if>
             </section>
+
 
             <c:if test="${not empty reviewResult}">
                 <div>

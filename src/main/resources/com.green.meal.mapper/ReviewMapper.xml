@@ -4,6 +4,7 @@
 <mapper namespace="com.green.meal.mapper.ReviewMapper">
 
     <!-- item별 Review 출력 -->
+    <!-- 파라미터 map 객체(itemNo 와 페이징 변수 포함) -->
     <select id="itemReview" parameterType="map" resultType="com.green.meal.domain.ReviewVO">
         select * from review where item_no = #{itemNo} order by review_root desc, review_step asc
         limit #{sno}, #{rowsPerPage}

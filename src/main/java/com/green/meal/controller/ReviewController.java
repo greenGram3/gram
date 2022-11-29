@@ -28,22 +28,29 @@ public class ReviewController {
     // ** 상세페이지 리뷰리스트
     @RequestMapping(value="/itemReview")
     public String itemReview(Model model, SearchCriteria cri, PageMaker pageMaker, ReviewVO vo) {
-        cri.setSnoEno(); //Sno, Eno 계산
+        try {
+            // 1) 현재페이지 시작 data row 계산
+            cri.setSnoEno();
+            // 2) 매서드 실행 결과 담을 List 생성
+            List<ReviewVO> list = new ArrayList<ReviewVO>();
+            // 3) itemReview select 매서드 실행(매개변수: 페이징, itemNo) => Mapper.xml
+            list = reviewService.itemReview(cri, vo);
 
-        List<ReviewVO> list = new ArrayList<ReviewVO>();
-        list = reviewService.itemReview(cri, vo);
-
-        if (list!=null) {
-            model.addAttribute("reviewResult", list);
-
-            pageMaker.setCri(cri);
-            pageMaker.setTotalRowsCount(reviewService.searchCount3(vo));
-            model.addAttribute("pageMaker",pageMaker);
-
-        } else {
-            model.addAttribute("message", "아직 후기가 없습니다.");
+            if (list!=null) { //4) 실행결과 후기 있을 시
+                //5) list 결과 model에 저장
+                model.addAttribute("reviewResult", list);
+                //6) 페이징(하단 페이지 수, 결과 row 수 count)
+                pageMaker.setCri(cri);
+                pageMaker.setTotalRowsCount(reviewService.searchCount3(vo));
+                //7) 페이징 결과 model에 저장
+                model.addAttribute("pageMaker",pageMaker);
+            } else {
+                model.addAttribute("message", "아직 후기가 없습니다.");
+            }
+        } catch (Exception e) {
+            //8) Exception발생 시 원인파악
+            e.printStackTrace();
         }
-
         return "/review/itemReview";
     }
     //-------------------------------------------------------------------------------------------------//
@@ -105,18 +112,20 @@ public class ReviewController {
     // ** Review 작성
     @RequestMapping(value="/reviewinsertf")
     public String reviewinsertf (ReviewVO vo, HttpServletResponse response) throws IOException {
+        // itemNo, orderNo 확인
         System.out.println("itemNo: "+vo.getItemNo()+","+"orderNo: "+vo.getOrderNo());
-        response.setContentType("text/html; charset=UTF-8"); //response 한글
 
+        // 요청분석
+        response.setContentType("text/html; charset=UTF-8"); //response 한글
         PrintWriter out = response.getWriter();
 
         // Review 중복체크
-        if (reviewService.dupCheck(vo)!=null) { //후기 중복
+        if (reviewService.dupCheck(vo)!=null) { //후기 중복인 경우
             out.println("<script>alert('후기는 한번만 작성가능합니다.'); " +
                     "history.back(); </script>");
-            out.flush();
+            out.flush(); //alert 띄우고 돌아가기
             return null;
-        } else { //중복X, 작성가능
+        } else { //중복X, 작성가능 => insertForm으로 이동
             return "/review/reviewInsert";
         }
     }

@@ -1,4 +1,4 @@
-// ** 답글 달기 클릭 시 function 작동
+// ** 답글달기 Ajax 함수
 function qnaReplyF(qnaRoot,qnaStep,qnaChild,link) {
     $.ajax({
         type: 'Get',

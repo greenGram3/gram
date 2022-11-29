@@ -16,23 +16,28 @@ public class ReviewServiceImpl implements ReviewService {
     @Autowired
     ReviewMapper reviewMapper;
 
-    // 상세페이지 ReviewList 출력
+    // ** 상세페이지 itemReview 출력
     @Override
     public List<ReviewVO> itemReview(SearchCriteria cri, ReviewVO vo) {
-        Map map = new HashMap();
-        map.put("itemNo",vo.getItemNo());
-        map.put("sno",cri.getSno());
-        map.put("rowsPerPage", cri.getRowsPerPage());
+        // 1. Mybatis 객체 2개 이상 파라미터로 전달 => Map 사용
+        Map map = new HashMap(); // 1) Map 객체 생성
+        map.put("itemNo",vo.getItemNo()); // 2) itemNo 넣기
+        map.put("sno",cri.getSno()); // 3) 시작 row 변수 sno 넣기
+        map.put("rowsPerPage", cri.getRowsPerPage()); // 4) 한 페이지당 출력 row 갯수 넣기
 
-        return reviewMapper.itemReview(map);
+        return reviewMapper.itemReview(map); // 5) 매개변수를 map으로 전달
     }
-
+    // 2. 출력될 row 갯수 구하는 searchCount3 실행
+    public int searchCount3(ReviewVO vo) {
+        return reviewMapper.searchCount3(vo);
+    }
+//---------------------------------------------------------------------------------------------------------//
     // Reviewlist 출력
     @Override
     public List<ReviewVO> reviewlist(SearchCriteria cri) { return reviewMapper.reviewlist(cri); }
     public int searchCount(SearchCriteria cri) { return reviewMapper.searchCount(cri); }
     public int searchCount2(String userId) { return reviewMapper.searchCount2(userId); }
-    public int searchCount3(ReviewVO vo) { return reviewMapper.searchCount3(vo); }
+
 
     // Reviewlist(MyPage) 출력
     @Override
