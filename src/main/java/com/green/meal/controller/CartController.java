@@ -117,8 +117,6 @@ public class CartController {
     }
 
 
-
-
     @PostMapping()
     @ResponseBody
     public  ResponseEntity<String> save(@RequestBody CartVO cartVO, HttpSession session){
@@ -134,7 +132,7 @@ public class CartController {
                 //장바구니 추가
                 list.add(cartVO);
                 session.setAttribute("list",list);
-                return new ResponseEntity<>("DEL_OK",HttpStatus.OK);
+                return new ResponseEntity<>("SAVE_OK",HttpStatus.OK);
             }
 
             //비회원 장바구니가 있을때
@@ -142,7 +140,7 @@ public class CartController {
             boolean containCart= false;
             for (CartVO vo : oldList) {
                 // 같은 상품이 있을시 수량 더하기
-                if(vo.getItemNo()==cartVO.getItemNo()){
+                if(vo.getItemNo().equals(cartVO.getItemNo())){
                     vo.setCartAmount(vo.getCartAmount()+cartVO.getCartAmount());
                     containCart = true;
                 }
@@ -152,9 +150,8 @@ public class CartController {
                     oldList.add(cartVO);
 
             session.setAttribute("list",oldList);
-            return new ResponseEntity<>("DEL_OK",HttpStatus.OK);
+            return new ResponseEntity<>("SAVE_OK",HttpStatus.OK);
             }
-
 
         //회원 장바구니 저장------------------------------------------------------------------
         String userId = getUserId(session);
@@ -163,10 +160,10 @@ public class CartController {
         Map map = new HashMap();
         map.put("userId",userId);
         map.put("itemNo",cartVO.getItemNo());
-
+        //회원 장바구니에 같은 상품찾기
         CartVO byItem = cartService.findByItem(map);
         int rowCnt = 0;
-        //같은 상품 있는지 확인
+
         if(byItem == null) {
             //같은 상품 없으면 저장
              rowCnt = cartService.save(cartVO);
@@ -181,10 +178,9 @@ public class CartController {
             }
         }catch (Exception e){
             e.printStackTrace();
-            return new ResponseEntity<>("DEL_ERR",HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("SAVE_ERR",HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<>("DEL_OK",HttpStatus.OK);
-
+        return new ResponseEntity<>("SAVE_OK",HttpStatus.OK);
     }
 
     @ResponseBody
@@ -224,10 +220,7 @@ public class CartController {
                 System.out.println("e = " + e);
                 return new ResponseEntity<>("DEL_ERR",HttpStatus.BAD_REQUEST);
             }
-
-
     }
-
 
     //장바구니 모두 삭제
     @ResponseBody
@@ -242,9 +235,7 @@ public class CartController {
             if(session.getAttribute("list")!=null){
                 return new ResponseEntity<>("DEL_ERR",HttpStatus.BAD_REQUEST);
             }
-
             return new ResponseEntity<>("DEL_OK",HttpStatus.OK);
-
         }
 
             String userId = getUserId(session);
@@ -261,13 +252,10 @@ public class CartController {
                 e.printStackTrace();
                 return new ResponseEntity<>("DEL_ERR",HttpStatus.BAD_REQUEST);
             }
-
-
     }
 
     // 로그인 체크
     private boolean loginCheck(HttpSession session){
-
         return session.getAttribute("userId")!=null;
     }
 
