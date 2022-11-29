@@ -2,10 +2,13 @@ package com.green.meal.service;
 
 import com.green.meal.domain.SearchCondition;
 import com.green.meal.domain.UserVO;
+import com.green.meal.mapper.DeliveryMapper;
 import com.green.meal.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,16 +17,25 @@ import java.util.Map;
 @Service
 public class UserServiceImpl implements UserService {
 
-    private final UserMapper mapper;
+    private final UserMapper usermapper;
+    private final DeliveryMapper delymapper;
 
+    //회원가입시 user insert랑 dely insert 묶어서 Transaction
+    @Transactional(rollbackFor = Exception.class)
     @Override
-    public int register(UserVO user){
-       return mapper.insertUser(user);
+    public void register(UserVO user){
+        try{
+            usermapper.insertUser(user);
+            user.setUserId("df");
+            delymapper.insertDely(user);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @Override
     public UserVO idDupliCheck(String userId){
-        return mapper.selectUserOne(userId);
+        return usermapper.selectUserOne(userId);
     }
 
     @Override
@@ -31,7 +43,7 @@ public class UserServiceImpl implements UserService {
         Map map = new HashMap();
         map.put("newPwd",newPwd);
         map.put("userId", userId);
-        return mapper.updateUserPwd(map);
+        return usermapper.updateUserPwd(map);
     }
 
     @Override
@@ -39,7 +51,7 @@ public class UserServiceImpl implements UserService {
         Map map = new HashMap();
         map.put("newName",newName);
         map.put("userId", userId);
-        return mapper.updateUserName(map);
+        return usermapper.updateUserName(map);
     }
 
     @Override
@@ -47,7 +59,7 @@ public class UserServiceImpl implements UserService {
         Map map = new HashMap();
         map.put("newEmail",newEmail);
         map.put("userId", userId);
-        return mapper.updateUserEmail(map);
+        return usermapper.updateUserEmail(map);
     }
 
     @Override
@@ -55,7 +67,7 @@ public class UserServiceImpl implements UserService {
         Map map = new HashMap();
         map.put("newPhone",newPhone);
         map.put("userId", userId);
-        return mapper.updateUserPhone(map);
+        return usermapper.updateUserPhone(map);
     }
 
     @Override
@@ -63,35 +75,37 @@ public class UserServiceImpl implements UserService {
         Map map = new HashMap();
         map.put("newAddr", newAddr);
         map.put("userId", userId);
-        return mapper.updateUserAddr(map);
+        return usermapper.updateUserAddr(map);
     }
     @Override
     public int deleteUser(String userId){
-        return mapper.deleteUser(userId);
+        return usermapper.deleteUser(userId);
     }
 
     @Override
     public int deleteNaverUser(String userId){
-        return mapper.deleteNaverUser(userId);
+        return usermapper.deleteNaverUser(userId);
     }
 
     @Override
     public UserVO userDetail(String userId) {
-        return mapper.selectOne(userId);
+        return usermapper.selectOne(userId);
     }
 
     @Override
     public int userWithdraw(String userId) {
-        return mapper.delete(userId);
+        return usermapper.delete(userId);
     }
 
     @Override
     public int getSearchResultCnt(SearchCondition sc) throws Exception {
-        return mapper.searchResultCnt(sc);
+        return usermapper.searchResultCnt(sc);
     }
 
     @Override
     public List<UserVO> getSearchResultPage(SearchCondition sc) throws Exception {
-        return mapper.searchSelectPage(sc);
+        return usermapper.searchSelectPage(sc);
     }
+
+
 }

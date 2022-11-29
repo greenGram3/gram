@@ -6,8 +6,7 @@ import com.green.meal.domain.UserVO;
 import java.util.List;
 
 public interface UserService {
-    int register(UserVO user);
-
+    void register(UserVO user);
     UserVO idDupliCheck(String userId);
 
     int changePwd(String newPwd, String userId);

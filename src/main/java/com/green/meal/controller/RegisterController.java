@@ -59,7 +59,6 @@ public class RegisterController {
         if(user.getUserGender()==null) user.setUserGender("선택안함");
 
         userService.register(user);
-        delyService.baseDely(user);
 
         attr.addFlashAttribute("msg","register_ok");
         return "redirect:/";
