@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -58,9 +59,15 @@ public class RegisterController {
 
         if(user.getUserGender()==null) user.setUserGender("선택안함");
 
-        userService.register(user);
+        log.info("userService.getClass()={}",userService.getClass());
 
-        attr.addFlashAttribute("msg","register_ok");
+        try {
+            userService.register(user);
+            attr.addFlashAttribute("msg","register_ok");
+        } catch (Exception e) {
+            attr.addFlashAttribute("msg","register_fail");
+            e.printStackTrace();
+        }
         return "redirect:/";
 
     }

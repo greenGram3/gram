@@ -87,7 +87,8 @@ public class OrderController {
 
         } catch (Exception e) {
             e.printStackTrace();
-            rattr.addAttribute("msg", "SEND_ERR");
+            rattr.addAttribute("orderNo", orderNo);
+            rattr.addFlashAttribute("msg", "SEND_ERR");
         }
 
         //발송처리 하면 주문상태, 상품재고 변경되고 다시 상품 상세보기로
