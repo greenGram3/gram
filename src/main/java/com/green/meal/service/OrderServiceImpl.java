@@ -22,6 +22,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void sendUpdate(Integer[] itemNoArr, Integer[] itemAmountArr, Integer orderNo) throws Exception {
+
         for(int i = 0; i < itemNoArr.length; i++) {
 
             HashMap map = new HashMap();

@@ -257,9 +257,10 @@ public class PaymentController {
                 odvoList.add(odvo);
             }
 
+            //log.info("userOrderService.getClass()={}",userOrderService.getClass());
             //구매정보 order_list, order_detail에 넣기
-            log.info("userOrderService.getClass()={}",userOrderService.getClass());
             userOrderService.save(odvoList, odvo);
+
             //주문완료되면 카트에 있던 상품들 삭제
             cartService.deleteAll(userId);
 
