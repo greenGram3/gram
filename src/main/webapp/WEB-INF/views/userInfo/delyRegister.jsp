@@ -60,7 +60,7 @@
 
     function goPopup(){
         let url = "/meal/addr?userId=${sessionScope.userId}";
-        let pop = window.open(url,"pop","width=570,height=420, scrollbars=yes, resizable=yes");
+        let pop = window.open(url,"pop","width=570,height=420,left=1000,top=200, scrollbars=yes, resizable=yes");
     }
 
     function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAddr, jibunAddr, zipNo){

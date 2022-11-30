@@ -28,8 +28,13 @@
     </sql>
 
     <select id="selectDetail" parameterType="int" resultType="OrderDetailVO">
-        select order_list.order_no, user_id, item_no, item_price, item_amount, dely_addr, user_phone, order_date, payment, order_req, order_state
+        select order_list.order_no, order_list.user_id, order_detail.item_no, i.item_name,
+               order_detail.item_price, order_detail.item_amount, order_list.dely_addr,
+               order_list.user_phone, order_list.order_date, order_list.payment, order_list.order_req,
+               order_list.order_state
         from order_list, order_detail
+                join item i
+                on order_detail.item_no = i.item_no
         where order_list.order_no = order_detail.order_no
           and order_list.order_no = #{orderNo};
     </select>

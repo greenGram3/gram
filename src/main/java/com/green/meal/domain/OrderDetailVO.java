@@ -15,5 +15,6 @@ public class OrderDetailVO extends OrderListVO {
     private int itemPrice;
     private int itemAmount;
     private int cartAmount;
+    private String itemName;
 
 }

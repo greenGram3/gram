@@ -80,9 +80,10 @@
                 </tr>
 
                 <tr>
-                    <th class="item-no">상품번호</th>
+                    <th class="item-no">상품정보</th>
                     <c:forEach var="orderDetailVO" items="${list}">
-                    <td><input name="itemNoArr" type="text" value="${orderDetailVO.itemNo}"></td>
+                    <td><li><input name="itemNoArr" type="text" value="${orderDetailVO.itemNo}"></li>
+                    <li><input name="itemName" type="text" value="${orderDetailVO.itemName}"></li></td>
                      </c:forEach>
                 </tr>
 

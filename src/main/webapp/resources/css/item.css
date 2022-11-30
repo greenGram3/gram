@@ -68,10 +68,10 @@ main * {
     width: 6%;
 }
 
-.itemList th:nth-of-type(5) {
-    width: 10%;
-}
 
+.itemList td.name {
+    font-size: 14px;
+}
 
 
 .itemList .update a {
