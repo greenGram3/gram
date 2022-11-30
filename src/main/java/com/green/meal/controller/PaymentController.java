@@ -264,11 +264,11 @@ public class PaymentController {
             cartService.deleteAll(userId);
 
             //총 구매금액, 배송지 정보, 구매한 제품 정보 -> jsp로 전달
-            m.addAttribute("totalPrice", totalPrice);
-            m.addAttribute("vo", vo);
-            m.addAttribute("odvoList", odvoList);
+            session.setAttribute("totalPrice", totalPrice);
+            session.setAttribute("vo", vo);
+            session.setAttribute("odvoList", odvoList);
 
-            return "paymentConfirm";
+            return "redirect:/buy/confirm";
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -278,5 +278,21 @@ public class PaymentController {
         }
 
     }
+
+    @GetMapping("/confirm")
+    public String confirm(HttpSession session, Model m){
+
+        Integer totalPrice = (Integer)session.getAttribute("totalPrice");
+        DeliveryVO vo = (DeliveryVO) session.getAttribute("vo");
+        List<OrderDetailVO> odvoList = (List<OrderDetailVO>) session.getAttribute("odvoList");
+
+
+        m.addAttribute("totalPrice", totalPrice);
+        m.addAttribute("vo", vo);
+        m.addAttribute("odvoList", odvoList);
+        return "paymentConfirm";
+    }
+
+
 
 }
