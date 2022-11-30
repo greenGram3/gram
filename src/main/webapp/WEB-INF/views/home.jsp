@@ -4,6 +4,7 @@
 <%@ page session="false" %>
 <script>
 	if('${msg}'=='register_ok') alert("회원가입 되었습니다.");
+	if('${msg}'=='register_fail') alert("회원가입에 실패하였습니다.");
 	if('${msg}'=='login_ok') alert("로그인 되었습니다.");
 	if('${msg}'=='logout_ok') alert("로그아웃 되었습니다.");
 	if('${msg}'=='deleteUser_ok') alert("회원탈퇴 되었습니다.");

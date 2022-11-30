@@ -5,14 +5,21 @@ import com.green.meal.domain.UserVO;
 import com.green.meal.mapper.DeliveryMapper;
 import com.green.meal.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.TransactionDefinition;
+import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Slf4j
 @RequiredArgsConstructor
 @Service
 public class UserServiceImpl implements UserService {
@@ -23,14 +30,9 @@ public class UserServiceImpl implements UserService {
     //회원가입시 user insert랑 dely insert 묶어서 Transaction
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public void register(UserVO user){
-        try{
-            usermapper.insertUser(user);
-            user.setUserId("df");
-            delymapper.insertDely(user);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+    public void register(UserVO user) throws Exception{
+        usermapper.insertUser(user);
+        delymapper.insertDely(user);
     }
 
     @Override
