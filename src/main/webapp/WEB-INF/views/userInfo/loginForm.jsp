@@ -23,7 +23,7 @@ if(alertMsg == "wrongAccess") alert("비정상적인 접근입니다.")
         <h1 id="title">로그인</h1>
         <form action="<c:url value="/login/login"/>" method="post" onsubmit="return formCheck(this)">
             <div class="login">
-                <p>회원 로그인</p><c:if test="${not empty param.msg}"> ${param.msg}</i>
+                <p>회원 로그인</p><c:if test="${not empty param.msg}"> ${param.msg}
             </c:if>
                 <div class="memberLogin">
                     <div class="memberLoginDetail">

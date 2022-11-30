@@ -11,8 +11,6 @@ import java.util.regex.Pattern;
 
 @Slf4j
 public class PwdValidator implements ConstraintValidator<PwdCheck, String> {
-
-
     @Override
     public boolean isValid(String s, ConstraintValidatorContext constraintValidatorContext) {
         Pattern pattern = Pattern.compile("^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,}$");
@@ -24,7 +22,6 @@ public class PwdValidator implements ConstraintValidator<PwdCheck, String> {
             log.info("Valid pwd fail");
             return false;
         }
-
         return true;
     }
 }

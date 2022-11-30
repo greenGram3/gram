@@ -9,8 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.util.StringUtils;
-
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,16 +16,11 @@ import javax.servlet.http.HttpSession;
 import java.io.*;
 import java.math.BigInteger;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.security.SecureRandom;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
-
 import static com.green.meal.controller.RegisterController.passwordEncoder;
-import static java.lang.System.out;
 
 @Controller
 @Slf4j
@@ -64,7 +57,7 @@ public class LoginController {
         // 1. id와 pwd를 확인
         if(!loginCheck(userId, userPwd)) {
             // 2-1   일치하지 않으면, loginForm으로 이동
-            String msg = URLEncoder.encode("id 또는 pwd가 일치하지 않습니다.", "utf-8");
+            String msg = URLEncoder.encode("id 또는 pwd가 일치하지 않습니다.", StandardCharsets.UTF_8);
             return "redirect:/login/login?msg="+msg;
         }
         // 2-2. id와 pwd가 일치하면,
@@ -88,7 +81,7 @@ public class LoginController {
 
         rettr.addFlashAttribute("msg","login_ok");
 //		       3. 홈또는 requestURI 으로 이동
-        if (requestURI == "") return "redirect:/";
+        if (requestURI.equals("")) return "redirect:/";
         else {
             requestURI = requestURI.replace("/meal","");
             return "redirect:"+requestURI;
@@ -99,11 +92,7 @@ public class LoginController {
     public String naverLogin2(HttpSession session, Model model) {
         String clientId = "eELpwpqlV0GXGymjU5cB";//애플리케이션 클라이언트 아이디값";
         String redirectURI = null;
-        try {
-            redirectURI = URLEncoder.encode("http://localhost:8080/meal/login/naverLogin", "UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            throw new RuntimeException(e);
-        }
+        redirectURI = URLEncoder.encode("http://localhost:8080/meal/login/naverLogin", StandardCharsets.UTF_8);
         SecureRandom random = new SecureRandom();
         String state = new BigInteger(130, random).toString();
         String apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code"
@@ -124,11 +113,7 @@ public class LoginController {
         String clientId = "eELpwpqlV0GXGymjU5cB";//애플리케이션 클라이언트 아이디값";
         String clientSecret = "fuLNwvC5Wz";//애플리케이션 클라이언트 시크릿값";
         String redirectURI = null;
-        try {
-            redirectURI = URLEncoder.encode("http://localhost:8080/meal/naverJson", "UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            throw new RuntimeException(e);
-        }
+        redirectURI = URLEncoder.encode("http://localhost:8080/meal/naverJson", StandardCharsets.UTF_8);
         String apiURL = "https://nid.naver.com/oauth2.0/token?grant_type=authorization_code"
                 + "&client_id=" + clientId
                 + "&client_secret=" + clientSecret
@@ -136,7 +121,6 @@ public class LoginController {
                 + "&code=" + code
                 + "&state=" + state;
         String accessToken = "";
-        String refresh_token = "";
         try {
             URL url = new URL(apiURL);
             HttpURLConnection con = (HttpURLConnection)url.openConnection();
@@ -173,9 +157,9 @@ public class LoginController {
             int responseCode = con.getResponseCode();
             BufferedReader br;
             if (responseCode == 200) { // 정상 호출
-                br = new BufferedReader(new InputStreamReader(con.getInputStream(), "UTF-8"));
+                br = new BufferedReader(new InputStreamReader(con.getInputStream(), StandardCharsets.UTF_8));
             } else {  // 에러 발생
-                br = new BufferedReader(new InputStreamReader(con.getErrorStream(), "UTF-8"));
+                br = new BufferedReader(new InputStreamReader(con.getErrorStream(), StandardCharsets.UTF_8));
             }
             String inputLine;
             StringBuilder res = new StringBuilder();
@@ -203,12 +187,12 @@ public class LoginController {
                 userName = StringEscapeUtils.unescapeJava(userName);
                 userEmail = userEmail.substring(userEmail.indexOf("\"email\":")+8).replace("\"","");
                 userPhone = userPhone.substring(userPhone.indexOf("\"mobile\":")+9).replace("\"","");
-                if(birthday!="")birthday = birthday.substring(birthday.indexOf("\"birthday\":")+11).replace("\"","");
-                if(birthyear!="")birthyear = birthyear.substring(birthyear.indexOf("\"birthyear\":")+12).replace("\"","");
+                if(!birthday.equals(""))birthday = birthday.substring(birthday.indexOf("\"birthday\":")+11).replace("\"","");
+                if(!birthyear.equals(""))birthyear = birthyear.substring(birthyear.indexOf("\"birthyear\":")+12).replace("\"","");
                 userBirth = birthyear+"-"+birthday;
-                if(userGender!="") userGender = userGender.substring(userGender.indexOf("\"gender\":")+9).replace("\"","");
-                if(userGender == "M") userGender = "man";
-                if(userGender == "W") userGender = "woman";
+                if(!userGender.equals("")) userGender = userGender.substring(userGender.indexOf("\"gender\":")+9).replace("\"","");
+                if(userGender.equals("M")) userGender = "man";
+                if(userGender.equals("W")) userGender = "woman";
 //                UserVO user = new UserVO();
                 user.setUserId(userId);
                 user.setUserName(userName);

@@ -67,7 +67,6 @@
     let receiver = $('#receiver')[0];
     let delyPlace = $('#delyPlace')[0];
     let delyPhone = $('#delyPhone')[0];
-    let addrDetail = $('#addrDetail')[0];
 
     let msgReceiver = $('#msgReceiver')[0];
     let msgDelyPlace = $('#msgDelyPlace')[0];
@@ -161,7 +160,7 @@
                             if (result.code != 0) {
                                 flag = false;
                                 alert("동일한 이름의 배송지가 있습니다.")
-                            };
+                            }
                         },
                         error: function (result) {
                             alert('error : '+result+" "+result.code);
@@ -187,7 +186,7 @@
                         delyPhone1 :  $('input[name=delyPhone1]').val(),
                         delyAddr1: $('input[name=delyAddr1]').val(),
                     },
-                    success: function (result) {
+                    success: function () {
                         alert("수정되었습니다.");
                         opener.parent.location.reload();
                         window.close();

@@ -31,7 +31,7 @@
       <div class="pwd hidden" id="pwd">
         <div><span>현재비밀번호</span><input type="text" id="currentPwd"></div>
         <div><span>신규비밀번호</span><input type="text" id="newPwd1"><div id="msgPwd" style="color: red"></div></div>
-        <div><span>신규비밀번호 재입력</span><input type="text" id="newPwd2"> </div>
+        <div><span>신규비밀번호 재입력</span><input type="text" id="newPwd2"><div id="msgPwd2" style="color: red"></div> </div>
         <div class="pwdCheck">
           <input type="button" id="pwdCancel" value="취소">
           <input type="button" id="pwdComplete" value="완료">
@@ -116,7 +116,28 @@
         </div>
       </div>
 
+      <div class="userGender">
+        <p>성별</p>　<p>${user.userGender}</p>
+      </div>
+
       <script>
+        let currentPwd = document.querySelector("#currentPwd");
+        let newPwd1 = document.querySelector("#newPwd1");
+        let newPwd2 = document.querySelector("#newPwd2");
+        let newPhone = $('#newPhone')[0];
+        let newName = $('#newName')[0];
+        let email1 = $('#userEmailArr')[0];
+        let email2 = $('#selectedEmail')[0];
+
+        let msgPwd = document.querySelector("#msgPwd");
+        let msgPwd2 = document.querySelector("#msgPwd2");
+        let msgName = $('#msgName')[0];
+        let msgEmail = $('#msgEmail')[0];
+
+        let RAP = $('#roadAddrPart1')[0];
+        let AD = $('#addrDetail')[0];
+        let ZN = $('#zipNo')[0];
+
         // 주소 우편번호 팝업창 api
         function goPopup(){
           let url = "/meal/addr?userId=${sessionScope.userId}";
@@ -124,57 +145,46 @@
         }
 
         function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAddr, jibunAddr, zipNo){
-          document.querySelector("#roadAddrPart1").value = roadAddrPart1+roadAddrPart2;
-          document.querySelector("#addrDetail").value = addrDetail;
-          document.querySelector("#zipNo").value = zipNo;
+          RAP.value = roadAddrPart1+roadAddrPart2;
+          AD.value = addrDetail;
+          ZN.value = zipNo;
         }
 
         //핸드폰 입력값 검사
         $('#phoneComplete')[0].addEventListener('click', function (){
           let test = /^[0-9]{3}-[0-9]{4}-[0-9]{4}/;
-          let test2 = $('#newPhone')[0].value;
+          let test2 = newPhone.value;
           if(test.test(test2) && test2.length==13){
             $('#phoneForm').submit();
           }else{
-            $('#msgPhone')[0].innerHTML = "010-0000-0000 형식이어야 합니다.";
-            $('#newPhone').focus();
+            msgPhone.innerHTML = "010-0000-0000 형식이어야 합니다.";
+            newPhone.focus();
           }
         })
 
         //주소 입력값 검사
         $('#addrComplete')[0].addEventListener('click', function (){
-          if($('#addrDetail')[0].value != ''){
+          if(AD.value != ''){
             $('#addrForm').submit();
           }else{
-            $('#msgAddr')[0].style.display = 'block'
-            $('#msgAddr')[0].innerHTML = "주소를 확인해주세요.";
-            $('#newAddr').focus();
+            msgAddr.style.display = 'block'
+            msgAddr.innerHTML = "주소를 확인해주세요.";
+            ZN.focus();
           }
         })
-      </script>
-
-      <div class="userGender">
-        <p>성별</p>　<p>${user.userGender}</p>
-      </div>
-
-      <script>
-        const currentPwd = document.querySelector("#currentPwd");
-        const newPwd1 = document.querySelector("#newPwd1");
-        const newPwd2 = document.querySelector("#newPwd2");
-        const msgPwd = document.querySelector("#msgPwd");
 
         //이름 바꿀때
         $('#nameComplete')[0].addEventListener('click', function (){
           let test = /[!?@#$%^&*():;+-=~{}<>\_\[\]\|\\\"\'\,\.\/\`\₩]/g;
-          let test2 = $('#newName')[0].value;
+          let test2 = newName.value;
           if(test.test(test2)){
-            $('#msgName')[0].innerHTML = "특수문자가 있어선 안됩니다.";
-            $('#newName').focus();
+            msgName.innerHTML = "특수문자가 있어선 안됩니다.";
+            newName.focus();
             return;
           }
           if(test2.length < 1 || test2.length > 10){
-            $('#msgName')[0].innerHTML = "1~10자 이내로 입력하셔야 합니다.";
-            $('#newName').focus();
+            msgName.innerHTML = "1~10자 이내로 입력하셔야 합니다.";
+            newName.focus();
             return;
           }
           $('#nameForm').submit();
@@ -187,9 +197,9 @@
 
         //이메일 바꿀때
         $('#emailComplete')[0].addEventListener('click', function (){
-          if($('#userEmailArr')[0].value == '' || $('#selectedEmail')[0].value == ''){
-            $('#msgEmail')[0].innerHTML = "이메일을 확인해주세요";
-            $('#newEmail').focus();
+          if(email1.value == '' || email2.value == ''){
+            msgEmail.innerHTML = "이메일을 확인해주세요";
+            email1.focus();
           }else{
             $('#emailForm').submit();
           }
@@ -218,19 +228,25 @@
         document.querySelector("#pwdComplete").addEventListener('click',function(){
           //신규 비밀번호 형식이 안맞을경우
           let reg = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/g;
-          let txt =  $('#newPwd1')[0].value;
+          let txt =  newPwd1.value;
           if( !reg.test(txt) ) {
             msgPwd.innerHTML = "8자 이상 숫자,특수문자,영문자가 하나씩 포합되어야합니다.";
+            msgPwd2.innerHTML = "";
+            newPwd1.focus();
             return;
           }
           //현재 비밀번호와 신규비밀번호가 같을경우
           if (currentPwd.value == newPwd1.value){
             msgPwd.innerHTML = "현재비밀번호와 신규비밀번호가 같습니다.";
+            msgPwd2.innerHTML = "";
+            newPwd1.focus();
             return;
           }
           //신규비밀번호 안맞을경우
           if (newPwd1.value!=newPwd2.value){
-            msgPwd.innerHTML = "신규 비밀번호 재입력란과 다릅니다";
+            msgPwd.innerHTML = "";
+            msgPwd2.innerHTML = "신규 비밀번호와 값이 다릅니다";
+            newPwd2.focus();
             return;
           }
           $.ajax({
@@ -242,7 +258,11 @@
             success: function (result){
               if(result==0) alert("비밀번호가 변경되지 않았습니다.")
               if(result==1) alert("비밀번호가 변경되었습니다.")
-              if (result==2) msgPwd.innerHTML = "현재 비밀번호가 맞지 않습니다";
+              if (result==2) {
+                currentPwd.focus();
+                msgPwd.innerHTML = "현재 비밀번호가 맞지 않습니다";
+                msgPwd2.innerHTML = "";
+              }
               else {
                 $('.pwd')[0].style.display = 'inline-block'
                 $('.pwd')[1].style.display = 'none'
@@ -266,11 +286,11 @@
         }
 
         function clearMsg(){
-          $('#msgName')[0].innerHTML = '';
-          $('#msgAddr')[0].innerHTML = '';
-          $('#msgPwd')[0].innerHTML = '';
-          $('#msgPhone')[0].innerHTML = '';
-          $('#msgEmail')[0].innerHTML = '';
+          msgName.innerHTML = '';
+          msgAddr.innerHTML = '';
+          msgPwd.innerHTML = '';
+          msgPhone.innerHTML = '';
+          msgEmail.innerHTML = '';
         }
       </script>
 

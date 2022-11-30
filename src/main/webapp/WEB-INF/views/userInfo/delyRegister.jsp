@@ -48,7 +48,6 @@
     let receiver = $('#receiver')[0];
     let delyPlace = $('#delyPlace')[0];
     let delyPhone = $('#delyPhone')[0];
-    let addrDetail = $('#addrDetail')[0];
 
     let msgReceiver = $('#msgReceiver')[0];
     let msgDelyPlace = $('#msgDelyPlace')[0];

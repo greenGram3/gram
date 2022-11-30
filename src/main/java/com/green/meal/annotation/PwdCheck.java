@@ -11,7 +11,6 @@ import java.lang.annotation.*;
 @Documented
 @Constraint(validatedBy = {PwdValidator.class})
 public @interface PwdCheck {
-
     String message() default "";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};

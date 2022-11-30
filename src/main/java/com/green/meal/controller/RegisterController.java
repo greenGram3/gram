@@ -1,14 +1,12 @@
 package com.green.meal.controller;
 
 import com.green.meal.domain.UserVO;
-import com.green.meal.service.DelyService;
 import com.green.meal.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -24,7 +22,6 @@ public class RegisterController {
 
     public static PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
     private final UserService userService;
-    private final DelyService delyService;
 
     //매인 -> 회원가입
     @GetMapping("/register")
@@ -53,7 +50,6 @@ public class RegisterController {
         //UserEmail 수동으로 넣기
         user.setUserEmail(addArr(userEmailArr));
         //패스워드 암호화
-        user.getUserPwd();
         String digest = passwordEncoder.encode(user.getUserPwd());
         user.setUserPwd(digest);
 

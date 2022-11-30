@@ -18,4 +18,9 @@ public class addrController {
         log.info("addrController session.userId :"+String.valueOf(session.getAttribute("userId")));
         return "addr";
     }
+
+    @RequestMapping("/addr2")
+    String addr2(){
+        return "addr";
+    }
 }

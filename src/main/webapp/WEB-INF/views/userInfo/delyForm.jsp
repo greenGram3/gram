@@ -55,7 +55,7 @@
                                         if (result.code == 1) {
                                             flag = !flag
                                             alert("기본배송지는 1개 존재해야합니다.");
-                                        };
+                                        }
                                     },
                                     error: function (result) {
                                         alert('error : '+result+" "+result.code);
@@ -75,7 +75,7 @@
                                     delyNo : '${item.delyNo}',
                                     delyPhone :  '${item.delyPhone}'
                                 },
-                                success: function (result) {
+                                success: function () {
                                     location.reload();
                                     alert("삭제되었습니다.");
                                 },

@@ -55,13 +55,13 @@ const delBtn2 = document.querySelector("#delBtn2");
 delBtn.addEventListener('click',function (){
    if(confirm("정말로 탈퇴하시겠습니까?")){
        document.querySelector("#form").submit();
-   }else return;
+   }
 });
 
 delBtn2.addEventListener('click',function (){
     if(confirm("정말로 탈퇴하시겠습니까?")){
         document.querySelector("#form2").submit();
-    }else return;
+    }
 });
 
 //회원별 버튼막기

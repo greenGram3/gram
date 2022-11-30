@@ -24,14 +24,13 @@ public class DeliveryController {
 
     @GetMapping("/delivery")
     public String deliveryGet(Model model, HttpSession session){
-        LinkedList<DeliveryVO> list = new LinkedList<>() ;
-        list.addAll(delyService.selectDelivery((String)session.getAttribute("userId")));
+        LinkedList<DeliveryVO> list = new LinkedList<>(delyService.selectDelivery((String) session.getAttribute("userId")));
 
         model.addAttribute("realDely", list); // mapper용 찐 주소인 list
 
-        for(int i=0 ; i<list.size(); i++){
-            String[] addrArr = list.get(i).getDelyAddr().split("@");
-            list.get(i).setDelyAddr(addrArr[1]+" "+addrArr[2]);
+        for (DeliveryVO deliveryVO : list) {
+            String[] addrArr = deliveryVO.getDelyAddr().split("@");
+            deliveryVO.setDelyAddr(addrArr[1] + " " + addrArr[2]);
         }
         BaseDelivery(list);
 
@@ -130,7 +129,7 @@ public class DeliveryController {
     }
 
 
-    public LinkedList<DeliveryVO> BaseDelivery(LinkedList<DeliveryVO> list){
+    public void BaseDelivery(LinkedList<DeliveryVO> list){
         int i = 0;
         for(;i<list.size();i++){
             if(list.get(i).getDelyNo()==1) {
@@ -139,7 +138,6 @@ public class DeliveryController {
                 break;
             }
         }
-        return list;
     }
 
 }
