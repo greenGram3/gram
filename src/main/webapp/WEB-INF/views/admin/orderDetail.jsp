@@ -24,6 +24,8 @@
     if(msg=="READ_ERR")  alert("주문 상세 보기를 가져오는데 실패했습니다. 다시 시도해 주세요.");
     if(msg=="SEND_OK")  alert("발송 처리를 완료했습니다.");
     if(msg=="SEND_ERR")  alert("발송 처리에 실패했습니다. 다시 시도해 주세요.");
+    <%--let reMsg = "${param.msg}";--%>
+    //RedirectAttributes 사용하더라도 addFlash- 를 사용하지 않으면 param.msg로 받아야됨
 </script>
     <div class="main">
         <jsp:include page="../include/admin.jsp" flush="false" />
