@@ -80,11 +80,11 @@
         </div>
         <div class="delySection">
         <div class="delyContent">
-        <c:forEach var="list" items="${delyList}" varStatus="status">
+        <c:forEach var="deliveryVO" items="${delyList}" varStatus="status">
           <ul class="delyContainer">
-             <li><input type="radio" id="delyPlace${status.index}" class="delyPlace" name="delyPlace" value="${list.delyPlace}" ${list.delyNo==1 ? "checked" : ""}/>
-              ${list.delyPlace} ${list.delyNo==1 ? "(기본배송지)" : ""}</li>
-            <li class="dely"><input id="delyAddr${status.index}" value="${list.delyAddr}" readonly>
+             <li><input type="radio" id="delyPlace${status.index}" class="delyPlace" name="delyPlace" value="${deliveryVO.delyPlace}" ${deliveryVO.delyNo==1 ? "checked" : ""}/>
+              ${deliveryVO.delyPlace} ${deliveryVO.delyNo==1 ? "(기본배송지)" : ""}</li>
+            <li class="dely"><input id="delyAddr${status.index}" value="${deliveryVO.delyAddr}" readonly>
               <button type="button" class="delyBtn" id="openBtn${status.index}">수정하기</button></li>
           <script>
             $("#openBtn${status.index}").on("click", function(){
