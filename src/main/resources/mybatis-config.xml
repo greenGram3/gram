@@ -20,6 +20,7 @@
         <typeAlias alias="OrderItemDTO" type="com.green.meal.domain.OrderItemDTO"/>
         <typeAlias alias="SearchCondition" type="com.green.meal.domain.SearchCondition"/>
         <typeAlias alias="DeliveryVO" type="com.green.meal.domain.DeliveryVO"/>
+        <typeAlias alias="EventVO" type="com.green.meal.domain.EventVO"/>
 
     </typeAliases>
 
