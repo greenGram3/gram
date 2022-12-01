@@ -196,7 +196,7 @@ public class ReviewController {
             // 실제 폴더 저장 위치
             realPath += "resources\\reviewImage\\";
             // ** 기본 이미지 지정하기
-            String file1, file2="reviewImage/noImage.JPG";
+            String file1, file2;
             // ** MultipartFile
             MultipartFile imgNamef = vo.getImgNamef();
 
