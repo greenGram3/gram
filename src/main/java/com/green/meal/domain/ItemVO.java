@@ -16,6 +16,7 @@ public class ItemVO {
     private String itemName;
     private int itemAmount;
     private int itemPrice;
+    private String etc1;
 
     // 이미지
     private String fileName; //DB에 저장된 이미지 String경로 꺼내오는 용
@@ -24,21 +25,23 @@ public class ItemVO {
 
 
 
-    public ItemVO(String itemCategory1, String itemCategory2, String itemName, int itemAmount, int itemPrice) {
+    public ItemVO(String itemCategory1, String itemCategory2, String itemName, int itemAmount, int itemPrice,String etc1) {
         this.itemCategory1 = itemCategory1;
         this.itemCategory2 = itemCategory2;
         this.itemName = itemName;
         this.itemAmount = itemAmount;
         this.itemPrice = itemPrice;
+        this.etc1 = etc1;
     }
 
-    public ItemVO(int itemNo, String itemCategory1, String itemCategory2, String itemName, int itemAmount, int itemPrice) {
+    public ItemVO(int itemNo, String itemCategory1, String itemCategory2, String itemName, int itemAmount, int itemPrice,String etc1) {
         this.itemNo = itemNo;
         this.itemCategory1 = itemCategory1;
         this.itemCategory2 = itemCategory2;
         this.itemName = itemName;
         this.itemAmount = itemAmount;
         this.itemPrice = itemPrice;
+        this.etc1 = etc1;
     }
 
 

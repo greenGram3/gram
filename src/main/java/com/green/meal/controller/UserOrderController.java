@@ -79,6 +79,7 @@ public class UserOrderController {
                 tmp +="@"+ orderDetailVO.getItemName();
             }
 
+            assert tmp != null;
             String[] splitItem = tmp.split("@");
             int length = splitItem.length;
 

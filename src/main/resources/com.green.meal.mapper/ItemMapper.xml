@@ -41,9 +41,9 @@
     <!-- Image Table -->
     <insert id="insert" parameterType="ItemVO">
         insert into item
-        (item_category1, item_category2, item_name, item_amount, item_price, file_name)
+        (item_category1, item_category2, item_name, item_amount, item_price, file_name, etc1)
         values
-            (#{itemCategory1}, #{itemCategory2}, #{itemName}, #{itemAmount}, #{itemPrice}, #{fileName})
+            (#{itemCategory1}, #{itemCategory2}, #{itemName}, #{itemAmount}, #{itemPrice}, #{fileName}, #{etc1})
     </insert>
 
     <!-- 이미지 한개 등록용 이전 구버전 -->
@@ -76,7 +76,8 @@
             item_name = #{itemName},
             item_amount = #{itemAmount},
             item_price = #{itemPrice},
-            file_name=#{fileName}
+            file_name=#{fileName},
+            etc1=#{etc1}
         where item_no = #{itemNo}
     </update>
 
@@ -139,13 +140,13 @@
     <select id="bestItems" resultType="ItemVO">
         select *
         from item
-        order by item_amount
+       where etc1 ='best' order by item_no desc
     </select>
 
     <select id="newItems" resultType="ItemVO">
         select *
         from item
-        order by item_no desc
+        where etc1 ='new' order by item_no desc
     </select>
 
     <select id="category1" resultType="ItemVO" parameterType="String">

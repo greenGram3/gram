@@ -58,10 +58,10 @@ public class ItemListController {
     public String bestList( Model model){
         String category = "베스트";
 
-        List<ItemVO> list = itemService.bestItems();
-        List<ItemVO> itemList=list.subList(0,16);
+        List<ItemVO> itemList = itemService.bestItems();
 
-        giveCategoryPage(category,itemList,model );
+
+        giveCategoryPage(category,itemList,model);
 
         return "/item/itemList";
     }
@@ -71,10 +71,10 @@ public class ItemListController {
     public String newList(Model model){
 
         String category = "신메뉴";
-        List<ItemVO> list = itemService.newItems();
-        List<ItemVO> itemList=list.subList(0,16);
+        List<ItemVO> itemList = itemService.newItems();
 
-        giveCategoryPage(category, itemList,model );
+
+        giveCategoryPage(category, itemList,model);
 
         return "/item/itemList";
     }

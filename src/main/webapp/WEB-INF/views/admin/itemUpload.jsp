@@ -75,6 +75,14 @@
     </tr>
 
     <tr>
+      <th><label for="etc1">상품분류</label></th>
+      <td colspan="2">
+        <input type="radio" name="etc1" value="best">베스트　
+        <input type="radio" name="etc1" value="new">신메뉴　
+        <input type="radio" name="etc1" value="none">선택안함</td>
+    </tr>
+
+    <tr>
       <th>상품이미지</th>
       <td>
         <li class="topImage">대표이미지</li>
@@ -148,6 +156,12 @@
       if(form.itemPrice.value=="") {
         alert("가격을 입력해 주세요.");
         form.itemPrice.focus();
+        return false;
+      }
+
+      if(form.etc1.value=="") {
+        alert("상품 분류를 선택해주세요.");
+        form.etc1.focus();
         return false;
       }
       /*return true;*/

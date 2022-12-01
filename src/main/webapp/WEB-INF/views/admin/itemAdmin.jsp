@@ -81,6 +81,13 @@
       <th><label for="itemPrice">가격</label></th>
       <td colspan="2"><input class="input-field" type="number" id="itemPrice" name="itemPrice" value="${vo.itemPrice}"></td>
     </tr>
+    <tr>
+      <th><label for="etc1">상품분류</label></th>
+      <td colspan="2">
+        <input type="radio" class="best" name="etc1" value="best">베스트　
+        <input type="radio" class="new" name="etc1" value="new">신메뉴　
+        <input type="radio" class="none" name="etc1" value="none">선택안함</td>
+    </tr>
 
      <!-- Image Update -->
      <tr>
@@ -134,6 +141,10 @@
 
   $(document).ready(function(){
 
+
+    $(".${vo.etc1}").attr("checked","checked");
+
+
     let formCheck = function() {
       let form = document.getElementById("form");
 
@@ -150,6 +161,12 @@
       if(form.itemPrice.value=="") {
         alert("가격을 입력해 주세요.");
         form.itemPrice.focus();
+        return false;
+      }
+
+      if(form.etc1.value=="") {
+        alert("상품 분류를 선택해주세요.");
+        form.etc1.focus();
         return false;
       }
       // ** Heejeong 첨부파일 업로드 체크
