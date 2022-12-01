@@ -73,7 +73,8 @@ public class OrderController {
     }
 
     @PostMapping("/send")
-    public String sendModify(Integer orderNo, Integer[] itemNoArr, Integer[] itemAmountArr, SearchCondition sc, RedirectAttributes rattr) {
+    public String sendModify(Integer orderNo, Integer[] itemNoArr, Integer[] itemAmountArr,
+                             SearchCondition sc, RedirectAttributes rattr) {
 
         try {
 
@@ -97,20 +98,22 @@ public class OrderController {
     }
 
     @PostMapping("/return")
-    public String returnModify(Integer orderNo, Integer[] itemNoArr, Integer[] itemAmountArr, SearchCondition sc, Model m) {
+    public String returnModify(Integer orderNo, Integer[] itemNoArr, Integer[] itemAmountArr,
+                               SearchCondition sc, RedirectAttributes rattr) {
 
         try {
 
             orderService.returnUpdate(itemNoArr, itemAmountArr, orderNo);
 
-            m.addAttribute("orderNo", orderNo);
-            m.addAttribute("page", sc.getPage());
-            m.addAttribute("pageSize", sc.getPageSize());
-            m.addAttribute("msg", "SEND_OK");
+            rattr.addAttribute("orderNo", orderNo);
+            rattr.addAttribute("page", sc.getPage());
+            rattr.addAttribute("pageSize", sc.getPageSize());
+            rattr.addFlashAttribute("msg", "RETURN_OK");
 
         } catch (Exception e) {
             e.printStackTrace();
-            m.addAttribute("msg", "SEND_ERR");
+            rattr.addAttribute("orderNo", orderNo);
+            rattr.addFlashAttribute("msg", "RETURN_ERR");
         }
 
         return "redirect:/order/read";
