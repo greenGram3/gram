@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.green.meal.mapper.EventMapper">
+    <select id="selectEvent" resultType="EventVO">
+        select * from event
+    </select>
+
+    <insert id="insertEvent">
+        <selectKey keyProperty="eventNo" resultType="int" order="BEFORE">
+            select  IFNULL(max(event_no),0)+1 from event
+        </selectKey>
+        insert into event
+        (event_no, event_name, img_name, img_path, banner) values
+        (#{eventNo}, #{eventName}, #{imgName}, #{imgPath}, #{banner})
+    </insert>
+
+    <update id="updateEvent">
+        update event
+        set event_name=#{eventName}, img_name = #{imgName}, img_path = #{imgPath}, banner = #{banner}
+        where event_no = #{eventNo}
+    </update>
+
+    <delete id="deleteEvent">
+        delete from event where event_no = #{eventNo}
+    </delete>
+</mapper>
+
+
