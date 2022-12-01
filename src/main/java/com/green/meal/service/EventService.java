@@ -30,6 +30,10 @@ public class EventService {
         return mapper.updateEvent(map);
     }
 
+    public EventVO selectOne(Integer eventNo){
+        return mapper.selectOne(eventNo);
+    }
+
     public int deleteEvent(Integer eventNo){
         return mapper.deleteEvent(eventNo);
     }

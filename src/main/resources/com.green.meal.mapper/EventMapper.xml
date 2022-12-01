@@ -25,6 +25,10 @@
     <delete id="deleteEvent">
         delete from event where event_no = #{eventNo}
     </delete>
+
+    <select id="selectOne" parameterType="int" resultType="EventVO">
+        select * from event where event_no = #{eventNo}
+    </select>
 </mapper>
 
 

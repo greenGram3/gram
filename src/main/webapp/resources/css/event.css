@@ -1,0 +1,69 @@
+main * {
+    margin:auto;
+    text-align: center;
+}
+.adminEventList {
+    margin-top: 250px;
+    margin-bottom: 50px;
+    width: 940px;
+}
+
+.userEventList {
+    margin-top: 250px;
+    margin-bottom: 50px;
+    width: 1260px;
+}
+
+.pageTitle_container h1,
+.pageTitle_container h3{
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+
+.pageTitle_container hr {
+    color: #cccccc;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.event_box {
+    text-align: left;
+}
+
+.event_box>div {
+    display: inline-block;
+    width: 300px;
+    margin: 50px 5px;
+}
+
+.eventDetail {
+    margin-top: 250px;
+    margin-bottom: 50px;
+    width: 1220px;
+}
+
+.eventDetail table {
+    width: 100%;
+    border-top: 1px solid lightgray;
+    border-collapse: collapse;
+}
+
+.eventDetail * {
+    text-align: left;
+}
+
+.eventDetail th {
+    background-color: #eeecec;
+}
+
+.eventDetail th,
+.eventDetail td {
+    border-bottom: 1px solid lightgray;
+    padding:10px 10px;
+
+}
+
+.pageTitle_container h3 {
+    padding: 5px;
+}

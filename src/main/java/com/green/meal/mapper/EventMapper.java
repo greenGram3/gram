@@ -15,4 +15,6 @@ public interface EventMapper {
     int updateEvent(HashMap map);
 
     int deleteEvent(Integer eventNo);
+
+    EventVO selectOne(Integer eventNo);
 }

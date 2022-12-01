@@ -14,7 +14,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
-import java.io.IOException;
 import java.util.List;
 
 
@@ -26,17 +25,19 @@ public class EventController {
     private final EventService eventService;
 
     //이벤트 목록 페이지 이동
-    @GetMapping()
+    @GetMapping("/list")
     public String eventList(Model model){
         List<EventVO> list = eventService.selectEvent();
         model.addAttribute("list", list);
-        return "eventList";
+        return "/eventList";
     }
 
     // 디테일 페이지 이동
-    @GetMapping("/{eventNo}")
-    public String eventDetail(@PathVariable Integer eventNo){
-        return "";
+    @GetMapping("/detail")
+    public String eventDetail(Integer eventNo, Model model){
+        EventVO eventVO = eventService.selectOne(eventNo);
+        model.addAttribute("eventVO",eventVO);
+        return "/eventDetail";
     }
 
     // 이벤트 등록 페이지 이동

@@ -16,17 +16,15 @@
 </head>
 
 <body>
-<jsp:include page="../include/header.jsp" flush="false" />
+<jsp:include page="include/header.jsp" flush="false" />
 <main>
 
     <div class="main">
-        <jsp:include page="../include/admin.jsp" flush="false" />
 
-        <div class="oventDetail">
+        <div class="eventDetail">
 
 <div class="pageTitle_container">
     <h3>이벤트</h3>
-    <hr>
 </div>
 
     <div class="event_container">
@@ -39,19 +37,20 @@
                 </tr>
                 <tr>
                     <td>
-                      <h3>관리자</h3>
+                      <h6>관리자</h6>
                     </td>
                 </tr>
                 <tr>
                     <td><img src="<c:url value='${eventVO.imgName}'/>"></td>
                 </tr>
             </table>
+        <c:if test="${loginId=='admin'}">
             <div class="button_container">
                 <button type="button" id="listBtn" class="btn-list">목록으로</button>
                 <button type="button" id="modifyBtn" class="btn-modify">수정</button>
                 <button type="button" id="delBtn" class="btn-del">삭제</button>
             </div>
-
+        </c:if>
         </form>
 
     </div>
@@ -93,7 +92,7 @@
         </div>
     </div>
 </main>
-<jsp:include page="../include/footer.jsp" flush="false" />
+<jsp:include page="include/footer.jsp" flush="false" />
 </body>
 
 </html>

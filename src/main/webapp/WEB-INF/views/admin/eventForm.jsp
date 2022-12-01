@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=utf-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
-<c:set var="setEvent" value="${eventVO.eventNo=='' ? '등록' : '수정'}"/>
+<c:set var="setEvent" value="${eventVO.eventNo==null ? '등록' : '수정'}"/>
 <%@ page session="true"%>
 
 <%--<%@ page import="java.net.URLDecoder"%>--%>
@@ -45,14 +45,15 @@
     <tr>
       <th>배너</th>
       <td colspan="2">
-        <input type="radio" name="banner" value="none">선택안함　
-        <input type="radio" name="banner" value="banner">배너　</td>　
+        <input type="radio" class="none" name="banner" value="none">선택안함　
+        <input type="radio" class="banner" name="banner" value="banner">배너　</td>　
     </tr>
 
     <tr>
       <th>이벤트 이미지</th>
       <td>
         <li><img src="<c:url value='${eventVO.imgPath}'/>" class="imgPath" width="150px" height="150px"></li>
+        <input hidden name="imgPath" value="${eventVO.imgPath}">
         <li><input type="file" id="imgPath" name="fileName"></li>
       </td>
     </tr>
@@ -74,7 +75,7 @@
 
   <div class="button_container">
     <c:if test="${setEvent == '등록'}">
-      <button type="button" id="uploadBtn" class="btn-modify">등록</button>
+      <button type="button" id="uploadBtn" class="btn-save">등록</button>
     </c:if>
     <c:if test="${setEvent == '수정'}">
       <button type="button" id="modifyBtn" class="btn-modify">수정</button>
@@ -86,6 +87,14 @@
 <script>
 
   $(document).ready(function(){
+    let banner;
+    if("${setEvent}" == "등록"){
+      banner = "none";
+    }else {
+      banner = "${eventVO.banner}" ;
+    }
+
+    $(".${banner}").attr("checked","checked");
 
     let formCheck = function() {
       let form = document.getElementById("form");
