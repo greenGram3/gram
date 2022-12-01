@@ -99,7 +99,7 @@ public class ItemController {
             realPath += "resources\\itemImage\\";
 
             // 기본 이미지 지정
-            String file1, file2, file3, file4="/itemImage/noImage.JPG";
+            String file1, file2, file3, file4;
 
             // ** MultipartFile
             MultipartFile fileNamef = vo.getFileNamef();
@@ -110,9 +110,11 @@ public class ItemController {
                 fileNamef.transferTo(new File(file1));
                 // 2) Table 저장 준비
                 file2="/itemImage/"+fileNamef.getOriginalFilename();
+
                 // ** Table에 완성 String경로 set
                 vo.setFileName(file2);
             }
+
             // --------------------------------------------------------------------------//
             // ImageImage 업데이트
             MultipartFile imgNamef = vo1.getImgNamef();
@@ -123,9 +125,11 @@ public class ItemController {
                 imgNamef.transferTo(new File(file3));
                 // 2) Table 저장 준비
                 file4 = "/itemImage/"+imgNamef.getOriginalFilename();
+
                 // Table에 완성 String경로 set
                 vo1.setImgName(file4);
             }
+
             // --------------------------------------------------------------------------//
 
             //수정 입력된 vo로 item 정보 update
@@ -201,7 +205,8 @@ public class ItemController {
             realPath += "resources\\itemImage\\";
 
             // 기본 이미지 지정
-            String file1, file2, file3, file4 ="/itemImage/noImage.JPG";
+            String file1, file2 = "/itemImage/noImage.JPG";
+            String file3, file4 = "/itemImage/noImage.JPG";
 
             // item에 저장하는 Image
             // MultipartFile
@@ -213,9 +218,9 @@ public class ItemController {
                 fileNamef.transferTo(new File(file1));
                 // 2) Table 저장 준비
                 file2="/itemImage/"+fileNamef.getOriginalFilename();
-                // Table에 완성 String경로 set
-                vo.setFileName(file2);
             }
+            // Table에 완성 String경로 set
+            vo.setFileName(file2);
 //-------------------------------------------------------------//
             // Image에 저장하는 Image
             // MultipartFile
@@ -227,10 +232,9 @@ public class ItemController {
                 imgNamef.transferTo(new File(file3));
                 // 2) Table 저장 준비
                 file4="/itemImage/"+imgNamef.getOriginalFilename();
-
-                // Table에 완성 String경로 set
-                vo1.setImgName(file4);
             }
+            // Table에 완성 String경로 set
+            vo1.setImgName(file4);
  //--------------------------------------------------------------//
 
             //상품정보 가지고 item 테이블에 insert
