@@ -8,7 +8,7 @@
 <head>
     <meta charset="UTF-8">
     <title>meal</title>
-    <link rel="stylesheet" href="<c:url value='/css/item.css'/>">
+    <link rel="stylesheet" href="<c:url value='/css/event.css'/>">
     <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
 
 </head>
@@ -31,52 +31,25 @@
     <div class="main">
         <jsp:include page="../include/admin.jsp" flush="false" />
 
-        <div class="itemList">
+        <div class="eventList">
 
 
 <div class="pageTitle_container">
-    <h1>이벤트 배너 목록</h1>
+    <h1>이벤트</h1>
     <hr>
 </div>
 
-<div>
-    <div class="board-container">
-<%--        <div class="search-container">--%>
-<%--            <form action="<c:url value="/item/list"/>" class="search-form" method="get">--%>
-<%--                <select class="search-option" name="option">--%>
-<%--                    <option value="A" ${ph.sc.option=='A' || ph.sc.option=='' ? "selected" : ""}>전체</option>--%>
-<%--                    &lt;%&ndash;옵션A 매퍼에 없어도 일단 넣어두자, 변수 전달되는거 확인하기에 좋음&ndash;%&gt;--%>
-<%--                    <option value="No" ${ph.sc.option=='No' ? "selected" : ""}>상품번호</option>--%>
-<%--                    <option value="Ca" ${ph.sc.option=='Ca' ? "selected" : ""}>카테고리</option>--%>
-<%--                    <option value="Na" ${ph.sc.option=='Na' ? "selected" : ""}>상품명</option>--%>
-<%--                    <option value="Pr" ${ph.sc.option=='Pr' ? "selected" : ""}>가격</option>--%>
-<%--                </select>--%>
-
-<%--                <input type="text" name="keyword" class="search-input" type="text" value="${ph.sc.keyword}" placeholder="검색어를 입력해주세요">--%>
-<%--                <input type="submit" class="search-button" value="검색">--%>
-<%--            </form>--%>
-<%--        </div>--%>
-
-        <table>
-            <tr>
-                <th class="no">번호</th>
-                <th class="item-image">이미지</th>
-                <th class="name">이벤트명</th>
-                <th class="administration">관리</th>
-            </tr>
-            <c:forEach var="itemVO" items="${list}">
-                <tr>
-                    <td class="no">${itemVO.itemNo}</td>
-                    <td class="item-image"><img src="<c:url value='${itemVO.fileName}'/>" width="100px" height="100px"></td>
-                    <td class="name">${itemVO.itemName}</td>
-                    <td class="update"><a href="<c:url value="/item/read${ph.sc.queryString}&itemNo=${itemVO.itemNo}"/>">변경/삭제</a></td>
-                </tr>
+    <div class="event-container">
+            <div class="event_box">
+            <c:forEach var="eventVO" items="${list}">
+                <c:set var="pageLink" value="/event?eventN0=${eventVO.eventNo}"/>
+                <div class="${eventVO.banner=='none'? 'none':'banner'}">
+                   <a href="<c:url value='${pageLink}'/>"><img src="<c:url value='${eventVO.imgName}'/>"></a>
+                    <h3>${eventVO.eventName}</h3>
+                </div>
             </c:forEach>
-        </table>
-
-
+            </div>
     </div>
-</div>
 
 <script>
 
