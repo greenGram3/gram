@@ -5,6 +5,7 @@ import com.green.meal.mapper.EventMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -17,12 +18,16 @@ public class EventService {
         return mapper.selectEvent();
     }
 
-    public int insertEvent(EventVO event){
-        return mapper.insertEvent(event);
+    public int insertEvent(EventVO eventVO){
+        return mapper.insertEvent(eventVO);
     }
 
-    public int updateEvent(Integer eventNo){
-        return mapper.updateEvent(eventNo);
+    public int updateEvent(EventVO eventVO ,Integer eventNo){
+        HashMap map = new HashMap();
+        map.put("eventVO", eventVO);
+        map.put("eventNo", eventNo);
+
+        return mapper.updateEvent(map);
     }
 
     public int deleteEvent(Integer eventNo){

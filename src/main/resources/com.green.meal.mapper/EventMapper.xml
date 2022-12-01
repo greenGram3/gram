@@ -16,7 +16,7 @@
         (#{eventNo}, #{eventName}, #{imgName}, #{imgPath}, #{banner})
     </insert>
 
-    <update id="updateEvent">
+    <update id="updateEvent" parameterType="map">
         update event
         set event_name=#{eventName}, img_name = #{imgName}, img_path = #{imgPath}, banner = #{banner}
         where event_no = #{eventNo}
