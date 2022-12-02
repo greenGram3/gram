@@ -31,7 +31,7 @@
         <form action="noticeupdate" method="post">
             <table>
                 <tr>
-                    <td>분류입력</td>
+                    <th>분류입력</th>
                     <td>
                         <select name="noticeType" id="noticeType">
                             <option value="FAQ">FAQ</option>
@@ -43,12 +43,12 @@
                 </tr>
 
                 <tr>
-                    <td>제목</td>
+                    <th>제목</th>
                     <td><input type="text" class="noticeTitle"  name="noticeTitle" value="${noticeResult.noticeTitle}" minlength="2" required></td>
                 </tr>
 
                 <tr>
-                    <td>내용</td>
+                    <th>내용</th>
                     <td><textarea rows="10" cols="50" name="noticeContent" minlength="10" required>${noticeResult.noticeContent}</textarea></td>
                 </tr>
 

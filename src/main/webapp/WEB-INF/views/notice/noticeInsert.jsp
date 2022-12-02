@@ -32,7 +32,7 @@
         <form action="noticeinsert" method="post">
             <table>
                 <tr>
-                    <td>분류입력</td>
+                    <th>분류입력</th>
                     <td>
                         <select name="noticeType" id="noticeType">
                             <option value="FAQ">FAQ</option>
@@ -43,11 +43,11 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>제목</td>
+                    <th>제목</th>
                     <td><input type="text" class="noticeTitle" name="noticeTitle" minlength="2" placeholder="제목을 입력하세요" required></td>
                 </tr>
                 <tr>
-                    <td>내용</td>
+                    <th>내용</th>
                     <td><textarea  name="noticeContent" minlength="10" placeholder="내용을 입력하세요" required></textarea></td>
                 </tr>
                 <tr>

@@ -31,15 +31,15 @@
     <section class="section_container">
         <table>
             <tr>
-                <td>제목</td>
+                <th>제목</th>
                 <td>${noticeResult.noticeTitle}</td>
             </tr>
             <tr>
-                <td>작성일</td>
+                <th>작성일</th>
                 <td>${noticeResult.regDate}</td>
             </tr>
             <tr>
-                <td>내용</td>
+                <th>내용</th>
                 <td><textarea rows="15" cols="100" readonly>${noticeResult.noticeContent}</textarea></td>
             </tr>
 
