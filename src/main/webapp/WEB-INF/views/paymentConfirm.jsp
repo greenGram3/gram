@@ -34,7 +34,10 @@
     </tr>
     <c:forEach var="odvo" items="${odvoList}">
         <tr>
-            <td>${odvo.itemName}</td>
+            <td>
+                <li><img src="<c:url value='${odvo.fileName}'/>" width="100"></li>
+                ${odvo.itemName}
+            </td>
             <td>${odvo.cartAmount} 개</td>
             <td><li class="itemPrice">(<fmt:formatNumber pattern="###,###,###" value="${odvo.itemPrice}"/> 원)</li>
                 <li><fmt:formatNumber pattern="###,###,###" value="${odvo.cartAmount*odvo.itemPrice}"/> 원</li></td>
