@@ -223,7 +223,6 @@ public class PaymentController {
             //구매상품에 대한 정보는 이미 매개변수로 전달 받았음
             odvo.setUserId(userId);
             odvo.setUserPhone(vo.getDelyPhone());
-            odvo.setDelyAddr(vo.getDelyAddr());
             odvo.setDelyAddr(delyAddrToDb);
             odvo.setReceiver(vo.getReceiver());
 

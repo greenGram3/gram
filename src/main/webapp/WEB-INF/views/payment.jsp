@@ -41,7 +41,7 @@
         <c:forEach var="list" items="${odvoList}" varStatus="status">
           <tr >
             <td>
-<%--             <img src="${list.fileName}" width="100"> --%>
+                <li><img src="<c:url value='${list.fileName}'/>" width="100"></li>
                 <input hidden name="itemNo" type="text" value="${list.itemNo}">
                 <input hidden id="itemName${status.index}" name="itemName" type="text" value="${list.itemName}">
                 ${list.itemName}
