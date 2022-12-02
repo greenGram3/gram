@@ -27,6 +27,16 @@ main * {
     margin-bottom: 20px;
 }
 
+.adminEventList .event_box {
+    width: 900px;
+    text-align: left;
+}
+
+.userEventList .event_box {
+    width: 1200px;
+    text-align: left;
+}
+
 
 .event_box>div {
     display: inline-block;

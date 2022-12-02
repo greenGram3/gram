@@ -92,6 +92,10 @@
 
 			<mvc:mapping path="/qnarinsertf/**" />
 			<mvc:mapping path="/qnarupdatef/**" />
+
+			<mvc:mapping path="/event/upload/**" />
+			<mvc:mapping path="/event/modify/**" />
+			<mvc:mapping path="/event/delete/**" />
 			<!-- 인터셉터로 사용할 빈 등록 -->
 			<beans:ref bean="AdminloginInterceptor" />
 		</mvc:interceptor>
