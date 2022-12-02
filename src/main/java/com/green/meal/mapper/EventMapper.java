@@ -12,7 +12,7 @@ public interface EventMapper {
 
     int insertEvent(EventVO event);
 
-    int updateEvent(HashMap map);
+    int updateEvent(EventVO eventVO);
 
     int deleteEvent(Integer eventNo);
 

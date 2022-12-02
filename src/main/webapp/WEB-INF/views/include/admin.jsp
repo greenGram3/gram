@@ -12,7 +12,7 @@
       <li><a href="<c:url value='/item/list'/>">　- 상품 목록</a></li>
     </ul>
     <ul>
-      <li><a href="<c:url value='/event/list'/>">　- 이벤트 목록</a></li>
+      <li><a href="<c:url value='/event/list?link=A'/>">　- 이벤트 목록</a></li>
     </ul>
   </div>
 

@@ -5,7 +5,7 @@ main * {
 .adminEventList {
     margin-top: 250px;
     margin-bottom: 50px;
-    width: 940px;
+    width: 900px;
 }
 
 .userEventList {
@@ -33,9 +33,19 @@ main * {
 
 .event_box>div {
     display: inline-block;
-    width: 300px;
+    width: 280px;
     margin: 50px 5px;
 }
+
+.adminEventList button {
+    text-align: center;
+    padding: 4px 10px;
+    background-color: whitesmoke;
+    border: 1px solid darkgray;
+    cursor: pointer;
+    width: 90px;
+}
+
 
 .eventDetail {
     margin-top: 250px;
@@ -43,7 +53,7 @@ main * {
     width: 1220px;
 }
 
-.eventDetail table {
+ table {
     width: 100%;
     border-top: 1px solid lightgray;
     border-collapse: collapse;
@@ -66,4 +76,45 @@ main * {
 
 .pageTitle_container h3 {
     padding: 5px;
+}
+
+.eventForm {
+    margin-top: 250px;
+    margin-bottom: 50px;
+    width: 900px;
+}
+.eventForm *{
+    text-align: left;
+}
+
+.eventForm th {
+    background-color: #eeecec;
+    width: 150px;
+}
+.eventForm th,
+.eventForm td {
+    border-bottom: 1px solid lightgray;
+    padding: 10px;
+    margin-left: 10px;
+}
+
+.eventForm .eventName {
+    width: 700px;
+    border: 1px solid lightgray;
+}
+
+.eventForm .button_container {
+    margin-top: 20px;
+    margin-left: 700px;
+}
+
+.button_container button {
+    margin: 20px 2px;
+    text-align: center;
+    padding: 4px 10px;
+    background-color: whitesmoke;
+    border: 1px solid darkgray;
+    cursor: pointer;
+    width: 80px;
+
 }

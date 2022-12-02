@@ -1,8 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt" %>
-<%@ page session="true"%>
-<%--<%@ page import="java.net.URLDecoder"%>--%>
+<c:set var="loginId" value="${sessionScope.userId}"/>
+
 
 <!DOCTYPE html>
 <html>
@@ -41,16 +41,19 @@
                     </td>
                 </tr>
                 <tr>
-                    <td><img src="<c:url value='${eventVO.imgName}'/>"></td>
+                    <td><img src="<c:url value='${eventVO.imgPath}'/>"></td>
                 </tr>
             </table>
-        <c:if test="${loginId=='admin'}">
             <div class="button_container">
                 <button type="button" id="listBtn" class="btn-list">목록으로</button>
-                <button type="button" id="modifyBtn" class="btn-modify">수정</button>
+
+                <c:if test="${loginId=='admin'}">
+                    <c:set var="pageLink" value="event/modify?eventNo=${eventVO.eventNo}"/>
+                <button type="button" id="modifyBtn" onclick="location.href='${pageLink}'" class="btn-modify">수정</button>
                 <button type="button" id="delBtn" class="btn-del">삭제</button>
+                </c:if>
+
             </div>
-        </c:if>
         </form>
 
     </div>
@@ -62,11 +65,10 @@
     $(document).ready(function(){
 
         $("#listBtn").on("click", function(){
-            location.href="<c:url value='/event'/>";
+            history.back();
         });
 
         $("#modifyBtn").on("click", function(){
-            location.href="<c:url value='/event/modify'/>";
         });
 
         $("#delBtn").on("click", function(){
@@ -80,7 +82,7 @@
                     data : JSON.stringify({eventNo:eventNo}),
                     success : function(result){
                         alert("삭제가 완료되었습니다");
-                        location.href="<c:url value='/event'/>";
+                        location.href="<c:url value='/event/list?link=A'/>";
                     },
                     error   : function(){ alert("삭제를 실패하였습니다") }
                 });

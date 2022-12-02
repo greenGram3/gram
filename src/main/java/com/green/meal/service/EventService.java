@@ -22,12 +22,8 @@ public class EventService {
         return mapper.insertEvent(eventVO);
     }
 
-    public int updateEvent(EventVO eventVO ,Integer eventNo){
-        HashMap map = new HashMap();
-        map.put("eventVO", eventVO);
-        map.put("eventNo", eventNo);
-
-        return mapper.updateEvent(map);
+    public int updateEvent(EventVO eventVO){
+        return mapper.updateEvent(eventVO);
     }
 
     public EventVO selectOne(Integer eventNo){

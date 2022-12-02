@@ -23,7 +23,8 @@
 
 <script>
   let msg = "${msg}";
-  if(msg=="UPL_ERR") alert("게시물 등록에 실패했습니다. 다시 시도해주세요.");
+  if(msg=="SAVE_ERR") alert("이벤트 등록에 실패했습니다. 다시 시도해주세요.");
+  if(msg=="MOD_ERR") alert("이벤트 수정에 실패했습니다. 다시 시도해주세요.");
 </script>
 <main>
 
@@ -36,7 +37,7 @@
   <h3>이벤트 ${setEvent}</h3>
   <hr>
   <table>
-
+      <input hidden name="eventNo" value="${eventVO.eventNo}">
     <tr>
       <th>이벤트명</th>
       <td colspan="2"><input class="eventName" type="text" id="eventName" name="eventName"  value="${eventVO.eventName}"></td>
@@ -52,7 +53,7 @@
     <tr>
       <th>이벤트 이미지</th>
       <td>
-        <li><img src="<c:url value='${eventVO.imgPath}'/>" class="imgPath" width="150px" height="150px"></li>
+        <li><img src="<c:url value='${eventVO.imgPath}'/>" class="imgPath" width="200px" height="100px"></li>
         <input hidden name="imgPath" value="${eventVO.imgPath}">
         <li><input type="file" id="imgPath" name="fileName"></li>
       </td>
@@ -87,23 +88,33 @@
 <script>
 
   $(document).ready(function(){
+    let event = '${setEvent}';
     let banner;
-    if("${setEvent}" == "등록"){
-      banner = "none";
+    if(event == '등록'){
+      banner = document.querySelector(".none");
     }else {
-      banner = "${eventVO.banner}" ;
+      banner = document.querySelector(".${eventVO.banner}");
     }
 
-    $(".${banner}").attr("checked","checked");
+    banner.setAttribute("checked","checked");
 
-    let formCheck = function() {
+    let uploadCheck = function() {
       let form = document.getElementById("form");
-      if(form.itemCategory1.value=="") {
+      if(form.eventName.value=="") {
         alert("이벤트명을 입력해주세요.");
         return false;
       }
-      if(form.imgNamef.value=="") {
+      if(form.fileName.value=="") {
         alert("이벤트 이미지를 첨부해주세요");
+        return false;
+      }
+      return true;
+    }
+
+    let modifyCheck = function() {
+      let form = document.getElementById("form");
+      if(form.eventName.value=="") {
+        alert("이벤트명을 입력해주세요.");
         return false;
       }
       return true;
@@ -112,18 +123,18 @@
     $("#uploadBtn").on("click", function(){
       let form = $("#form");
       form.attr("enctype","multipart/form-data");
-      form.attr("action", "<c:url value='/event'/>");
+      form.attr("action", "<c:url value='/event/upload'/>");
       form.attr("method", "post");
-      if(formCheck())
+      if(uploadCheck())
         form.submit();
     });
 
     $("#modifyBtn").on("click", function(){
       let form = $("#form");
       form.attr("enctype","multipart/form-data");
-      form.attr("action", "<c:url value='/event/upload'/>");
+      form.attr("action", "<c:url value='/event/modify'/>");
       form.attr("method", "post");
-      if(formCheck())
+      if(modifyCheck())
         form.submit();
     });
 

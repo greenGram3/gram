@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 
@@ -26,15 +28,19 @@ public class EventController {
 
     //이벤트 목록 페이지 이동
     @GetMapping("/list")
-    public String eventList(Model model){
+    public String eventList(String link,Model model){
         List<EventVO> list = eventService.selectEvent();
+        model.addAttribute("link",link);
         model.addAttribute("list", list);
         return "/eventList";
     }
 
     // 디테일 페이지 이동
-    @GetMapping("/detail")
-    public String eventDetail(Integer eventNo, Model model){
+    @GetMapping()
+    public String eventDetail(Integer eventNo, HttpSession session, Model model){
+
+        String userId = (String)session.getAttribute("userId");
+        log.info("userId={}",userId);
         EventVO eventVO = eventService.selectOne(eventNo);
         model.addAttribute("eventVO",eventVO);
         return "/eventDetail";
@@ -42,13 +48,11 @@ public class EventController {
 
     // 이벤트 등록 페이지 이동
     @GetMapping("/upload")
-    public String uploadPage(){
-        return "";
-    }
+    public String uploadPage(){return "admin/eventForm";    }
 
     // 등록 버튼 눌러서 등록했을때
-    @PostMapping()
-    public String eventUpload(EventVO eventVO, HttpServletRequest request){
+    @PostMapping("/upload")
+    public String eventUpload(EventVO eventVO, HttpServletRequest request, Model model){
         // ** 이미지 업로드
         String realPath = request.getSession().getServletContext().getRealPath("/");
         realPath += "resources\\eventImage\\";
@@ -57,30 +61,55 @@ public class EventController {
 
         try {
             fileName.transferTo(new File(realPath + fileName.getOriginalFilename()));
+            eventVO.setImgPath("/eventImage/"+fileName.getOriginalFilename());
+            eventService.insertEvent(eventVO);
         } catch (Exception e) {
             e.printStackTrace();
+            model.addAttribute("eventVO",eventVO);
+            model.addAttribute("msg","SAVE_ERR");
+            return "admin/eventForm";
         }
 
-        eventVO.setImgPath("/itemImage/"+fileName.getOriginalFilename());
 
-        eventService.insertEvent(eventVO);
-        return "redirect:/event";
+
+
+        return "redirect:/event/list?link=A";
     }
 
     // 수정 페이지로 이동
     @GetMapping("/modify")
-    public String modifyPage(){
-        return "";
+    public String modifyPage(Integer eventNo, Model model){
+        log.info("eventNo={}",eventNo);
+        EventVO eventVO = eventService.selectOne(eventNo);
+        MultipartFile fileName = eventVO.getFileName();
+        log.info("fileName={}",fileName);
+        model.addAttribute("eventVO",eventVO);
+        return "admin/eventForm";
     }
 
     // 수정하기
-    @PatchMapping(value = "/{eventNo}", consumes = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<String> modify(@PathVariable Integer eventNo, @RequestPart EventVO eventVO){
-//        log.info("이름 : {}, 이미지 : {}",eventVO.getEventName(), imgFile);
-        log.info("이름 : {}",eventVO.getEventName());
+    @PostMapping( "/modify")
+    public String modify(EventVO eventVO , HttpServletRequest request, Model model){
 
-//        eventService.updateEvent(eventVO, eventNo);
-        return new ResponseEntity<>("ok",HttpStatus.OK);
+        String realPath = request.getSession().getServletContext().getRealPath("/");
+        realPath += "resources\\eventImage\\";
+        MultipartFile fileName = eventVO.getFileName();
+        try {
+            if(!fileName.isEmpty()) {
+                fileName.transferTo(new File(realPath + fileName.getOriginalFilename()));
+                eventVO.setImgPath("/eventImage/"+fileName.getOriginalFilename());
+            }
+            eventService.updateEvent(eventVO);
+        } catch (IOException e) {
+            e.printStackTrace();
+            model.addAttribute("eventVO",eventVO);
+            model.addAttribute("msg","MOD_ERR");
+            return "admin/eventForm";
+        }
+
+
+
+        return "redirect:/event/list?link=A";
     }
 
     // 삭제하기
