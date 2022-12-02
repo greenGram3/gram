@@ -241,7 +241,7 @@ public class PaymentController {
             //주문완료되면 카트에 있던 상품들 삭제
             cartService.deleteAll(userId);
 
-            //총 구매금액, 배송지 정보, 구매한 제품 정보 -> jsp로 전달
+            //총 구매금액, 배송지 정보, 구매한 제품 정보 -> session에 저장
             session.setAttribute("totalPrice", totalPrice);
             session.setAttribute("vo", vo);
             session.setAttribute("odvoList", odvoList);
@@ -265,10 +265,12 @@ public class PaymentController {
         DeliveryVO vo = (DeliveryVO) session.getAttribute("vo");
         List<OrderDetailVO> odvoList = (List<OrderDetailVO>) session.getAttribute("odvoList");
 
+        System.out.println("odvoList = " + odvoList);
 
         m.addAttribute("totalPrice", totalPrice);
         m.addAttribute("vo", vo);
         m.addAttribute("odvoList", odvoList);
+
         return "paymentConfirm";
     }
 
