@@ -27,9 +27,6 @@ main * {
     margin-bottom: 20px;
 }
 
-.event_box {
-    text-align: left;
-}
 
 .event_box>div {
     display: inline-block;
@@ -87,6 +84,9 @@ main * {
     text-align: left;
 }
 
+.button_container{
+
+}
 .eventForm th {
     background-color: #eeecec;
     width: 150px;
@@ -95,6 +95,10 @@ main * {
 .eventForm td {
     border-bottom: 1px solid lightgray;
     padding: 10px;
+    margin-left: 10px;
+}
+
+.button_container {
     margin-left: 10px;
 }
 

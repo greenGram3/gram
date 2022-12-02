@@ -18,6 +18,10 @@ public class EventService {
         return mapper.selectEvent();
     }
 
+    public List<EventVO> selectBanner(){
+        return mapper.selectBanner();
+    }
+
     public int insertEvent(EventVO eventVO){
         return mapper.insertEvent(eventVO);
     }

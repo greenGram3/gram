@@ -9,6 +9,7 @@ import java.util.List;
 @Mapper
 public interface EventMapper {
     List<EventVO> selectEvent();
+    List<EventVO> selectBanner();
 
     int insertEvent(EventVO event);
 

@@ -26,7 +26,11 @@
 
 <main>
 	<section class="event_container">
-		<ul class="event_list" >
+		<ul class="event_list">
+		<c:forEach var="eventVO" items="${eventList}">
+			<c:set var="pageLink" value="/event?eventNo=${eventVO.eventNo}"/>
+			<li><a href="<c:url value='${pageLink}'/>"><img src="<c:url value='${eventVO.imgPath}'/>" width="1200"></a></li>
+		</c:forEach>
 			<button class="play nonVisible"></button>
 			<button class="pause"></button>
 		</ul>

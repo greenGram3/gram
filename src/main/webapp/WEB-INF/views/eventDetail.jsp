@@ -45,7 +45,8 @@
                 </tr>
             </table>
             <div class="button_container">
-                <button type="button" id="listBtn" class="btn-list">목록으로</button>
+                <c:set var="eventList" value="${link=='A' ? 'event/list?link=A' : 'event/list'}"/>
+                <button type="button" id="listBtn" class="btn-list" onclick="location.href='${eventList}'">목록으로</button>
 
                 <c:if test="${loginId=='admin'}">
                     <c:set var="pageLink" value="event/modify?eventNo=${eventVO.eventNo}"/>
@@ -64,16 +65,12 @@
 
     $(document).ready(function(){
 
-        $("#listBtn").on("click", function(){
-            history.back();
-        });
-
         $("#delBtn").on("click", function(){
                 if(!confirm("이벤트를 삭제하시겠습니까?")) return;
 
                 $.ajax({
                     type:'delete',
-                    url: '/meal/event/'+eventNo,
+                    url: '/meal/event/delete/'+eventNo,
                     headers : { "content-type": "application/json"},
                     dataType : 'text',
                     data : JSON.stringify({eventNo:eventNo}),

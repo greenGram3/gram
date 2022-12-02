@@ -38,9 +38,9 @@
 </div>
             <div class="event_box">
             <c:forEach var="eventVO" items="${list}">
-                <c:set var="pageLink" value="/event?eventNo=${eventVO.eventNo}"/>
+                <c:set var="pageLink" value="/event?eventNo=${eventVO.eventNo}&link=${link}"/>
                 <div>
-                   <a href="<c:url value='${pageLink}'/>"><img src="<c:url value='${eventVO.imgPath}'/>" class="${eventVO.banner=='none'? 'none':'banner'}" width="280" height="200">
+                   <a href="<c:url value='${pageLink}'/>"><div class="${eventVO.banner=='none'? 'none':'banner'}"><img src="<c:url value='${eventVO.imgPath}'/>"  width="280" height="200"></div>
                     <h3>${eventVO.eventName}</h3></a>
                 </div>
             </c:forEach>

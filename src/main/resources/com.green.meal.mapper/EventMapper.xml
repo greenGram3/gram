@@ -29,6 +29,10 @@
     <select id="selectOne" parameterType="int" resultType="EventVO">
         select * from event where event_no = #{eventNo}
     </select>
+
+    <select id="selectBanner" resultType="EventVO">
+        select * from event where banner = 'banner'
+    </select>
 </mapper>
 
 
