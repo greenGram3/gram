@@ -9,15 +9,11 @@ import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -51,24 +47,14 @@ public class PaymentController {
             List<OrderDetailVO> odvoList = new ArrayList<>();
             odvoList.add(odvo);
 
-            //배송지 리스트 얻어오기
-            List<DeliveryVO> delyList = delyService.delySelect(userId);
-
-            //배송지 리스트에 있는 주소들 모두 구분자 기준으로 쪼개서 다시 리스트에 담아
-            //jsp에 주소 띄워줄 때는 구분자 없이 주소가 나와야되기 때문
-            for(int i=0 ; i<delyList.size(); i++){
-                String[] addrArr = delyList.get(i).getDelyAddr().split("@");
-                delyList.get(i).setDelyAddr(addrArr[1]+" "+addrArr[2]);
-            }
+            //배송지 리스트 얻어오기, 주소 형태변환
+            List<DeliveryVO> delyList = getDelyList(userId);
 
             //구매고객 정보 얻어오기 - 주문시 주문자 정보 띄워주기 위해
             UserVO userVo = userService.userDetail(userId);
 
             //임시주문번호제작
-            String uniqueNo = "";
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssSSS");
-            Calendar dateTime = Calendar.getInstance();
-            uniqueNo = sdf.format(dateTime.getTime())+"_"+ RandomStringUtils.randomAlphanumeric(6);
+            String uniqueNo = getUniqueNo();
 
             //전체금액, 구매할상품정보, 구매자배송지정보, 구매자정보, 임시주문정보 -> jsp 전달
             m.addAttribute("odvoList", odvoList);
@@ -102,22 +88,14 @@ public class PaymentController {
             List<OrderDetailVO> odvoList = new ArrayList<>();
             odvoList = cartService.buyCartList(userId);
 
-            //배송지 리스트 얻어오기
-            List<DeliveryVO> delyList = delyService.delySelect(userId);
-            //배송지 리스트 얻어올 때 주소 표시 형태 변환 쪼개기
-            for(int i=0 ; i<delyList.size(); i++){
-                String[] addrArr = delyList.get(i).getDelyAddr().split("@");
-                delyList.get(i).setDelyAddr(addrArr[1]+" "+addrArr[2]);
-            }
+            //배송지 리스트 얻어오기, 주소 형태변환
+            List<DeliveryVO> delyList = getDelyList(userId);
 
             //구매고객 정보 얻어오기
             UserVO userVo = userService.userDetail(userId);
 
             //임시주문번호제작
-            String uniqueNo = "";
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssSSS");
-            Calendar dateTime = Calendar.getInstance();
-            uniqueNo = sdf.format(dateTime.getTime())+"_"+ RandomStringUtils.randomAlphanumeric(6);
+            String uniqueNo = getUniqueNo();
 
             //전체금액, 구매할상품정보, 구매자배송지정보, 구매자정보, 임시주문정보, 카트결제여부 -> jsp 전달
             m.addAttribute("totalPrice", totalPrice);
@@ -217,7 +195,7 @@ public class PaymentController {
 
     }
 
-    //결제 후 결제확인 창으로 이동하는 메서드
+    //결제처리하는 메서드
     @PostMapping("/confirm")
     public String paymentConfirm(Integer totalPrice, String orderType, String delyPlace, Model m, HttpServletRequest request, OrderDetailVO odvo) {
 
@@ -226,7 +204,7 @@ public class PaymentController {
             //세션으로 아이디 얻어오기
             HttpSession session = request.getSession();
             String userId = (String)session.getAttribute("userId");
-            
+
             //아이디와 배송지명을 이용해서 배송지 주소 얻어오기
             HashMap map = new HashMap();
             map.put("userId", userId);
@@ -235,7 +213,7 @@ public class PaymentController {
             vo = delyService.selectedDely(map);
             String delyAddrToDb = vo.getDelyAddr();
 
-            //주소 형태 변환(쪼개기)
+            //주소 형태 변환(구분자 없애기)
             String delyAddrTemp = vo.getDelyAddr();
             String[] addrs = delyAddrTemp.split("@");
             String delyAddr = addrs[1] + " " + addrs[2];
@@ -280,6 +258,7 @@ public class PaymentController {
 
     }
 
+    //결제 후 결제처리 페이지로 이동하는 메서드
     @GetMapping("/confirm")
     public String confirm(HttpSession session, Model m){
 
@@ -294,6 +273,29 @@ public class PaymentController {
         return "paymentConfirm";
     }
 
+    //임시주문번호 만들어내는 메서드
+    private static String getUniqueNo() {
 
+        String uniqueNo = "";
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssSSS");
+        Calendar dateTime = Calendar.getInstance();
+        uniqueNo = sdf.format(dateTime.getTime())+"_"+ RandomStringUtils.randomAlphanumeric(6);
+        return uniqueNo;
+
+    }
+
+    //배송지 리스트 얻어온 후 주소형태 변환하는 메서드
+    private List<DeliveryVO> getDelyList(String userId) {
+        
+        //배송지 리스트 얻어오기
+        List<DeliveryVO> delyList = delyService.delySelect(userId);
+
+        //주소 형태변환 (구분자 없애기)
+        for(int i=0 ; i<delyList.size(); i++){
+            String[] addrArr = delyList.get(i).getDelyAddr().split("@");
+            delyList.get(i).setDelyAddr(addrArr[1]+" "+addrArr[2]);
+        }
+        return delyList;
+    }
 
 }
