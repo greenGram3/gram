@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -28,9 +29,10 @@ public class EventController {
 
     //이벤트 목록 페이지 이동
     @GetMapping("/list")
-    public String eventList(String link,Model model){
+    public String eventList(String link, String msg, Model model, RedirectAttributes redirectAttributes){
         List<EventVO> list = eventService.selectEvent();
         model.addAttribute("link",link);
+        redirectAttributes.addFlashAttribute("msg",msg);
         model.addAttribute("list", list);
         return "/eventList";
     }
@@ -52,7 +54,7 @@ public class EventController {
 
     // 등록 버튼 눌러서 등록했을때
     @PostMapping("/upload")
-    public String eventUpload(EventVO eventVO, HttpServletRequest request, Model model){
+    public String eventUpload(EventVO eventVO, HttpServletRequest request, Model model,RedirectAttributes redirectAttributes){
         // ** 이미지 업로드
         String realPath = request.getSession().getServletContext().getRealPath("/");
         realPath += "resources\\eventImage\\";
@@ -63,15 +65,13 @@ public class EventController {
             fileName.transferTo(new File(realPath + fileName.getOriginalFilename()));
             eventVO.setImgPath("/eventImage/"+fileName.getOriginalFilename());
             eventService.insertEvent(eventVO);
+            redirectAttributes.addFlashAttribute("msg","SAVE_OK");
         } catch (Exception e) {
             e.printStackTrace();
             model.addAttribute("eventVO",eventVO);
-            model.addAttribute("msg","SAVE_ERR");
+            redirectAttributes.addFlashAttribute("msg","SAVE_ERR");
             return "admin/eventForm";
         }
-
-
-
 
         return "redirect:/event/list?link=A";
     }
@@ -79,17 +79,17 @@ public class EventController {
     // 수정 페이지로 이동
     @GetMapping("/modify")
     public String modifyPage(Integer eventNo, Model model){
-        log.info("eventNo={}",eventNo);
+
         EventVO eventVO = eventService.selectOne(eventNo);
         MultipartFile fileName = eventVO.getFileName();
-        log.info("fileName={}",fileName);
+
         model.addAttribute("eventVO",eventVO);
         return "admin/eventForm";
     }
 
     // 수정하기
     @PostMapping( "/modify")
-    public String modify(EventVO eventVO , HttpServletRequest request, Model model){
+    public String modify(EventVO eventVO , HttpServletRequest request, Model model,RedirectAttributes redirectAttributes){
 
         String realPath = request.getSession().getServletContext().getRealPath("/");
         realPath += "resources\\eventImage\\";
@@ -100,15 +100,13 @@ public class EventController {
                 eventVO.setImgPath("/eventImage/"+fileName.getOriginalFilename());
             }
             eventService.updateEvent(eventVO);
+            redirectAttributes.addFlashAttribute("msg","MOD_OK");
         } catch (IOException e) {
             e.printStackTrace();
             model.addAttribute("eventVO",eventVO);
-            model.addAttribute("msg","MOD_ERR");
+            redirectAttributes.addFlashAttribute("msg","MOD_ERR");
             return "admin/eventForm";
         }
-
-
-
         return "redirect:/event/list?link=A";
     }
 

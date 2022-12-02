@@ -68,9 +68,6 @@
             history.back();
         });
 
-        $("#modifyBtn").on("click", function(){
-        });
-
         $("#delBtn").on("click", function(){
                 if(!confirm("이벤트를 삭제하시겠습니까?")) return;
 
@@ -84,7 +81,7 @@
                         alert("삭제가 완료되었습니다");
                         location.href="<c:url value='/event/list?link=A'/>";
                     },
-                    error   : function(){ alert("삭제를 실패하였습니다") }
+                    error   : function(){ alert("삭제를 실패하였습니다. 다시 시도해 주세요") }
                 });
         });
 

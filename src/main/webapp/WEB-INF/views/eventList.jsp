@@ -18,9 +18,11 @@
 <jsp:include page="include/header.jsp" flush="false" />
 <main>
 
-<script>
-
-</script>
+    <script>
+        let msg = "${msg}";
+        if(msg=="SAVE_OK") alert("이벤트 등록을 성공하였습니다");
+        if(msg=="MOD_OK") alert("이벤트 수정을 성공하였습니다");
+    </script>
 
     <div class="main">
 
