@@ -90,7 +90,7 @@
           <script>
             $("#openBtn${status.index}").on("click", function(){
 
-              window.open("<c:url value='/buy/delyView'/>?delyPlace=${list.delyPlace}&dely=delyAddr${status.index}","Child","left=400,top=200,width=500,height=500");
+              window.open("<c:url value='/buy/delyView'/>?delyPlace=${deliveryVO.delyPlace}&dely=delyAddr${status.index}","Child","left=400,top=200,width=500,height=500");
 
             });
 
@@ -161,44 +161,44 @@
 
   $("#check_module").on("click", function () {
 
-    <%--//테스트용 코드--%>
-    <%--let form = $("#form");--%>
-    <%--form.attr("action", "<c:url value='/buy/confirm' />");--%>
-    <%--form.attr("method", "post");--%>
-    <%--form.submit();--%>
+    //테스트용 코드
+    let form = $("#form");
+    form.attr("action", "<c:url value='/buy/confirm' />");
+    form.attr("method", "post");
+    form.submit();
 
-    let odvoLength = ${fn:length(odvoList)};
-    let temp;
+    <%--let odvoLength = ${fn:length(odvoList)};--%>
+    <%--let temp;--%>
 
-    if(odvoLength > 1) {
-      temp = ' 등 ' + odvoLength+'건';
-    } else {
-      temp = '';
-    }
+    <%--if(odvoLength > 1) {--%>
+    <%--  temp = ' 등 ' + odvoLength+'건';--%>
+    <%--} else {--%>
+    <%--  temp = '';--%>
+    <%--}--%>
 
-    let IMP = window.IMP;
-    IMP.init("imp12500623")
+    <%--let IMP = window.IMP;--%>
+    <%--IMP.init("imp12500623")--%>
 
-    IMP.request_pay({
-      pg : 'html5_inicis',
-      merchant_uid: '${uniqueNo}',
-      name : $("#itemName0").val()+temp ,
-      amount : ${totalPrice},
-      pay_method : $("#payment").val(),
-      buyer_email : '${userVo.userEmail}',
-      buyer_name : '${userVo.userName}'
-    }, function (rsp) {
-      if(rsp.success) {
-        alert("결제가 완료되었습니다.");
-        let form = $("#form");
-        form.attr("action", "<c:url value='/buy/confirm' />");
-        form.attr("method", "post");
-        form.submit();
-      } else {
-        alert("결제에 실패했습니다. 에러 내용: " + rsp.error_msg);
-      }
+    <%--IMP.request_pay({--%>
+    <%--  pg : 'html5_inicis',--%>
+    <%--  merchant_uid: '${uniqueNo}',--%>
+    <%--  name : $("#itemName0").val()+temp ,--%>
+    <%--  amount : ${totalPrice},--%>
+    <%--  pay_method : $("#payment").val(),--%>
+    <%--  buyer_email : '${userVo.userEmail}',--%>
+    <%--  buyer_name : '${userVo.userName}'--%>
+    <%--}, function (rsp) {--%>
+    <%--  if(rsp.success) {--%>
+    <%--    alert("결제가 완료되었습니다.");--%>
+    <%--    let form = $("#form");--%>
+    <%--    form.attr("action", "<c:url value='/buy/confirm' />");--%>
+    <%--    form.attr("method", "post");--%>
+    <%--    form.submit();--%>
+    <%--  } else {--%>
+    <%--    alert("결제에 실패했습니다. 에러 내용: " + rsp.error_msg);--%>
+    <%--  }--%>
 
-    }); //request_pay
+    <%--}); //request_pay--%>
 
   }); //check_module
 

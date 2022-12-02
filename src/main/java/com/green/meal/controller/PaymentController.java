@@ -265,8 +265,8 @@ public class PaymentController {
         DeliveryVO vo = (DeliveryVO) session.getAttribute("vo");
         List<OrderDetailVO> odvoList = (List<OrderDetailVO>) session.getAttribute("odvoList");
 
-        System.out.println("odvoList = " + odvoList);
 
+        m.addAttribute("msg","PAY_OK");
         m.addAttribute("totalPrice", totalPrice);
         m.addAttribute("vo", vo);
         m.addAttribute("odvoList", odvoList);

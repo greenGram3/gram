@@ -68,7 +68,7 @@
     //주소 우편번호 팝업창 api 열기
     function goPopup(){
         let url = "/meal/addr?userId=${sessionScope.userId}";
-        let pop = window.open(url,"pop","width=570,height=420, scrollbars=yes, resizable=yes");
+        let pop = window.open(url,"pop","width=570,height=420,left=1000,top=200, scrollbars=yes, resizable=yes");
     }
 
     //api에서 주소 입력받기
@@ -121,7 +121,8 @@
             form.attr("method", "POST");
             if(formCheck()) {
                 form.submit();
-                alert("수정이 완료되었습니다.");
+                alert("수정이 완료되었습니다. 닫기를 눌러주세요");
+
             } else {
                 alert("수정에 실패했습니다. 다시 시도해주세요.");
                 return;

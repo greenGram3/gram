@@ -44,6 +44,11 @@ th {
     padding: 10px 20px;
 }
 
+.payment table:nth-of-type(3) *,
+.payment table:nth-of-type(2) * {
+    text-align: left;
+}
+
 th:first-child, td:first-child {
     border-left: none;
 }
@@ -161,6 +166,10 @@ select {
     display: flex;
 }
 
+tr.totaltr *,
+tr.addrtr * {
+    text-align: left;
+}
 
 
 .delyInfo * ,

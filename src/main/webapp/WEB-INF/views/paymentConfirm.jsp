@@ -12,9 +12,10 @@
     <title>paymentConfirm</title>
 
 </head>
-<style>
-
-</style>
+<script>
+    let msg = "${msg}";
+    if(msg=="PAY_OK") alert("결제가 완료되었습니다.");
+</script>
 
 <body>
 <jsp:include page="include/header.jsp" flush="false" />
@@ -44,12 +45,12 @@
 
         </tr>
     </c:forEach>
-    <tr>
+    <tr class="totaltr">
         <th>총 금액</th>
         <c:set var="totalPrice" value="${totalPrice}"/>
         <td colspan="2"><fmt:formatNumber pattern="###,###,###" value="${totalPrice}"/> 원</td>
     </tr>
-    <tr>
+    <tr class="addrtr">
         <th>배송지 주소</th>
         <td colspan="2">${vo.delyAddr}</td>
     </tr>
