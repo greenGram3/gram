@@ -58,10 +58,16 @@ public class EventController {
         realPath += "resources\\eventImage\\";
 
         MultipartFile fileName = eventVO.getFileName();
+        MultipartFile detailImage = eventVO.getDetailImage();
 
         try {
+
             fileName.transferTo(new File(realPath + fileName.getOriginalFilename()));
+            detailImage.transferTo(new File(realPath + detailImage.getOriginalFilename()));
+
             eventVO.setImgPath("/eventImage/"+fileName.getOriginalFilename());
+            eventVO.setImgName("/eventImage/"+detailImage.getOriginalFilename());
+
             eventService.insertEvent(eventVO);
             redirectAttributes.addFlashAttribute("msg","SAVE_OK");
         } catch (Exception e) {
@@ -92,13 +98,23 @@ public class EventController {
         String realPath = request.getSession().getServletContext().getRealPath("/");
         realPath += "resources\\eventImage\\";
         MultipartFile fileName = eventVO.getFileName();
+        MultipartFile detailImage = eventVO.getDetailImage();
         try {
+
             if(!fileName.isEmpty()) {
                 fileName.transferTo(new File(realPath + fileName.getOriginalFilename()));
                 eventVO.setImgPath("/eventImage/"+fileName.getOriginalFilename());
             }
+
+            if(!detailImage.isEmpty()) {
+                detailImage.transferTo(new File(realPath + detailImage.getOriginalFilename()));
+                eventVO.setImgName("/eventImage/"+detailImage.getOriginalFilename());
+            }
+
+
             eventService.updateEvent(eventVO);
             redirectAttributes.addFlashAttribute("msg","MOD_OK");
+
         } catch (IOException e) {
             e.printStackTrace();
             model.addAttribute("eventVO",eventVO);

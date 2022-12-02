@@ -52,10 +52,15 @@
 
     <tr>
       <th>이벤트 이미지</th>
-      <td>
+      <td>대표이미지
         <li><img src="<c:url value='${eventVO.imgPath}'/>" class="imgPath" width="200px" height="100px"></li>
         <input hidden name="imgPath" value="${eventVO.imgPath}">
         <li><input type="file" id="imgPath" name="fileName"></li>
+      </td>
+      <td>상세이미지
+        <li><img src="<c:url value='${eventVO.imgName}'/>" class="imgName" width="200px" height="100px"></li>
+        <input hidden name="imgName" value="${eventVO.imgName}">
+        <li><input type="file" id="imgName" name="detailImage"></li>
       </td>
     </tr>
     <script>
@@ -66,6 +71,16 @@
           reader.readAsDataURL(this.files[0]);
           reader.onload = function (e) {
             $(".imgPath").attr("src", e.target.result)
+                    .width(150).height(150);
+          }
+        }
+      }); //change
+      $('#imgName').change(function () {
+        if (this.files && this.files[0]) {
+          let reader = new FileReader;
+          reader.readAsDataURL(this.files[0]);
+          reader.onload = function (e) {
+            $(".imgName").attr("src", e.target.result)
                     .width(150).height(150);
           }
         }
@@ -105,7 +120,11 @@
         return false;
       }
       if(form.fileName.value=="") {
-        alert("이벤트 이미지를 첨부해주세요");
+        alert("대표 이미지를 첨부해주세요");
+        return false;
+      }
+      if(form.detailImage.value=="") {
+        alert("상세 이미지를 첨부해주세요");
         return false;
       }
       return true;

@@ -14,7 +14,8 @@ public class EventVO {
     private Integer eventNo;
     private String eventName;
     private String imgName;
-    private MultipartFile fileName; //img 진짜 정보 저장 객체 타입
+    private MultipartFile fileName; //대표img 진짜 정보 저장 객체 타입
+    private MultipartFile detailImage; //상세img 진짜 정보 저장 객체 타입
 
     private String imgPath;
     private String banner;

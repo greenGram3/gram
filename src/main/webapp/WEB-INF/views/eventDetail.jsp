@@ -41,7 +41,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td><img src="<c:url value='${eventVO.imgPath}'/>"></td>
+                    <td><img src="<c:url value='${eventVO.imgName}'/>"></td>
                 </tr>
             </table>
             <div class="button_container">
