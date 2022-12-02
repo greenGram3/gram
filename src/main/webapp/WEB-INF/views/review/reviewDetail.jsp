@@ -44,6 +44,7 @@
                     <tr class="reviewDetailBold">
                         <td>${reviewResult.userId}</td>
                         <td>${reviewResult.regDate}</td>
+                        <td>${reviewResult.reviewStar}점</td>
                     </tr>
 
                     <tr>

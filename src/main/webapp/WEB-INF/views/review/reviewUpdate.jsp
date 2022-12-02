@@ -42,6 +42,53 @@
                                required></td>
                 </tr>
                 <tr>
+                    <td>상품만족도</td>
+                    <td>
+                        <select name="reviewStar" id="reviewStar"> <!-- switch case문 -->
+                            <c:choose>
+                                <c:when test="${reviewResult.reviewStar==1}">
+                                    <option value="1" selected>[1 매우 별로예요]</option>
+                                    <option value="2">[2 별로예요]</option>
+                                    <option value="3">[3 보통이에요]</option>
+                                    <option value="4">[4 만족해요]</option>
+                                    <option value="5">[5 매우 만족해요]</option>
+                                </c:when>
+                                <c:when test="${reviewResult.reviewStar==2}">
+                                    <option value="1">[1 매우 별로예요]</option>
+                                    <option value="2" selected>[2 별로예요]</option>
+                                    <option value="3">[3 보통이에요]</option>
+                                    <option value="4">[4 만족해요]</option>
+                                    <option value="5">[5 매우 만족해요]</option>
+                                </c:when>
+                                <c:when test="${reviewResult.reviewStar==3}">
+                                    <option value="1">[1 매우 별로예요]</option>
+                                    <option value="2">[2 별로예요]</option>
+                                    <option value="3" selected>[3 보통이에요]</option>
+                                    <option value="4">[4 만족해요]</option>
+                                    <option value="5">[5 매우 만족해요]</option>
+                                </c:when>
+                                <c:when test="${reviewResult.reviewStar==4}">
+                                    <option value="1">[1 매우 별로예요]</option>
+                                    <option value="2">[2 별로예요]</option>
+                                    <option value="3">[3 보통이에요]</option>
+                                    <option value="4" selected>[4 만족해요]</option>
+                                    <option value="5">[5 매우 만족해요]</option>
+                                </c:when>
+                                <c:when test="${reviewResult.reviewStar==5}">
+                                    <option value="1">[1 매우 별로예요]</option>
+                                    <option value="2">[2 별로예요]</option>
+                                    <option value="3">[3 보통이에요]</option>
+                                    <option value="4">[4 만족해요]</option>
+                                    <option value="5" selected>[5 매우 만족해요]</option>
+                                </c:when>
+                                <c:otherwise>
+                                    <option value="0">평가 생성 이전 후기</option>
+                                </c:otherwise>
+                            </c:choose>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
                     <td>내용</td>
                     <td><textarea name="reviewContent" id="reviewContent" minlength="10"
                                   required>${reviewResult.reviewContent}</textarea></td>

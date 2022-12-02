@@ -57,6 +57,18 @@
                     <td><input type="text" class="reviewTitle" name="reviewTitle" minlength="2" placeholder="제목을 입력하세요" required></td>
                 </tr>
                 <tr>
+                    <td>상품만족도</td>
+                    <td>
+                        <select name="reviewStar" id="reviewStar">
+                            <option value="1">[1 매우 별로예요]</option>
+                            <option value="2">[2 별로예요]</option>
+                            <option value="3">[3 보통이에요]</option>
+                            <option value="4">[4 만족해요]</option>
+                            <option value="5">[5 매우 만족해요]</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
                     <td>내용</td>
                     <td><textarea rows="5" cols="50" name="reviewContent" minlength="10" placeholder="내용을 입력하세요" required></textarea></td>
                 </tr>

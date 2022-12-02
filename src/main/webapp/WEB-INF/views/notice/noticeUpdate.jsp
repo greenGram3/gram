@@ -34,10 +34,32 @@
                     <th>분류입력</th>
                     <td>
                         <select name="noticeType" id="noticeType">
-                            <option value="FAQ">FAQ</option>
-                            <option value="이벤트">이벤트</option>
-                            <option value="공지">공지</option>
-                            <option value="편한밥상">편한밥상</option>
+                            <c:choose>
+                                <c:when test="${noticeResult.noticeType=='FAQ'}">
+                                    <option value="FAQ" selected>FAQ</option>
+                                    <option value="이벤트">이벤트</option>
+                                    <option value="공지">공지</option>
+                                    <option value="편한밥상">편한밥상</option>
+                                </c:when>
+                                <c:when test="${noticeResult.noticeType=='이벤트'}">
+                                    <option value="FAQ">FAQ</option>
+                                    <option value="이벤트" selected>이벤트</option>
+                                    <option value="공지">공지</option>
+                                    <option value="편한밥상">편한밥상</option>
+                                </c:when>
+                                <c:when test="${noticeResult.noticeType=='공지'}">
+                                    <option value="FAQ">FAQ</option>
+                                    <option value="이벤트">이벤트</option>
+                                    <option value="공지" selected>공지</option>
+                                    <option value="편한밥상">편한밥상</option>
+                                </c:when>
+                                <c:otherwise>
+                                    <option value="FAQ">FAQ</option>
+                                    <option value="이벤트">이벤트</option>
+                                    <option value="공지">공지</option>
+                                    <option value="편한밥상" selected>편한밥상</option>
+                                </c:otherwise>
+                            </c:choose>
                         </select>
                     </td>
                 </tr>
