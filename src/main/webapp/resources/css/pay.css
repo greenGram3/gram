@@ -28,6 +28,10 @@ table {
     border-collapse: collapse;
 }
 
+table *{
+    text-align: center;
+}
+
 td {
     border-bottom: 1px solid lightgray;
     border-left: 1px solid lightgray;
