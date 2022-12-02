@@ -39,11 +39,9 @@ public class EventController {
 
     // 디테일 페이지 이동
     @GetMapping()
-    public String eventDetail(Integer eventNo, HttpSession session, Model model){
-
-        String userId = (String)session.getAttribute("userId");
-        log.info("userId={}",userId);
+    public String eventDetail(Integer eventNo,String link, HttpSession session, Model model){
         EventVO eventVO = eventService.selectOne(eventNo);
+        model.addAttribute("link",link);
         model.addAttribute("eventVO",eventVO);
         return "/eventDetail";
     }
@@ -112,7 +110,7 @@ public class EventController {
 
     // 삭제하기
     @ResponseBody
-    @DeleteMapping("/{eventNo}")
+    @DeleteMapping("/delete/{eventNo}")
     public ResponseEntity<String> delete(@PathVariable Integer eventNo){
         try {
             eventService.deleteEvent(eventNo);
