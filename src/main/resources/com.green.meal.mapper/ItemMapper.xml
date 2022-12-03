@@ -29,6 +29,17 @@
         </choose>
     </sql>
 
+    <sql id="findCategory">
+        <choose>
+            <when test='category=="한식" || category=="양식" || category=="중식/일식" || category=="분식/야식" || category=="세트상품"'>
+                where item_category1 = #{category}
+            </when>
+            <when test='category=="비오는날" || category=="집들이" || category=="캠핑" || category=="술안주" || category=="혼밥"'>
+                where item_category2 = #{category}
+            </when>
+        </choose>
+    </sql>
+
     <select id="selectOne" parameterType="int" resultType="ItemVO">
         select * from item
         WHERE item_no = #{itemNo}
@@ -159,6 +170,23 @@
         select *
         from item
         where item_category2=#{itemCategory2}
+    </select>
+
+    <select id="highPrice"  resultType="ItemVO">
+        select * from item <include refid="findCategory"/> order by item_price desc
+    </select>
+
+    <select id="lowPrice" resultType="ItemVO">
+        select * from item <include refid="findCategory"/> order by item_price asc
+    </select>
+
+    <select id="latest"  resultType="ItemVO">
+        select * from item <include refid="findCategory"/> order by item_no desc
+    </select>
+
+    <select id="review"  resultType="ItemVO">
+        select i.item_no, i.item_category1, i.item_category2, i.item_name, i.item_amount, i.item_price, i.file_name
+        from item i left outer join review r on i.item_no = r.item_no <include refid="findCategory"/> group by i.item_no order by count(*) desc;
     </select>
 
 

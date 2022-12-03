@@ -36,8 +36,8 @@ public class HomeController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model model, HttpServletRequest request) {
 
-//		List<EventVO> eventList = eventService.selectBanner();
-//		model.addAttribute("eventList",eventList);
+		List<EventVO> eventList = eventService.selectBanner();
+		model.addAttribute("eventList",eventList);
 
 		List<ItemVO> list1 = itemService.bestItems();
 		bestItems=list1.subList(0,8);

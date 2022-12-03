@@ -33,18 +33,5 @@ public class LoginInterceptor extends HandlerInterceptorAdapter   {
 			response.sendRedirect("/meal/login/login?requestURI="+requestURI);
 			return false;
 		}
-//		return  true;
-
-//		String requestURI = request.getRequestURI();
-//		String uuid = UUID.randomUUID().toString();
-//		request.setAttribute(LOG_ID, uuid);
-//		//@RequestMapping: HandlerMethod
-//		//정적 리소스: ResourceHttpRequestHandler
-//		if (handler instanceof HandlerMethod) {
-//			HandlerMethod hm = (HandlerMethod) handler; //호출할 컨트롤러 메서드의모든 정보가 포함되어 있다.
-//		}
-//		log.info("REQUEST [{}][{}][{}] : "+uuid+" "+requestURI+" "+handler);
-//		return true; //false 진행
-
 	}
 }

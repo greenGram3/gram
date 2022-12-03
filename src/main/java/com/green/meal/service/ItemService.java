@@ -53,4 +53,8 @@ public interface ItemService {
     List<ItemVO> category1(String category);
     List<ItemVO> category2(String category);
 
+    List<ItemVO> highPrice(String category);
+    List<ItemVO> lowPrice(String category);
+    List<ItemVO> latest(String category);
+    List<ItemVO> review(String category);
 }

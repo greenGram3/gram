@@ -119,4 +119,20 @@ public class ItemServiceImpl implements ItemService {
     public List<ItemVO> category2(String category) {
         return mapper.category2(category);
     }
+    @Override
+    public List<ItemVO> highPrice(String category){
+        return mapper.highPrice(category);
+    };
+    @Override
+    public List<ItemVO> lowPrice(String category){
+        return mapper.lowPrice(category);
+    };
+    @Override
+    public List<ItemVO> latest(String category){
+        return mapper.latest(category);
+    };
+    @Override
+    public List<ItemVO> review(String category){
+        return mapper.review(category);
+    };
 }

@@ -21,6 +21,7 @@
         <span> <span class="star">*</span> 은 필수 입력 사항 입니다</span>
         <hr>
 
+        <%--@elvariable id="userVO" type=""--%>
         <form:form modelAttribute="userVO" method="post">
             <span class="star">*</span><label for="userId">아이디　</label>
             <input type="text" id="userId" name="userId" placeholder="　아이디(6~12자 이내, 특수문자 사용 불가)" style="width: 300px" value="${user.userId}">　
@@ -34,7 +35,7 @@
             <span class="star">*</span><label for="userName">이름　</label>
             <input type="text" id="userName" name="userName" placeholder="　이름(1~10자 이내, 특수문자 사용불가)" style="width: 300px" value="${user.userName}">
             <div id="msgName" style="display:none; color: red"></div>
-            <form:errors path="userName" cssClass="class" cssStyle="color: red" ></form:errors>
+            <form:errors path="userName" cssClass="class" cssStyle="color: red" />
             <hr>
             <span class="star">*</span><label for="userEmailArr">이메일　</label>
             <input type="text" id="userEmailArr" name="userEmailArr" value="${userEmailArr[0]}"> @ <input type="text" id="selectedEmail" name="userEmailArr" value="${userEmailArr[1]}">
@@ -46,13 +47,13 @@
                 <option value="nate.com">nate.com</option>
             </select>
             <br>
-            <form:errors path="userEmail" cssClass="class" cssStyle="color: red"></form:errors>
+            <form:errors path="userEmail" cssClass="class" cssStyle="color: red"/>
             <hr>
             <span class="star">*</span> <label for="userPwd">비밀번호　</label>
             <input type="password" id="userPwd" name="userPwd" placeholder="　비밀번호(8~20자 이내, 하나이상의 영문,숫자,특수문자)" style="width: 350px" value="${user.userPwd}">
             <div id="msgPwd1" style="color: red; display: none"></div>
             <div id="msgPwd2" style="color: red; display: none"></div>
-            <form:errors path="userPwd" cssClass="class" cssStyle="color: red"></form:errors>
+            <form:errors path="userPwd" cssClass="class" cssStyle="color: red"/>
             <hr>
             <span class="star">*</span><label for="pwdCheck">비밀번호 확인　</label>
             <input type="password" id="pwdCheck" name="pwdCheck" value="${pwdCheck}">
@@ -61,7 +62,7 @@
             <span class="star">*</span><label for="userPhone">휴대폰번호　</label>
             <input type="text" id="userPhone" name="userPhone" placeholder="　010-0000-0000" value="${user.userPhone}">
             <div id="msgPhone" style="color: red; display: none"></div>
-            <form:errors path="userPhone" cssClass="class" cssStyle="color: red"></form:errors>
+            <form:errors path="userPhone" cssClass="class" cssStyle="color: red"/>
             <hr>
             <span class="star">*</span>주소　</label>
             <input type="text" id="zipNo" style="width: 100px" name="zipNo" placeholder="우편번호" value="${zipNo}" readonly/>

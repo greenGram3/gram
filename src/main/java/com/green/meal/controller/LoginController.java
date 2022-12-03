@@ -193,7 +193,7 @@ public class LoginController {
                 if(!userGender.equals("")) userGender = userGender.substring(userGender.indexOf("\"gender\":")+9).replace("\"","");
                 if(userGender.equals("M")) userGender = "man";
                 if(userGender.equals("W")) userGender = "woman";
-//                UserVO user = new UserVO();
+
                 user.setUserId(userId);
                 user.setUserName(userName);
                 user.setUserEmail(userEmail);
@@ -225,18 +225,4 @@ public class LoginController {
         user = userService.idDupliCheck(userId);
         return user!=null && passwordEncoder.matches(userPwd,user.getUserPwd());
     }
-
-
-
-//    private String tempId(){
-//        Random random = new Random();
-//        String randomUpper = (char)((int)(Math.random()*26)+65)+""+(char)((int)(Math.random()*26)+65)+""+(char)((int)(Math.random()*26)+65);
-//        String randomLower = (char)((int)(Math.random()*26)+97)+""+(char)((int)(Math.random()*26)+97)+""+(char)((int)(Math.random()*26)+97);
-//        String randomNum = Integer.toString(random.nextInt(9) + 1)+Integer.toString(random.nextInt(9) + 1)+Integer.toString(random.nextInt(9) + 1);
-//        String id = "N"+randomUpper + randomLower + randomNum;
-//        if(userService.idDupliCheck(id) != null){
-//            id = tempId();
-//        }
-//        return id;
-//    }
 }

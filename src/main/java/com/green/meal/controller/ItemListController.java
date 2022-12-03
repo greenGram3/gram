@@ -4,17 +4,24 @@ import com.green.meal.domain.ItemVO;
 import com.green.meal.domain.SearchCondition;
 import com.green.meal.service.ItemService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletResponse;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @RequestMapping("/itemList")
 @RequiredArgsConstructor
 @Controller
 public class ItemListController {
+    DecimalFormat format = new DecimalFormat("###,###");
 
     private final ItemService itemService;
 
@@ -120,4 +127,56 @@ public class ItemListController {
 
         model.addAttribute("itemList",itemList);
     }
+
+    @PostMapping("/select")
+    public String selectOption(HttpServletResponse response, String value, String category,Model model) throws Exception{
+        log.info("category = {}",category);
+        response.setContentType("text/html; charset=UTF-8");
+        switch(value) {
+            case "highPrice":
+                setItems(itemService.highPrice(category), model);
+                break;
+            case "lowPrice":
+                setItems(itemService.lowPrice(category), model);
+                break;
+            case "latest":
+                setItems(itemService.latest(category), model);
+                break;
+            case "review":
+                setItems(itemService.review(category), model);
+                break;
+        }
+        return "jsonView";
+    }
+
+
+    public void setItems(List<ItemVO> list, Model model){     // 정렬 조건별 배열세팅
+        List<String> tmpList1 = new ArrayList();  List<String> tmpList2 = new ArrayList();
+        List<String> tmpList3 = new ArrayList();  List<String> tmpList4 = new ArrayList();
+        String[] itemNo ;
+        String[] itemName;
+        String[] fileName;
+        String[] itemPrice;
+
+        for (int i=0; i<list.size(); i++){
+            tmpList1.add(String.valueOf(list.get(i).getItemNo()));
+            tmpList2.add(String.valueOf(list.get(i).getItemName()));
+            tmpList3.add(String.valueOf(list.get(i).getFileName()));
+            tmpList4.add(String.valueOf(list.get(i).getItemPrice()));
+        }
+        itemNo = tmpList1.toArray(new String[tmpList1.size()]);
+        itemName = tmpList2.toArray(new String[tmpList1.size()]);
+        fileName = tmpList3.toArray(new String[tmpList1.size()]);
+        itemPrice = tmpList4.toArray(new String[tmpList1.size()]);
+
+        for(int i=0; i< itemPrice.length; i++){
+            itemPrice[i] = format.format(Integer.parseInt(itemPrice[i]));
+        }
+
+        model.addAttribute("itemNo", itemNo);
+        model.addAttribute("itemName", itemName);
+        model.addAttribute("fileName", fileName);
+        model.addAttribute("itemPrice", itemPrice);
+    }
+
 }

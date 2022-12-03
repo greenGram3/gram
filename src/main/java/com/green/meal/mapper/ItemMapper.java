@@ -5,9 +5,7 @@ import com.green.meal.domain.ItemVO;
 import com.green.meal.domain.SearchCondition;
 import org.apache.ibatis.annotations.Mapper;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Mapper
 public interface ItemMapper {
@@ -51,4 +49,10 @@ public interface ItemMapper {
     //카테고리 별 리스트 페이지 --------------------------------------------------------------
     List<ItemVO> category1(String category);
     List<ItemVO> category2(String category);
+    List<ItemVO> highPrice(String category);
+    List<ItemVO> lowPrice(String category);
+    List<ItemVO> latest(String category);
+    List<ItemVO> review(String category);
+
+
 }

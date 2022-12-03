@@ -31,9 +31,8 @@ public class RegisterController {
 
     //회원가입 -> 메인
     @PostMapping("/register")
-    public String register2(@Valid UserVO user, BindingResult result, RedirectAttributes attr, String[] userEmailArr, Model model, String pwdCheck,
-                            String zipNo, String roadAddrPart1, String addrDetail) {
-
+    public String register2(@Valid UserVO user, BindingResult result, RedirectAttributes attr, String[] userEmailArr,
+                            String pwdCheck, String zipNo, String roadAddrPart1, String addrDetail, Model model) {
         if(result.hasErrors()){
             model.addAttribute("pwdCheck", pwdCheck);
             model.addAttribute("userEmailArr", userEmailArr);
