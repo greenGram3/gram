@@ -96,20 +96,20 @@ public class CartController {
     @ResponseBody
     public  ResponseEntity<String> save(@RequestBody CartVO cartVO, HttpSession session){
         String userId = getUserId(session);
-        List<CartVO> list= new ArrayList<>();
+        List<CartVO> afterCart= new ArrayList<>();
         try {
             //비회원 장바구니 저장---------------------------------------------------------
             if(userId==null){
                 //세션에서 장바구니 꺼내기
-                List<CartVO> oldList = getList(session);
+                List<CartVO> beforeCart = getList(session);
                 //비회원 장바구니가 없을때
-                if(oldList==null){
-                    list.add(cartVO);
+                if(beforeCart==null){
+                    afterCart.add(cartVO);
                 }else{
                     //비회원 장바구니가 있을때
-                    list = cartService.guestSave(cartVO,oldList);
+                    afterCart = cartService.guestSave(cartVO,beforeCart);
                 }
-                session.setAttribute("list",list);
+                session.setAttribute("list",afterCart);
             } else {
                 //회원 장바구니 저장-------------------------------------------------------
                 cartVO.setUserId(userId);

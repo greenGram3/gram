@@ -100,10 +100,10 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public List<CartVO> guestSave(CartVO cartVO, List<CartVO> oldlist) {
+    public List<CartVO> guestSave(CartVO cartVO, List<CartVO> beforeCart) {
 
         boolean containCart= true;
-            for (CartVO vo : oldlist) {
+            for (CartVO vo : beforeCart) {
                 // 장바구니에 같은 상품이 있을시 수량 더하기
                 if(vo.getItemNo().equals(cartVO.getItemNo())){
                     vo.setCartAmount(vo.getCartAmount()+cartVO.getCartAmount());
@@ -112,9 +112,9 @@ public class CartServiceImpl implements CartService {
             }
         //같은 상품이 없을때 장바구니에 추가
         if(containCart)
-            oldlist.add(cartVO);
+            beforeCart.add(cartVO);
 
-        return oldlist;
+        return beforeCart;
     }
 
     @Override
