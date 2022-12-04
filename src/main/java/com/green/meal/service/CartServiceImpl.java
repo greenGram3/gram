@@ -24,18 +24,14 @@ public class CartServiceImpl implements CartService {
     public List<CartVO> getList(String userId, List<CartVO> guestCart){
         //로그인 전의 장바구니가 있을 때
         if(guestCart!=null) {
-            Map<String,Object> map = new HashMap<>();
-            map.put("userId",userId);
-
             //장바구니 리스트를 검색하여
-            for (CartVO vo : guestCart) {
-                map.put("itemNo",vo.getItemNo());
+            for (CartVO cartVO : guestCart) {
+                cartVO.setUserId(userId);
                 // 디비에 같은 아이템이 있는지 확인
-                CartVO getCart = cartMapper.findByItem(vo);
+                CartVO getCart = cartMapper.findByItem(cartVO);
                 // 디비에 같은 아이템이 없으면 저장
                 if(getCart==null) {
-                    vo.setUserId(userId);
-                    cartMapper.insert(vo);
+                    cartMapper.insert(cartVO);
                 }
             }
         }
@@ -104,7 +100,6 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public int userDelete(String userId, Integer itemNo){
-
         Map<String,Object> map = new HashMap<>();
         map.put("userId",userId);
         map.put("itemNo",itemNo);
