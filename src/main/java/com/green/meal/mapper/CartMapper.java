@@ -18,7 +18,7 @@ public interface CartMapper {
 
     int update(CartVO cartVO);
 
-    CartVO findByItem(Map map);
+    CartVO findByItem(CartVO cartVO);
 
     int deleteAll(String userId);
 

@@ -30,7 +30,7 @@
         where user_id=  #{userId} and item_no = #{itemNo}
     </delete>
 
-    <select id="findByItem" resultType="CartVO" parameterType="map">
+    <select id="findByItem" resultType="CartVO" parameterType="CartVO">
         select c.user_id, c.item_no, i.item_name, c.cart_amount, i.item_price ,  i.file_name
         from cart c
                  join item i

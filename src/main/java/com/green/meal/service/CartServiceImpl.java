@@ -24,14 +24,14 @@ public class CartServiceImpl implements CartService {
     public List<CartVO> getList(String userId, List<CartVO> guestCart){
         //로그인 전의 장바구니가 있을 때
         if(guestCart!=null) {
-            Map map = new HashMap();
+            Map<String,Object> map = new HashMap<>();
             map.put("userId",userId);
 
             //장바구니 리스트를 검색하여
             for (CartVO vo : guestCart) {
                 map.put("itemNo",vo.getItemNo());
                 // 디비에 같은 아이템이 있는지 확인
-                CartVO getCart = cartMapper.findByItem(map);
+                CartVO getCart = cartMapper.findByItem(vo);
                 // 디비에 같은 아이템이 없으면 저장
                 if(getCart==null) {
                     vo.setUserId(userId);
@@ -43,12 +43,24 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
+    public List<CartVO> guestSave(CartVO cartVO, List<CartVO> beforeCart) {
+        boolean containCart= true;
+        for (CartVO vo : beforeCart) {
+            // 장바구니에 같은 상품이 있을시 수량 더하기
+            if(vo.getItemNo().equals(cartVO.getItemNo())){
+                vo.setCartAmount(vo.getCartAmount()+cartVO.getCartAmount());
+                containCart = false;
+            }
+        }
+        //같은 상품이 없을때 장바구니에 추가
+        if(containCart)
+            beforeCart.add(cartVO);
+        return beforeCart;
+    }
+    @Override
     public int userSave(CartVO cartVO){
-        Map map = new HashMap();
-        map.put("userId",cartVO.getUserId());
-        map.put("itemNo",cartVO.getItemNo());
         //회원 장바구니에 상품이 있는지 확인
-        CartVO byItem = cartMapper.findByItem(map);
+        CartVO byItem = cartMapper.findByItem(cartVO);
         if(byItem == null) {
             //같은 상품 없으면 저장
             return cartMapper.insert(cartVO);
@@ -57,21 +69,6 @@ public class CartServiceImpl implements CartService {
             cartVO.setCartAmount(cartVO.getCartAmount()+ byItem.getCartAmount());
             return cartMapper.update(cartVO);
         }
-    }
-    @Override
-    public List<CartVO> guestSave(CartVO cartVO, List<CartVO> beforeCart) {
-        boolean containCart= true;
-            for (CartVO vo : beforeCart) {
-                // 장바구니에 같은 상품이 있을시 수량 더하기
-                if(vo.getItemNo().equals(cartVO.getItemNo())){
-                    vo.setCartAmount(vo.getCartAmount()+cartVO.getCartAmount());
-                    containCart = false;
-                }
-            }
-        //같은 상품이 없을때 장바구니에 추가
-        if(containCart)
-            beforeCart.add(cartVO);
-        return beforeCart;
     }
 
 
@@ -108,7 +105,7 @@ public class CartServiceImpl implements CartService {
     @Override
     public int userDelete(String userId, Integer itemNo){
 
-        Map map = new HashMap();
+        Map<String,Object> map = new HashMap<>();
         map.put("userId",userId);
         map.put("itemNo",itemNo);
         return cartMapper.delete(map);
