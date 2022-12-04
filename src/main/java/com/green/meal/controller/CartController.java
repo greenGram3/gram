@@ -111,12 +111,11 @@ public class CartController {
                 }
                 session.setAttribute("list",list);
             } else {
-                //회원 장바구니 저장------------------------------------------------------------
+                //회원 장바구니 저장-------------------------------------------------------
                 cartVO.setUserId(userId);
                 if(cartService.userSave(cartVO) != 1)
                     throw new Exception("Save failed");
             }
-
         }catch (Exception e){
             e.printStackTrace();
             return new ResponseEntity<>("SAVE_ERR",HttpStatus.BAD_REQUEST);

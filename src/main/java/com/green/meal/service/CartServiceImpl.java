@@ -126,7 +126,6 @@ public class CartServiceImpl implements CartService {
                 list.remove(i);
             }
         }
-
         return list;
     }
 
