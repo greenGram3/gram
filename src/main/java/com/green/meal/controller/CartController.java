@@ -72,9 +72,9 @@ public class CartController {
             //비회원 장바구니 수정
             if(userId==null){
                 //세션에서 비회원장바구니 꺼내기
-                List<CartVO> oldList = getList(session);
+                List<CartVO> beforeCart = getList(session);
                 //비회원장바구니 수량 변경
-                List<CartVO> list = cartService.guestUpdate(cartVO, oldList);
+                List<CartVO> list = cartService.guestUpdate(cartVO, beforeCart);
                 if(list == null)
                     throw new Exception("Modify failed");
                 // 세션에 저장
@@ -91,7 +91,7 @@ public class CartController {
         }
         return new ResponseEntity<>("MOD_OK",HttpStatus.OK);
     }
-
+    //장바구니 저장
     @PostMapping()
     @ResponseBody
     public  ResponseEntity<String> save(@RequestBody CartVO cartVO, HttpSession session){
@@ -127,13 +127,13 @@ public class CartController {
     @DeleteMapping("/{itemNo}")
     public ResponseEntity<String>remove(@PathVariable Integer itemNo, HttpSession session){
 
-        List<CartVO> oldList = getList(session);
+        List<CartVO> beforeCart = getList(session);
         String userId = getUserId(session);
 
         try {
             //비회원 장바구니 삭제
             if(userId==null){
-                List<CartVO> list= cartService.guestDelete(itemNo,oldList);
+                List<CartVO> list= cartService.guestDelete(itemNo,beforeCart);
                 session.setAttribute("list",list);
             }
             //회원 장바구니 삭제

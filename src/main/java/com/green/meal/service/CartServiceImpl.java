@@ -6,11 +6,10 @@ import com.green.meal.domain.OrderDetailVO;
 import com.green.meal.mapper.CartMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,25 +19,6 @@ import java.util.Map;
 public class CartServiceImpl implements CartService {
 
     private final CartMapper cartMapper;
-
-    @Override
-    public int userSave(CartVO cartVO){
-
-        Map map = new HashMap();
-        map.put("userId",cartVO.getUserId());
-        map.put("itemNo",cartVO.getItemNo());
-        //회원 장바구니에 상품이 있는지 확인
-        CartVO byItem = cartMapper.findByItem(map);
-
-        if(byItem != null) {
-            //같은 상품 없으면 저장
-            return cartMapper.insert(cartVO);
-        }else {
-            //같은 상품이 있을경우 수량 합쳐서 수정
-            cartVO.setCartAmount(cartVO.getCartAmount()+ byItem.getCartAmount());
-            return cartMapper.update(cartVO);
-        }
-    }
 
     @Override
     public List<CartVO> getList(String userId, List<CartVO> guestCart){
@@ -63,45 +43,23 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public int userUpdate(CartVO cartVO){
-        return cartMapper.update(cartVO);
-    }
-
-    @Override
-    public int userDelete(String userId, Integer itemNo){
-
+    public int userSave(CartVO cartVO){
         Map map = new HashMap();
-        map.put("userId",userId);
-        map.put("itemNo",itemNo);
-       return cartMapper.delete(map);
-    }
-
-
-    @Override
-    public int userDeleteAll(String userId) {
-        return cartMapper.deleteAll(userId);
-    }
-
-    @Override
-    public List<OrderDetailVO> buyCartList(String userId) {
-        return cartMapper.selectCartItems(userId);
-    }
-
-    @Override
-    public List<CartVO> guestUpdate(CartVO cartVO, List<CartVO> list){
-        //비회원 장바구니 목록중에 같은 상품을 찾아서 수량 변경
-        for (CartVO vo : list) {
-            if(vo.getItemNo().equals(cartVO.getItemNo())){
-                vo.setCartAmount(cartVO.getCartAmount());
-            }
+        map.put("userId",cartVO.getUserId());
+        map.put("itemNo",cartVO.getItemNo());
+        //회원 장바구니에 상품이 있는지 확인
+        CartVO byItem = cartMapper.findByItem(map);
+        if(byItem == null) {
+            //같은 상품 없으면 저장
+            return cartMapper.insert(cartVO);
+        }else {
+            //같은 상품이 있을경우 수량 합쳐서 수정
+            cartVO.setCartAmount(cartVO.getCartAmount()+ byItem.getCartAmount());
+            return cartMapper.update(cartVO);
         }
-
-        return list;
     }
-
     @Override
     public List<CartVO> guestSave(CartVO cartVO, List<CartVO> beforeCart) {
-
         boolean containCart= true;
             for (CartVO vo : beforeCart) {
                 // 장바구니에 같은 상품이 있을시 수량 더하기
@@ -113,6 +71,24 @@ public class CartServiceImpl implements CartService {
         //같은 상품이 없을때 장바구니에 추가
         if(containCart)
             beforeCart.add(cartVO);
+        return beforeCart;
+    }
+
+
+    @Override
+    public int userUpdate(CartVO cartVO){
+        return cartMapper.update(cartVO);
+    }
+
+
+    @Override
+    public List<CartVO> guestUpdate(CartVO cartVO, List<CartVO> beforeCart){
+        //비회원 장바구니 목록중에 같은 상품을 찾아서 수량 변경
+        for (CartVO vo : beforeCart) {
+            if(vo.getItemNo().equals(cartVO.getItemNo())){
+                vo.setCartAmount(cartVO.getCartAmount());
+            }
+        }
 
         return beforeCart;
     }
@@ -128,5 +104,26 @@ public class CartServiceImpl implements CartService {
         }
         return list;
     }
+
+    @Override
+    public int userDelete(String userId, Integer itemNo){
+
+        Map map = new HashMap();
+        map.put("userId",userId);
+        map.put("itemNo",itemNo);
+        return cartMapper.delete(map);
+    }
+
+    @Override
+    public int userDeleteAll(String userId) {
+        return cartMapper.deleteAll(userId);
+    }
+
+
+    @Override
+    public List<OrderDetailVO> buyCartList(String userId) {
+        return cartMapper.selectCartItems(userId);
+    }
+
 
 }
