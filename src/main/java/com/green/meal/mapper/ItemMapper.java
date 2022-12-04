@@ -2,6 +2,7 @@ package com.green.meal.mapper;
 
 import com.green.meal.domain.ImageVO;
 import com.green.meal.domain.ItemVO;
+import com.green.meal.domain.ReviewVO;
 import com.green.meal.domain.SearchCondition;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -39,6 +40,9 @@ public interface ItemMapper {
 
     // item 업데이트 이미지 업데이트
     int imageModify(ImageVO vo1);
+
+    // 후기Insert 시 후기 평균 update
+    int itemAvg(ReviewVO vo);
 
     // seolhee home 페이지 -------------------------------------------------------
     List<ItemVO> bestItems();

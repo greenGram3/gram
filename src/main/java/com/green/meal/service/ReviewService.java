@@ -23,7 +23,7 @@ public interface ReviewService {
     ReviewVO reviewdetail(ReviewVO vo);
 
     // Review insert+후기중복체크
-    int reviewinsert(ReviewVO vo);
+    void reviewinsert(ReviewVO vo) throws Exception;
     ReviewVO dupCheck(ReviewVO vo);
 
     // Review 수정

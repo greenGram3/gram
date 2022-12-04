@@ -1,10 +1,12 @@
 package com.green.meal.service;
 
 import com.green.meal.domain.ReviewVO;
+import com.green.meal.mapper.ItemMapper;
 import com.green.meal.mapper.ReviewMapper;
 import com.green.meal.paging.SearchCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
 import java.util.List;
@@ -15,6 +17,9 @@ public class ReviewServiceImpl implements ReviewService {
 
     @Autowired
     ReviewMapper reviewMapper;
+
+    @Autowired
+    ItemMapper itemMapper;
 
     // ** 상세페이지 itemReview 출력
     @Override
@@ -53,9 +58,19 @@ public class ReviewServiceImpl implements ReviewService {
     @Override
     public ReviewVO reviewdetail(ReviewVO vo) { return reviewMapper.reviewdetail(vo); }
 
-    // Review Insert+후기중복체크
+    // Review Insert(+transaction)
     @Override
-    public int reviewinsert(ReviewVO vo) { return reviewMapper.reviewinsert(vo); }
+    @Transactional(rollbackFor = Exception.class)
+    public void reviewinsert(ReviewVO vo) throws Exception {
+        if (reviewMapper.reviewinsert(vo)==0) { // 후기 insert
+            throw new Exception();
+        }
+        if (itemMapper.itemAvg(vo)==0) { // item 테이블 평균별점 update
+            throw new Exception();
+        }
+    }
+
+    // Review 중복체크
     @Override
     public ReviewVO dupCheck(ReviewVO vo) {return reviewMapper.dupCheck(vo);}
 
