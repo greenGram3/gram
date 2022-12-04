@@ -76,7 +76,15 @@ public class ReviewServiceImpl implements ReviewService {
 
     // Review 수정
     @Override
-    public int reviewupdate(ReviewVO vo) { return reviewMapper.reviewupdate(vo); }
+    @Transactional(rollbackFor = Exception.class)
+    public void reviewupdate(ReviewVO vo) throws Exception {
+        if (reviewMapper.reviewupdate(vo)==0) {
+            throw new Exception();
+        }
+        if (itemMapper.itemAvg(vo)==0) {
+            throw new Exception();
+        }
+    }
 
     // Review 답변작성
     @Override

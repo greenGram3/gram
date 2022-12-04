@@ -190,35 +190,34 @@ public class ReviewController {
     //------------------------------------------------------------------------------------------------------//
     // ** Review Update
     @RequestMapping(value="/reviewupdate", method = RequestMethod.POST)
-    public String reviewupdate(HttpServletRequest request, Model model, ReviewVO vo) throws IOException {
-        // 1. 요청분석
-        String uri = "redirect:reviewdetail?reviewNo="+vo.getReviewNo();
-        model.addAttribute("reviewResult",vo); //업뎃 실패시에도 값 저장
-        // 이미지 저장
+    public String reviewupdate(HttpServletRequest request, Model model,
+                               ReviewVO vo, RedirectAttributes rttr) throws IOException {
+        try {
+            model.addAttribute("reviewResult",vo);
+            // 이미지 저장
             String realPath = request.getSession().getServletContext().getRealPath("/");
             System.out.println("** realPath => "+realPath);
-            // 실제 폴더 저장 위치
             realPath += "resources\\reviewImage\\";
-            // ** 기본 이미지 지정하기
             String file1, file2;
+
             // ** MultipartFile
             MultipartFile imgNamef = vo.getImgNamef();
-
             if ( imgNamef !=null && !imgNamef.isEmpty() ) {
-                // 1) 물리적 저장경로에 Image저장
                 file1 = realPath + imgNamef.getOriginalFilename();
                 imgNamef.transferTo(new File(file1));
-                // 2) Table 저장
                 file2="reviewImage/"+imgNamef.getOriginalFilename();
                 vo.setImgName(file2);
             }
-        // 2. service처리
-        if(reviewService.reviewupdate(vo)>0) {
-            model.addAttribute("message","수정 성공");
-        } else {
-            model.addAttribute("message","수정 실패. 다시 시도하시기 바랍니다.");
+            // 2. service처리
+            reviewService.reviewupdate(vo);
+            rttr.addFlashAttribute("message","수정 성공");
+            return "redirect:reviewdetail?reviewNo="+vo.getReviewNo();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            rttr.addFlashAttribute("message","수정 실패. 다시 시도하시기 바랍니다.");
+            return "redirect:reviewdetail?reviewNo="+vo.getReviewNo();
         }
-        return uri;
     }
     //------------------------------------------------------------------------------------------------------//
     // ** Review Delete
