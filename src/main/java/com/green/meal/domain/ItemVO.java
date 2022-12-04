@@ -18,6 +18,8 @@ public class ItemVO {
     private int itemPrice;
     private String etc1;
 
+    private int etc2;
+
     // 이미지
     private String fileName; //DB에 저장된 이미지 String경로 꺼내오는 용
 

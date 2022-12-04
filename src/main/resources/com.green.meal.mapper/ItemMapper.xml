@@ -65,6 +65,7 @@
             (#{itemNo},#{imgName},#{imgType})
     </insert>
 
+    <!-- item후기 평균 업데이트 -->
     <update id="itemAvg" parameterType="com.green.meal.domain.ReviewVO">
         update item
         set etc2 = (select sum(review_star) from review where item_no=#{itemNo}) div (select count(*) from review where item_no=#{itemNo} and user_id != 'admin')

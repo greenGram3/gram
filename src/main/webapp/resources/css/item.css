@@ -400,6 +400,19 @@ img.select_img1 {
     background-color: white;
 }
 
+/*itemDetail reviewStar*/
+.star {
+    position: relative;
+    font-size: 25px !important;
+    color: rgb(84, 108, 92);
+}
+
+.blankStar {
+    position: absolute;
+    font-size: 25px !important;
+    color: #ddd;
+}
+
 /*category*/
 
 .category {

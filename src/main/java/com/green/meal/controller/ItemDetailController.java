@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -28,7 +29,7 @@ public class ItemDetailController {
 
     // item 상세페이지------------------------------------------------------------- //
     @RequestMapping(value="/itemDetail")
-    public String itemDetail(ItemVO vo, Model m) {
+    public String itemDetail(ItemVO vo, Model m, RedirectAttributes rttr) {
         try {
             vo = itemService.itemdetail(vo);
             m.addAttribute("itemResult",vo);
@@ -39,8 +40,7 @@ public class ItemDetailController {
 
         } catch (Exception e) {
             e.printStackTrace();
-            m.addAttribute("message", "item_detail error");
-
+            rttr.addFlashAttribute("message","item_detail error");
             return "redirect:home";
         }
     } //itemDetail
