@@ -43,7 +43,7 @@
               $(".itemVO").css('display','none');
               for(let i = 0; i < result.itemNo.length; i++) {
                 itemVOList.innerHTML +=
-                        '<div class="itemVO"><ul><li> <a href="/meal/itemDetail?itemNo=' +result.itemNo[i]+'"><img src="'+result.fileName[i]+'"  width="300"></a> <h2>'+result.itemName[i]+'</h2> <h3>'+result.itemPrice[i]+' 원</h3> </li></ul> </div>';
+                        '<div class="itemVO"><ul><li> <a href="/meal/itemDetail?itemNo=' +result.itemNo[i]+'"><img src="/meal'+result.fileName[i]+'"  width="300"></a> <h2>'+result.itemName[i]+'</h2> <h3>'+result.itemPrice[i]+' 원</h3> </li></ul> </div>';
               }
 
             },
