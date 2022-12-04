@@ -13,13 +13,12 @@ public interface UserOrderService {
     @Transactional(rollbackFor = Exception.class)
     int save(List<OrderDetailVO> list, OrderDetailVO odvo) throws Exception;
 
-    List<OrderDetailDto> orderItemInfo(Integer orderNo);
 
     List<OrderListDto> orderUserInfo(String userId);
 
     List<OrderListDto> searchOrder(OrderSearch orderSearch);
 
-    OrderListDto order(Map map);
+    OrderListDto order(String userId, Integer orderNo);
 
     int orderConfirm(OrderListDto orderListVO);
 

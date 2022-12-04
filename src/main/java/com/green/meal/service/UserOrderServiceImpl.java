@@ -11,6 +11,7 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -42,26 +43,51 @@ public class UserOrderServiceImpl implements UserOrderService {
     }
 
     @Override
-    public  List<OrderDetailDto>orderItemInfo(Integer orderNo) {
-       return userOrderMapper.orderDetail(orderNo);
-    }
-
-    @Override
     public List<OrderListDto> orderUserInfo(String userId) {
-     return userOrderMapper.orderList(userId);
-    }
+        List<OrderListDto> orderList = userOrderMapper.orderList(userId);
+        setOrder(orderList);
 
+        return orderList;
+    }
 
 
     @Override
     public List<OrderListDto> searchOrder(OrderSearch orderSearch) {
-        log.info("orderSearch={}",orderSearch);
-        return userOrderMapper.searchOrder(orderSearch);
+
+        List<OrderListDto> orderList = userOrderMapper.searchOrder(orderSearch);
+        setOrder(orderList);
+        return orderList;
     }
 
     @Override
-    public OrderListDto order(Map map) {
-        return userOrderMapper.order(map);
+    public OrderListDto order(String userId, Integer orderNo) {
+        //맵핑된 주문번호 정리하기
+
+        Map map = new HashMap<>();
+        map.put("userId",userId);
+        map.put("orderNo",orderNo);
+
+        OrderListDto orderListDto =  userOrderMapper.order(map);
+
+        orderListDto.setOrder(orderListDto.getOrderDate()+"-0000"+orderListDto.getOrderNo());
+        //맵핑된 배송지 세팅하기
+        String delyAdd = orderListDto.getDelyAddr();
+
+        String[] addrs = delyAdd.split("@");
+
+        String delyAddr  = addrs[1] + " " + addrs[2];
+        orderListDto.setDelyAddr(delyAddr);
+
+        List<OrderDetailDto> list = userOrderMapper.orderDetail(orderNo);
+        Integer totalPay = 0;
+        for (OrderDetailDto orderDetailDto : list) {
+            totalPay +=(orderDetailDto.getItemPrice()*orderDetailDto.getItemAmount());
+        }
+
+        orderListDto.setTotalPay(totalPay);
+        orderListDto.setList(list);
+
+        return orderListDto;
     }
 
     @Override
@@ -71,8 +97,45 @@ public class UserOrderServiceImpl implements UserOrderService {
 
     @Override
     public List<OrderListDto> cancelList(String userId) {
-        return userOrderMapper.cancelList(userId);
+        List<OrderListDto> cancelList= userOrderMapper.cancelList(userId);
+        setOrder(cancelList);
+
+        return cancelList;
     }
 
 
+    // 주문 번호및 주문 목록의 대표 이름 정하기
+    private void setOrder(List<OrderListDto> orderList) {
+        for (OrderListDto listVO : orderList) {
+            //회원의 주문번호별 결제한 상품내역 리스트에 담기
+            List<OrderDetailDto> list = userOrderMapper.orderDetail(listVO.getOrderNo());
+            //주문번호 셋팅 ( 보여주기 식 )
+            listVO.setOrder(listVO.getOrderDate()+"-0000"+listVO.getOrderNo());
+            listVO.setList(list);
+
+            String tmp = null;
+            Integer totalPay = 0;
+            //주문목록에서 상품 금액 합치기, 주문한상품들 이름 더하기 ( 대표이름 )
+            for (OrderDetailDto orderDetailVO : list) {
+                totalPay +=(orderDetailVO.getItemPrice()*orderDetailVO.getItemAmount());
+                tmp +="@"+ orderDetailVO.getItemName();
+            }
+
+            assert tmp != null;
+            String[] splitItem = tmp.split("@");
+            int length = splitItem.length;
+
+            //주문리스트 대표상품이름
+            String totalItem = splitItem[1];
+            //2건 이상일때 외 건 붙이기
+            if(length>2){
+                totalItem = splitItem[1]+" 외"+(length-2)+" 건";
+            }
+
+
+            listVO.setTotalItem(totalItem);
+            listVO.setTotalPay(totalPay);
+
+        }
+    }
 }

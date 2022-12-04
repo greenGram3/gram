@@ -13,6 +13,10 @@
 <body>
 <jsp:include page="include/header.jsp" flush="false" />
 <main>
+    <script>
+        let msg = "${msg}";
+        if(msg=="READ_ERR") alert("다시 시도해 주세요");
+    </script>
     <div class="main">
 
         <%@include file="include/mypage.jsp"%>

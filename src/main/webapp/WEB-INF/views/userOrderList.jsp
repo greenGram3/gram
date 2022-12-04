@@ -15,6 +15,7 @@
 <script>
     let msg = "${msg}";
     if(msg=="null")alert("날짜를 다시 입력해주세요");
+    if(msg=="LIST_ERR") alert("다시 시도해 주세요");
 </script>
 <main>
     <div class="main">
