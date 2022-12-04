@@ -32,40 +32,30 @@ public class CartController {
 
 
     @GetMapping() // 장바구니목록 보여주기
-    public String cartList(Model model,HttpServletRequest request){
+    public String cartList(Model model, HttpSession session){
 
-        HttpSession session = request.getSession();
-        //세션에서 장바구니 꺼내기 ( 비회원 장바구니 )
-        List<CartVO> oldList = getList(session);
-        //비회원 장바구니 리스트
-        if(!loginCheck(session)){
+        String userId = getUserId(session);
+        //비회원 일때
+        if(userId==null){
             return "cart";
         }
 
-        String userId = getUserId(session);
-        //로그인 전의 장바구니가 있을 때
-        if(oldList!=null) {
-            Map map = new HashMap();
-            map.put("userId",userId);
+        try {
+            //회원일때
+            //세션에서 장바구니 꺼내기 ( 로그인 전 장바구니 )
+            List<CartVO> guestCart = getList(session);
+            //로그인 전 장바구니와 아이디를 넘겨서 회원 장바구니 받기
+            List<CartVO> list = cartService.getList(userId, guestCart);
 
-            //세션의장바구니 리스트를 검색하여
-            for (CartVO vo : oldList) {
-                map.put("itemNo",vo.getItemNo());
-               // 디비에 같은 아이템이 없으면 저장
-                CartVO getCart = cartService.findByItem(map);
-                if(getCart==null) {
-                    vo.setUserId(userId);
-                    cartService.save(vo);
-                }
-            }
+            session.removeAttribute("list");
+            model.addAttribute("list",list);
 
+        }catch (Exception e){
+            e.printStackTrace();
+            model.addAttribute("msg", "LIST_ERR");
         }
-        //아이디로 장바구니 리스트 검색
-        List<CartVO> list = cartService.getList(userId);
-        model.addAttribute("list",list);
         return "cart";
     }
-
 
 
     //장바구니 수정
@@ -74,108 +64,59 @@ public class CartController {
     public ResponseEntity<String> modify(@PathVariable Integer itemNo, @RequestBody CartVO cartVO,  HttpSession session){
 
         //장바구니 수량이 0 이하로 수정할때 걸려주기
-       if( cartVO.getCartAmount() <= 0 ){
-
+       if( cartVO.getCartAmount() <= 0 )
            return new ResponseEntity<>("MOD_ERR",HttpStatus.BAD_REQUEST);
-       }
 
-
-        //비회원 장바구니 수정
-        if(!loginCheck(session)){
-            //세션에서 장바구니 꺼내기
-            List<CartVO> oldList = getList(session);
-
-            //장바구니 목록중에 같은 상품을 찾아서 수량 변경
-            for (CartVO vo : oldList) {
-                if(vo.getItemNo().equals(itemNo)){
-                    vo.setCartAmount(cartVO.getCartAmount());
-                }
-            }
-
-            session.setAttribute("list",oldList);
-            return  new ResponseEntity<>("SAVE_OK",HttpStatus.OK);
-
-        } else {
-
-            try {
+        String userId = getUserId(session);
+        try{
+            //비회원 장바구니 수정
+            if(userId==null){
+                //세션에서 비회원장바구니 꺼내기
+                List<CartVO> oldList = getList(session);
+                //비회원장바구니 수량 변경
+                List<CartVO> list = cartService.guestUpdate(cartVO, oldList);
+                if(list == null)
+                    throw new Exception("Modify failed");
+                // 세션에 저장
+                session.setAttribute("list",list);
+            } else {
                 //회원 장바구니 수정
-                String userId = getUserId(session);
-
                 cartVO.setUserId(userId);
-                int rowCnt = cartService.update(cartVO);
-                log.info("rowCnt={}",rowCnt);
-                if(rowCnt !=1){
-                    throw new Exception("Save failed");
-                }
-            }catch (Exception e){
-                e.printStackTrace();
-                return new ResponseEntity<>("MOD_ERR",HttpStatus.BAD_REQUEST);
+                if(cartService.userUpdate(cartVO) !=1)
+                    throw new Exception("Modify failed");
             }
+        }catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<>("MOD_ERR",HttpStatus.BAD_REQUEST);
         }
-
         return new ResponseEntity<>("MOD_OK",HttpStatus.OK);
     }
-
 
     @PostMapping()
     @ResponseBody
     public  ResponseEntity<String> save(@RequestBody CartVO cartVO, HttpSession session){
-
-        //비회원 장바구니 저장------------------------------------------------------------------
-        if(!loginCheck(session)){
-            //세션에서 장바구니 꺼내기
-            List<CartVO> oldList = getList(session);
-
-            //비회원 장바구니가 없을때
-            if(oldList==null){
-                List<CartVO> list = new ArrayList<>();
-                //장바구니 추가
-                list.add(cartVO);
-                session.setAttribute("list",list);
-                return new ResponseEntity<>("SAVE_OK",HttpStatus.OK);
-            }
-
-            //비회원 장바구니가 있을때
-            //세션의 장바구니에서 같은 상품있는지 확인
-            boolean containCart= false;
-            for (CartVO vo : oldList) {
-                // 같은 상품이 있을시 수량 더하기
-                if(vo.getItemNo().equals(cartVO.getItemNo())){
-                    vo.setCartAmount(vo.getCartAmount()+cartVO.getCartAmount());
-                    containCart = true;
-                }
-            }
-            //같은 상품이 없을시 장바구니에 추가
-                if(!containCart)
-                    oldList.add(cartVO);
-
-            session.setAttribute("list",oldList);
-            return new ResponseEntity<>("SAVE_OK",HttpStatus.OK);
-            }
-
-        //회원 장바구니 저장------------------------------------------------------------------
         String userId = getUserId(session);
-        cartVO.setUserId(userId);
-
-        Map map = new HashMap();
-        map.put("userId",userId);
-        map.put("itemNo",cartVO.getItemNo());
-        //회원 장바구니에 같은 상품찾기
-        CartVO byItem = cartService.findByItem(map);
-        int rowCnt = 0;
-
-        if(byItem == null) {
-            //같은 상품 없으면 저장
-             rowCnt = cartService.save(cartVO);
-        }else {
-            //같은 상품이 있을경우 수량 합쳐서 수정
-            cartVO.setCartAmount(cartVO.getCartAmount()+ byItem.getCartAmount());
-            rowCnt = cartService.update(cartVO);
-        }
+        List<CartVO> list= new ArrayList<>();
         try {
-            if(rowCnt!=1){
-                throw new Exception("Save failed");
+            //비회원 장바구니 저장---------------------------------------------------------
+            if(userId==null){
+                //세션에서 장바구니 꺼내기
+                List<CartVO> oldList = getList(session);
+                //비회원 장바구니가 없을때
+                if(oldList==null){
+                    list.add(cartVO);
+                }else{
+                    //비회원 장바구니가 있을때
+                    list = cartService.guestSave(cartVO,oldList);
+                }
+                session.setAttribute("list",list);
+            } else {
+                //회원 장바구니 저장------------------------------------------------------------
+                cartVO.setUserId(userId);
+                if(cartService.userSave(cartVO) != 1)
+                    throw new Exception("Save failed");
             }
+
         }catch (Exception e){
             e.printStackTrace();
             return new ResponseEntity<>("SAVE_ERR",HttpStatus.BAD_REQUEST);
@@ -186,77 +127,44 @@ public class CartController {
     @ResponseBody
     @DeleteMapping("/{itemNo}")
     public ResponseEntity<String>remove(@PathVariable Integer itemNo, HttpSession session){
-        CartVO cartVO = new CartVO();
-        cartVO.setItemNo(itemNo);
+
         List<CartVO> oldList = getList(session);
+        String userId = getUserId(session);
 
-        //비회원 장바구니 삭제
-        if(!loginCheck(session)){
-            //세션의 장바구니에서 같은 상품을 찾아 삭제
-            for(int i =0; i<oldList.size();i++){
-               if(oldList.get(i).getItemNo()==itemNo){
-                   oldList.remove(i);
-               }
+        try {
+            //비회원 장바구니 삭제
+            if(userId==null){
+                List<CartVO> list= cartService.guestDelete(itemNo,oldList);
+                session.setAttribute("list",list);
             }
-            session.setAttribute("list",oldList);
-
-            return new ResponseEntity<>("DEL_OK",HttpStatus.OK);
-        }
-
-            String userId = getUserId(session);
             //회원 장바구니 삭제
-            Map map = new HashMap();
-            map.put("userId",userId);
-            map.put("itemNo",itemNo);
-            try {
-                int rowCnt = cartService.delete(map);
-
-                if(rowCnt !=1)
+            if(cartService.userDelete(userId,itemNo) !=1)
                 throw new Exception("Delete Failed");
-
-                return new ResponseEntity<>("DEL_OK",HttpStatus.OK);
-            } catch (Exception e) {
-                e.printStackTrace();
-                System.out.println("e = " + e);
-                return new ResponseEntity<>("DEL_ERR",HttpStatus.BAD_REQUEST);
-            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>("DEL_ERR",HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>("DEL_OK",HttpStatus.OK);
     }
 
     //장바구니 모두 삭제
     @ResponseBody
     @DeleteMapping("/cart")
     public ResponseEntity<String>removeAll(HttpSession session){
-
-        //비회원 장바구니 모두삭제
-        if(!loginCheck(session)){
-
-            session.removeAttribute("list");
-          
-            if(session.getAttribute("list")!=null){
-                return new ResponseEntity<>("DEL_ERR",HttpStatus.BAD_REQUEST);
+        String userId = getUserId(session);
+        try {
+            //비회원 장바구니 모두삭제
+            if(userId==null){
+                session.removeAttribute("list");
             }
-            return new ResponseEntity<>("DEL_OK",HttpStatus.OK);
-        }
-
-            String userId = getUserId(session);
             //회원 장바구니 삭제
-  
-            try {
-                int rowCnt = cartService.deleteAll(userId);
-
-                if(rowCnt == 0)
-                    throw new Exception("Delete Failed");
-
-                return new ResponseEntity<>("DEL_OK",HttpStatus.OK);
-            } catch (Exception e) {
-                e.printStackTrace();
-                return new ResponseEntity<>("DEL_ERR",HttpStatus.BAD_REQUEST);
-            }
-    }
-
-    // 로그인 체크
-    private boolean loginCheck(HttpSession session){
-        return session.getAttribute("userId")!=null;
+            if(cartService.userDeleteAll(userId) == 0)
+                throw new Exception("Delete Failed");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>("DEL_ERR",HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>("DEL_OK",HttpStatus.OK);
     }
 
     //회원아이디 꺼내오기

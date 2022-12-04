@@ -7,18 +7,22 @@ import java.util.List;
 import java.util.Map;
 
 public interface CartService {
-    int save(CartVO cartVO);
+    int userSave(CartVO cartVO);
 
-    List<CartVO> getList(String userId);
+    List<CartVO> getList(String userId, List<CartVO> guestCart);
 
-    int update(CartVO cartVO);
+    int userUpdate(CartVO cartVO);
 
-    int delete(Map map);
+    int userDelete(String userId, Integer itemNo);
 
-    CartVO findByItem(Map map);
 
-    int deleteAll(String userId);
+    int userDeleteAll(String userId);
 
     List<OrderDetailVO> buyCartList(String userId);
+
+    List<CartVO> guestUpdate(CartVO cartVO, List<CartVO> list);
+    List<CartVO> guestSave(CartVO cartVO, List<CartVO> list);
+
+    List<CartVO> guestDelete(Integer itemNo, List<CartVO> list);
 
 }

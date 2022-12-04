@@ -30,19 +30,28 @@ public class EventController {
     //이벤트 목록 페이지 이동
     @GetMapping("/list")
     public String eventList(String link, String msg, Model model, RedirectAttributes redirectAttributes){
-        List<EventVO> list = eventService.selectEvent();
-        model.addAttribute("link",link);
-        redirectAttributes.addFlashAttribute("msg",msg);
-        model.addAttribute("list", list);
+        try {
+            List<EventVO> list = eventService.selectEvent();
+            model.addAttribute("link",link);
+            redirectAttributes.addFlashAttribute("msg",msg);
+            model.addAttribute("list", list);
+        }catch (Exception e){
+            e.printStackTrace();
+            model.addAttribute("msg", "LIST_ERR");
+        }
         return "/eventList";
     }
 
     // 디테일 페이지 이동
     @GetMapping()
     public String eventDetail(Integer eventNo,String link, HttpSession session, Model model){
-        EventVO eventVO = eventService.selectOne(eventNo);
-        model.addAttribute("link",link);
-        model.addAttribute("eventVO",eventVO);
+        try {
+            EventVO eventVO = eventService.selectOne(eventNo);
+            model.addAttribute("link",link);
+            model.addAttribute("eventVO",eventVO);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         return "/eventDetail";
     }
 
@@ -83,12 +92,16 @@ public class EventController {
     // 수정 페이지로 이동
     @GetMapping("/modify")
     public String modifyPage(Integer eventNo, Model model){
-
-        EventVO eventVO = eventService.selectOne(eventNo);
-        MultipartFile fileName = eventVO.getFileName();
-
-        model.addAttribute("eventVO",eventVO);
-        return "admin/eventForm";
+        try{
+            EventVO eventVO = eventService.selectOne(eventNo);
+            MultipartFile fileName = eventVO.getFileName();
+            model.addAttribute("eventVO",eventVO);
+            return "admin/eventForm";
+        }catch (Exception e){
+            e.printStackTrace();
+            model.addAttribute("msg", "LIST_ERR");
+            return "redirect:/event/list?link=A";
+        }
     }
 
     // 수정하기
@@ -131,6 +144,7 @@ public class EventController {
         try {
             eventService.deleteEvent(eventNo);
         }catch (Exception e){
+            e.printStackTrace();
             return new ResponseEntity<>("fail",HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<>("ok",HttpStatus.OK);
