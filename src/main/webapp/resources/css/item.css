@@ -439,3 +439,7 @@ img.select_img1 {
     margin: 20px 10px 0px 1130px;
     display: flex;
 }
+select.search-option {
+    font-size: 12px;
+    height: 26px;
+}
