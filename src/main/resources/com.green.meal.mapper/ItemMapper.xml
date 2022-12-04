@@ -5,6 +5,9 @@
 <mapper namespace="com.green.meal.mapper.ItemMapper">
 
     <sql id="searchCondition">
+        <if test='stock=="So"'>
+            and item_amount &lt; 10
+        </if>
         <choose>
             <when test='option=="No"'>
                 and item_no = #{keyword}
@@ -16,15 +19,15 @@
                 and item_price = #{keyword}
             </when>
             <when test='option=="Ca"'>
-                and item_category1 like concat('%', #{keyword}, '%')
-                or item_category2 like concat('%', #{keyword}, '%')
+                and (item_category1 like concat('%', #{keyword}, '%')
+                or item_category2 like concat('%', #{keyword}, '%'))
             </when>
             <otherwise>
-                and item_no = #{keyword}
+                and (item_no = #{keyword}
                 or item_category1 like concat('%', #{keyword}, '%')
                 or item_category2 like concat('%', #{keyword}, '%')
                 or item_name like concat('%', #{keyword}, '%')
-                or item_price = #{keyword}
+                or item_price = #{keyword})
             </otherwise>
         </choose>
     </sql>
@@ -129,8 +132,6 @@
         <include refid="searchCondition"/>
         order by item_no desc
     </select>
-
-
 
     <!-- heeJeang item 상세페이지 itemDetail -->
     <!--    <select id="itemdetail" resultType="ItemVO">

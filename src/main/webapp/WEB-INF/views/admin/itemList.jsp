@@ -54,6 +54,7 @@
 
                 <input type="text" name="keyword" class="search-input" type="text" value="${ph.sc.keyword}" placeholder="검색어를 입력해주세요">
                 <input type="submit" class="search-button" value="검색">
+                <input type="checkbox" name="stock" value="So" ${ph.sc.stock=='So' ? "checked" : ""}>품절임박
             </form>
         </div>
 

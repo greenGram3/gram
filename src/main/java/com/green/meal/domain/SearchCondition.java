@@ -7,14 +7,16 @@ public class SearchCondition {
     private Integer pageSize = 10;  //한 페이지에 몇개의 행이 들어갈건지
     private String keyword="";
     private String option="";
+    private String stock="";
 
     public SearchCondition() {}
 
-    public SearchCondition(Integer page, Integer pageSize, String option) {
+    public SearchCondition(Integer page, Integer pageSize, String option, String keyword, String stock) {
         this.page = page;
         this.pageSize = pageSize;
         this.keyword = keyword;
         this.option = option;
+        this.stock = stock;
     }
 
     public String getQueryString(Integer page) {
@@ -24,6 +26,7 @@ public class SearchCondition {
                 .queryParam("pageSize", pageSize)
                 .queryParam("option", option)
                 .queryParam("keyword", keyword)
+                .queryParam("stock", stock)
                 .build().toString();
     }
 
@@ -67,6 +70,14 @@ public class SearchCondition {
         this.option = option;
     }
 
+    public String getStock() {
+        return stock;
+    }
+
+    public void setStock(String stock) {
+        this.stock = stock;
+    }
+
     @Override
     public String toString() {
         return "SearchCondition{" +
@@ -75,6 +86,7 @@ public class SearchCondition {
                 ", offset=" + getOffset() +
                 ", keyword='" + keyword + '\'' +
                 ", option='" + option + '\'' +
+                ", stock='" + stock + '\'' +
                 '}';
     }
 }
