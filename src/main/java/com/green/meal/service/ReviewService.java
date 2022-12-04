@@ -27,7 +27,7 @@ public interface ReviewService {
     ReviewVO dupCheck(ReviewVO vo);
 
     // Review 수정
-    int reviewupdate(ReviewVO vo);
+    void reviewupdate(ReviewVO vo) throws Exception;
 
     // Review 답변작성
     int reviewrinsert(ReviewVO vo);

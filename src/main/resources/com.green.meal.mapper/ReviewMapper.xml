@@ -84,7 +84,7 @@
 
     <!-- Review Update -->
     <update id="reviewupdate">
-        update review set review_title=#{reviewTitle}, review_content=#{reviewContent}, img_name=#{imgName}
+        update review set review_title=#{reviewTitle}, review_content=#{reviewContent}, img_name=#{imgName}, review_star=#{reviewStar}
         where review_no=#{reviewNo}
     </update>
 

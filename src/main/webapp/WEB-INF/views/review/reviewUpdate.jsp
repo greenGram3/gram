@@ -124,6 +124,8 @@
                 <tr hidden>
                     <td>글번호</td>
                     <td><input type="text" name="reviewNo" id="reviewNo" value="${reviewResult.reviewNo}"></td>
+                    <td>상품번호</td>
+                    <td><input type="text" name="itemNo" id="itemNo" value="${reviewResult.itemNo}"></td>
                 </tr>
                 <tr hidden>
                     <td><input name="link" value="${link}"></td>
