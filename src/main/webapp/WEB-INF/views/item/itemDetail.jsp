@@ -177,12 +177,19 @@
                     <th>총 상품금액</th>
                     <th> <input type="text" name="totalPrice" id="totalPrice"  value="${itemResult.itemPrice}" readonly>  원</th>
                 </tr>
+                <tr hidden>
+                    <th>상품재고</th>
+                    <td><input type="hidden" name="itemAmount" id="itemAmount" value="${itemResult.itemAmount}"></td>
+                </tr>
+                <tr>
+                    <td id="soldOutMsg" style="color: darkgray"></td>
+                </tr>
             </table>
             </div>
-                <div class="itemCheck">
+            <div class="itemCheck">
                 <button type="button" id="cartButton">장바구니 담기</button>
                 <button type="button" id="buyButton">바로주문</button>
-                </div>
+            </div>
         </form>
     </div>
     <div class="itemDetail_menu_container">
@@ -272,6 +279,13 @@
                 }
 
             })
+        }
+
+        let itemAmount = $("#itemAmount").val();
+        if (itemAmount <= 10) {
+            $("#cartButton").attr("disabled", true);
+            $("#buyButton").attr("disabled", true);
+            $("#soldOutMsg")[0].innerHTML = "품절 상품입니다.";
         }
 
     </script>
