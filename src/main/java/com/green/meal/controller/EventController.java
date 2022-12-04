@@ -57,27 +57,19 @@ public class EventController {
 
     // 이벤트 등록 페이지 이동
     @GetMapping("/upload")
-    public String uploadPage(){return "admin/eventForm";    }
+    public String uploadPage(){
+        return "admin/eventForm";
+    }
 
     // 등록 버튼 눌러서 등록했을때
     @PostMapping("/upload")
     public String eventUpload(EventVO eventVO, HttpServletRequest request, Model model,RedirectAttributes redirectAttributes){
-        // ** 이미지 업로드
+
+        //이미지 저장할 폴더의 절대경로 얻기
         String realPath = request.getSession().getServletContext().getRealPath("/");
-        realPath += "resources\\eventImage\\";
-
-        MultipartFile fileName = eventVO.getFileName();
-        MultipartFile detailImage = eventVO.getDetailImage();
-
         try {
-
-            fileName.transferTo(new File(realPath + fileName.getOriginalFilename()));
-            detailImage.transferTo(new File(realPath + detailImage.getOriginalFilename()));
-
-            eventVO.setImgPath("/eventImage/"+fileName.getOriginalFilename());
-            eventVO.setImgName("/eventImage/"+detailImage.getOriginalFilename());
-
-            eventService.insertEvent(eventVO);
+            if(eventService.insertEvent(eventVO, realPath) != 1)
+                throw new Exception("save failed");
             redirectAttributes.addFlashAttribute("msg","SAVE_OK");
         } catch (Exception e) {
             e.printStackTrace();
@@ -85,16 +77,15 @@ public class EventController {
             redirectAttributes.addFlashAttribute("msg","SAVE_ERR");
             return "admin/eventForm";
         }
-
         return "redirect:/event/list?link=A";
     }
 
     // 수정 페이지로 이동
     @GetMapping("/modify")
     public String modifyPage(Integer eventNo, Model model){
+
         try{
             EventVO eventVO = eventService.selectOne(eventNo);
-            MultipartFile fileName = eventVO.getFileName();
             model.addAttribute("eventVO",eventVO);
             return "admin/eventForm";
         }catch (Exception e){
@@ -107,28 +98,16 @@ public class EventController {
     // 수정하기
     @PostMapping( "/modify")
     public String modify(EventVO eventVO , HttpServletRequest request, Model model,RedirectAttributes redirectAttributes){
-
+        //이미지 저장할 폴더의 절대경로 얻기
         String realPath = request.getSession().getServletContext().getRealPath("/");
-        realPath += "resources\\eventImage\\";
-        MultipartFile fileName = eventVO.getFileName();
-        MultipartFile detailImage = eventVO.getDetailImage();
+
         try {
 
-            if(!fileName.isEmpty()) {
-                fileName.transferTo(new File(realPath + fileName.getOriginalFilename()));
-                eventVO.setImgPath("/eventImage/"+fileName.getOriginalFilename());
-            }
-
-            if(!detailImage.isEmpty()) {
-                detailImage.transferTo(new File(realPath + detailImage.getOriginalFilename()));
-                eventVO.setImgName("/eventImage/"+detailImage.getOriginalFilename());
-            }
-
-
-            eventService.updateEvent(eventVO);
+            if(eventService.updateEvent(eventVO,realPath)!=1)
+                throw new Exception("modify failed");
             redirectAttributes.addFlashAttribute("msg","MOD_OK");
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             model.addAttribute("eventVO",eventVO);
             redirectAttributes.addFlashAttribute("msg","MOD_ERR");
@@ -142,7 +121,8 @@ public class EventController {
     @DeleteMapping("/delete/{eventNo}")
     public ResponseEntity<String> delete(@PathVariable Integer eventNo){
         try {
-            eventService.deleteEvent(eventNo);
+            if(eventService.deleteEvent(eventNo)!= 1)
+                throw new Exception("delete failed");
         }catch (Exception e){
             e.printStackTrace();
             return new ResponseEntity<>("fail",HttpStatus.BAD_REQUEST);

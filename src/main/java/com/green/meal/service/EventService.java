@@ -1,40 +1,19 @@
 package com.green.meal.service;
 
 import com.green.meal.domain.EventVO;
-import com.green.meal.mapper.EventMapper;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
 import java.util.List;
 
-@RequiredArgsConstructor
-@Service
-public class EventService {
+public interface EventService {
+    List<EventVO> selectEvent();
 
-    private final EventMapper mapper;
+    List<EventVO> selectBanner();
 
-    public List<EventVO> selectEvent(){
-        return mapper.selectEvent();
-    }
+    int insertEvent(EventVO eventVO, String realPath) throws Exception;
 
-    public List<EventVO> selectBanner(){
-        return mapper.selectBanner();
-    }
+    int updateEvent(EventVO eventVO, String realPath) throws Exception;
 
-    public int insertEvent(EventVO eventVO){
-        return mapper.insertEvent(eventVO);
-    }
+    EventVO selectOne(Integer eventNo);
 
-    public int updateEvent(EventVO eventVO){
-        return mapper.updateEvent(eventVO);
-    }
-
-    public EventVO selectOne(Integer eventNo){
-        return mapper.selectOne(eventNo);
-    }
-
-    public int deleteEvent(Integer eventNo){
-        return mapper.deleteEvent(eventNo);
-    }
+    int deleteEvent(Integer eventNo);
 }
