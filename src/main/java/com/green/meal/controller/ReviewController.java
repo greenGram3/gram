@@ -3,6 +3,7 @@ package com.green.meal.controller;
 import com.green.meal.domain.ReviewVO;
 import com.green.meal.paging.PageMaker;
 import com.green.meal.paging.SearchCriteria;
+import com.green.meal.service.ItemService;
 import com.green.meal.service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,6 +25,9 @@ public class ReviewController {
 
     @Autowired
     ReviewService reviewService;
+
+//    @Autowired
+//    ItemService
 
     // ** 상세페이지 리뷰리스트
     @RequestMapping(value="/itemReview")
@@ -134,31 +138,31 @@ public class ReviewController {
     @RequestMapping(value="/reviewinsert", method= RequestMethod.POST)
     public String reviewinsert(HttpServletRequest request, Model model,
                                ReviewVO vo, RedirectAttributes rttr) throws IOException {
-        String uri = "redirect:myReview"; // uri경로
-//------------------------------------------------------------------------//
-        String realPath = request.getSession().getServletContext().getRealPath("/");
-        System.out.println("** realPath => "+realPath);
+        try {
+            // 이미지 저장
+            String realPath = request.getSession().getServletContext().getRealPath("/");
+            System.out.println("** realPath => "+realPath);
+            realPath += "resources\\reviewImage\\";
+            String file1, file2="reviewImage/noImage.JPG";
 
-        realPath += "resources\\reviewImage\\"; // 실제 폴더 저장위치
-        String file1, file2="reviewImage/noImage.JPG"; // 기본 이미지 지정
+            // ** MultipartFile
+            MultipartFile imgNamef = vo.getImgNamef();
+            if ( imgNamef !=null && !imgNamef.isEmpty() ) {
+                file1 = realPath + imgNamef.getOriginalFilename();
+                imgNamef.transferTo(new File(file1));
+                file2="reviewImage/"+imgNamef.getOriginalFilename();
+            }
+            vo.setImgName(file2);
 
-        // ** MultipartFile
-        MultipartFile imgNamef = vo.getImgNamef();
-        if ( imgNamef !=null && !imgNamef.isEmpty() ) {
-            file1 = realPath + imgNamef.getOriginalFilename();
-            imgNamef.transferTo(new File(file1));
-            file2="reviewImage/"+imgNamef.getOriginalFilename();
-        }
-        vo.setImgName(file2);
-//-----------------------------------------------------------------------------//
-        // Service 처리
-        if ( reviewService.reviewinsert(vo)>0 ) {
+            // Service 실행
+            reviewService.reviewinsert(vo);
             rttr.addFlashAttribute("message","후기가 등록되었습니다.");
-        }else {
+            return "redirect:myReview";
+        } catch (Exception e) {
+            e.printStackTrace();
             model.addAttribute("message","후기 등록 실패. 다시 이용하시기 바랍니다.");
-            uri = "/review/reviewInsert";
+            return "/review/reviewInsert";
         }
-        return uri;
     }
     //------------------------------------------------------------------------------------------------------//
     // Review 답변

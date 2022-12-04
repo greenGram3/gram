@@ -57,11 +57,6 @@
             (#{itemCategory1}, #{itemCategory2}, #{itemName}, #{itemAmount}, #{itemPrice}, #{fileName}, #{etc1})
     </insert>
 
-    <!-- 이미지 한개 등록용 이전 구버전 -->
-    <!--    <selectKey keyProperty="itemNo" resultType="int" order="AFTER">
-                SELECT LAST_INSERT_ID()
-            </selectKey> -->
-
     <!-- Image Insert 추가 -->
     <insert id="itemImgUpload" parameterType="com.green.meal.domain.ImageVO">
         insert into image
@@ -69,6 +64,12 @@
         values
             (#{itemNo},#{imgName},#{imgType})
     </insert>
+
+    <update id="itemAvg" parameterType="com.green.meal.domain.ReviewVO">
+        update item
+        set etc2 = (select sum(review_star) from review where item_no=#{itemNo}) div (select count(*) from review where item_no=#{itemNo} and user_id != 'admin')
+        where item_no=#{itemNo};
+    </update>
 
     <select id="selectItemNo" parameterType="string" resultType="int">
         select item_no
