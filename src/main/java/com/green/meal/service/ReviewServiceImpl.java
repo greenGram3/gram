@@ -62,10 +62,10 @@ public class ReviewServiceImpl implements ReviewService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void reviewinsert(ReviewVO vo) throws Exception {
-        if (reviewMapper.reviewinsert(vo)==0) { // 후기 insert
+        if (reviewMapper.reviewinsert(vo)!=1) { // 후기 insert
             throw new Exception();
         }
-        if (itemMapper.itemAvg(vo)==0) { // item 테이블 평균별점 update
+        if (itemMapper.itemAvg(vo)!=1) { // item 테이블 평균별점 update
             throw new Exception();
         }
     }
@@ -78,10 +78,10 @@ public class ReviewServiceImpl implements ReviewService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void reviewupdate(ReviewVO vo) throws Exception {
-        if (reviewMapper.reviewupdate(vo)==0) {
+        if (reviewMapper.reviewupdate(vo)!=1) {
             throw new Exception();
         }
-        if (itemMapper.itemAvg(vo)==0) {
+        if (itemMapper.itemAvg(vo)!=1) {
             throw new Exception();
         }
     }
