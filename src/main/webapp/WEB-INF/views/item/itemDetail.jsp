@@ -122,36 +122,7 @@
                 <table>
                 <tr>
                     <th colspan="2"><input type="text" name="itemName" id="itemName" value="${itemResult.itemName}"readonly></th>
-                    <td>
-                        <c:choose>
-                            <c:when test="${itemResult.etc2 eq 5}">
-                                <span class="star">★★★★★</span>
-                            </c:when>
-                            <c:when test="${itemResult.etc2 eq 4}">
-                                <span class="star">★★★★
-                                    <span class="blankStar">★</span>
-                                </span>
-                            </c:when>
-                            <c:when test="${itemResult.etc2 eq 3}">
-                                <span class="star">★★★
-                                    <span class="blankStar">★★</span>
-                                </span>
-                            </c:when>
-                            <c:when test="${itemResult.etc2 eq 2}">
-                                <span class="star">★★
-                                    <span class="blankStar">★★★</span>
-                                </span>
-                            </c:when>
-                            <c:when test="${itemResult.etc2 eq 1}">
-                                <span class="star">★
-                                    <span class="blankStar">★★★★</span>
-                                </span>
-                            </c:when>
-                            <c:otherwise>
-                                <span class="blankStar">★★★★★</span>
-                            </c:otherwise>
-                        </c:choose>
-                    </td>
+
                 </tr>
                 <tr>
                     <th>판매가</th>
@@ -184,6 +155,36 @@
                 <tr>
                     <td id="soldOutMsg" style="color: darkgray"></td>
                 </tr>
+                    <tr>
+                        <td class="starCheck">
+                        <c:choose>
+                            <c:when test="${itemResult.etc2 eq 5}">
+                                <div class="starDiv"><span class="star">★★★★★</span>
+                                    <span class="blankStar"></span></div>
+                            </c:when>
+                            <c:when test="${itemResult.etc2 eq 4}">
+                                <div class="starDiv"><span class="star">★★★★</span>
+                                <span class="blankStar">★</span></div>
+                            </c:when>
+                            <c:when test="${itemResult.etc2 eq 3}">
+                                <div class="starDiv"><span class="star">★★★</span>
+                                    <span class="blankStar">★★</span></div>
+                            </c:when>
+                            <c:when test="${itemResult.etc2 eq 2}">
+                                <div class="starDiv"><span class="star">★★</span>
+                                    <span class="blankStar">★★★</span></div>
+                            </c:when>
+                            <c:when test="${itemResult.etc2 eq 1}">
+                                <div class="starDiv"> <span class="star">★</span>
+                                    <span class="blankStar">★★★★</span></div>
+                            </c:when>
+                            <c:otherwise>
+                                <div class="starDiv"><span class="star"></span>
+                                <span class="blankStar">★★★★★</span></div>
+                            </c:otherwise>
+                        </c:choose>
+                        </td>
+                    </tr>
             </table>
             </div>
             <div class="itemCheck">

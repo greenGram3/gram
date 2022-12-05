@@ -300,10 +300,8 @@ img.select_img1 {
 }
 
 .itemDetail-container table {
-    height: 300px;
-    width: 500px;
     border-collapse: collapse;
-    margin-left: 70px;
+    margin-top: 40px;
 }
 
 .itemDetail-container table * {
@@ -311,10 +309,8 @@ img.select_img1 {
     font-weight: 500;
     text-align: left;
 }
-.itemDetail-container #itemPrice,
 .itemDetail-container #itemPrice {
     width: 100px;
-    padding-left: 50px;
 }
 
 .itemDetail-container #cartAmount{
@@ -335,11 +331,9 @@ img.select_img1 {
 }
 
 .itemDetail-container #totalPrice {
-    width: 100px;
     font-size: 20px;
     font-weight: 1000;
     width: 100px;
-    padding-left: 20px;
 }
 
 .itemDetail-container tr:nth-of-type(6) th {
@@ -348,11 +342,10 @@ img.select_img1 {
 }
 
  .itemCheck {
-    margin-left: 420px;
-    margin-top: 30px;
-    margin-bottom: 50px;
+     margin-left: 500px;
+     margin-top: -60px;
+     margin-bottom: 50px;
 }
-
 
 .itemDetail-container #cartButton {
     text-align: center;
@@ -401,16 +394,22 @@ img.select_img1 {
 }
 
 /*itemDetail reviewStar*/
+
 .star {
-    position: relative;
     font-size: 25px !important;
     color: rgb(84, 108, 92);
 }
 
 .blankStar {
-    position: absolute;
     font-size: 25px !important;
     color: #ddd;
+}
+
+.starDiv {
+    display: flex;
+    position: absolute;
+    top: 305px;
+    right: 450px;
 }
 
 /*category*/
