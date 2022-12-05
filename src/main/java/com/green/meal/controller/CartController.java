@@ -30,16 +30,15 @@ public class CartController {
 
     private final CartService cartService;
 
-
-    @GetMapping() // 장바구니목록 보여주기
-    public String cartList(Model model, HttpSession session){
+    // 장바구니목록 보여주기
+    @GetMapping()
+    public String read(Model model, HttpSession session){
 
         String userId = getUserId(session);
         //비회원 일때
         if(userId==null){
             return "cart";
         }
-
         try {
             //회원일때
             //세션에서 장바구니 꺼내기 ( 로그인 전 장바구니 )
@@ -59,9 +58,9 @@ public class CartController {
 
 
     //장바구니 수정
-    @PatchMapping("/{itemNo}")
     @ResponseBody
-    public ResponseEntity<String> modify(@PathVariable Integer itemNo, @RequestBody CartVO cartVO,  HttpSession session){
+    @PatchMapping("/{itemNo}")
+    public ResponseEntity<String> modify(@PathVariable Integer itemNo, @RequestBody CartVO cartVO, HttpSession session){
 
         //장바구니 수량이 0 이하로 수정할때 걸려주기
        if( cartVO.getCartAmount() <= 0 )
@@ -91,9 +90,11 @@ public class CartController {
         }
         return new ResponseEntity<>("MOD_OK",HttpStatus.OK);
     }
+
+
     //장바구니 저장
-    @PostMapping()
     @ResponseBody
+    @PostMapping()
     public  ResponseEntity<String> save(@RequestBody CartVO cartVO, HttpSession session){
         String userId = getUserId(session);
         List<CartVO> afterCart= new ArrayList<>();
@@ -123,9 +124,10 @@ public class CartController {
         return new ResponseEntity<>("SAVE_OK",HttpStatus.OK);
     }
 
+    //장바구니 삭제
     @ResponseBody
     @DeleteMapping("/{itemNo}")
-    public ResponseEntity<String>remove(@PathVariable Integer itemNo, HttpSession session){
+    public ResponseEntity<String> remove(@PathVariable Integer itemNo, HttpSession session){
 
         List<CartVO> beforeCart = getList(session);
         String userId = getUserId(session);
