@@ -253,6 +253,12 @@ main * {
     font-size: 16px;
 }
 
+.reviewUpdate select {
+    width: 130px;
+    height: 30px;
+    margin: 5px 10px;
+}
+
 
 
 /*reviewReplyInsert*/
@@ -487,5 +493,10 @@ main * {
 
 .reviewInsert .reviewCheck {
     margin-left: 650px;
+}
+
+.reviewInsert select {
+    width: 130px;
+    height: 30px;
 }
 

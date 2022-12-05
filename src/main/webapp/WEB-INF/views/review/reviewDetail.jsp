@@ -39,7 +39,7 @@
             <section class="section_container">
                 <table>
                     <tr>
-                        <th colspan="2">${reviewResult.reviewTitle}</th>
+                        <th colspan="3">${reviewResult.reviewTitle}</th>
                     </tr>
                     <tr class="reviewDetailBold">
                         <td>${reviewResult.userId}</td>
@@ -54,7 +54,7 @@
                             </c:if>
                         </td>
                         <c:if test="${not empty reviewResult.itemName}">
-                            <td>
+                            <td colspan="2">
                                 <li>${reviewResult.itemName}</li>
                                 <li><fmt:formatNumber pattern="###,###,###" value="${reviewResult.itemPrice}"/> 원</li>
                             </td>
@@ -62,7 +62,7 @@
                     </tr>
 
                     <tr>
-                        <td colspan="2"><textarea readonly>${reviewResult.reviewContent}</textarea></td>
+                        <td colspan="3"><textarea readonly>${reviewResult.reviewContent}</textarea></td>
                     </tr>
 
                     <tr hidden>
